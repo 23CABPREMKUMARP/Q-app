@@ -12,7 +12,7 @@ import { Linkedin, Twitter, Github, Mail, Youtube } from "lucide-react";
 export default function ProductPage() {
   return (
     <main className="relative w-full overflow-x-hidden">
-      <div className="absolute top-6 md:top-10 left-0 z-50 flex items-center gap-0 pointer-events-auto">
+      <div className="absolute top-3 md:top-5 left-0 z-50 flex items-center gap-0 pointer-events-auto">
         <Image
           src="/logo2.png"
           alt="JEFFBEN Corporate Branding"
