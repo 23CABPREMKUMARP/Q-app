@@ -354,11 +354,7 @@ export default function ProductPage() {
                 desc: "Advanced GPS telemetry for real-time asset monitoring, enabling passengers to track journeys and operators to oversee fleet utilization."
               },
               {
-                title: "4. Smart Terminal Displays",
-                desc: "IoT-enabled LED information networks for bus terminals, delivering dynamic route updates and schedule information with high visibility."
-              },
-              {
-                title: "5. QR Smart-Boarding",
+                title: "4. QR Smart-Boarding",
                 desc: "Vehicle-specific QR integration allowing passengers to instantly scan for: Real-time route status, Schedule adherence, and Frictionless ticket validation."
               }
             ].map((service, i) => (

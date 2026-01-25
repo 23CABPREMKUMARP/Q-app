@@ -28,7 +28,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Automated Fare Collection System
 - Real-Time Transit Intelligence
 - Fleet Telematics & Tracking
-- Smart Terminal Displays
 - QR Smart-Boarding
 
 ---
