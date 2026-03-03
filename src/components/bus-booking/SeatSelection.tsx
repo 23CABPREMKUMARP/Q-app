@@ -65,15 +65,18 @@ export function SeatSelection({ busId, pricePerSeat, onProceed, onBack }: SeatSe
                             DRIVERS CABIN
                         </div>
 
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-5 gap-4">
                             {seats.map((id, index) => {
                                 const isBooked = bookedSeats.includes(id);
                                 const isSelected = selectedSeats.includes(id);
-                                const isAisle = index % 4 === 2;
+                                // Aisle is the 3rd column (index % 4 === 2)
+                                const showAisle = index % 4 === 2;
 
                                 return (
                                     <React.Fragment key={id}>
-                                        {isAisle && <div className="w-4" />} {/* Aisle in center */}
+                                        {showAisle && <div className="w-full flex items-center justify-center">
+                                            <div className="w-px h-full bg-black/5 border-l border-dashed border-black/10" />
+                                        </div>}
                                         <button
                                             onClick={() => toggleSeat(id)}
                                             disabled={isBooked}
