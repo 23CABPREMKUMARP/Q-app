@@ -20,7 +20,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       const html5QrCode = new Html5Qrcode("reader");
       scannerRef.current = html5QrCode;
 
-      const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+      const config = { fps: 25, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 };
 
       html5QrCode.start(
         { facingMode: "environment" },
@@ -124,17 +124,19 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       
       <style jsx global>{`
         @keyframes scan {
-          0% { top: 15%; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { top: 85%; opacity: 0; }
+          0% { top: 15%; }
+          50% { top: 85%; }
+          100% { top: 15%; }
         }
         #reader__dashboard { display: none !important; }
+        #reader { background: black !important; }
         #reader video { 
           object-fit: cover !important; 
           width: 100% !important; 
           height: 100% !important; 
         }
+        /* Suppress internal flickering UI messages from html5-qrcode library */
+        #reader > div { display: none !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>

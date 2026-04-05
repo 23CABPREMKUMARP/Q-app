@@ -642,17 +642,18 @@ function LiveMapContent() {
                         )}
                       </AnimatePresence>
 
-                      {/* Search Autocomplete Dropdown */}
+                      {/* Search Autocomplete Dropdown - Mobile Full-Width Focus Override */}
                       <AnimatePresence mode="wait">
                         {searchQuery && searchResults.length > 0 && (
                            <motion.div 
                              initial={{ opacity: 0, y: -20, scale: 0.95 }}
                              animate={{ opacity: 1, y: 0, scale: 1 }}
                              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                             className="absolute top-[115%] left-[-10px] right-[-10px] md:left-0 md:right-0 bg-white/95 backdrop-blur-xl rounded-[32px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] border border-white/50 overflow-hidden z-[1000] flex flex-col max-h-[60vh] md:max-h-[400px] overflow-y-auto no-scrollbar pointer-events-auto ring-1 ring-black/5 animate-in fade-in slide-in-from-top-4"
+                             className="fixed md:absolute top-[80px] md:top-[115%] left-2 right-2 md:left-0 md:right-0 bg-white/95 backdrop-blur-xl rounded-[32px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] border border-white/50 overflow-hidden z-[1000] flex flex-col max-h-[70vh] md:max-h-[400px] overflow-y-auto no-scrollbar pointer-events-auto ring-1 ring-black/5 animate-in fade-in slide-in-from-top-4"
                            >
-                              <div className="px-5 py-3 border-b border-zinc-50 bg-zinc-50/50">
-                                 <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest leading-none">Intelligence Match ({searchResults.length})</p>
+                              <div className="px-6 py-4 border-b border-zinc-50 bg-zinc-50/50 flex items-center justify-between">
+                                 <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest leading-none">Intelligence Match ({searchResults.length} Fleet Found)</p>
+                                 <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
                               </div>
                               {searchResults.map((bus) => (
                                  <div 
@@ -664,15 +665,15 @@ function LiveMapContent() {
                                        setIsBooking(true);
                                        setCenterOn({...bus.location});
                                     }}
-                                    className="p-5 md:p-6 hover:bg-orange-50 border-b border-zinc-100 cursor-pointer flex items-center justify-between transition-all group active:bg-orange-100"
-                                 >
-                                    <div>
-                                       <p className="text-lg md:text-xl font-black text-zinc-900 group-hover:text-primary transition-colors leading-none tracking-tight">{bus.busNumber}</p>
-                                       <p className="text-[12px] font-bold text-zinc-500 uppercase tracking-tighter mt-1">{bus.routeId?.routeName}</p>
+                                    className="p-6 hover:bg-orange-50 border-b border-zinc-100 cursor-pointer flex items-center justify-between transition-all group active:bg-orange-100"
+                                >
+                                    <div className="flex-1">
+                                       <p className="text-xl font-black text-zinc-900 group-hover:text-primary transition-colors leading-none tracking-tight italic uppercase">{bus.busNumber}</p>
+                                       <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-tighter mt-2">{bus.routeId?.routeName}</p>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                       <span className={`text-[10px] font-black uppercase px-4 py-2 rounded-full tracking-wider shadow-sm transition-transform group-hover:scale-105 ${bus.status === 'Running' ? 'bg-primary text-white' : 'bg-orange-100 text-[#EA580C]'}`}>{bus.status}</span>
-                                       <ChevronRight size={18} className="text-zinc-200 group-hover:text-primary transition-colors" />
+                                    <div className="flex items-center gap-4">
+                                       <span className={`text-[10px] font-black uppercase px-5 py-2.5 rounded-full tracking-wider shadow-sm transition-transform group-hover:scale-105 ${bus.status === 'Running' ? 'bg-primary text-white' : 'bg-orange-100 text-[#EA580C]'}`}>{bus.status}</span>
+                                       <ChevronRight size={22} className="text-zinc-200 group-hover:text-primary transition-colors" />
                                     </div>
                                  </div>
                               ))}
