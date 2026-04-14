@@ -1,11 +1,16 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import { Linkedin, Twitter, Github, Mail, Youtube, Facebook, Ticket, ShieldCheck } from "lucide-react";
+import { 
+  Linkedin, Twitter, Github, Mail, Youtube, Facebook, 
+  Ticket, ShieldCheck, Lock, X, ChevronRight 
+} from "lucide-react";
 import dynamic from "next/dynamic";
 
 const Globe = dynamic(() => import("@/src/registry/magicui/globe").then(m => m.Globe), { ssr: false });
@@ -13,10 +18,75 @@ const AuroraBackground = dynamic(() => import("../src/components/ui/aurora-backg
 const ContainerScroll = dynamic(() => import("../src/components/ui/container-scroll-animation").then(m => m.ContainerScroll), { ssr: false });
 
 export default function ProductPage() {
+  const router = useRouter();
+  const [showPinGate, setShowPinGate] = useState(false);
+  const [pin, setPin] = useState("");
+  const [error, setError] = useState(false);
+
+  const handlePinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pin === "445566") {
+      router.push("/live-map");
+    } else {
+      setError(true);
+      setPin("");
+      setTimeout(() => setError(false), 500);
+    }
+  };
+
   return (
     <main className="relative w-full overflow-x-hidden">
-      <div className="absolute top-2 md:top-5 left-0 z-50 flex items-center gap-0 pointer-events-auto cursor-pointer">
-        <Link href="/live-map">
+      {/* 6-Digit Neural Access Gate */}
+      <AnimatePresence>
+        {showPinGate && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-zinc-950/90 backdrop-blur-2xl flex items-center justify-center p-6"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className={`w-full max-w-md bg-white rounded-[40px] p-10 shadow-2xl border-2 ${error ? "border-rose-500 animate-shake" : "border-zinc-100"}`}
+            >
+              <div className="flex justify-between items-center mb-8">
+                <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500">
+                  <Lock size={24} />
+                </div>
+                <button onClick={() => setShowPinGate(false)} className="text-zinc-400 hover:text-zinc-900 transition-colors">
+                  <X size={24} />
+                </button>
+              </div>
+              
+              <h2 className="text-3xl font-black text-zinc-900 tracking-tighter mb-2 uppercase italic">Verification Required</h2>
+              <p className="text-zinc-500 text-sm font-bold mb-8 uppercase tracking-widest">Enter 6-Digit Command Code</p>
+              
+              <form onSubmit={handlePinSubmit} className="space-y-6">
+                <input 
+                  type="password"
+                  maxLength={6}
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                  autoFocus
+                  placeholder="••••••"
+                  className="w-full h-20 bg-zinc-50 border-2 border-zinc-100 rounded-[28px] text-center text-4xl font-black tracking-[0.5em] text-zinc-900 outline-none focus:border-orange-500 transition-all placeholder:text-zinc-200"
+                />
+                
+                <button 
+                  type="submit"
+                  disabled={pin.length < 6}
+                  className="w-full h-20 bg-zinc-900 text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-orange-500 transition-all flex items-center justify-center gap-3 disabled:opacity-20 active:scale-95"
+                >
+                  Confirm Identity <ChevronRight size={24} />
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="absolute top-2 md:top-5 left-0 z-50 flex items-center gap-0 pointer-events-auto cursor-pointer" onClick={() => setShowPinGate(true)}>
           <Image
             src="/logo2.png"
             alt="JEFFBEN Branding"
@@ -25,7 +95,6 @@ export default function ProductPage() {
             className="h-24 sm:h-28 md:h-36 w-auto object-contain transition-transform hover:scale-105 duration-300 px-4 md:px-8"
             priority
           />
-        </Link>
       </div>
 
       <div className="absolute top-0 right-0 z-50 pointer-events-auto cursor-pointer flex">
@@ -35,16 +104,16 @@ export default function ProductPage() {
           transition={{ delay: 0.2, duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Link href="/live-map">
+          <div onClick={() => setShowPinGate(true)}>
             <Image
               src="/hero-logo.png"
               alt="JEFFBEN Strategic Emblem"
               width={800}
               height={800}
-              className="h-16 sm:h-24 md:h-48 w-auto object-contain mix-blend-multiply drop-shadow-2xl transition-transform hover:scale-105 duration-300"
+              className="h-16 sm:h-24 md:h-48 w-auto object-contain mix-blend-multiply drop-shadow-2xl transition-transform hover:scale-105 duration-300 cursor-pointer"
               priority
             />
-          </Link>
+          </div>
         </motion.div>
       </div>
 
