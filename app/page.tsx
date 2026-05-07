@@ -124,7 +124,6 @@ export default function ProductPage() {
       {/* User Profile / Logout (Desktop Only) */}
       <div className="hidden md:block fixed top-6 right-6 z-[60]">
         <UserButton 
-          afterSignOutUrl="/sign-in"
           appearance={{
             elements: {
               userButtonAvatarBox: "w-12 h-12 border-2 border-white/20 shadow-xl hover:scale-105 transition-transform",
