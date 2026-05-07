@@ -12,12 +12,7 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
-    try {
-      await auth.protect();
-    } catch (e) {
-      // Allow fallback if auth protection fails due to environment issues
-      console.error("Auth protection failure:", e);
-    }
+    await auth.protect();
   }
 });
 
