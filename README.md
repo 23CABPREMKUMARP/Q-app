@@ -1,34 +1,47 @@
-# JeffBen Systems
+# JeffBen Systems - Metropolitan Transit Intelligence
 
-Pioneering Intelligence in Metropolitan Public Transit Ecosystems.
+Pioneering industrial-grade automation and real-time telemetry for metropolitan public transit ecosystems.
 
-## Overview
+## 🌐 Web Platform (PWA Ready)
+The web application is a high-performance Next.js 16 platform optimized for both desktop and mobile-web experiences.
 
-JeffBen Systems is a premier technology enterprise dedicated to the modernization of public infrastructure through industrial-grade automation. This project serves as the official product page for JeffBen Systems.
+### Features
+- **Mobile-First UI**: Native-like bottom navigation and sticky headers.
+- **PWA Support**: Installable as a standalone app on iOS and Android.
+- **Real-Time Map**: Live fleet tracking with hardware-accelerated animations.
 
-## Getting Started
-
-First, run the development server:
-
+### Getting Started
 ```bash
+npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-## Tech Stack
+## 📱 Native Android Application (`/native-app`)
+A complete native Android experience built with React Native and Expo, providing a premium feel similar to Uber and Swiggy.
 
-- **Framework**: Next.js 16 (Turbopack)
-- **Styling**: Tailwind CSS / Vanilla CSS
-- **Animations**: Motion (formerly Framer Motion)
-- **Components**: Radix UI / Magic UI / Aceternity UI components
+### Key Native Features
+- **Native Maps**: 60fps Google Maps integration for live tracking.
+- **Biometric/Secure Auth**: Integrated with Clerk Expo for secure sessions.
+- **QR Scanning**: Native camera integration for bus identification.
+- **Tactile Feedback**: Haptic-responsive interactions for a premium feel.
 
-## Key Features
+### Build & Run
+```bash
+cd native-app
+npm install
+npx expo start
+```
+To build the production APK:
+```bash
+npx eas build -p android
+```
 
-- Automated Fare Collection System
-- Real-Time Transit Intelligence
-- Fleet Telematics & Tracking
-- QR Smart-Boarding
+## 🛠️ Tech Stack
+- **Web**: Next.js 16 (Turbopack), Tailwind CSS, Motion, Clerk.
+- **Mobile**: React Native, Expo, Reanimated, Lucide Native.
+- **Backend**: MongoDB/Mongoose (Transit Matrix Hub).
 
 ---
-© 2026 JeffBen Systems. All rights reserved.
+© 2026 JeffBen Systems. Industrial-Grade Transit Automation.
