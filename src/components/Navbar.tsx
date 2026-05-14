@@ -55,6 +55,7 @@ export const Navbar = React.memo(function Navbar() {
                 src="/hero-logo.png" 
                 alt="Digi Bus Stand Logo" 
                 fill 
+                sizes="(max-width: 768px) 80px, 120px"
                 className="object-contain mix-blend-multiply"
                 priority
               />

@@ -485,43 +485,101 @@ function LiveMapContent() {
   }, []);
 
   const handlePayment = async () => {
+    if (!selectedBus) return;
     setPaymentState('preparing');
+    setPaymentError(null);
     
-    // TEMPORARY: Bypassing real payment logic until API keys are provided
-    setTimeout(async () => {
-      setPaymentState('verifying');
+    try {
+      const amount = ticketQuantity * (selectedBus.fare || 150);
       
-      const amount = ticketQuantity * (selectedBus?.fare || 150);
-      const simulatedBooking = {
-        success: true,
-        booking: {
-          ticketId: `JB-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
-          qrToken: btoa(JSON.stringify({
-            t: Math.random().toString(36).substr(2, 9).toUpperCase(),
-            b: selectedBus._id,
-            q: ticketQuantity,
-            m: "SIMULATED-SECURE"
-          })),
-          bus: selectedBus.busNumber,
-          route: selectedBus.routeId?.routeName,
-          boardingPoint,
-          destination: dropPoint,
-          totalAmount: amount,
-          bookingDate: new Date().toISOString()
-        }
+      // 1. Create Razorpay Order
+      const orderRes = await fetch('/api/payments/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount }),
+      });
+      
+      const orderData = await orderRes.json();
+      
+      if (!orderRes.ok) throw new Error(orderData.error || 'Failed to create order');
+
+      // 2. Open Razorpay Checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_placeholder",
+        amount: orderData.amount,
+        currency: "INR",
+        name: "JeffBen Systems",
+        description: `Bus Booking: ${selectedBus.busNumber}`,
+        order_id: orderData.id,
+        handler: async (response: any) => {
+          setPaymentState('verifying');
+          
+          try {
+            // 3. Verify Payment and Finalize Booking
+            const verifyRes = await fetch('/api/payments/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                bookingDetails: {
+                  busId: selectedBus._id,
+                  seats: Array.from({ length: ticketQuantity }, (_, i) => `S-${i + 1}`),
+                  totalAmount: amount,
+                  boardingPoint,
+                  destination: dropPoint,
+                  passengers: [{ phone: passengerDetails.phone || "9999999999" }]
+                }
+              }),
+            });
+
+            const verifyData = await verifyRes.json();
+
+            if (verifyData.success) {
+              setBookingResult(verifyData.booking);
+              setTicketId(verifyData.booking.ticketId);
+              setPaymentState('success');
+              setStep(5);
+              
+              if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                navigator.vibrate([100, 30, 100]);
+              }
+              
+              setBuses(prev => prev.map(bus => bus._id === selectedBus._id ? { ...bus, availableSeats: bus.availableSeats - ticketQuantity } : bus));
+            } else {
+              throw new Error(verifyData.message || 'Payment verification failed');
+            }
+          } catch (err: any) {
+            setPaymentState('failed');
+            setPaymentError(err.message || "Failed to verify payment");
+            setStep(6);
+            console.error("Verification Error:", err);
+          }
+        },
+        modal: {
+          ondismiss: function() {
+            setPaymentState('failed');
+            setPaymentError("Payment cancelled by user");
+            setStep(6);
+          }
+        },
+        prefill: {
+          contact: passengerDetails.phone || "9999999999",
+        },
+        theme: {
+          color: "#18181b",
+        },
       };
 
-      setBookingResult(simulatedBooking.booking);
-      setTicketId(simulatedBooking.booking.ticketId);
-      setPaymentState('success');
-      setStep(5);
-      
-      if (typeof navigator !== 'undefined' && navigator.vibrate) {
-        navigator.vibrate([100, 30, 100]);
-      }
-      
-      setBuses(prev => prev.map(bus => bus._id === selectedBus?._id ? { ...bus, availableSeats: bus.availableSeats - ticketQuantity } : bus));
-    }, 1500);
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
+    } catch (error: any) {
+      setPaymentState('failed');
+      setPaymentError(error.message || "Failed to initialize payment");
+      setStep(6);
+      console.error("Payment Initialization Error:", error);
+    }
   };
 
   const confirmBooking = async () => {
@@ -1354,7 +1412,7 @@ function LiveMapContent() {
                                   exit={{ opacity: 0, y: -10 }}
                                   className="flex items-center gap-3"
                                 >
-                                  Generate Ticket <ChevronRight size={24} />
+                                  Secure Checkout <ChevronRight size={24} />
                                 </motion.div>
                               ) : (
                                 <motion.div 
@@ -1444,9 +1502,9 @@ function LiveMapContent() {
                                    level="H"
                                    fgColor="#18181b"
                                    imageSettings={{
-                                     src: "/logo2.png",
-                                     height: 35,
-                                     width: 35,
+                                     src: "/hero-logo.png",
+                                     height: 50,
+                                     width: 50,
                                      excavate: true,
                                    }}
                                 />
@@ -1501,6 +1559,40 @@ function LiveMapContent() {
                         </motion.div>
                       </motion.div>
                     )}
+
+                    {step === 6 && (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="space-y-8 text-center py-12"
+                      >
+                        <div className="w-24 h-24 bg-rose-50 rounded-[40px] flex items-center justify-center mx-auto mb-8 border-2 border-rose-100">
+                          <X size={48} className="text-rose-500" />
+                        </div>
+                        
+                        <div className="space-y-4">
+                          <h4 className="text-3xl font-black text-zinc-900 tracking-tighter uppercase">Transaction Failed</h4>
+                          <p className="text-sm font-bold text-zinc-400 uppercase tracking-widest max-w-xs mx-auto">
+                            {paymentError || "The transit matrix encountered a processing error. Please verify your credentials and try again."}
+                          </p>
+                        </div>
+
+                        <div className="pt-8 space-y-3">
+                          <button 
+                            onClick={() => { setStep(4); setPaymentState('idle'); }}
+                            className="w-full h-20 bg-zinc-900 text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-primary transition-all flex items-center justify-center gap-3 active:scale-95 shadow-xl shadow-zinc-900/10"
+                          >
+                            <RefreshCw size={24} /> Retry Payment
+                          </button>
+                          <button 
+                             onClick={() => { setIsBooking(false); setSelectedBus(null); setStep(1); }}
+                             className="w-full h-14 bg-zinc-50 text-zinc-400 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-zinc-100 hover:text-zinc-900 transition-all active:scale-95"
+                          >
+                            Return to Fleet Hub
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
                 </motion.div>
               )}
             </div>
@@ -1543,11 +1635,11 @@ function LiveMapContent() {
                     fgColor="#18181b"
                     level="H"
                     imageSettings={{
-                      src: "/logo2.png",
+                      src: "/hero-logo.png",
                       x: undefined,
                       y: undefined,
-                      height: 50,
-                      width: 50,
+                      height: 70,
+                      width: 70,
                       excavate: true,
                     }}
                   />

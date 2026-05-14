@@ -16,7 +16,11 @@ export async function POST(req: Request) {
     } = await req.json();
 
     // 1. Verify Signature
-    const secret = process.env.RAZORPAY_KEY_SECRET || "";
+    const secret = process.env.RAZORPAY_KEY_SECRET;
+    if (!secret) {
+      console.error("Razorpay secret is missing in environment variables.");
+      return NextResponse.json({ success: false, message: "Server configuration error" }, { status: 500 });
+    }
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac("sha256", secret)

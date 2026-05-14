@@ -252,11 +252,11 @@ export default function GetTicketPage() {
                                   bgColor="transparent"
                                   level="H"
                                   imageSettings={{
-                                    src: "/logo2.png",
+                                    src: "/hero-logo.png",
                                     x: undefined,
                                     y: undefined,
-                                    height: 30,
-                                    width: 30,
+                                    height: 50,
+                                    width: 50,
                                     excavate: true,
                                   }}
                                 />
