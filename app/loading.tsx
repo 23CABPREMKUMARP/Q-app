@@ -21,6 +21,7 @@ export default function Loading() {
             src="/logo2.png"
             alt="JeffBen"
             fill
+            sizes="128px"
             className="object-contain"
             priority
           />
@@ -39,8 +40,9 @@ export default function Loading() {
           />
         </div>
         
-        <p className="mt-6 text-zinc-400 font-bold uppercase tracking-[0.3em] text-[10px]">
-          Transit Intelligence Platform
+        <p className="mt-6 text-zinc-400 font-bold uppercase tracking-[0.3em] text-[10px] text-center">
+          Digi Bus Stand <br/>
+          <span className="opacity-60 text-[8px]">powered by Jeff Ben</span>
         </p>
       </motion.div>
     </div>

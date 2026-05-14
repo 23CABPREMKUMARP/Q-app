@@ -4,10 +4,13 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
-import { Bus, MapPin, Navigation, User, Phone, Mail, ChevronRight, X, CreditCard, Ticket, LayoutDashboard, QrCode, Zap, Info, Shield, ShieldCheck, Clock, CheckCircle, ArrowLeft, ArrowRight, Activity, Gauge, Search, Route, Camera, Wind, RefreshCw, Download } from "lucide-react";
+import { Bus, MapPin, Navigation, User, Phone, Mail, ChevronRight, X, CreditCard, Ticket, LayoutDashboard, QrCode, Zap, Info, Shield, ShieldCheck, Clock, CheckCircle, ArrowLeft, ArrowRight, Activity, Gauge, Search, Route, Camera, Wind, RefreshCw, Download, Wallet, Banknote, CheckCircle2, AlertCircle } from "lucide-react";
+import Script from "next/script";
 import { QRCodeSVG } from "qrcode.react";
 import Link from "next/link";
 import QRScanner from "@/src/components/ui/QRScanner";
+import { RollingNumber } from "@/src/components/ui/RollingNumber";
+import { IntelligentPhoneInput } from "@/src/components/ui/IntelligentPhoneInput";
 import { useSearchParams } from "next/navigation";
 import * as turf from '@turf/turf';
 
@@ -27,13 +30,49 @@ const MapLoadingSkeleton = React.memo(() => (
         <div className="w-full h-full border-2 border-orange-500 rounded-full animate-pulse" />
       </div>
       <div className="space-y-4 text-center">
-        <p className="text-zinc-900 font-black italic tracking-tight text-2xl">Initializing Live Track</p>
-        <p className="text-zinc-400 text-[10px] uppercase font-black tracking-[0.4em] whitespace-nowrap">Connecting to Transit Hub ... OK</p>
+        <p className="text-zinc-900 font-bold tracking-tight text-2xl">Initializing Digi Bus Stand</p>
+        <p className="text-zinc-400 text-[10px] uppercase font-semibold tracking-widest whitespace-nowrap">Powered by Jeff Ben ... OK</p>
       </div>
     </div>
   </div>
 ));
 MapLoadingSkeleton.displayName = "MapLoadingSkeleton";
+
+const Confetti = () => {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-[2000] overflow-hidden">
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ 
+            top: "50%", 
+            left: "50%", 
+            scale: 0,
+            x: 0,
+            y: 0,
+            rotate: 0
+          }}
+          animate={{ 
+            x: (Math.random() - 0.5) * 600,
+            y: (Math.random() - 0.5) * 600 - 100,
+            scale: [0, 1, 0.5],
+            rotate: Math.random() * 360,
+            opacity: [1, 1, 0]
+          }}
+          transition={{ 
+            duration: 2, 
+            ease: "easeOut",
+            delay: Math.random() * 0.2
+          }}
+          className="absolute w-2 h-2 rounded-sm"
+          style={{ 
+            backgroundColor: ['#F18701', '#3B82F6', '#10B981', '#EF4444'][Math.floor(Math.random() * 4)] 
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 
 
@@ -79,6 +118,9 @@ function LiveMapContent() {
   const [isNavigating, setIsNavigating] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [hideNearestCard, setHideNearestCard] = useState(false);
+  const [paymentState, setPaymentState] = useState<'idle' | 'preparing' | 'checkout' | 'verifying' | 'success' | 'failed'>('idle');
+  const [bookingResult, setBookingResult] = useState<any>(null);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
 
   const busesRef = useRef(buses);
   useEffect(() => {
@@ -140,7 +182,9 @@ function LiveMapContent() {
       setLocationError(null);
       setIsLiveLocationOn(false);
       setShowNearbyOnly(false);
+      clearNavigation();
     } else {
+      setLocationError(null); // Reset error state on retry
       setHideNearestCard(false);
       if (!navigator.geolocation) {
         setLocationError("Geolocation is not supported by your browser.");
@@ -154,10 +198,15 @@ function LiveMapContent() {
       };
 
       const error = (err: GeolocationPositionError) => {
+        let msg = "GPS Signal Lost";
+        if (err.code === 1) msg = "Permission Denied";
+        else if (err.code === 3) msg = "Connection Timeout";
+        
+        setLocationError(msg);
+
         // Set fallback to user's real-world location (Palladam, TN) since localhost testing blocks live GPS
         setTimeout(() => {
-          setUserLocation({ lat: 11.0000, lng: 77.2880 });
-          setLocationError(null);
+          if (!userLocation) setUserLocation({ lat: 11.0000, lng: 77.2880 });
         }, 1000);
 
         // On fatal user permission denial, reset toggle
@@ -435,55 +484,61 @@ function LiveMapContent() {
     return () => cancelAnimationFrame(frameId);
   }, []);
 
-  const confirmBooking = async () => {
-    setLoading(true);
-    try {
-      const payload = {
-        busId: selectedBus._id,
-        boardingPoint: boardingPoint,
-        destination: dropPoint,
-        totalAmount: ticketQuantity * (selectedBus?.fare || 0),
-        passengers: [passengerDetails], // Matching the schema expectation
-        seats: Array.from({ length: ticketQuantity }, (_, i) => `S-${Math.floor(Math.random() * 50) + 1}`),
-        userId: "USER_CURRENT_MATRIX" // Placeholder for current session
+  const handlePayment = async () => {
+    setPaymentState('preparing');
+    
+    // TEMPORARY: Bypassing real payment logic until API keys are provided
+    setTimeout(async () => {
+      setPaymentState('verifying');
+      
+      const amount = ticketQuantity * (selectedBus?.fare || 150);
+      const simulatedBooking = {
+        success: true,
+        booking: {
+          ticketId: `JB-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+          qrToken: btoa(JSON.stringify({
+            t: Math.random().toString(36).substr(2, 9).toUpperCase(),
+            b: selectedBus._id,
+            q: ticketQuantity,
+            m: "SIMULATED-SECURE"
+          })),
+          bus: selectedBus.busNumber,
+          route: selectedBus.routeId?.routeName,
+          boardingPoint,
+          destination: dropPoint,
+          totalAmount: amount,
+          bookingDate: new Date().toISOString()
+        }
       };
 
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-
-      if (data.success && data.booking) {
-        setTicketId(data.booking.ticketId);
-
-        // Resilience Backup: Local Node Persistence
-        try {
-          const localData = localStorage.getItem("jeffben_matrix_passes");
-          const localPasses = localData ? JSON.parse(localData) : [];
-          localStorage.setItem("jeffben_matrix_passes", JSON.stringify([data.booking, ...localPasses]));
-        } catch (storageError) {
-        }
-
-        // Optimize local fleet count for immediate UI feedback
-        setBuses(prev => prev.map(bus => bus._id === selectedBus?._id ? { ...bus, availableSeats: bus.availableSeats - ticketQuantity } : bus));
-        setStep(4);
-      } else {
-        alert("CRITICAL SYNC ERROR: System failed to commit booking to matrix records.");
+      setBookingResult(simulatedBooking.booking);
+      setTicketId(simulatedBooking.booking.ticketId);
+      setPaymentState('success');
+      setStep(5);
+      
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        navigator.vibrate([100, 30, 100]);
       }
-    } catch (e) {
-      alert("NETWORK FAILURE: Unable to reach transit hub.");
-    } finally {
-      setLoading(false);
-    }
+      
+      setBuses(prev => prev.map(bus => bus._id === selectedBus?._id ? { ...bus, availableSeats: bus.availableSeats - ticketQuantity } : bus));
+    }, 1500);
   };
 
+  const confirmBooking = async () => {
+    setStep(4);
+  };
+
+  if (loading) return <MapLoadingSkeleton />;
+
   return (
-    <main className="h-[100dvh] w-full flex flex-col bg-zinc-50 overflow-hidden font-sans text-zinc-900 relative">
+    <motion.main 
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="h-[100dvh] w-full flex flex-col bg-zinc-50 overflow-hidden font-sans text-zinc-900 relative"
+    >
       <h1 className="sr-only">Live Bus Tracking & Booking | JeffBen Systems</h1>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isScanning && <QRScanner onScan={handleQRScan} onClose={() => setIsScanning(false)} />}
       </AnimatePresence>
 
@@ -494,24 +549,25 @@ function LiveMapContent() {
             <motion.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="bg-white/90 premium-blur border border-white/50 rounded-[28px] px-6 py-4 shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex items-center gap-4 pointer-events-auto group focus-within:ring-2 ring-primary/20 transition-all gpu-accelerated"
+              className="bg-white/95 premium-blur border border-white/50 rounded-[24px] px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex items-center gap-3 pointer-events-auto group focus-within:ring-2 ring-primary/20 transition-all gpu-accelerated"
             >
-              <Search size={20} className="text-zinc-400 group-focus-within:text-primary transition-colors" />
+              <Link href="/" className="p-2 hover:bg-zinc-100 rounded-full transition-colors" title="Back to Home">
+                <ArrowLeft size={20} className="text-zinc-600" />
+              </Link>
+              <div className="w-px h-6 bg-zinc-200" />
+              <Search size={18} className="text-zinc-400 group-focus-within:text-primary transition-colors" />
               <input 
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Find a bus or route..."
-                className="bg-transparent border-none text-zinc-900 outline-none w-full placeholder-zinc-400 font-bold tracking-tight"
+                className="bg-transparent border-none text-zinc-900 outline-none w-full placeholder-zinc-400 font-semibold tracking-tight text-sm"
               />
-               <div className="flex items-center gap-2 border-l border-zinc-100 pl-4">
-                  <Link href="/get-ticket" className="w-10 h-10 bg-white text-zinc-900 border border-zinc-200 rounded-full flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all active:scale-90 shadow-sm" title="My Ticket">
-                    <Ticket size={18} />
-                  </Link>
-                  <button onClick={() => setIsScanning(true)} className="w-10 h-10 bg-zinc-900 text-white rounded-full flex items-center justify-center hover:bg-primary transition-all active:scale-90" title="Scan Bus QR">
-                    <QrCode size={18} />
-                  </button>
-               </div>
+              <div className="flex items-center gap-2 border-l border-zinc-100 pl-4">
+                <Link href="/get-ticket" className="w-9 h-9 bg-white text-zinc-900 border border-zinc-200 rounded-full flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all active:scale-90 shadow-sm" title="My Ticket">
+                  <Ticket size={16} />
+                </Link>
+              </div>
             </motion.div>
 
             {/* Search Results Dropdown */}
@@ -525,7 +581,7 @@ function LiveMapContent() {
                   className="bg-white/95 premium-blur rounded-[32px] shadow-2xl border border-white/20 overflow-hidden max-h-[60vh] overflow-y-auto pointer-events-auto ring-1 ring-black/5 gpu-accelerated"
                 >
                   <div className="px-6 py-3 border-b border-zinc-50 bg-zinc-50/50">
-                    <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest leading-none">Intelligence Match ({searchResults.length} Fleet Found)</p>
+                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none">Intelligence Match ({searchResults.length} Fleet Found)</p>
                   </div>
                   {searchResults.map((bus) => (
                     <div 
@@ -542,8 +598,8 @@ function LiveMapContent() {
                           <Bus size={22} className="text-primary group-hover:text-white transition-colors" />
                         </div>
                         <div>
-                          <p className="font-black text-zinc-900 leading-tight tracking-tight uppercase italic">{bus.busNumber}</p>
-                          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">{bus.routeId?.routeName}</p>
+                          <p className="font-bold text-zinc-900 leading-tight tracking-tight uppercase whitespace-nowrap truncate max-w-[150px]">{bus.busNumber}</p>
+                          <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mt-1">{bus.routeId?.routeName}</p>
                         </div>
                       </div>
                       <ChevronRight size={18} className="text-zinc-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all" />
@@ -561,9 +617,9 @@ function LiveMapContent() {
             <Image 
               src="/logo2.png" 
               alt="Jeffben" 
-              width={250} 
-              height={100} 
-              className="h-12 md:h-24 w-auto object-contain drop-shadow-xl" 
+              width={200} 
+              height={80} 
+              className="h-8 md:h-14 w-auto object-contain drop-shadow-xl" 
               priority 
             />
           </Link>
@@ -608,10 +664,10 @@ function LiveMapContent() {
                <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center border border-primary/30 group-hover:bg-primary transition-all">
                   <Zap size={24} className="text-primary group-hover:text-white" />
                </div>
-               <div className="text-center">
-                  <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em] leading-none mb-1">Pass Active</p>
-                  <p className="text-sm font-black text-white italic truncate w-32 uppercase tracking-tighter">JB-{(ticketId || "").slice(-6)}</p>
-               </div>
+                <div className="text-center">
+                   <p className="text-[9px] font-bold text-primary uppercase tracking-widest leading-none mb-1">Pass Active</p>
+                   <p className="text-sm font-bold text-white truncate w-32 uppercase tracking-tight">JB-{(ticketId || "").slice(-6)}</p>
+                </div>
                <div className="flex items-center gap-2 mt-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-[8px] font-bold text-zinc-500 uppercase">Verified Sync</span>
@@ -624,9 +680,24 @@ function LiveMapContent() {
         <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-[150] flex flex-col gap-4 pointer-events-none gpu-accelerated">
           <div className="flex flex-col gap-2 p-1.5 md:p-2 bg-white/95 premium-blur rounded-[24px] md:rounded-[32px] shadow-xl border border-white pointer-events-auto">
             <button
+              onClick={toggleLiveLocation}
+              className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-3xl flex items-center justify-center transition-all group shadow-sm border border-zinc-100/50 relative ${locationError ? "bg-red-500 text-white" : isLiveLocationOn ? "bg-primary text-white" : "bg-white text-primary hover:bg-primary hover:text-white"}`}
+              title={locationError || "Location Hub"}
+            >
+              {locationError ? <Zap size={18} className="animate-bounce" /> : <LayoutDashboard size={18} className={isLiveLocationOn ? "animate-pulse" : ""} />}
+              {locationError && (
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping" />
+                </div>
+              )}
+            </button>
+            <button
               onClick={() => {
-                if (userLocation) setCenterOn({ ...userLocation } as any);
-                else toggleLiveLocation();
+                if (userLocation) {
+                  setCenterOn({ ...userLocation } as any);
+                } else if (!isLiveLocationOn) {
+                  toggleLiveLocation(); // Request location if off
+                }
               }}
               className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-primary hover:text-white text-primary rounded-xl md:rounded-3xl flex items-center justify-center transition-all group shadow-sm border border-zinc-100/50"
               title="Locate Me"
@@ -664,90 +735,106 @@ function LiveMapContent() {
           </div>
         </div>
 
-        {/* Bottom Navigation Panel */}
-        <div className="absolute bottom-0 left-0 right-0 md:bottom-8 md:left-1/2 md:-translate-x-1/2 md:w-max z-[200] pointer-events-auto gpu-accelerated">
-          <div className="bg-white/90 premium-blur border-t border-zinc-100 md:border md:rounded-full rounded-t-[32px] pb-6 pt-3 px-4 md:p-2 sm:pb-3 flex items-center justify-between md:justify-center gap-2 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] md:shadow-[0_20px_40px_rgba(0,0,0,0.1)] overflow-x-auto no-scrollbar w-full">
-
-            <button onClick={toggleLiveLocation} className={`flex flex-col items-center justify-center min-w-[48px] sm:min-w-[56px] md:min-w-[80px] h-12 md:h-16 rounded-2xl md:rounded-full transition-all flex-shrink-0 relative ${isLiveLocationOn ? "text-orange-500 bg-orange-500/10" : "hover:bg-zinc-50 text-zinc-500"}`}>
-              <LayoutDashboard size={20} className={isLiveLocationOn ? "animate-pulse" : ""} />
-              <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-1">{isLiveLocationOn ? "Stop Hub" : "Location Hub"}</span>
-              {isLiveLocationOn && <X size={12} className="absolute top-1 right-1 text-orange-500" />}
-            </button>
-
-            <button
-              onClick={() => {
-                if (!isLiveLocationOn) { toggleLiveLocation(); setShowNearbyOnly(true); return; }
-                if (!userLocation) { setLocationError("GPS..."); return; }
-                setShowNearbyOnly(!showNearbyOnly);
-                if (!showNearbyOnly && nearestBus) startNavigation(nearestBus);
-                else clearNavigation();
-              }}
-              className={`flex flex-col items-center justify-center min-w-[48px] sm:min-w-[56px] md:min-w-[80px] h-12 md:h-16 rounded-2xl md:rounded-full transition-all flex-shrink-0 relative ${showNearbyOnly ? "text-orange-500 bg-orange-500/10" : "hover:bg-zinc-50 text-zinc-500"}`}
+        {/* Bottom Navigation Panel (Overhauled Map Mode) */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, type: "spring", damping: 25, stiffness: 200 }}
+          className="fixed bottom-0 left-0 right-0 md:bottom-8 md:left-1/2 md:-translate-x-1/2 md:w-max z-[1000] pointer-events-none px-4 md:px-0"
+        >
+          <div className="relative flex items-end justify-center w-full max-w-xl mx-auto">
+            
+            {/* The Floating Center Button (Primary Action) */}
+            <motion.div 
+              className="absolute -top-10 z-[1100] pointer-events-auto"
+              whileHover={{ scale: 1.1, y: -5 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
-              <Navigation size={20} />
-              <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-1">{showNearbyOnly ? "Cancel" : "Nearby"}</span>
-              {showNearbyOnly && <X size={12} className="absolute top-1 right-1 text-orange-500" />}
-            </button>
-
-            <div className="w-px h-8 bg-zinc-100 mx-0.5 md:mx-1 hidden md:block flex-shrink-0" />
-
-            <button onClick={() => setLayers(l => ({ ...l, showRoutes: !l.showRoutes }))} className={`flex flex-col items-center justify-center min-w-[48px] sm:min-w-[56px] md:min-w-[80px] h-12 md:h-16 rounded-2xl md:rounded-full transition-all flex-shrink-0 ${layers.showRoutes ? "text-orange-600 bg-orange-50" : "hover:bg-zinc-50 text-zinc-500"}`}>
-              <Route size={20} />
-              <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-1">Routes</span>
-            </button>
-
-            <button onClick={() => setLayers(l => ({ ...l, showBuses: !l.showBuses }))} className={`flex flex-col items-center justify-center min-w-[48px] sm:min-w-[56px] md:min-w-[80px] h-12 md:h-16 rounded-2xl md:rounded-full transition-all flex-shrink-0 ${layers.showBuses ? "text-orange-600 bg-orange-50" : "hover:bg-zinc-50 text-zinc-500"}`}>
-              <Bus size={20} />
-              <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-1">Fleet</span>
-            </button>
-
-            <button onClick={() => setLayers(l => ({ ...l, showMajorStops: !l.showMajorStops }))} className={`flex flex-col items-center justify-center min-w-[48px] sm:min-w-[56px] md:min-w-[80px] h-12 md:h-16 rounded-2xl md:rounded-full transition-all flex-shrink-0 ${layers.showMajorStops ? "text-orange-600 bg-orange-50" : "hover:bg-zinc-50 text-zinc-500"}`}>
-              <Zap size={18} className={layers.showMajorStops ? "fill-orange-400/20" : ""} />
-              <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-1">Intelligence</span>
-            </button>
-
-
-            <div className="w-px h-8 bg-zinc-100 mx-0.5 md:mx-1 hidden md:block flex-shrink-0" />
-
-            {(isLiveLocationOn || showNearbyOnly || selectedBus || isNavigating) && (
-              <>
-                <div className="w-px h-8 bg-white/10 mx-0.5 md:mx-1 hidden md:block flex-shrink-0" />
-                <button
-                  onClick={() => {
-                    // 1. Core Navigation & Simulation Resets
-                    clearNavigation();
-                    setShowNearbyOnly(false);
-                    setSelectedBus(null);
-                    setIsBooking(false);
-                    setHideNearestCard(true);
-                    setSearchQuery("");
-
-                    // 2. Clear Live GPS if on
-                    if (isLiveLocationOn) toggleLiveLocation();
-
-                    // 3. Reset Layer Visibility to Defaults
-                    setLayers({
-                      showBuses: true,
-                      showRoutes: true,
-                      showMajorStops: true,
-                      showSmallStops: true,
-                      showTraffic: false,
-                      showBuildings: true
-                    });
-
-                    // 4. Cinematic Reset to City Overview
-                    setCenterOn({ lat: 11.0168, lng: 76.9558, zoom: 14, pitch: 60, bearing: -15 } as any);
+              <button 
+                onClick={() => setIsScanning(true)}
+                className="w-20 h-20 bg-zinc-950 rounded-full flex flex-col items-center justify-center border-[6px] border-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] group transition-all relative overflow-hidden"
+              >
+                {/* Breathing Pulse Effect */}
+                <motion.div 
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.1, 0.3, 0.1]
                   }}
-                  className="flex flex-col items-center justify-center min-w-[48px] sm:min-w-[56px] md:min-w-[80px] h-12 md:h-16 rounded-2xl md:rounded-full transition-all bg-primary text-white flex-shrink-0 shadow-lg shadow-primary/30 animate-in fade-in slide-in-from-right-4"
-                >
-                  <RefreshCw size={20} />
-                  <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-1">Cancel</span>
-                </button>
-              </>
-            )}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-primary rounded-full"
+                />
 
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <QrCode size={28} className="text-white mb-0.5 relative z-10 group-hover:rotate-12 transition-transform" strokeWidth={2.5} />
+                <span className="text-[7px] font-semibold text-white uppercase tracking-tight leading-none relative z-10">Scan to Book</span>
+                
+                {/* Visual Scanning Line Animation */}
+                <motion.div 
+                  animate={{ top: ["20%", "80%", "20%"] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="absolute left-4 right-4 h-[1px] bg-primary/40 blur-[1px] z-20"
+                />
+
+                {/* Circular Ripple on Tap (Simulated via Framer) */}
+                <motion.div 
+                  whileTap={{ scale: 4, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0 bg-white/20 rounded-full pointer-events-none z-0"
+                />
+              </button>
+            </motion.div>
+
+            {/* The Glassmorphic Navbar Container */}
+            <div className="bg-white/95 premium-blur border border-white/50 rounded-[32px] md:rounded-full pb-8 pt-4 px-4 md:p-3 shadow-[0_-20px_60px_rgba(0,0,0,0.1),0_20px_40px_rgba(0,0,0,0.1)] flex items-center justify-between md:justify-center gap-1 md:gap-4 pointer-events-auto w-full md:min-w-[500px]">
+              
+              {/* Fleet */}
+              <button onClick={() => setLayers(l => ({ ...l, showBuses: !l.showBuses }))} className={`flex flex-col items-center justify-center flex-1 md:min-w-[80px] h-14 rounded-2xl transition-all ${layers.showBuses ? "text-primary bg-primary/5" : "text-zinc-400 hover:text-zinc-600"}`}>
+                <Bus size={20} className={layers.showBuses ? "scale-110" : ""} />
+                <span className="text-[8px] font-black uppercase tracking-widest mt-1.5">Fleet</span>
+              </button>
+
+              {/* Intelligence */}
+              <button onClick={() => setLayers(l => ({ ...l, showMajorStops: !l.showMajorStops }))} className={`flex flex-col items-center justify-center flex-1 md:min-w-[80px] h-14 rounded-2xl transition-all ${layers.showMajorStops ? "text-primary bg-primary/5" : "text-zinc-400 hover:text-zinc-600"}`}>
+                <Zap size={20} className={layers.showMajorStops ? "scale-110 fill-primary/10" : ""} />
+                <span className="text-[8px] font-black uppercase tracking-widest mt-1.5">Intel</span>
+              </button>
+
+              {/* Spacer for Center Button */}
+              <div className="w-20 flex-shrink-0" />
+
+              {/* Routes */}
+              <button onClick={() => setLayers(l => ({ ...l, showRoutes: !l.showRoutes }))} className={`flex flex-col items-center justify-center flex-1 md:min-w-[80px] h-14 rounded-2xl transition-all ${layers.showRoutes ? "text-primary bg-primary/5" : "text-zinc-400 hover:text-zinc-600"}`}>
+                <Route size={20} className={layers.showRoutes ? "scale-110" : ""} />
+                <span className="text-[8px] font-black uppercase tracking-widest mt-1.5">Routes</span>
+              </button>
+
+              {/* Nearby */}
+              <button 
+                onClick={() => {
+                  if (locationError) {
+                    toggleLiveLocation(); // Attempt to retry if if in error state
+                    return;
+                  }
+                  if (!isLiveLocationOn) { 
+                    toggleLiveLocation(); 
+                    setShowNearbyOnly(true); 
+                    return; 
+                  }
+                  const nextState = !showNearbyOnly;
+                  setShowNearbyOnly(nextState);
+                  if (!nextState) clearNavigation();
+                }}
+                className={`flex flex-col items-center justify-center flex-1 md:min-w-[80px] h-14 rounded-2xl transition-all relative ${locationError ? "text-red-400 bg-red-50" : showNearbyOnly ? "text-primary bg-primary/5" : "text-zinc-400 hover:text-zinc-600"}`}
+              >
+                <Navigation size={20} className={showNearbyOnly && !locationError ? "scale-110" : ""} />
+                <span className="text-[8px] font-semibold uppercase tracking-widest mt-1.5">{locationError ? "Error" : showNearbyOnly ? "Active" : "Nearby"}</span>
+                {showNearbyOnly && !locationError && <div className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-primary animate-ping" />}
+              </button>
+
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         {isNavigating && navStats && (
           <motion.div
@@ -757,13 +844,13 @@ function LiveMapContent() {
             className="absolute bottom-[100px] md:bottom-32 left-1/2 -translate-x-1/2 z-[100] w-[90%] md:w-[600px] bg-orange-600 text-white p-8 rounded-[48px] shadow-2xl flex items-center justify-between pointer-events-auto gpu-accelerated"
           >
             <div className="flex gap-10">
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black uppercase opacity-60 tracking-[0.3em]">Distance</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-black italic">{navStats.distance}</span>
-                  <span className="text-xs font-black opacity-60">KM</span>
-                </div>
-              </div>
+               <div className="flex flex-col">
+                 <span className="text-[10px] font-bold uppercase opacity-60 tracking-widest">Distance</span>
+                 <div className="flex items-baseline gap-1">
+                   <span className="text-4xl font-bold">{navStats.distance}</span>
+                   <span className="text-xs font-bold opacity-60">KM</span>
+                 </div>
+               </div>
               <div className="w-[1px] h-12 bg-white/20" />
               <div className="flex flex-col">
                 <span className="text-[10px] font-black uppercase opacity-60 tracking-[0.3em]">Arrival ETA</span>
@@ -846,10 +933,11 @@ function LiveMapContent() {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 200 }}
-            drag={step === 4 ? false : "y"}
+            drag={ (step === 4 || step === 5) ? false : "y"}
             dragConstraints={{ top: 0 }}
+            dragElastic={0.2}
             onDragEnd={(_, info) => {
-              if (info.offset.y > 150 && step !== 4) {
+              if (info.offset.y > 150 && step < 4) {
                 setSelectedBus(null);
                 setIsBooking(false);
                 setStep(1);
@@ -865,8 +953,8 @@ function LiveMapContent() {
             )}
 
             <div className="flex-1 overflow-y-auto no-scrollbar px-6 md:px-12 pb-12">
-              {step === 4 ? (
-                /* STEP 4: FINAL DIGITAL TICKET */
+              {step === 5 ? (
+                /* STEP 5: FINAL DIGITAL TICKET */
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="relative flex flex-col items-center justify-center p-0 text-center py-12">
                    <div className="w-full max-w-[340px] md:max-w-4xl relative group">
                     {/* VINTAGE ORNATE GOLD TICKET DESIGN */}
@@ -884,9 +972,9 @@ function LiveMapContent() {
                           <div className="flex items-center justify-center gap-4 mb-4">
                             <Image src="/logo2.png" alt="JeffBen" width={40} height={40} className="object-contain" />
                             <div className="h-8 w-[1px] bg-[#5d4037]/20" />
-                            <Image src="/hero-logo.png" alt="Digi Bus" width={40} height={40} className="object-contain mix-blend-multiply" />
+                            <Image src="/hero-logo.png" alt="Digi Bus Stand" width={40} height={40} className="object-contain mix-blend-multiply" />
                           </div>
-                          <p className="text-[10px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Framework</p>
+                          <p className="text-[10px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Stand Framework</p>
                           <p className="text-xl md:text-2xl font-vintage italic text-[#5d4037]/80 leading-none mb-2">JeffBen Systems</p>
                           <h3 className="text-3xl md:text-5xl font-serif font-black tracking-tight text-[#5d4037] leading-none mb-2 uppercase">Boarding Pass</h3>
                         </div>
@@ -922,7 +1010,7 @@ function LiveMapContent() {
                           {/* Secure Watermark Layer */}
                           <div className="absolute inset-0 opacity-[0.4] pointer-events-none flex flex-wrap gap-2 items-center justify-center text-[6px] font-black uppercase tracking-tighter text-white -rotate-12 scale-110">
                             {Array(20).fill(null).map((_, i) => (
-                              <span key={i} className="whitespace-nowrap">DIGI BUS • JEFFBEN •</span>
+                              <span key={i} className="whitespace-nowrap">DIGI BUS STAND • JEFFBEN •</span>
                             ))}
                           </div>
                           <QRCodeSVG 
@@ -974,17 +1062,17 @@ function LiveMapContent() {
                     </div>
                   </div>
                 </motion.div>
-              ) : !isBooking ? (
+              ) : (step === 1 || step === 2 || step === 3 || step === 4) && !isBooking ? (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   {/* TRIP PEEK STATE */}
                   {/* Primary CTA Stack - Promoted to top for Rapido speed */}
                   <div className="flex flex-col gap-3">
                     <button 
-                      onClick={() => { setIsBooking(true); setStep(2); }}
-                      className="w-full h-20 bg-primary text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-zinc-900 transition-all shadow-[0_20px_40px_rgba(255,107,0,0.3)] flex items-center justify-center gap-3 active:scale-95 group"
-                    >
-                      Book e-Ticket <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
+                       onClick={() => { setIsBooking(true); setStep(2); }}
+                       className="w-full h-20 bg-primary text-white rounded-[32px] font-bold text-xl tracking-tight hover:bg-zinc-900 transition-all shadow-[0_20px_40px_rgba(255,107,0,0.3)] flex items-center justify-center gap-3 active:scale-95 group"
+                     >
+                       Book Ticket <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+                     </button>
                     <div className="grid grid-cols-2 gap-3">
                       <button 
                         onClick={() => { setSelectedBus(null); setIsBooking(false); setStep(1); }}
@@ -1010,7 +1098,7 @@ function LiveMapContent() {
                         <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
                         <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] leading-none">Arriving in approx 8 Mins</p>
                       </div>
-                      <h2 className="text-4xl font-black text-zinc-900 tracking-tighter leading-none mt-2 italic uppercase">{selectedBus.busNumber}</h2>
+                      <h2 className="text-4xl font-black text-zinc-900 tracking-tighter leading-none mt-2 italic uppercase whitespace-nowrap truncate font-heading">{selectedBus.busNumber}</h2>
                       <p className="text-xs font-bold text-zinc-400 italic mt-1">{selectedBus.routeId?.routeName}</p>
                     </div>
                     <div className="w-16 h-16 bg-orange-50 rounded-3xl flex items-center justify-center border border-orange-100/50 shadow-sm relative">
@@ -1069,7 +1157,7 @@ function LiveMapContent() {
                    <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                          <button onClick={() => setIsBooking(false)} className="w-12 h-12 bg-zinc-50 rounded-2xl flex items-center justify-center text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 transition-all"><ArrowLeft size={20} /></button>
-                         <h3 className="text-2xl font-black text-zinc-900 tracking-tighter uppercase italic">Secure Booking</h3>
+                         <h3 className="text-2xl font-bold text-zinc-900 tracking-tight uppercase">Secure Booking</h3>
                       </div>
                       <button onClick={() => { setIsBooking(false); setSelectedBus(null); }} className="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-500 hover:bg-rose-500 hover:text-white transition-all"><X size={20} /></button>
                    </div>
@@ -1171,24 +1259,18 @@ function LiveMapContent() {
                             <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] mb-4">Ticket Quantity</p>
                             <div className="flex items-center gap-12">
                                <button onClick={() => setTicketQuantity(prev => Math.max(1, prev -1))} className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-xl font-black text-zinc-900 shadow-sm hover:bg-zinc-900 hover:text-white transition-all border border-zinc-200">-</button>
-                               <span className="text-5xl font-black text-zinc-900 italic">{ticketQuantity}</span>
+                                                               <div className="text-5xl font-black text-zinc-900 italic min-w-[80px] flex justify-center">
+                                  <RollingNumber value={ticketQuantity} />
+                                </div>
+
                                <button onClick={() => setTicketQuantity(prev => Math.min(selectedBus.availableSeats, prev + 1))} className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-xl font-black text-white shadow-lg hover:bg-zinc-900 transition-all">+</button>
                             </div>
-                            <div className="space-y-4">
-                             <div className="space-y-2">
-                                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-2">Secure Link (Phone)</label>
-                                <div className="relative">
-                                   <Phone size={18} className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-400" />
-                                   <input 
-                                     type="tel" 
-                                     value={passengerDetails.phone}
-                                     onChange={(e) => setPassengerDetails({...passengerDetails, phone: e.target.value})}
-                                     placeholder="Active Phone Number"
-                                     className="w-full h-16 bg-zinc-50 border border-zinc-100 rounded-[24px] pl-16 pr-6 font-bold text-zinc-900 outline-none focus:ring-2 ring-primary/20 transition-all"
-                                   />
-                                </div>
+                            <div className="space-y-4 w-full px-6 mt-6">
+                               <IntelligentPhoneInput 
+                                 value={passengerDetails.phone}
+                                 onChange={(val) => setPassengerDetails({...passengerDetails, phone: val})}
+                               />
                              </div>
-                          </div>
                          </div>
 
                          <button 
@@ -1196,10 +1278,229 @@ function LiveMapContent() {
                            disabled={!passengerDetails.phone || passengerDetails.phone.length < 10}
                            className="w-full h-20 bg-primary text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-zinc-900 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-30"
                          >
-                           {loading ? <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" /> : "Confirm Boarding Pass"}
+                           Proceed to Payment <ChevronRight size={24} />
                          </button>
                       </div>
                    )}
+                    {step === 4 && (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                        className="space-y-8"
+                      >
+                        <div className="bg-zinc-950 rounded-[40px] p-8 text-white space-y-6 relative overflow-hidden group">
+                          {/* Animated Gradient Glow */}
+                          <motion.div 
+                            animate={{ 
+                              opacity: [0.1, 0.3, 0.1],
+                              scale: [1, 1.2, 1]
+                            }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute -top-20 -right-20 w-64 h-64 bg-primary rounded-full blur-[100px] pointer-events-none"
+                          />
+                          
+                          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <CreditCard size={120} />
+                          </div>
+                          <div className="space-y-1 relative z-10">
+                            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Payment Summary</p>
+                            <h4 className="text-3xl font-black tracking-tighter italic uppercase whitespace-nowrap truncate font-heading">{selectedBus.busNumber}</h4>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-6 relative z-10">
+                            <div className="space-y-1">
+                              <p className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Tickets</p>
+                              <div className="flex items-center gap-1">
+                                <RollingNumber value={ticketQuantity} />
+                                <span className="text-lg font-black italic ml-1">Seats</span>
+                              </div>
+                            </div>
+                            <div className="space-y-1 text-right">
+                              <p className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Total Fare</p>
+                              <div className="text-2xl font-black text-primary italic flex justify-end">
+                                <RollingNumber value={ticketQuantity * (selectedBus.fare || 150)} prefix="₹" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="w-full h-px bg-zinc-800" />
+
+                          <div className="space-y-4 relative z-10">
+                            <div className="flex items-center gap-3">
+                              <MapPin size={14} className="text-zinc-500" />
+                              <p className="text-[10px] font-bold text-zinc-300 uppercase tracking-tight">{boardingPoint} → {dropPoint}</p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <Phone size={14} className="text-zinc-500" />
+                              <p className="text-[10px] font-bold text-zinc-300 uppercase tracking-tight">{passengerDetails.phone}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <button 
+                            onClick={handlePayment}
+                            disabled={paymentState !== 'idle' && paymentState !== 'failed'}
+                            className="w-full h-20 bg-primary text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-zinc-900 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50 relative overflow-hidden group"
+                          >
+                            <AnimatePresence mode="wait">
+                              {paymentState === 'idle' || paymentState === 'failed' ? (
+                                <motion.div 
+                                  key="idle"
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -10 }}
+                                  className="flex items-center gap-3"
+                                >
+                                  Generate Ticket <ChevronRight size={24} />
+                                </motion.div>
+                              ) : (
+                                <motion.div 
+                                  key="processing"
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  className="flex items-center gap-3"
+                                >
+                                  <RefreshCw size={20} className="animate-spin" />
+                                  <span className="uppercase tracking-widest text-sm">{paymentState}...</span>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </button>
+                          <button 
+                            onClick={() => setStep(3)}
+                            className="w-full h-14 bg-zinc-50 text-zinc-400 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-zinc-100 hover:text-zinc-900 transition-all active:scale-95"
+                          >
+                            Edit Details
+                          </button>
+                        </div>
+                        
+                        {paymentError && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="flex items-center gap-2 text-rose-500 justify-center"
+                          >
+                            <AlertCircle size={14} />
+                            <p className="text-[10px] font-black uppercase tracking-tight">{paymentError}</p>
+                          </motion.div>
+                        )}
+                      </motion.div>
+                    )}
+
+                    {step === 5 && bookingResult && (
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="space-y-8 relative"
+                      >
+                        <Confetti />
+                        <div className="text-center space-y-4 relative z-10 mb-12">
+                          <motion.div 
+                            initial={{ scale: 0, rotate: -45 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            transition={{ type: "spring", damping: 12, stiffness: 200 }}
+                            className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border-2 border-emerald-100"
+                          >
+                            <CheckCircle2 size={32} className="text-emerald-500" />
+                          </motion.div>
+                          <div className="space-y-1">
+                            <motion.h4 
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.2 }}
+                              className="text-2xl font-bold text-zinc-900 tracking-tight uppercase"
+                            >
+                              Payment Verified
+                            </motion.h4>
+                            <motion.p 
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.4 }}
+                              className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest"
+                            >
+                              Ticket Generated Successfully
+                            </motion.p>
+                          </div>
+                        </div>
+
+                        {/* Modern Compact Ticket Card */}
+                        <div className="w-full overflow-hidden flex items-center justify-center py-4">
+                          <motion.div 
+                            id="printable-ticket"
+                            initial={{ y: 40, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.3 }}
+                            className="bg-white rounded-[40px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] border border-zinc-100 flex flex-row transition-all hover:shadow-[0_48px_80px_-20px_rgba(0,0,0,0.15)] origin-center scale-[0.55] sm:scale-[0.75] md:scale-100 min-w-[600px] md:min-w-0"
+                            style={{ margin: '-15% 0' }}
+                          >
+                           <div className="p-8 border-r border-dashed border-zinc-100 flex flex-col items-center justify-center gap-6 bg-zinc-50/50 w-[240px]">
+                              <div className="bg-white p-4 rounded-3xl shadow-xl border border-zinc-50 group-hover:scale-105 transition-transform duration-500">
+                                <QRCodeSVG 
+                                   value={bookingResult.qrToken} 
+                                   size={180} 
+                                   level="H"
+                                   fgColor="#18181b"
+                                   imageSettings={{
+                                     src: "/logo2.png",
+                                     height: 35,
+                                     width: 35,
+                                     excavate: true,
+                                   }}
+                                />
+                              </div>
+                              <div className="text-center space-y-1">
+                                 <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none mb-1">Pass Identity Token</p>
+                                 <p className="text-xs font-bold text-zinc-900 uppercase tracking-tight">{bookingResult.ticketId}</p>
+                              </div>
+                           </div>
+
+                           <div className="p-8 flex-1 space-y-8 flex flex-col justify-center">
+                              <div className="flex items-center justify-between">
+                                 <div className="space-y-1">
+                                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Bus Number</p>
+                                    <p className="text-base font-bold text-zinc-900 uppercase">{selectedBus.busNumber}</p>
+                                 </div>
+                                 <div className="text-right space-y-1">
+                                    <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Departure</p>
+                                    <p className="text-base font-bold text-zinc-900 uppercase">{selectedBus.departureTime || "LIVE"}</p>
+                                 </div>
+                              </div>
+                              <div className="space-y-1">
+                                 <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Route Channel</p>
+                                 <p className="text-sm font-bold text-zinc-600">{selectedBus.routeId?.routeName}</p>
+                              </div>
+                           </div>
+
+                           {/* Side Notches */}
+                           <div className="absolute left-0 top-[60%] -translate-x-1/2 w-8 h-8 rounded-full bg-zinc-50 border border-zinc-100" />
+                           <div className="absolute right-0 top-[60%] translate-x-1/2 w-8 h-8 rounded-full bg-zinc-50 border border-zinc-100" />
+                        </motion.div>
+                        </div>
+
+                        <motion.div 
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.8 }}
+                          className="grid grid-cols-2 gap-3"
+                        >
+                           <button 
+                             onClick={() => window.print()}
+                             className="h-16 bg-zinc-950 text-white rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-primary transition-all flex items-center justify-center gap-2 active:scale-95"
+                           >
+                             <Download size={14} /> Print Pass
+                           </button>
+                           <button 
+                             onClick={() => { setIsBooking(false); setSelectedBus(null); setStep(1); }}
+                             className="h-16 bg-zinc-50 text-zinc-900 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 active:scale-95"
+                           >
+                             Return to Hub
+                           </button>
+                        </motion.div>
+                      </motion.div>
+                    )}
                 </motion.div>
               )}
             </div>
@@ -1233,7 +1534,7 @@ function LiveMapContent() {
                   {/* Secure Watermark Layer */}
                   <div className="absolute inset-0 opacity-[0.35] pointer-events-none flex flex-wrap gap-3 items-center justify-center text-[8px] font-black uppercase tracking-widest text-white -rotate-12 scale-125">
                     {Array(30).fill(null).map((_, i) => (
-                      <span key={i} className="whitespace-nowrap">DIGI BUS • JEFFBEN •</span>
+                      <span key={i} className="whitespace-nowrap">DIGI BUS STAND • JEFFBEN •</span>
                     ))}
                   </div>
                   <QRCodeSVG
@@ -1264,76 +1565,43 @@ function LiveMapContent() {
       </AnimatePresence>
 
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-        .font-vintage { font-family: 'Dancing Script', cursive !important; }
-        
         @media print {
-          /* 1. Global Sanitization: Kill all browser-default margins and ghost offsets */
           @page {
             size: landscape !important;
             margin: 0 !important;
           }
 
-          html, body {
+          .no-print, nav, form, .diagnostics-plate, button, .Internal-Fleet-Diagnostics, footer, .Confetti { display: none !important; }
+          
+          body { 
+            background: white !important; 
+            -webkit-print-color-adjust: exact !important; 
+            print-color-adjust: exact !important; 
             margin: 0 !important;
             padding: 0 !important;
-            min-height: 0 !important;
           }
 
-          @media print {
-            body * { visibility: hidden !important; }
-            #printable-ticket, #printable-ticket * { 
-              visibility: visible !important; 
-              -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-            }
-            
-            #printable-ticket {
-              position: fixed !important;
-              left: 50% !important;
-              top: 50% !important;
-              transform: translate(-50%, -50%) !important;
-              width: 210mm !important;
-              height: 90mm !important;
-              background: #f7e49f !important;
-              background-image: linear-gradient(to bottom right, #f7e49f, #e5c167, #d4af37) !important;
-              border: 4px solid #b8860b !important;
-              border-radius: 20px !important;
-              display: flex !important;
-              flex-direction: row !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              box-shadow: none !important;
-              z-index: 999999 !important;
-              overflow: hidden !important;
-            }
+          main { background: white !important; padding: 0 !important; margin: 0 !important; }
+          
+          #printable-ticket {
+            visibility: visible !important;
+            display: block !important;
+            width: 100% !important;
+            max-width: none !important;
+            border: 1px solid #f4f4f5 !important;
+            border-radius: 40px !important;
+            margin: 0 auto !important;
+            box-shadow: none !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
 
-            .ticket-main {
-               flex: 1 !important;
-               display: flex !important;
-               flex-direction: column !important;
-               justify-content: center !important;
-               padding: 10mm !important;
-               border-right: 2px dashed rgba(184, 134, 11, 0.4) !important;
-            }
-
-            .ticket-stub {
-               width: 75mm !important;
-               display: flex !important;
-               flex-direction: column !important;
-               align-items: center !important;
-               justify-content: center !important;
-               background: rgba(0, 0, 0, 0.05) !important;
-            }
-
-            h3 { font-size: 38pt !important; margin: 0 0 4mm 0 !important; line-height: 1 !important; color: #5d4037 !important; }
-            p { font-size: 14pt !important; margin: 2mm 0 0 0 !important; color: #5d4037 !important; }
-            span { font-size: 10pt !important; font-weight: 800 !important; color: #5d4037 !important; }
-            svg { width: 45mm !important; height: 45mm !important; }
-            .italic { font-style: italic !important; }
+          #printable-ticket * {
+            visibility: visible !important;
           }
         }
       `}</style>
-    </main>
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+    </motion.main>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode";
+// import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode"; // Removed for optimization
 import { X, Camera, Zap, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -13,11 +13,11 @@ interface QRScannerProps {
 const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
   const [error, setError] = useState<string | null>(null);
   const mountedRef = useRef(true);
-  const scannerRef = useRef<Html5Qrcode | null>(null);
+  const scannerRef = useRef<any>(null);
   const isStartingRef = useRef(false);
 
   useEffect(() => {
-    let html5QrCode: Html5Qrcode | null = null;
+    let html5QrCode: any = null;
     mountedRef.current = true;
 
     const startScanner = async () => {
@@ -40,6 +40,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       setError(null); // Clear previous errors for fresh attempt
       
       try {
+        const { Html5Qrcode } = await import("html5-qrcode");
         const scanner = new Html5Qrcode("reader");
         scannerRef.current = scanner;
 
@@ -53,7 +54,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
         await scanner.start(
           { facingMode: "environment" },
           config,
-          (decodedText) => {
+          (decodedText: string) => {
             if (mountedRef.current) {
                onScan(decodedText);
                // Graceful stop after successful scan

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode";
+// import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode"; // Removed for optimization
 import { ShieldCheck, LogIn, Camera, QrCode, CheckCircle2, AlertTriangle, XCircle, Clock, MapPin, User, ChevronLeft, Volume2, Vibrate } from "lucide-react";
 import Image from "next/image";
 
@@ -14,7 +14,7 @@ export default function ConductorPanel() {
   const [error, setError] = useState("");
   const [validating, setValidating] = useState(false);
   
-  const scannerRef = useRef<Html5Qrcode | null>(null);
+  const scannerRef = useRef<any>(null);
 
   // Simple hardcoded access for demonstration
   const handleLogin = (e: React.FormEvent) => {
@@ -28,32 +28,44 @@ export default function ConductorPanel() {
   };
 
   useEffect(() => {
-    if (isAuthenticated && isScanning) {
-      const html5QrCode = new Html5Qrcode("reader");
-      scannerRef.current = html5QrCode;
-      
-      const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-      
-      html5QrCode.start(
-        { facingMode: "environment" },
-        config,
-        async (decodedText) => {
-          handleScanSuccess(decodedText);
-          await html5QrCode.stop();
+    let html5QrCode: any = null;
+
+    const startScanner = async () => {
+      if (isAuthenticated && isScanning) {
+        // Dynamic Import for Performance
+        const { Html5Qrcode } = await import("html5-qrcode");
+        
+        html5QrCode = new Html5Qrcode("reader");
+        scannerRef.current = html5QrCode;
+        
+        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+        
+        try {
+          await html5QrCode.start(
+            { facingMode: "environment" },
+            config,
+            async (decodedText: string) => {
+              handleScanSuccess(decodedText);
+              await html5QrCode.stop();
+              setIsScanning(false);
+            },
+            (errorMessage: string) => {
+              // ignore failures
+            }
+          );
+        } catch (err) {
+          console.error("Camera access failed", err);
+          setError("Camera Access Denied");
           setIsScanning(false);
-        },
-        (errorMessage) => {
-          // ignore failures
         }
-      ).catch((err) => {
-        console.error("Camera access failed", err);
-        setError("Camera Access Denied");
-      });
-    }
+      }
+    };
+
+    startScanner();
 
     return () => {
-      if (scannerRef.current && scannerRef.current.isScanning) {
-        scannerRef.current.stop().catch(console.error);
+      if (html5QrCode && html5QrCode.isScanning) {
+        html5QrCode.stop().catch(console.error);
       }
     };
   }, [isAuthenticated, isScanning]);
@@ -120,8 +132,8 @@ export default function ConductorPanel() {
         >
           <Image src="/logo2.png" alt="Logo" width={100} height={100} className="mx-auto" />
           <div className="space-y-3">
-            <h1 className="text-4xl font-black uppercase italic tracking-tighter text-zinc-900">Conductor <span className="text-[#FF9933]">Hub</span></h1>
-            <p className="text-zinc-400 text-[10px] font-black uppercase tracking-[0.3em]">Boarding Verification Terminal</p>
+            <h1 className="text-4xl font-bold uppercase tracking-tight text-zinc-900">Conductor <span className="text-[#FF9933]">Hub</span></h1>
+            <p className="text-zinc-400 text-[10px] font-bold uppercase tracking-widest">Boarding Verification Terminal</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -131,13 +143,13 @@ export default function ConductorPanel() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Access ID"
-                className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl py-5 px-6 focus:outline-none focus:ring-4 focus:ring-[#FF9933]/10 focus:border-[#FF9933] transition-all text-center tracking-[1em] text-2xl font-black placeholder:tracking-normal placeholder:text-zinc-200"
+                className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl py-5 px-6 focus:outline-none focus:ring-4 focus:ring-[#FF9933]/10 focus:border-[#FF9933] transition-all text-center tracking-[0.5em] text-2xl font-bold placeholder:tracking-normal placeholder:text-zinc-200"
               />
-              {error && <p className="text-red-600 text-[10px] font-black uppercase tracking-widest mt-3">{error}</p>}
+              {error && <p className="text-red-600 text-[10px] font-bold uppercase tracking-widest mt-3">{error}</p>}
             </div>
             <button
               type="submit"
-              className="w-full bg-[#FF9933] text-white py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-zinc-900 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-xl shadow-[#FF9933]/20"
+              className="w-full bg-[#FF9933] text-white py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-xl shadow-[#FF9933]/20"
             >
               <LogIn size={20} />
               Engage Terminal
@@ -146,7 +158,7 @@ export default function ConductorPanel() {
           
           <div className="pt-12 flex items-center justify-center gap-4 text-zinc-800">
              <ShieldCheck size={20} />
-             <span className="text-[10px] font-black uppercase tracking-widest">Endorsed by JeffBen Fleet Authority</span>
+             <span className="text-[10px] font-bold uppercase tracking-widest">Endorsed by JeffBen Fleet Authority</span>
           </div>
         </motion.div>
       </main>
@@ -158,11 +170,11 @@ export default function ConductorPanel() {
       <header className="p-6 bg-white border-b border-zinc-100 sticky top-0 z-50 shadow-sm flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Terminal 01 • Live Secure</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Terminal 01 • Live Secure</span>
         </div>
         <button 
           onClick={() => setIsAuthenticated(false)}
-          className="text-[10px] font-black uppercase tracking-widest text-[#FF9933] px-4 py-2 bg-white border border-[#FF9933]/20 rounded-xl hover:bg-[#FF9933] hover:text-white transition-all shadow-sm"
+          className="text-[10px] font-bold uppercase tracking-widest text-[#FF9933] px-4 py-2 bg-white border border-[#FF9933]/20 rounded-xl hover:bg-[#FF9933] hover:text-white transition-all shadow-sm"
         >
           Logout
         </button>
@@ -180,12 +192,12 @@ export default function ConductorPanel() {
                 </div>
               </div>
               <div className="text-center space-y-2">
-                <h2 className="text-2xl font-black uppercase italic text-zinc-900">Awaiting Scan</h2>
-                <p className="text-zinc-400 text-[10px] font-black uppercase tracking-widest">Align QR inside the frame</p>
+                <h2 className="text-2xl font-bold uppercase text-zinc-900">Awaiting Scan</h2>
+                <p className="text-zinc-400 text-[10px] font-bold uppercase tracking-widest">Align QR inside the frame</p>
               </div>
               <button 
                 onClick={() => setIsScanning(true)}
-                className="w-full bg-zinc-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 transition-all shadow-2xl"
+                className="w-full bg-zinc-900 text-white py-5 rounded-2xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 transition-all shadow-2xl"
               >
                 <Camera size={20} />
                 Launch Camera
@@ -242,12 +254,12 @@ export default function ConductorPanel() {
                     <XCircle size={48} className="text-red-500" />
                   )}
                   <div className="space-y-1">
-                    <h3 className={`text-2xl font-black uppercase ${
+                    <h3 className={`text-2xl font-bold uppercase ${
                       scanResult.success ? "text-green-600" : scanResult.message?.includes("Expired") ? "text-yellow-600" : "text-red-600"
                     }`}>
                       {scanResult.success ? "VALID PASS" : "INVALID PASS"}
                     </h3>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Status: {scanResult.message}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Status: {scanResult.message}</p>
                   </div>
                 </div>
 

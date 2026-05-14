@@ -36,14 +36,14 @@ const BusMarker = React.memo(({ isRunning, busNumber, isSelected, speed, availab
 
       {/* 2D Bus Marker with Rapido-style Elevation */}
       <div 
-        className="w-16 h-16 relative flex items-center justify-center transition-transform duration-300 ease-out"
+        className="w-16 h-16 relative flex items-center justify-center transition-transform duration-300 ease-out will-change-transform"
         style={{ 
-          transform: `scale(calc(var(--bus-scale, 1.0) * ${isSelected ? 1.4 : 1})) rotate(${(rotationDegrees || 0) - (mapBearing || 0)}deg)`, 
+          transform: `translate3d(0,0,0) scale(calc(var(--bus-scale, 1.0) * ${isSelected ? 1.4 : 1})) rotate(${(rotationDegrees || 0) - (mapBearing || 0)}deg)`, 
           transformOrigin: 'center center' 
         }}
       >
         {/* Soft Shadow Underneath (Simulated Elevation) */}
-        <div className="absolute top-[80%] left-1/4 right-1/4 h-2 bg-black/40 blur-md rounded-full transform scale-x-150" />
+        <div className="absolute top-[80%] left-1/4 right-1/4 h-2 bg-black/40 blur-sm rounded-full transform scale-x-150 md:blur-md" />
 
         {/* Live Neural Pulse Glow - High Contrast for Rapido Aesthetic */}
         {isRunning && (
@@ -57,12 +57,13 @@ const BusMarker = React.memo(({ isRunning, busNumber, isSelected, speed, availab
           <img 
             src="/bus-marker-3d.png" 
             alt="Bus" 
-            className={`w-14 h-14 object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.4)] transition-transform duration-500 ${isSelected ? "scale-110" : "scale-100"}`} 
+            loading="lazy"
+            className={`w-14 h-14 object-contain transition-transform duration-500 ${isSelected ? "scale-110 drop-shadow-xl" : "scale-100"}`} 
           />
         </div>
 
         {isSelected && (
-          <div className="absolute -inset-1 rounded-full border-[3px] border-orange-500 shadow-[0_0_40px_rgba(255,107,0,0.8)] animate-pulse" />
+          <div className="absolute -inset-1 rounded-full border-[3px] border-orange-500 shadow-[0_0_20px_rgba(255,107,0,0.5)] md:shadow-[0_0_40px_rgba(255,107,0,0.8)] animate-pulse" />
         )}
       </div>
     </div>
@@ -411,9 +412,9 @@ const LiveBusMap = React.memo(({
                      const dot = document.createElement('div');
                      dot.className = "w-3 h-3 bg-white border-2 border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.6)] rounded-full transition-transform hover:scale-150";
                      
-                     // The Label (Reveals on Hover/Click)
+                     // The Label (Always visible in Intelligence mode)
                      const label = document.createElement('div');
-                     label.className = "absolute -bottom-8 bg-zinc-900 text-white text-[9px] font-black tracking-widest px-3 py-1 rounded-full shadow-2xl whitespace-nowrap backdrop-blur-md opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 pointer-events-none z-50 uppercase italic border border-white/20";
+                     label.className = "absolute -bottom-8 bg-white/95 text-zinc-900 text-[10px] font-black tracking-tight px-3 py-1 rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.1)] whitespace-nowrap backdrop-blur-md opacity-100 scale-100 transition-all duration-300 pointer-events-none z-50 uppercase italic border border-zinc-200";
                      label.innerText = stop.stopName;
                      
                      el.appendChild(dot);
@@ -448,10 +449,10 @@ const LiveBusMap = React.memo(({
               
               // Glide marker position smoothly (15% closer per frame, achieving ~60FPS visual snap)
               if (Math.abs(dx) > 0.000001 || Math.abs(dy) > 0.000001) {
-                 cache.marker.setLngLat([
-                    curr.lng + dx * 0.15, 
-                    curr.lat + dy * 0.15
-                 ]);
+                  cache.marker.setLngLat([
+                    curr.lng + dx * 0.12, 
+                    curr.lat + dy * 0.12
+                  ]);
               }
            }
         });

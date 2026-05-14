@@ -1,21 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Open_Sans } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
-import { MobileNav } from "@/src/components/MobileNav";
-import { MobileHeader } from "@/src/components/MobileHeader";
+import { Inter, Manrope } from "next/font/google";
+
+import { Navbar } from "@/src/components/Navbar";
+import { Footer } from "@/src/components/Footer";
 import "./globals.css";
 
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: 'swap',
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  display: 'swap',
 });
 
 export const viewport: Viewport = {
   themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
   viewportFit: "cover",
 };
 
@@ -48,19 +55,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning className="overflow-hidden h-full selection:bg-orange-500 selection:text-white">
-        <body
-          suppressHydrationWarning
-          className={`${openSans.variable} antialiased bg-white h-full flex flex-col overflow-hidden select-none`}
-        >
-          <MobileHeader />
-          <main className="flex-1 overflow-y-auto overflow-x-hidden pb-20 md:pb-0 scroll-smooth no-scrollbar gpu-accelerated">
-            {children}
-          </main>
-          <MobileNav />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-white">
+      <body
+        className={`${inter.variable} ${manrope.variable} antialiased bg-white min-h-full flex flex-col`}
+      >
+        <Navbar />
+        <main className="flex-1 scroll-smooth">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
   );
 }

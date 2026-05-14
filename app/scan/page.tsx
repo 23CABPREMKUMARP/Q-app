@@ -1,13 +1,39 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { QrCode, ArrowLeft, Bus, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
+import { useState } from "react";
+import QRScanner from "@/src/components/ui/QRScanner";
+import { useRouter } from "next/navigation";
+
 export default function ScanPage() {
+  const [showScanner, setShowScanner] = useState(true);
+  const router = useRouter();
+
+  const handleScan = (data: string) => {
+    setShowScanner(false);
+    // established link logic: if it's a URL or raw ID, we push to map
+    let busId = data;
+    if (data.includes("busId=")) {
+      busId = data.split("busId=")[1].split("&")[0];
+    }
+    router.push(`/live-map?busId=${busId}`);
+  };
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      <AnimatePresence>
+        {showScanner && (
+          <QRScanner 
+            onScan={handleScan} 
+            onClose={() => setShowScanner(false)} 
+          />
+        )}
+      </AnimatePresence>
+
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px] -z-10" />
       
@@ -64,16 +90,17 @@ export default function ScanPage() {
         </motion.p>
 
         <div className="pt-8 space-y-4">
-          <Link href="/">
+          {!showScanner && (
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full h-14 bg-white text-black rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-white/5"
+              onClick={() => setShowScanner(true)}
+              className="w-full h-14 bg-white text-black rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-white/5 cursor-pointer"
             >
               <Bus size={18} />
-              Open Camera
+              Re-open Scanner
             </motion.button>
-          </Link>
+          )}
 
           <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors font-bold text-xs uppercase tracking-widest">
             <ArrowLeft size={14} />
