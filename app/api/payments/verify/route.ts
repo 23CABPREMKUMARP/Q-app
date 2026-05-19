@@ -5,6 +5,7 @@ import Booking from "@/src/models/Booking";
 import Bus from "@/src/models/Bus";
 import Seat from "@/src/models/Seat";
 import { supabaseFetch } from "@/src/lib/supabase";
+import mongoose from "mongoose";
 
 export async function POST(req: Request) {
   try {
@@ -14,6 +15,8 @@ export async function POST(req: Request) {
       razorpay_signature,
       bookingDetails
     } = await req.json();
+
+    console.log(`[Payment Verification] Processing Order: ${razorpay_order_id}`);
 
     // 1. Verify Signature
     const secret = process.env.RAZORPAY_KEY_SECRET;
@@ -30,73 +33,102 @@ export async function POST(req: Request) {
     const isAuthentic = expectedSignature === razorpay_signature;
 
     if (!isAuthentic) {
-      return NextResponse.json({ success: false, message: "Payment verification failed" }, { status: 400 });
+      console.error(`[Signature Mismatch] Expected: ${expectedSignature}, Received: ${razorpay_signature}`);
+      return NextResponse.json({ success: false, message: "Payment verification failed: Signature mismatch" }, { status: 400 });
     }
 
-    // 2. Finalize Booking (Logic migrated from api/bookings/route.ts)
-    await connectDB();
-
-    const {
-      userId,
-      busId,
-      passengers,
-      seats,
-      totalAmount,
-      boardingPoint,
-      destination,
-    } = bookingDetails;
-
+    // 2. Finalize Booking
+    let newBooking = null;
     const ticketId = `JBN-${crypto.randomBytes(3).toString("hex").toUpperCase()}`;
     const qrToken = crypto.randomBytes(32).toString("hex");
 
-    const bookingData = {
-      ticketId,
-      userId: userId || "GUEST_LINK",
-      busId,
-      seats,
-      totalAmount,
-      boardingPoint,
-      destination,
-      passengers,
-      paymentStatus: "Paid",
-      qrToken,
-      validationStatus: "Active",
-      razorpayOrderId: razorpay_order_id,
-      razorpayPaymentId: razorpay_payment_id,
-      razorpaySignature: razorpay_signature
-    };
-
-    const newBooking = new Booking(bookingData);
-    await newBooking.save();
-
-    // Update seat availability
-    if (busId && busId.length === 24) {
-      await Seat.updateMany(
-        { busId, seatNumber: { $in: seats } },
-        { $set: { isBooked: true } }
-      );
-
-      await Bus.findByIdAndUpdate(busId, {
-        $inc: { availableSeats: -seats.length },
-      });
-    }
-
-    // Supabase Sync
     try {
-      await supabaseFetch("bookings", "POST", {
-        ticket_id: ticketId,
-        user_id: userId || "GUEST_LINK",
-        bus_id: busId || "SIM_BUS",
-        seats: seats || ["S-1"],
-        total_amount: totalAmount || 0,
-        boarding_point: boardingPoint || "TRANSIT_HUB",
-        destination: destination || "END_NODE",
-        phone: passengers?.[0]?.phone || "N/A",
-        qr_token: qrToken,
-        status: "Confirmed"
+      await connectDB();
+
+      const {
+        userId,
+        busId,
+        passengers,
+        seats,
+        totalAmount,
+        boardingPoint,
+        destination,
+      } = bookingDetails;
+
+      // Validate busId - if it's a mock bus (not 24 chars or not valid ObjectId), use a placeholder or handle gracefully
+      const isValidObjectId = mongoose.Types.ObjectId.isValid(busId);
+      
+      const bookingData = {
+        ticketId,
+        userId: userId || "GUEST_LINK",
+        busId: isValidObjectId ? busId : new mongoose.Types.ObjectId(), // Create a temp ID if mock bus to satisfy schema
+        seats,
+        totalAmount,
+        boardingPoint,
+        destination,
+        passengers,
+        paymentStatus: "Paid",
+        qrToken,
+        validationStatus: "Active",
+        razorpayOrderId: razorpay_order_id,
+        razorpayPaymentId: razorpay_payment_id,
+        razorpaySignature: razorpay_signature
+      };
+
+      newBooking = new Booking(bookingData);
+      await newBooking.save();
+      console.log(`[Booking Saved] Ticket: ${ticketId}`);
+
+      // Update seat availability only for real buses
+      if (isValidObjectId) {
+        await Seat.updateMany(
+          { busId, seatNumber: { $in: seats } },
+          { $set: { isBooked: true } }
+        );
+
+        await Bus.findByIdAndUpdate(busId, {
+          $inc: { availableSeats: -seats.length },
+        });
+      }
+
+      // Supabase Sync
+      try {
+        await supabaseFetch("bookings", "POST", {
+          ticket_id: ticketId,
+          user_id: userId || "GUEST_LINK",
+          bus_id: busId || "SIM_BUS",
+          seats: seats || ["S-1"],
+          total_amount: totalAmount || 0,
+          boarding_point: boardingPoint || "TRANSIT_HUB",
+          destination: destination || "END_NODE",
+          phone: passengers?.[0]?.phone || "N/A",
+          qr_token: qrToken,
+          status: "Confirmed"
+        });
+        console.log("[Supabase Sync] Success");
+      } catch (supabaseError) {
+        console.warn("[Supabase Sync Failure]", supabaseError);
+      }
+
+    } catch (dbError: any) {
+      console.error("[Database Error During Verification]", dbError);
+      // EMERGENCY FALLBACK: If payment is authentic but DB fails, still return success with temporary object
+      // This prevents the user from being charged but seeing a "failed" screen.
+      return NextResponse.json({
+        success: true,
+        message: "Payment verified (Emergency Mode)",
+        booking: {
+          ticketId,
+          qrToken,
+          busId: bookingDetails.busId,
+          seats: bookingDetails.seats,
+          totalAmount: bookingDetails.totalAmount,
+          boardingPoint: bookingDetails.boardingPoint,
+          destination: bookingDetails.destination,
+          passengers: bookingDetails.passengers,
+          isEmergency: true
+        }
       });
-    } catch (supabaseError) {
-      console.warn("Supabase Sync Failure:", supabaseError);
     }
 
     return NextResponse.json({
@@ -106,7 +138,8 @@ export async function POST(req: Request) {
     });
 
   } catch (error: any) {
-    console.error("Payment Verification Error:", error);
+    console.error("Critical Verification Error:", error);
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
   }
 }
+

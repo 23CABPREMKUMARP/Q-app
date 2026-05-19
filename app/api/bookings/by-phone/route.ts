@@ -29,7 +29,8 @@ export async function POST(req: Request) {
     // Attempt MongoDB Retrieval if possible
     try {
       bookings = await Booking.find({
-        "passengers.phone": phone
+        "passengers.phone": phone,
+        paymentStatus: "Paid"
       })
       .populate({
         path: "busId",

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Phone, Search, Loader2, Ticket, MapPin, Clock, Calendar, QrCode, ShieldCheck, Download, Zap, X } from "lucide-react";
+import { ArrowLeft, Phone, Search, Loader2, Ticket, MapPin, Clock, Calendar, QrCode, ShieldCheck, Download, Zap, X, ChevronRight, CheckCircle2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import dynamic from "next/dynamic";
+import { BusCodeSearch } from "@/src/components/BusCodeSearch";
 
 export default function GetTicketPage() {
   const [phone, setPhone] = useState("");
@@ -14,26 +14,44 @@ export default function GetTicketPage() {
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [diagnostics, setDiagnostics] = useState<string>("");
+  const [activePrintIndex, setActivePrintIndex] = useState<number | null>(null);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phone) return;
+  const handlePrint = (idx: number) => {
+    setActivePrintIndex(idx);
+    setTimeout(() => {
+      window.print();
+      setActivePrintIndex(null);
+    }, 150);
+  };
 
+  // Pre-load phone number from localStorage if present
+  useEffect(() => {
+    const savedPhone = localStorage.getItem("registeredPhone");
+    if (savedPhone) {
+      setPhone(savedPhone);
+      // Auto trigger fetch
+      fetchBookings(savedPhone);
+    }
+  }, []);
+
+  const fetchBookings = async (phoneNum: string) => {
     setLoading(true);
     setSearched(true);
     try {
       const res = await fetch("/api/bookings/by-phone", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone: phoneNum }),
       });
 
       if (res.ok) {
         const data = await res.json();
-        setBookings(data);
-        setDiagnostics(`Search complete. Clusters queried. Found ${data.length} matches across all nodes.`);
+        const paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid");
+        setBookings(paidBookings);
+        setDiagnostics(`Sync active. Cluster queried. Found ${paidBookings.length} active passes.`);
+        localStorage.setItem("registeredPhone", phoneNum);
       } else {
-        setDiagnostics("Network Link Error: The transit hub returned a structural failure.");
+        setDiagnostics("Network Link Error: Structural failure.");
       }
     } catch (error) {
       console.error("Search error:", error);
@@ -42,310 +60,255 @@ export default function GetTicketPage() {
     }
   };
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone) return;
+    fetchBookings(phone);
+  };
+
   return (
-    <main className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-[#FF9933] selection:text-white relative overflow-x-hidden">
-      {/* Background Ornaments */}
-      <div className="fixed inset-0 opacity-10 pointer-events-none">
-        <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-[#FF9933] rounded-full blur-[100px] opacity-20" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-[#FF9933] rounded-full blur-[100px] opacity-10" />
+    <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
+      {/* Native Mobile Top Bar */}
+      <div className="bg-white border-b border-slate-100 py-6 px-6 fixed top-0 left-0 right-0 z-40 shadow-sm flex items-center gap-3">
+        <Link href="/" className="p-2 hover:bg-slate-100 rounded-xl transition-all">
+          <ChevronRight className="rotate-180 text-slate-600" size={20} />
+        </Link>
+        <div>
+          <h1 className="text-xl font-bold tracking-tight text-slate-950">My Passes</h1>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Metropolitan Transit Passbook</p>
+        </div>
       </div>
 
-      <div className="relative z-10 w-full min-h-screen border-t-[8px] border-[#FF9933]">
-
-      <nav className="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between relative z-10">
-        <Link href="/" className="group flex items-center gap-3 bg-zinc-50 hover:bg-zinc-100 px-5 py-2.5 rounded-2xl transition-all border border-zinc-100 shadow-sm">
-          <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform text-zinc-900" />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-900">Back</span>
-        </Link>
-        <Image src="/logo2.png" alt="Logo" width={250} height={100} className="h-12 md:h-24 w-auto object-contain" />
-        <div className="w-10" /> {/* Spacer */}
-      </nav>
-
-      <div className="max-w-4xl mx-auto px-6 pt-12 pb-32 relative z-10">
-        <div className="text-center mb-16 space-y-4">
+      <div className="max-w-xl md:max-w-4xl mx-auto px-5 pt-8 space-y-6">
+        
+        {/* Intro Panel */}
+        <div className="text-center space-y-2">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF9933]/10 border border-[#FF9933]/20 text-[#FF9933] text-[10px] font-bold uppercase tracking-widest"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF9933]/10 border border-[#FF9933]/20 text-[#FF9933] text-[9px] font-black uppercase tracking-wider"
           >
-            <ShieldCheck size={14} /> Secure Access
+            <ShieldCheck size={12} /> Secure Encryption Node
           </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+          <motion.h2 
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight uppercase text-zinc-900"
+            className="text-2xl font-black tracking-tight text-slate-950 uppercase"
           >
-            Retrieve Your <span className="text-[#FF9933]">Pass</span>
-          </motion.h1>
+            Retrieve Passes
+          </motion.h2>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-zinc-400 text-sm md:text-lg max-w-lg mx-auto font-medium"
+            className="text-slate-400 text-xs font-semibold max-w-xs mx-auto leading-relaxed"
           >
-            Enter your active phone number to synchronize with the JeffBen fleet matrix.
+            Enter your registered mobile number to fetch, sync, and display your digital passes.
           </motion.p>
         </div>
 
-        {/* Search Form */}
+        {/* Input Search Form */}
         <motion.form 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           onSubmit={handleSearch}
-          className="max-w-md mx-auto mb-20 group"
+          className="w-full relative"
         >
           <div className="relative">
-            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-zinc-400 group-focus-within:text-[#FF9933] transition-colors">
-              <Phone size={20} />
+            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400">
+              <Phone size={18} />
             </div>
             <input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="Enter Phone Number"
-              className="w-full bg-white border border-zinc-200 rounded-[32px] py-6 pl-16 pr-32 focus:outline-none focus:ring-4 focus:ring-[#FF9933]/10 focus:border-[#FF9933] transition-all text-lg font-bold tracking-tight placeholder:text-zinc-300 text-zinc-900 shadow-sm"
+              placeholder="10-Digit Mobile Number"
+              className="w-full bg-white border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#FF9933]/10 focus:border-[#FF9933] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-[#FF9933] hover:bg-zinc-900 text-white px-8 rounded-[24px] font-bold text-xs uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2 shadow-lg shadow-[#FF9933]/20"
+              className="absolute right-2 top-2 bottom-2 bg-slate-950 hover:bg-[#FF9933] text-white px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
-                <div className="flex items-center gap-2">
-                  <Loader2 size={16} className="animate-spin" />
-                  <span className="text-[8px] opacity-70">powered by Jeff Ben</span>
-                </div>
+                <Loader2 size={12} className="animate-spin" />
               ) : (
                 <>
-                  <Search size={18} />
-                  <span>Search</span>
+                  <Search size={14} />
+                  <span>Sync</span>
                 </>
               )}
             </button>
           </div>
         </motion.form>
 
-        {/* Results Area */}
-        <div className="space-y-12">
+        {/* Results list */}
+        <div className="space-y-6">
           {searched && !loading && bookings.length === 0 && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-32 bg-white rounded-[48px] border border-zinc-100 border-dashed max-w-2xl mx-auto shadow-sm"
+              className="text-center py-12 bg-white rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
             >
-              <div className="w-20 h-20 bg-zinc-50 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-zinc-100">
-                <Ticket size={40} className="text-zinc-200" />
+              <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-300">
+                <Ticket size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-zinc-900 tracking-tight uppercase mb-2">Matrix Out of Sync</h3>
-              <p className="text-zinc-400 text-sm font-medium max-w-xs mx-auto">We couldn't locate any active digital passes associated with this phone number in our telemetry cluster.</p>
+              <div className="space-y-1">
+                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-tight">No Passes Found</h3>
+                <p className="text-slate-400 text-[11px] font-semibold max-w-[200px] mx-auto leading-relaxed">We could not find any active tickets linked with this node.</p>
+              </div>
             </motion.div>
           )}
 
           <AnimatePresence>
             {bookings.length > 0 && (
-              <div className="grid gap-12">
+              <div className="space-y-6">
                 {bookings.map((booking, idx) => (
                   <motion.div
                     key={booking.id || booking._id || `booking-${idx}`}
-                    initial={{ opacity: 0, y: 40 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className="w-full"
+                    className="w-full overflow-hidden flex flex-col items-center justify-center py-4"
                   >
-                    {/* Premium Ornate Digital Pass Design */}
-                    <div className="relative group perspective-1000">
-                      {/* Premium Modern Ticket Card */}
-                      <div className="w-full overflow-hidden flex items-center justify-center py-4 px-2">
-                        <div 
-                          id="printable-ticket" 
-                          className="bg-white rounded-[24px] md:rounded-[48px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-zinc-100 flex flex-row transition-all hover:shadow-[0_48px_80px_-20px_rgba(0,0,0,0.15)] origin-center scale-[0.6] sm:scale-[0.75] md:scale-100 min-w-[700px] md:min-w-0"
-                          style={{ margin: '-10% 0' }}
-                        >
-                        
-                        {/* MAIN TICKET BODY */}
-                        <div className="flex-1 p-8 md:p-12 flex flex-col relative">
-                          {/* Top Header */}
-                          <div className="flex items-center justify-between mb-10">
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                                <Ticket className="text-primary" size={20} />
-                              </div>
-                              <div>
-                                <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none mb-1">Pass Status</p>
-                                <p className="text-xs font-bold text-emerald-500 uppercase tracking-tight flex items-center gap-1.5">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Verified Active
-                                </p>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                               <Image src="/logo2.png" alt="JeffBen" width={80} height={30} className="object-contain ml-auto opacity-80" />
-                               <p className="text-[8px] font-bold text-zinc-300 uppercase tracking-widest mt-1">Matrix v4.2.1</p>
-                            </div>
+                    {/* Vintage Ornate Gold Ticket Design (Horizontal Landscape Layout matching Live Map) */}
+                    <div 
+                      id={`printable-ticket-${idx}`}
+                      className={`ticket-container relative bg-[#f7e49f] bg-gradient-to-br from-[#f7e49f] via-[#e5c167] to-[#d4af37] rounded-[20px] md:rounded-[40px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] overflow-hidden border-[6px] md:border-[12px] border-[#b8860b]/30 flex flex-col md:flex-row min-h-[500px] md:min-h-[380px] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-left ${activePrintIndex === idx ? "print-active-ticket" : ""}`}
+                    >
+                      <div className="absolute inset-0 opacity-100 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] print:opacity-50" />
+                      <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
+                      <div className="absolute inset-0 border-[6px] border-[#d4af37] opacity-80 pointer-events-none" />
+                      
+                      {/* Left Side: Main Info */}
+                      <div className="p-6 md:p-10 flex-1 relative border-b-4 md:border-b-0 md:border-r-4 border-dashed border-[#b8860b]/40">
+                        <div className="relative z-10 text-center mb-8">
+                          <div className="flex items-center justify-center gap-4 mb-3">
+                            <Image src="/logo2.png" alt="JeffBen" width={32} height={32} className="object-contain" />
+                            <div className="h-6 w-[1px] bg-[#5d4037]/25" />
+                            <Image src="/hero-logo.png" alt="Digi Bus Stand" width={32} height={32} className="object-contain mix-blend-multiply" />
                           </div>
-
-                          {/* Route Visualizer */}
-                          <div className="relative mb-10">
-                             <div className="flex items-center justify-between relative z-10">
-                                <div className="space-y-1">
-                                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Departure</p>
-                                  <p className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight uppercase">{booking.boardingPoint || "ORIGIN"}</p>
-                                </div>
-                                <div className="flex-1 px-6 flex flex-col items-center justify-center gap-2">
-                                   <div className="w-full h-px bg-zinc-100 relative">
-                                      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-2 h-2 rounded-full bg-primary border-2 border-white" />
-                                      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-2 rounded-full bg-zinc-900 border-2 border-white" />
-                                   </div>
-                                   <Zap size={14} className="text-primary/40 animate-pulse" />
-                                </div>
-                                <div className="text-right space-y-1">
-                                  <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Arrival</p>
-                                  <p className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight uppercase">{booking.destination || "DESTIN"}</p>
-                                </div>
-                             </div>
-                          </div>
-
-                          {/* Details Grid */}
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-zinc-50">
-                             <div className="space-y-1">
-                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Bus Number</p>
-                                <p className="text-sm font-bold text-zinc-900 uppercase">{(booking.busId?.busNumber || "JB-FLEET")}</p>
-                             </div>
-                             <div className="space-y-1">
-                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Seat Node</p>
-                                <p className="text-sm font-bold text-zinc-900 uppercase">{booking.seats?.[0] || "S-1"}</p>
-                             </div>
-                             <div className="space-y-1">
-                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Travel Date</p>
-                                <p className="text-sm font-bold text-zinc-900">{new Date(booking.bookingDate).toLocaleDateString()}</p>
-                             </div>
-                             <div className="space-y-1 text-right md:text-left">
-                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Sync Time</p>
-                                <p className="text-sm font-bold text-zinc-900 uppercase">{booking.busId?.departureTime || "LIVE"}</p>
-                             </div>
-                          </div>
-
-                          {/* Footer Disclaimer */}
-                          <div className="mt-8 flex items-center justify-between">
-                             <div className="flex items-center gap-2">
-                                <ShieldCheck size={14} className="text-zinc-300" />
-                                <span className="text-[8px] font-bold text-zinc-300 uppercase tracking-widest">Encrypted Ticket Token • Non-Transferable</span>
-                             </div>
-                             <p className="text-[10px] font-bold text-zinc-900 uppercase tracking-tight">Amt: ₹{booking.totalAmount || "0"}</p>
-                          </div>
+                          <p className="text-[8px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Stand Framework</p>
+                          <p className="text-base font-vintage text-[#5d4037]/80 leading-none mb-1">Powered by <span className="text-black">Jeff</span>Ben</p>
+                          <h3 className="text-2xl md:text-4xl font-serif font-black tracking-tight text-[#5d4037] leading-none uppercase">Digi Bus Stand Ticket</h3>
                         </div>
 
-                        {/* TICKET STUB / QR SECTION */}
-                        <div className="bg-zinc-50/50 p-8 md:p-12 md:w-[320px] flex flex-col justify-between items-center border-t md:border-t-0 md:border-l border-dashed border-zinc-200 relative">
-                           {/* Side Notches for Ticket Effect */}
-                           <div className="hidden md:block absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border border-zinc-100" />
-                           <div className="block md:hidden absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white border border-zinc-100" />
-                           
-                           <div className="flex flex-col items-center gap-6 w-full">
-                              <div className="bg-white p-4 rounded-3xl shadow-xl border border-zinc-100 group-hover:scale-105 transition-transform duration-500">
-                                <QRCodeSVG
-                                  value={booking.qrToken || "INVALID"}
-                                  size={160}
-                                  fgColor="#18181b"
-                                  bgColor="transparent"
-                                  level="H"
-                                  imageSettings={{
-                                    src: "/hero-logo.png",
-                                    x: undefined,
-                                    y: undefined,
-                                    height: 50,
-                                    width: 50,
-                                    excavate: true,
-                                  }}
-                                />
-                              </div>
-                              <div className="text-center space-y-1">
-                                 <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Authentication ID</p>
-                                 <p className="text-[11px] font-bold text-zinc-900 uppercase tracking-tight">{booking.ticketId}</p>
-                              </div>
-                           </div>
+                        <div className="space-y-4 text-left relative z-10 px-2 text-[#5d4037]">
+                          <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
+                            <div className="flex flex-col">
+                              <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Bus No:</span>
+                              <span className="text-lg font-serif font-black tracking-tight uppercase">{booking.busId?.busNumber || "TN-38"}</span>
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Passengers:</span>
+                              <span className="text-lg font-serif font-black tracking-tight">{booking.seats?.length || 1}</span>
+                            </div>
+                          </div>
 
-                           <div className="w-full mt-10 space-y-3 no-print">
-                              <button 
-                                 onClick={() => window.print()}
-                                 className="w-full flex items-center justify-center gap-2 h-14 bg-zinc-900 text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-primary transition-all active:scale-95 shadow-xl shadow-zinc-900/10"
-                              >
-                                 <Download size={18} />
-                                 Print Pass
-                              </button>
-                           </div>
+                          <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
+                            <div className="flex flex-col">
+                              <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Boarding</span>
+                              <p className="text-sm font-serif font-bold uppercase truncate max-w-[120px]">{booking.boardingPoint || "Point A"}</p>
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Destination</span>
+                              <p className="text-sm font-serif font-bold uppercase truncate max-w-[120px]">{booking.destination || "Point B"}</p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center justify-between text-[#5d4037]/75">
+                            <div className="flex flex-col">
+                              <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60">Travel Date</span>
+                              <span className="text-xs font-bold">{booking.bookingDate ? new Date(booking.bookingDate).toLocaleDateString() : new Date().toLocaleDateString()}</span>
+                            </div>
+                            <div className="text-right bg-[#5d4037]/5 px-3 py-1.5 rounded-xl border border-[#5d4037]/15">
+                              <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60 block mb-0.5">Total Fare</span>
+                              <p className="text-sm font-serif font-black text-slate-950">₹{booking.totalAmount}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Right Side: QR Secure Matrix */}
+                      <div className="p-6 md:p-8 md:w-[240px] flex flex-col justify-between items-center relative overflow-hidden bg-black/5">
+                        <div className="p-3 bg-[#b8860b]/10 rounded-2xl shadow-inner border-2 border-[#b8860b]/30 relative overflow-hidden group bg-white/20">
+                          {/* Secure Watermark Layer */}
+                          <div className="absolute inset-0 opacity-[0.2] pointer-events-none flex flex-wrap gap-2 items-center justify-center text-[5px] font-black uppercase tracking-tighter text-[#5d4037] -rotate-12 scale-110">
+                            {Array(15).fill(null).map((_, i) => (
+                              <span key={i} className="whitespace-nowrap">DIGI BUS •</span>
+                            ))}
+                          </div>
+                          <QRCodeSVG 
+                            value={booking.qrToken || "INVALID"} 
+                            size={120} 
+                            fgColor="#2d1a12" 
+                            bgColor="transparent"
+                            level="H" 
+                            imageSettings={{
+                              src: "/hero-logo.png",
+                              height: 28,
+                              width: 28,
+                              excavate: true,
+                            }}
+                          />
+                        </div>
+                        <div className="text-center mt-4">
+                          <p className="text-[8px] font-bold text-[#5d4037]/50 uppercase tracking-widest leading-none mb-1">Serial Key</p>
+                          <p className="text-xs font-serif font-black text-[#5d4037]">JB-{booking.ticketId?.slice(-8).toUpperCase()}</p>
+                        </div>
+                      </div>
+
+                      {/* Side Notches */}
+                      <div className="hidden md:block absolute left-[240px] top-0 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
+                      <div className="hidden md:block absolute left-[240px] bottom-0 translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
                     </div>
-                  </div>
-                </motion.div>
+
+                    {/* Print Button (Outside/underneath, only visible when not printing) */}
+                    <div className="w-full flex gap-3 mt-4 print:hidden">
+                      <button 
+                        onClick={() => handlePrint(idx)}
+                        className="flex-1 py-4 bg-slate-950 hover:bg-[#FF9933] text-white rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+                      >
+                        <Download size={14} /> Download Pass PDF
+                      </button>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             )}
           </AnimatePresence>
 
-          {/* Diagnostic Plate */}
-          <div className="mt-20 border-t border-zinc-100 pt-12 text-center pb-20">
-              <p className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest mb-4">Internal Fleet Diagnostics</p>
-              <div className="inline-flex items-center gap-3 bg-zinc-50 px-6 py-3 rounded-2xl border border-zinc-100">
-                  <div className={`w-2 h-2 rounded-full ${diagnostics ? "bg-emerald-500" : "bg-zinc-200"}`} />
-                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{diagnostics || "Waiting for signal..."}</span>
-              </div>
-              <p className="mt-4 text-[9px] text-zinc-400 max-w-xs mx-auto leading-relaxed font-medium">Verification nodes prioritize MongoDB cluster with automated fallback to Supabase cloud matrix via phone-matched primary indexing.</p>
+          {/* Diagnostic Sync plate */}
+          <div className="border-t border-slate-100 pt-6 text-center">
+            <p className="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-3">Bus stand Sync Node</p>
+            <div className="inline-flex items-center gap-2 bg-slate-100/50 px-4 py-2 rounded-xl border border-slate-100">
+              <div className={`w-1.5 h-1.5 rounded-full ${diagnostics ? "bg-emerald-500 animate-pulse" : "bg-slate-300"}`} />
+              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{diagnostics || "Ready for sync signal"}</span>
+            </div>
+          </div>
+
+          <div className="pt-8 space-y-3">
+            <div className="text-center">
+              <h2 className="text-lg font-black text-slate-950 uppercase tracking-tight">Need a new Pass?</h2>
+              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mt-1">Book ticket via GPS mapping engine</p>
+            </div>
+            <Link 
+              href="/live-map" 
+              className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+            >
+              Launch Live Booking Map <ChevronRight size={14} />
+            </Link>
           </div>
         </div>
       </div>
-    </div>
-
-      <style jsx global>{`
-        @media print {
-          @page {
-            size: landscape !important;
-            margin: 0 !important;
-          }
-
-          .no-print, nav, form, .diagnostics-plate, button, .Internal-Fleet-Diagnostics, footer { display: none !important; }
-          
-          body { 
-            background: white !important; 
-            -webkit-print-color-adjust: exact !important; 
-            print-color-adjust: exact !important; 
-            margin: 0 !important;
-            padding: 0 !important;
-          }
-
-          main { background: white !important; padding: 0 !important; margin: 0 !important; }
-          
-          /* Force the ticket to be visible and correctly styled */
-          #printable-ticket {
-            visibility: visible !important;
-            display: flex !important;
-            flex-direction: row !important;
-            width: 100% !important;
-            height: auto !important;
-            border: 1px solid #f4f4f5 !important;
-            border-radius: 48px !important;
-            margin: 0 auto !important;
-            box-shadow: none !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-
-          #printable-ticket * {
-            visibility: visible !important;
-          }
-
-          /* Ensure all nested elements are visible */
-          .ticket-container, .ticket-main, .ticket-stub {
-            display: flex !important;
-          }
-
-          /* Reset margins for printing */
-          .mt-20, .pt-12, .pb-20 { margin: 0 !important; padding: 0 !important; }
-        }
-      `}</style>
     </main>
   );
 }
+
+
+// End of passes view
+
+

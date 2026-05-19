@@ -21,10 +21,17 @@ export const Navbar = React.memo(function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -72,7 +79,7 @@ export const Navbar = React.memo(function Navbar() {
             </span>
             <div className="flex flex-col -gap-1">
               <span className="text-lg md:text-xl font-bold tracking-tight leading-none">
-                JEFF<span className="text-primary">BEN</span>
+                <span className="text-black">JEFF</span><span className="text-primary">BEN</span>
               </span>
               <span className="text-[8px] font-semibold text-zinc-400 uppercase tracking-wider leading-none">
                 Systems

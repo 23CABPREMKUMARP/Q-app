@@ -1,49 +1,51 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff; 
-  --foreground: #09090b;
-  --radius: 0.8rem;
+  --background: #f3f4f6; 
+  --foreground: #111827; 
+  --dark-saffron: #FF9933;
+  --radius: 1rem;
   --card: #ffffff;
-  --card-foreground: #09090b;
+  --card-foreground: #111827;
   --popover: #ffffff;
-  --popover-foreground: #09090b;
-  --primary: #E67E00; /* Darker Saffron for better contrast ratio */
+  --popover-foreground: #111827;
+  --primary: #FF9933; 
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #09090b;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
   --accent: #fff7ed; 
-  --accent-foreground: #F18701;
+  --accent-foreground: #FF9933;
   --destructive: #ef4444;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #F18701;
-  --chart-1: #F18701;
-  --chart-2: #2563eb;
-  --chart-3: #10b981;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #FF9933;
+  --chart-1: #FF9933;
+  --chart-2: #10b981;
+  --chart-3: #3b82f6;
   --chart-4: #f59e0b;
   --chart-5: #6366f1;
   --sidebar: #ffffff;
-  --sidebar-foreground: #09090b;
-  --sidebar-primary: #F18701;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #FF9933;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f4f4f5;
-  --sidebar-accent-foreground: #09090b;
-  --sidebar-border: #e4e4e7;
-  --sidebar-ring: #F18701;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #FF9933;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-dark-saffron: var(--dark-saffron);
   --font-sans: var(--font-inter), system-ui, sans-serif;
+
   --font-heading: var(--font-manrope), var(--font-inter), system-ui, sans-serif;
   --font-ui: var(--font-inter), system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -107,6 +109,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    -webkit-overflow-scrolling: touch; /* Butter-smooth momentum scrolling on iOS devices */
   }
 
   body {
@@ -119,6 +122,7 @@
     width: 100%;
     line-height: 1.5;
     letter-spacing: -0.011em;
+    scroll-padding-top: 80px; /* Aligns page anchor scrolls perfectly with sticky navbar */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -174,5 +178,57 @@
     }
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+@utility content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+@utility scroll-contain {
+  overscroll-behavior: contain;
+}
+
+@media print {
+  @page {
+    size: auto;
+    margin: 0mm;
+  }
+
+  body {
+    background: white !important;
+  }
+  
+  /* Hide all elements on the page */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Only show active printable ticket and its contents */
+  .print-active-ticket,
+  .print-active-ticket * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .print-active-ticket {
+    position: fixed !important;
+    left: 50% !important;
+    top: 40% !important;
+    transform: translate(-50%, -50%) scale(1.15) !important;
+    width: 680px !important;
+    min-width: 680px !important;
+    max-width: 680px !important;
+    background: #f7e49f !important;
+    background-image: linear-gradient(to bottom right, #f7e49f, #e5c167, #d4af37) !important;
+    border: 6px solid rgba(184, 134, 11, 0.3) !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
   }
 }

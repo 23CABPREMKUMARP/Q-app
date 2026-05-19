@@ -105,7 +105,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
                 initial={{ opacity: 0, y: 15, scale: 1.5 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: "spring", damping: 15, stiffness: 400 }}
-                className={`text-2xl font-black italic transition-colors duration-500 font-ui ${isValid ? "text-emerald-600" : "text-zinc-900"}`}
+                className={`text-2xl font-black transition-colors duration-500 font-ui ${isValid ? "text-emerald-600" : "text-dark-saffron"}`}
               >
                 {digit}
               </motion.span>

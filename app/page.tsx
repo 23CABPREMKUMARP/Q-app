@@ -1,23 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-
+import { useUser } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 import { 
-  Mail, Youtube, Facebook, 
-  Ticket, ShieldCheck, ChevronRight 
+  Search, QrCode, Ticket, MapPin, ShieldAlert, Sparkles, 
+  Bell, ChevronRight, Bus, Wallet, Plus, Clock, User, 
+  ArrowRight, ShieldCheck, Zap, Navigation, History, Info, Play, ScanLine, WalletCards, CreditCard, Hash
 } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const Globe = dynamic(() => import("@/src/registry/magicui/globe").then(m => m.Globe), { ssr: false });
-const AuroraBackground = dynamic(() => import("../src/components/ui/aurora-background").then(m => m.AuroraBackground), { ssr: false });
-const ContainerScroll = dynamic(() => import("../src/components/ui/container-scroll-animation").then(m => m.ContainerScroll), { ssr: false });
+import { BusCodeSearch } from "@/src/components/BusCodeSearch";
 
 const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onComplete();
+    }, 2800);
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
   return (
     <motion.div 
       initial={{ opacity: 1 }}
@@ -36,55 +40,56 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             initial={{ x: -30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 1, type: "spring" }}
-            className="relative w-32 h-32 md:w-48 md:h-48"
+            className="relative w-28 h-28 md:w-36 md:h-36"
           >
-            <Image src="/logo2.png" alt="JeffBen" fill sizes="200px" className="object-contain" priority />
+            <Image src="/logo2.png" alt="JeffBen" fill sizes="160px" className="object-contain" priority />
           </motion.div>
           <motion.div 
             initial={{ scaleY: 0 }}
             animate={{ scaleY: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="w-px h-24 bg-zinc-950/20" 
+            className="w-px h-20 bg-black/20" 
           />
           <motion.div
             initial={{ x: 30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1, type: "spring" }}
-            className="relative w-32 h-32 md:w-48 md:h-48"
+            className="relative w-28 h-28 md:w-36 md:h-36"
           >
-            <Image src="/hero-logo.png" alt="Digi Bus Stand" fill sizes="200px" className="object-contain mix-blend-multiply" priority />
+            <Image src="/hero-logo.png" alt="Digi Bus Stand" fill sizes="160px" className="object-contain mix-blend-multiply" priority />
           </motion.div>
         </div>
 
         <div className="space-y-6 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic font-heading"
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="text-5xl md:text-7xl font-black tracking-tighter uppercase font-heading"
           >
-            <span className="text-zinc-950">Digi Bus</span> <span className="text-white">Stand</span>
-          </motion.h2>
+            <span className="text-black">Digi Bus</span> <span className="text-white">Stand</span>
+          </motion.h1>
           <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ delay: 1.8, duration: 3.5, ease: "linear" }}
-            className="h-1.5 bg-zinc-950 rounded-full mx-auto"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 2.2, duration: 2.5, ease: "linear" }}
+            style={{ transformOrigin: "left center", willChange: "transform" }}
+            className="h-1.5 w-full bg-black rounded-full mx-auto"
           />
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
-            transition={{ delay: 2.2 }}
-            className="text-zinc-950 font-bold uppercase tracking-widest text-[10px]"
+            transition={{ delay: 2.6 }}
+            className="text-black font-bold uppercase tracking-widest text-[9px]"
           >
-            Powered By JeffBen Systems
+            Powered by <span className="text-black">JeffBen</span>
           </motion.p>
         </div>
 
         <motion.div 
           animate={{ top: ["0%", "100%", "0%"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-x-0 h-[2px] bg-zinc-950/5 pointer-events-none"
+          className="absolute inset-x-0 h-[2px] bg-black/5 pointer-events-none"
         />
       </motion.div>
     </motion.div>
@@ -93,470 +98,599 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
 
 HomeLoader.displayName = "HomeLoader";
 
-export default function ProductPage() {
+export default function MobileDashboard() {
   const router = useRouter();
+  const { user } = useUser();
   const [isLoading, setIsLoading] = useState(true);
+  const [buses, setBuses] = useState<any[]>([]);
+  const [walletBalance, setWalletBalance] = useState("250.00");
+  const [activeBookingsCount, setActiveBookingsCount] = useState(0);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationText, setNotificationText] = useState({ title: "Welcome to Digi Bus!", message: "Your journey begins here." });
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [showNotificationsModal, setShowNotificationsModal] = useState(false);
+  const [liveTripTrack, setLiveTripTrack] = useState<any>(null);
+  const [showBusCodeModal, setShowBusCodeModal] = useState(false);
+  const [address, setAddress] = useState("Coimbatore, TN");
+  const [addressInput, setAddressInput] = useState("Coimbatore, TN");
+  const [showAddressModal, setShowAddressModal] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2500);
+    const savedAddress = localStorage.getItem("passengerAddress");
+    if (savedAddress) {
+      setAddress(savedAddress);
+      setAddressInput(savedAddress);
+    }
+    const timer = setTimeout(() => setIsLoading(false), 3000);
+    
+    const fetchBusesData = async () => {
+      try {
+        const res = await fetch("/api/buses");
+        if (res.ok) {
+          const data = await res.json();
+          setBuses(data);
+        }
+      } catch (err) {}
+    };
+    fetchBusesData();
+
+    const phone = localStorage.getItem("registeredPhone");
+    if (phone) {
+      const fetchBookings = async () => {
+        try {
+          const res = await fetch("/api/bookings/by-phone", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone }),
+          });
+          const bookings = await res.json();
+          if (Array.isArray(bookings)) {
+            const confirmedPaid = bookings.filter((b: any) => b.paymentStatus === "Paid");
+            setActiveBookingsCount(confirmedPaid.length);
+            
+            // Check if any of passenger's booked buses are active
+            const activeBus = confirmedPaid.find((b: any) => 
+              b.busId && (b.busId.status === "Trip Started" || b.busId.status === "Boarding" || b.busId.status === "Arriving Soon" || b.busId.status === "Reached Stop")
+            );
+            if (activeBus) {
+              setLiveTripTrack(activeBus);
+            } else {
+              setLiveTripTrack(null);
+            }
+          }
+        } catch (e) {}
+      };
+      fetchBookings();
+
+      const fetchAlerts = async () => {
+        try {
+          const res = await fetch("/api/passenger/notifications", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone }),
+          });
+          const data = await res.json();
+          if (data.success && Array.isArray(data.notifications)) {
+            setNotifications((prev) => {
+              if (prev.length > 0 && data.notifications.length > prev.length) {
+                const newest = data.notifications[0];
+                setNotificationText({ title: newest.title, message: newest.message });
+                setShowNotification(true);
+                setTimeout(() => setShowNotification(false), 4500);
+              }
+              return data.notifications;
+            });
+          }
+        } catch (err) {}
+      };
+      fetchAlerts();
+
+      const pollInterval = setInterval(() => {
+        fetchBookings();
+        fetchAlerts();
+      }, 4000);
+
+      return () => {
+        clearTimeout(timer);
+        clearInterval(pollInterval);
+      };
+    }
+
     return () => clearTimeout(timer);
   }, []);
 
+  if (isLoading) {
+    return <HomeLoader onComplete={() => setIsLoading(false)} />;
+  }
 
   return (
     <AnimatePresence mode="wait">
-      {isLoading ? (
-        <HomeLoader key="loader" onComplete={() => setIsLoading(false)} />
-      ) : (
-        <motion.main 
-          key="main"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          style={{ willChange: "opacity" }}
-          className="relative w-full overflow-x-hidden"
-        >
-
-      {/* ================= HERO SECTION ================= */}
-      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center gpu-accelerated">
-        {/* Background Bus Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/smart-bus.png"
-            alt="Strategic Automated Mobility Infrastructure"
-            fill
-            sizes="100vw"
-            className="object-cover md:object-center opacity-90 gpu-accelerated"
-            priority
-          />
-          {/* Professional Overlays for Legibility - Replaced blur with standard gradient for performance */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-50/90 via-orange-50/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-50/20 via-transparent to-orange-50" />
-        </div>
-
-        <AuroraBackground className="bg-transparent text-black h-full w-full gpu-accelerated">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.2,
-              duration: 1,
-              ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for premium feel
-            }}
-            viewport={{ once: true }}
-            className="relative z-10 flex flex-col items-center justify-start text-center px-6 md:px-24 pt-12 md:pt-24 w-full h-full"
-          >
-            <div className="max-w-4xl relative">
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="mb-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/5 border border-zinc-900/10 text-xs font-bold uppercase tracking-widest text-zinc-600"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                Powered By JeffBen Systems
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
-                viewport={{ once: true }}
-                className="text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-b from-black to-zinc-600 bg-clip-text text-transparent tracking-tight leading-tight"
-              >
-                Welcome to <br className="hidden md:block" />
-                Digi <span className="text-[#EA580C]">Bus</span> Stand
-              </motion.h1>
-
-              <motion.h2
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 1 }}
-                viewport={{ once: true }}
-                className="mt-6 text-xl sm:text-2xl md:text-4xl font-semibold text-zinc-900 leading-snug"
-              >
-                Pioneering Intelligence in <br className="hidden md:block" />
-                Metropolitan Public Transit Ecosystems
-              </motion.h2>
-
-              <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Explore Solutions"
-                  onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-full bg-black px-10 py-4 text-white text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] cursor-pointer gpu-accelerated"
-                >
-                  Explore Solutions
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
-        </AuroraBackground>
-        <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.1),rgba(255,255,255,0))]" />
-      </section>
-
-      {/* ================= CONTAINER SCROLL SECTION ================= */}
-      <section className="relative flex flex-col overflow-hidden bg-primary text-zinc-950 gpu-accelerated">
-        <ContainerScroll
-          titleComponent={
-            <div className="flex items-center justify-center flex-col gpu-accelerated">
-              <h2 className="text-2xl sm:text-4xl font-semibold text-white/90 text-center">
-                Experience the Future of <br />
-                <span className="text-3xl sm:text-4xl md:text-[6rem] font-bold mt-2 leading-none text-white tracking-tight font-heading">
-                  Automated Mobility
-                </span>
-              </h2>
-            </div>
-          }
-        >
-          <video
-            src="/mobility-demo.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            className="mx-auto rounded-2xl object-cover h-full w-full gpu-accelerated shadow-2xl bg-zinc-900"
-            draggable={false}
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </ContainerScroll>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, type: "spring" }}
-          viewport={{ once: true }}
-          className="container mx-auto px-6 max-w-4xl text-center pb-20 -mt-10 md:-mt-64 relative z-10"
-        >
-          <p className="text-base md:text-xl text-white font-medium leading-relaxed">
-            JEFFBEN Systems is spearheading the digital transformation of urban mobility across Tamil Nadu. Through our proprietary Digi Bus Stand framework, we deploy advanced automated fare collection and mission-critical fleet intelligence systems. Our mission is to provide transport authorities with robust, data-driven operational control while delivering a premier, frictionless experience for every commuter.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* ================= WHAT WE DO SECTION ================= */}
-      <section className="relative py-12 md:py-24 bg-background text-black border-y border-zinc-200 overflow-hidden gpu-accelerated">
-        <div className="container mx-auto px-6 max-w-5xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight">Strategic Capabilities</h2>
-            <p className="text-lg md:text-xl text-neutral-600 mb-12">
-              We engineer enterprise-grade transit ecosystems focused on operational excellence:
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 text-left">
-              {[
-                "Real-time fleet scheduling & dispersion",
-                "Precision GPS vehicle tracking",
-                "QR-integrated seamless boarding",
-                "Smart terminal display networks",
-                "Unified digital ticketing platforms"
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1, type: "spring" }}
-                  whileHover={{ y: -8, scale: 1.02, backgroundColor: "#fff" }}
-                  whileTap={{ scale: 0.98 }}
-                  viewport={{ once: true }}
-                  className="flex items-start gap-4 p-6 rounded-2xl bg-gray-50 border border-zinc-200 shadow-sm transition-all duration-500 cursor-pointer gpu-accelerated"
-                >
-                  <div className="w-2 h-2 rounded-full bg-orange-500 mt-2.5 shrink-0" />
-                  <span className="text-neutral-700 font-medium tracking-tight">{item}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <p className="mt-12 text-lg text-neutral-600">
-              Optimizing operational efficiency while elevating the passenger journey.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ================= ABOUT US PAGE CONTENT ================= */}
-      <section className="relative py-12 md:py-24 bg-primary text-white border-y border-primary/20 overflow-hidden gpu-accelerated">
-        <div className="container mx-auto px-6 max-w-screen-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
-            {/* Left Column: All Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              viewport={{ once: true }}
-              className="space-y-8 text-left"
-            >
-              <div>
-                <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight tracking-tight">Corporate Overview</h2>
-                <div className="space-y-6">
-                  <p className="text-lg md:text-xl lg:text-2xl text-white leading-relaxed font-medium">
-                    JEFFBEN Systems is a premier technology enterprise dedicated to the modernization of public infrastructure through industrial-grade automation. We specialize in the development of sophisticated telemetry and real-time information architectures for metropolitan transit.
-                  </p>
-                  <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-medium">
-                    Our unified ecosystem facilitates a seamless interface between regulatory bodies and the public. By harnessing advanced cloud computation, cross-platform mobility applications, and integrated IoT networks, we ensure high-integrity data accessibility across the transit lifecycle.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 font-heading">The JEFFBEN Advantage</h3>
-                <div className="grid grid-cols-[1.5fr_1fr] lg:grid-cols-1 xl:grid-cols-2 gap-4 md:gap-8 items-center lg:items-start lg:block xl:grid">
-                  <div className="space-y-4 md:space-y-6">
-                    {[
-                      "Enterprise-grade automation",
-                      "High-fidelity real-time data",
-                      "User-centric design philosophy",
-                      "Scalable state-wide architecture",
-                      "Smart City integration ready"
-                    ].map((item, i) => (
-                      <motion.div 
-                        key={i} 
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        viewport={{ once: true }}
-                        className="flex items-start gap-3 md:gap-4 group cursor-default"
-                      >
-                        <div className="h-2 w-2 md:h-3 md:w-3 rounded-full bg-white shrink-0 mt-1.5 group-hover:scale-150 transition-transform duration-300" />
-                        <span className="text-sm sm:text-base md:text-lg lg:text-xl text-white font-medium leading-tight group-hover:translate-x-1 transition-transform duration-300">{item}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Mobile-only globe positioned beside the list, scaled down to fit */}
-                  <div className="lg:hidden relative h-[140px] sm:h-[300px] w-full flex items-center justify-center translate-x-4">
-                    <div className="absolute inset-0 bg-white/20 rounded-full blur-[40px] sm:blur-[60px] scale-125" />
-                    <Globe className="relative z-10 w-full h-full gpu-accelerated" />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Column: Perfect Desktop Globe Animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, type: "spring", damping: 20 }}
-              className="hidden lg:flex relative aspect-square w-full lg:h-[800px] xl:h-[900px] items-center justify-center gpu-accelerated"
-            >
-              <div className="absolute inset-0 bg-white/20 rounded-full blur-[150px] xl:blur-[200px] scale-110" />
-              <Globe className="relative z-10 w-full h-full" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= OUR VISION SECTION ================= */}
-      <section className="relative py-12 md:py-24 bg-background text-black overflow-hidden gpu-accelerated">
-        <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            viewport={{ once: true }}
-            className="p-8 sm:p-12 rounded-[48px] bg-sky-50 border border-sky-100 shadow-inner gpu-accelerated"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 tracking-tight text-zinc-950">Our Vision</h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-zinc-900 font-normal leading-relaxed">
-              &quot;To architect a comprehensive digital infrastructure for an intelligent, sustainable, and highly efficient public transit network across Tamil Nadu, establishing a global benchmark for smart urban mobility.&quot;
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ================= MEET OUR FOUNDER SECTION ================= */}
-      <section className="relative py-12 md:py-24 bg-primary text-zinc-950 overflow-hidden gpu-accelerated">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              viewport={{ once: true }}
-              className="relative w-full max-w-[380px] mx-auto md:mx-0 group gpu-accelerated"
-            >
-              <div className="absolute -inset-4 bg-gradient-to-tr from-orange-500 to-orange-400 opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-700" />
-              <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden border-8 border-white/20 shadow-2xl shadow-black/20">
-                <Image
-                  src="/founder.jpg"
-                  alt="Founder (JeffBen)"
-                  width={576}
-                  height={1024}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="min-h-screen bg-[#f3f4f6] text-slate-900 font-sans pb-28 relative"
+      >
+        {/* PhonePe Header */}
+        <div className="bg-[#FF9933] px-4 pt-12 pb-4 text-white sticky top-0 z-[100] shadow-md rounded-b-2xl">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 p-1 rounded-full">
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-9 h-9 rounded-full",
+                    },
+                  }}
                 />
               </div>
-            </motion.div>
+              <button 
+                onClick={() => setShowAddressModal(true)}
+                className="flex flex-col text-left bg-transparent border-none outline-none cursor-pointer focus:outline-none"
+              >
+                <p className="text-[10px] font-bold text-white/70 uppercase tracking-wider">My Address</p>
+                <div className="flex items-center gap-1 text-sm font-black text-white">
+                  <span className="truncate max-w-[140px]">{address}</span>
+                  <ChevronRight size={14} className="opacity-80 shrink-0" />
+                </div>
+              </button>
+            </div>
 
+            <div className="flex items-center gap-4">
+              <Link href="/scan" className="relative text-white" title="Scan QR">
+                <ScanLine size={24} />
+              </Link>
+              <button 
+                onClick={() => {
+                  setShowNotificationsModal(true);
+                }}
+                className="relative text-white cursor-pointer" 
+                title="Notifications"
+              >
+                <Bell size={24} />
+                {notifications.length > 0 && (
+                  <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-[#FF9933] rounded-full" />
+                )}
+              </button>
+              <Link href="/about" className="relative text-white" title="Help">
+                <Info size={24} />
+              </Link>
+            </div>
+          </div>
+          
+          {/* Search Bar - PhonePe Style */}
+          <div className="relative mt-2">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <Search size={18} className="text-slate-400" />
+            </div>
+            <input 
+              type="text" 
+              className="w-full bg-white text-slate-900 rounded-xl pl-11 pr-4 py-3 text-sm shadow-sm outline-none placeholder:text-slate-500"
+              placeholder="Search by Bus Code, Route, or Stop"
+              readOnly
+              onClick={() => router.push('/search-buses')}
+            />
+          </div>
+        </div>
+
+        <div className="px-4 mt-4 space-y-4 max-w-md mx-auto">
+          
+          {/* Active Live Tracking Widget */}
+          {liveTripTrack && (
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              viewport={{ once: true }}
-              className="gpu-accelerated"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              onClick={() => router.push(`/live-map?busId=${liveTripTrack.busId?._id || liveTripTrack.busId}`)}
+              className="bg-gradient-to-br from-slate-900 to-zinc-950 text-white rounded-3xl p-5 shadow-xl border border-orange-500/30 relative overflow-hidden cursor-pointer group active:scale-[0.98] transition-all"
             >
-              <h2 className="text-3xl md:text-5xl font-bold mb-2 text-white">Executive Leadership</h2>
-              <p className="text-xl text-zinc-900 font-medium uppercase tracking-wider mb-6 opacity-80">JeffBen — Founder & CEO</p>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,153,51,0.15),transparent_60%)]" />
+              <div className="relative z-10 flex items-center justify-between">
+                <div className="space-y-1 text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FF9933]">Live Trip Active</span>
+                  </div>
+                  <h3 className="text-base font-bold tracking-tight text-white group-hover:text-[#FF9933] transition-colors">
+                    Track Bus JB-{liveTripTrack.busId?.busCode || "1024"}
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Status: <span className="text-white font-semibold">{liveTripTrack.busId?.status || "Running"}</span>
+                  </p>
+                </div>
+                <div className="w-12 h-12 bg-[#FF9933] text-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
+                  <MapPin size={22} className="animate-bounce" />
+                </div>
+              </div>
+            </motion.div>
+          )}
 
-              <p className="text-lg text-white leading-relaxed mb-6 font-medium">
-                A distinguished technologist and entrepreneur focused on addressing complex infrastructure challenges through innovation. With expertise in systems engineering and a strategic vision for urban advancement, JeffBen established JEFFBEN Systems to redefine public accessibility and operational efficiency in modern transit.
-              </p>
+          {/* In-App Live Notifications Panel */}
+          {notifications.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100/50 space-y-4 text-left overflow-hidden relative"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-[#FF9933]/10 rounded-xl flex items-center justify-center">
+                    <Bell size={16} className="text-[#FF9933]" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-slate-900">Trip Broadcasts</h3>
+                    <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Live Updates</p>
+                  </div>
+                </div>
+                <span className="px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-100 rounded-full text-[9px] font-black uppercase tracking-wider animate-pulse shrink-0">
+                  Active alerts
+                </span>
+              </div>
 
-              <div className="flex flex-wrap items-center gap-4 mt-8">
-                {[
-                  { icon: <Youtube className="w-6 h-6" />, href: "https://youtube.com/@jeffbenofficial?si=46pT3R8BLOVA9AFP", label: "YouTube" },
-                  { icon: <Mail className="w-6 h-6" />, href: "mailto:jeffbenofficial1@gmail.com", label: "Email" },
-                  { icon: <span className="font-black text-xl px-2">f</span>, href: "https://www.facebook.com/share/1C7WBtFHeS/", label: "Facebook" }
-                ].map((social, i) => (
-                  <motion.a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15, y: -6, backgroundColor: "#fff", color: "#000" }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-4 rounded-2xl text-white transition-all shadow-xl flex items-center justify-center bg-white/10 border border-white/20 backdrop-blur-xl gpu-accelerated"
-                    aria-label={social.label}
+              <div className="space-y-2.5 max-h-[220px] overflow-y-auto pr-1">
+                {notifications.map((notif: any) => (
+                  <div
+                    key={notif._id}
+                    className="p-3.5 bg-slate-50 hover:bg-slate-100/70 transition-all rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden"
                   >
-                    {social.icon}
-                  </motion.a>
+                    <div className="w-1.5 h-full bg-[#FF9933] absolute left-0 top-0 bottom-0" />
+                    <div className="flex-1 pl-1 space-y-1">
+                      <p className="text-xs font-bold text-slate-950 flex items-center justify-between">
+                        <span>{notif.title}</span>
+                        <span className="text-[8.5px] text-slate-400 font-bold shrink-0 ml-2">
+                          {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </p>
+                      <p className="text-[11px] text-slate-600 leading-relaxed font-medium">{notif.message}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
+          )}
 
-      {/* ================= SERVICES PAGE CONTENT ================= */}
-      <section id="solutions" className="relative py-12 md:py-24 bg-background text-black overflow-hidden gpu-accelerated">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-6xl font-bold tracking-tight">Solutions Portfolio</h2>
-            <p className="text-zinc-400 font-medium uppercase tracking-[0.2em] mt-4 text-[11px]">Enterprise Infrastructure Matrix</p>
+          {/* Ad/Promo Banner Carousel */}
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 text-white relative">
+              <div className="w-2/3">
+                <p className="text-xs font-semibold text-blue-200 mb-1">JEFFBEN EXCLUSIVE</p>
+                <h3 className="text-lg font-bold leading-tight mb-2">Flat ₹50 Off on First Bus Pass</h3>
+                <Link href="/get-ticket" className="inline-block bg-white text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                  Claim Now
+                </Link>
+              </div>
+              <div className="absolute right-2 bottom-0 top-0 flex items-center justify-center opacity-80">
+                <Ticket size={80} className="translate-x-4" />
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-            {[
-              {
-                title: "1. Automated Fare Collection System",
-                desc: "An end-to-end digital ticketing suite enabling: Seamless mobile & web booking, Instant QR validation, and significant reduction in manual overhead and queue times."
-              },
-              {
-                title: "2. Real-Time Transit Intelligence",
-                desc: "Enterprise-grade visibility into network operations featuring high-fidelity arrival predictive modeling, ensuring operational transparency and optimized terminal throughput."
-              },
-              {
-                title: "3. Fleet Telematics & Tracking",
-                desc: "Advanced GPS telemetry for real-time asset monitoring, enabling passengers to track journeys and operators to oversee fleet utilization."
-              },
-              {
-                title: "4. QR Smart-Boarding",
-                desc: "Vehicle-specific QR integration allowing passengers to instantly scan for: Real-time route status, Schedule adherence, and Frictionless ticket validation."
-              }
-            ].map((service, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, type: "spring", damping: 20 }}
-                whileHover={{ y: -12 }}
-                viewport={{ once: true }}
-                className="p-8 md:p-10 rounded-[40px] bg-zinc-50 border border-zinc-100 flex flex-col items-start gap-6 transition-all duration-500 shadow-sm hover:shadow-2xl hover:bg-white gpu-accelerated group cursor-pointer"
-              >
-                <div className="h-14 w-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 font-semibold text-xl group-hover:bg-orange-500 group-hover:text-white transition-all duration-500">
-                  {i + 1}
+          {/* Quick Actions (Money Transfers / Primary Services) */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Transit & Payments</h3>
+            <div className="grid grid-cols-4 gap-x-1 gap-y-4 text-center">
+              <Link href="/live-map?action=book" className="flex flex-col items-center gap-2">
+                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                  <Ticket size={18} />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight leading-none uppercase">{service.title.split('. ')[1]}</h3>
-                <p className="text-neutral-500 leading-relaxed font-normal text-sm">
-                  {service.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <span className="text-[9px] font-semibold text-slate-700 leading-tight">Book<br/>Ticket</span>
+              </Link>
 
-      {/* ================= TECHNOLOGY OVERVIEW SECTION ================= */}
-      <section className="relative py-12 md:py-24 bg-primary text-zinc-950 border-y border-primary/20 overflow-hidden text-center gpu-accelerated">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <h2 className="text-3xl md:text-6xl font-bold mb-8 text-white tracking-tighter">Next-Gen Infrastructure</h2>
-          <p className="text-lg md:text-2xl text-white/90 mb-12 font-bold leading-relaxed">
-            JEFFBEN Systems leverages a military-grade technology stack to ensure unmatched reliability, performance, and scalability across large-scale public transit networks:
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            {["Web & Mobile Applications", "GPS-based tracking", "Cloud-based data systems", "Secure QR code technology", "Real-time information processing"].map((tech, i) => (
-              <motion.div 
-                key={i} 
-                whileHover={{ scale: 1.05, y: -4 }}
-                className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
+              <button 
+                onClick={() => setShowBusCodeModal(true)} 
+                className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                {tech}
-              </motion.div>
-            ))}
+                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                  <Hash size={18} />
+                </div>
+                <span className="text-[9px] font-semibold text-slate-700 leading-tight">Bus<br/>Code</span>
+              </button>
+              
+              <Link href="/scan" className="flex flex-col items-center gap-2">
+                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                  <ScanLine size={18} />
+                </div>
+                <span className="text-[9px] font-semibold text-slate-700 leading-tight">Scan<br/>QR</span>
+              </Link>
+
+              <Link href="/search-buses" className="flex flex-col items-center gap-2">
+                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                  <Bus size={18} />
+                </div>
+                <span className="text-[9px] font-semibold text-slate-700 leading-tight">Search<br/>Routes</span>
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* ================= CONTACT US PAGE CONTENT ================= */}
-      <section className="flex flex-col items-center justify-center py-20 md:py-40 text-center px-6 bg-background text-black gpu-accelerated">
-        <motion.h3 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          className="text-3xl md:text-6xl font-bold tracking-tight leading-none uppercase"
-        >
-          Strategic Institutional Partnerships
-        </motion.h3>
+          {/* PhonePe Wallet & Passes Card */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Spends & Passes</h3>
+            <div className="flex gap-4">
+              <div className="flex-1 bg-slate-50 rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
+                <div className="flex items-center gap-2 text-slate-600 mb-2">
+                  <WalletCards size={16} className="text-[#FF9933]" />
+                  <span className="text-[11px] font-semibold truncate">Digi Bus Stand App</span>
+                </div>
+                <div>
+                  <p className="text-lg font-bold text-slate-900 leading-tight">₹2,000</p>
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
+                </div>
+              </div>
+              
+              <Link href="/get-ticket" className="flex-1 bg-slate-50 rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
+                <div className="flex items-center gap-2 text-slate-600 mb-1">
+                  <Ticket size={16} className="text-[#FF9933]" />
+                  <span className="text-xs font-semibold">My Passes</span>
+                </div>
+                <p className="text-lg font-bold text-slate-900">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
+                <div className="mt-2 text-xs font-bold text-[#FF9933] flex items-center gap-1">
+                  VIEW ALL <ChevronRight size={12} />
+                </div>
+                <History className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
+              </Link>
+            </div>
+          </div>
 
-        <p className="mt-8 max-w-2xl text-neutral-500 text-lg md:text-xl font-bold leading-relaxed">
-          We invite transit authorities, municipal government bodies, and state-level fleet operators to initiate high-level collaboration on the future of regional infrastructure.
-        </p>
+          {/* Bus Code Quick Search */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <h3 className="text-[13px] font-bold text-slate-800 mb-3 px-1">Quick Fleet Search</h3>
+            <BusCodeSearch compact={true} />
+          </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 md:gap-6 px-4">
-          {[
-            { icon: <Youtube className="w-6 h-6" />, href: "https://youtube.com/@jeffbenofficial?si=46pT3R8BLOVA9AFP", label: "YouTube" },
-            { icon: <Mail className="w-6 h-6" />, href: "mailto:jeffbenofficial1@gmail.com", label: "Email" },
-            { icon: <span className="font-semibold text-xl px-1">f</span>, href: "https://www.facebook.com/share/1C7WBtFHeS/", label: "Facebook" }
-          ].map((social, i) => (
-            <motion.a
-              key={i}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -4, backgroundColor: "#fff", borderColor: "#EA580C" }}
-              whileTap={{ scale: 0.95 }}
-              className="p-5 rounded-[28px] bg-zinc-50 border-2 border-zinc-100 text-neutral-900 transition-all shadow-sm flex items-center gap-4 font-semibold uppercase tracking-tight text-sm md:text-base gpu-accelerated"
-              aria-label={social.label}
+          {/* Live Trip / Telemetry (Similar to PhonePe "Recent Transactions") */}
+          {buses.length > 0 && (
+            <div className="bg-white rounded-2xl p-4 shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-[13px] font-bold text-slate-800 px-1">Live Telemetry Status</h3>
+                <Link href="/live-map" className="text-xs font-bold text-[#FF9933]">View Map</Link>
+              </div>
+              
+              <div 
+                onClick={() => router.push(`/live-map?busId=${buses[0]?._id}`)}
+                className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl active:bg-slate-100 transition-colors cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
+                  <Bus size={20} className="text-emerald-600" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-sm font-bold text-slate-900">JB-{buses[0]?.busCode || "1024"}</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">{buses[0]?.routeId?.routeName || "Route 102"}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs font-bold text-emerald-600 flex items-center gap-1 justify-end">
+                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" /> Active
+                  </p>
+                  <p className="text-[10px] text-slate-400 mt-1">TN-38-EF-2025</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Utilities & Conductor Portal (Recharge & Pay Bills style) */}
+          <div className="bg-white rounded-2xl p-4 shadow-sm">
+            <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Partner & Services</h3>
+            <div className="grid grid-cols-3 gap-y-4 text-center">
+              <Link href="/conductor" className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center border border-slate-100 text-slate-700">
+                  <ShieldAlert size={20} className="text-amber-500" />
+                </div>
+                <span className="text-[11px] font-medium text-slate-600">Conductor<br/>Terminal</span>
+              </Link>
+              <Link href="/about" className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center border border-slate-100 text-slate-700">
+                  <CreditCard size={20} className="text-blue-500" />
+                </div>
+                <span className="text-[11px] font-medium text-slate-600">Payment<br/>Methods</span>
+              </Link>
+              <Link href="/about" className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center border border-slate-100 text-slate-700">
+                  <Navigation size={20} className="text-purple-500" />
+                </div>
+                <span className="text-[11px] font-medium text-slate-600">Transit<br/>Intelligence</span>
+              </Link>
+            </div>
+          </div>
+          
+          <div className="text-center pt-4 pb-6">
+            <p className="text-[10px] font-medium text-slate-400 flex items-center justify-center gap-1">
+              <ShieldCheck size={12} /> 100% Secure Payments by JeffBen
+            </p>
+          </div>
+
+        {/* Floating Notification Panel Modal */}
+        <AnimatePresence>
+          {showNotificationsModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
             >
-              <div className="text-orange-600">{social.icon}</div>
-              <span>{social.label}</span>
-            </motion.a>
-          ))}
-        </div>
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="w-full max-w-md bg-white rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#FF9933]/15 rounded-xl flex items-center justify-center">
+                      <Bell size={20} className="text-[#FF9933]" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-base font-bold text-slate-900">Notifications</h3>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Your Live Trip Feed</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowNotificationsModal(false)}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full font-bold text-xs cursor-pointer"
+                  >
+                    Close
+                  </button>
+                </div>
 
-        <p className="mt-16 text-zinc-300 text-[10px] uppercase tracking-[0.4em] font-medium">Verification Matrix v2.3</p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
-          <Link href="/get-ticket" aria-label="Get My Ticket" className="px-12 py-6 bg-zinc-900 text-white rounded-[32px] font-semibold text-lg tracking-tight hover:bg-orange-600 transition-all active:scale-95 shadow-2xl flex items-center gap-4 group">
-            <Ticket className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-             Get My Ticket
-          </Link>
-          <Link href="/conductor" aria-label="Conductor Portal" className="px-12 py-6 bg-white border-2 border-zinc-100 text-zinc-900 rounded-[32px] font-semibold text-lg tracking-tight hover:border-orange-500 transition-all active:scale-95 shadow-2xl flex items-center gap-4 group">
-            <ShieldCheck className="w-6 h-6 text-orange-600 group-hover:scale-110 transition-transform" />
-             Conductor Portal
-          </Link>
-        </div>
+                <div className="space-y-3 pt-2">
+                  {notifications.length === 0 ? (
+                    <div className="text-center py-10 space-y-2">
+                      <p className="text-sm font-bold text-slate-700">No Notifications Yet</p>
+                      <p className="text-xs text-slate-400">We'll alert you here when your booked bus trip starts or the driver sends updates.</p>
+                    </div>
+                  ) : (
+                    notifications.map((notif: any) => (
+                      <div
+                        key={notif._id}
+                        className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden text-left"
+                      >
+                        <div className="w-2.5 h-full bg-[#FF9933] absolute left-0 top-0 bottom-0" />
+                        <div className="flex-1 pl-1.5 space-y-1">
+                          <p className="text-xs font-bold text-slate-950">{notif.title}</p>
+                          <p className="text-xs text-slate-600 leading-tight">{notif.message}</p>
+                          <p className="text-[9px] text-slate-400 font-medium">
+                            {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <p className="mt-24 text-4xl md:text-6xl font-bold text-black tracking-tight select-none">
-          &quot;Advancing Transit, Enhancing Lives.&quot;
-        </p>
-      </section>
+        {/* Track with Bus Code Modal */}
+        <AnimatePresence>
+          {showBusCodeModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
+            >
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="w-full max-w-md bg-white rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#FF9933]/15 rounded-xl flex items-center justify-center">
+                      <Hash size={20} className="text-[#FF9933]" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-base font-bold text-slate-900">Track with Bus Code</h3>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Separate Fleet Access Mode</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowBusCodeModal(false)}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full font-bold text-xs cursor-pointer border-none outline-none focus:outline-none"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                <div className="pt-2">
+                  <BusCodeSearch compact={true} onScanClick={() => {
+                    setShowBusCodeModal(false);
+                    router.push('/live-map?action=scan');
+                  }} />
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Address Input Modal */}
+        <AnimatePresence>
+          {showAddressModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
+            >
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="w-full max-w-md bg-white rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#FF9933]/15 rounded-xl flex items-center justify-center">
+                      <MapPin size={20} className="text-[#FF9933]" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-base font-bold text-slate-900">Change Location</h3>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Set Custom Transit Origin</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowAddressModal(false)}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full font-bold text-xs cursor-pointer border-none outline-none focus:outline-none"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Address / Neighborhood</label>
+                    <input 
+                      type="text"
+                      value={addressInput}
+                      onChange={(e) => setAddressInput(e.target.value)}
+                      placeholder="e.g. Gandhipuram, Coimbatore"
+                      className="w-full bg-slate-50 border-2 border-slate-100 focus:border-slate-900 rounded-xl p-3.5 text-xs font-bold text-slate-950 placeholder:text-slate-300 outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Preset Locations */}
+                  <div className="space-y-2">
+                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest block">Popular Neighborhoods</span>
+                    <div className="flex flex-wrap gap-2">
+                      {["Gandhipuram, CBE", "Ukkadam, TN", "Saravanampatti", "Annur Hub", "Mettupalayam"].map((preset) => (
+                        <button
+                          key={preset}
+                          onClick={() => {
+                            setAddressInput(preset);
+                          }}
+                          className="px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-lg text-[10px] font-bold text-slate-600 transition-all active:scale-95"
+                        >
+                          {preset}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (addressInput.trim()) {
+                        setAddress(addressInput.trim());
+                        localStorage.setItem("passengerAddress", addressInput.trim());
+                        setShowAddressModal(false);
+                      }
+                    }}
+                    className="w-full h-12 bg-slate-950 hover:bg-[#FF9933] text-white rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
+                  >
+                    Confirm & Update Address
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
+
+        </div>
       </motion.main>
-      )}
     </AnimatePresence>
   );
 }
+

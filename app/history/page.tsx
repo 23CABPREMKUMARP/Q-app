@@ -1,0 +1,433 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { 
+  ArrowLeft, Phone, Search, Loader2, Ticket, MapPin, 
+  Clock, Calendar, QrCode, ShieldCheck, Download, Zap, 
+  ChevronRight, ArrowDownLeft, ArrowUpRight, Wallet, History,
+  Info, Filter, Share2, Printer
+} from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
+import { MobileBottomNav } from "@/src/components/MobileBottomNav";
+
+export default function HistoryPage() {
+  const [phone, setPhone] = useState("");
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
+  const [filterType, setFilterType] = useState<"all" | "bookings" | "spends">("all");
+  const [isPrinting, setIsPrinting] = useState(false);
+
+  const handlePrint = () => {
+    setIsPrinting(true);
+    setTimeout(() => {
+      window.print();
+      setIsPrinting(false);
+    }, 150);
+  };
+
+  // Pre-load phone number from localStorage if present
+  useEffect(() => {
+    const savedPhone = localStorage.getItem("registeredPhone");
+    if (savedPhone) {
+      setPhone(savedPhone);
+      fetchBookings(savedPhone);
+    }
+  }, []);
+
+  const fetchBookings = async (phoneNum: string) => {
+    setLoading(true);
+    setSearched(true);
+    try {
+      const res = await fetch("/api/bookings/by-phone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: phoneNum }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid");
+        setBookings(paidBookings);
+        localStorage.setItem("registeredPhone", phoneNum);
+      }
+    } catch (error) {
+      console.error("History query error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone) return;
+    fetchBookings(phone);
+  };
+
+  // Compile full history list (combining DB bookings and mock topups/limits)
+  const getCombinedHistory = () => {
+    const items: any[] = [];
+    
+    // Add real database bookings
+    bookings.forEach((booking) => {
+      items.push({
+        id: booking._id || booking.ticketId,
+        type: "booking",
+        title: `Bus Ticket: ${booking.boardingPoint?.split(" ")[0]} → ${booking.destination?.split(" ")[0]}`,
+        subtitle: `Seats: ${booking.seats?.join(", ") || "S-1"} • ID: #${booking.ticketId?.slice(-6).toUpperCase()}`,
+        date: new Date(booking.bookingDate),
+        amount: booking.totalAmount,
+        status: "successful",
+        rawBooking: booking
+      });
+    });
+
+    // Add static allocation of spend limit
+    items.push({
+      id: "limit-allocation-init",
+      type: "limit",
+      title: "Digi Bus Stand Ticket Purchases",
+      subtitle: "Amount used to purchase ticket",
+      date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+      amount: 2000,
+      status: "allocated",
+      rawBooking: null
+    });
+
+    // Sort by date descending
+    return items.sort((a, b) => b.date.getTime() - a.date.getTime());
+  };
+
+  const combinedHistory = getCombinedHistory();
+  const totalSpent = bookings.reduce((sum, b) => sum + (b.totalAmount || 0), 0);
+
+  // Filter items
+  const filteredHistory = combinedHistory.filter(item => {
+    if (filterType === "bookings") return item.type === "booking";
+    if (filterType === "spends") return item.type === "limit";
+    return true;
+  });
+
+  return (
+    <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
+      
+      {/* Saffron Gradient PhonePe Header */}
+      <div className="bg-[#FF9933] text-white fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
+        <div className="py-6 px-6 flex items-center gap-3">
+          <Link href="/" className="p-2 hover:bg-white/10 rounded-xl transition-all">
+            <ChevronRight className="rotate-180 text-white" size={20} />
+          </Link>
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-white uppercase">Transaction History</h1>
+            <p className="text-[10px] font-bold text-white/80 uppercase tracking-wider">Metropolitan Transit Passbook & Ledgers</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-xl md:max-w-4xl mx-auto px-5 pt-8 space-y-6">
+        
+        {/* Intro Info Banner */}
+        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div className="space-y-2 relative z-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-slate-300 text-[9px] font-black uppercase tracking-wider">
+              <ShieldCheck size={12} className="text-[#FF9933]" /> Live DB Sync Nodes Active
+            </div>
+            <h2 className="text-2xl font-black uppercase tracking-tight">Sync Wallet Ledgers</h2>
+            <p className="text-slate-400 text-xs font-semibold leading-relaxed max-w-sm">
+              Verify your registered transit number to fetch actual trip bookings, spend distributions, and active travel passes.
+            </p>
+          </div>
+          
+          {/* Quick Metrics display */}
+          {searched && (
+            <div className="grid grid-cols-2 gap-4 w-full md:w-auto relative z-10">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 min-w-[120px]">
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Total Spends</span>
+                <p className="text-lg font-black text-[#FF9933]">₹{totalSpent}</p>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 min-w-[120px]">
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Active Passes</span>
+                <p className="text-lg font-black text-white">{bookings.length}</p>
+              </div>
+            </div>
+          )}
+          
+          <History className="absolute right-[-20px] bottom-[-20px] text-white/5" size={140} />
+        </div>
+
+        {/* Input Search Form */}
+        <motion.form 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          onSubmit={handleSearch}
+          className="w-full relative"
+        >
+          <div className="relative">
+            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400">
+              <Phone size={18} />
+            </div>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="10-Digit Mobile Number"
+              className="w-full bg-white border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#FF9933]/10 focus:border-[#FF9933] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              required
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="absolute right-2 top-2 bottom-2 bg-slate-950 hover:bg-[#FF9933] text-white px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+            >
+              {loading ? (
+                <Loader2 size={12} className="animate-spin" />
+              ) : (
+                <>
+                  <Search size={14} />
+                  <span>Fetch</span>
+                </>
+              )}
+            </button>
+          </div>
+        </motion.form>
+
+        {/* Main transaction listing panel */}
+        {searched && (
+          <div className="space-y-4">
+            
+            {/* Filtering tab controls */}
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                <Filter size={10} /> Filters
+              </span>
+              <div className="flex items-center gap-2">
+                {[
+                  { id: "all", label: "All Items" },
+                  { id: "bookings", label: "Bookings" },
+                  { id: "spends", label: "Spends" }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setFilterType(tab.id as any)}
+                    className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all border ${
+                      filterType === tab.id 
+                        ? "bg-[#FF9933] text-white border-[#FF9933] shadow-sm" 
+                        : "bg-white text-slate-500 border-slate-200 hover:bg-slate-100"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* List entries */}
+            <div className="space-y-3">
+              {filteredHistory.length === 0 ? (
+                <div className="text-center py-12 bg-white rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4">
+                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-300">
+                    <History size={20} />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-bold text-slate-800 uppercase tracking-tight">No Transactions</h3>
+                    <p className="text-slate-400 text-[10px] font-semibold max-w-[200px] mx-auto leading-relaxed">No ledger activity fits the selected query criteria.</p>
+                  </div>
+                </div>
+              ) : (
+                filteredHistory.map((item) => (
+                  <div 
+                    key={item.id}
+                    onClick={() => {
+                      if (item.type === "booking") {
+                        setSelectedBooking(item.rawBooking);
+                      }
+                    }}
+                    className={`bg-white rounded-2xl p-4 border border-slate-100 hover:border-[#FF9933] shadow-sm flex items-center justify-between gap-4 transition-all duration-300 ${item.type === "booking" ? "cursor-pointer" : "cursor-default"}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {/* Left circular icon status */}
+                      <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${
+                        item.type === "booking" 
+                          ? "bg-slate-100 text-slate-700" 
+                          : "bg-emerald-50 text-emerald-600"
+                      }`}>
+                        {item.type === "booking" ? (
+                          <ArrowDownLeft size={18} className="text-amber-600" />
+                        ) : (
+                          <ArrowUpRight size={18} />
+                        )}
+                      </div>
+                      <div className="text-left space-y-0.5 max-w-[180px] md:max-w-md">
+                        <h4 className="text-[12px] font-black text-slate-900 tracking-tight leading-tight uppercase truncate">{item.title}</h4>
+                        <p className="text-[9px] font-semibold text-slate-400 leading-none">{item.subtitle}</p>
+                        <span className="text-[8px] font-bold text-slate-300 block uppercase tracking-wider pt-0.5">
+                          {new Date(item.date).toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="text-right space-y-1">
+                      <p className={`text-[13px] font-black leading-none ${
+                        item.type === "booking" ? "text-slate-900" : "text-emerald-600"
+                      }`}>
+                        {item.type === "booking" ? "-" : "+"}₹{item.amount}
+                      </p>
+                      <span className={`inline-block text-[8px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md leading-none ${
+                        item.status === "successful" 
+                          ? "bg-emerald-50 text-emerald-600 border border-emerald-100" 
+                          : "bg-amber-50 text-amber-600 border border-amber-100"
+                      }`}>
+                        {item.status}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+          </div>
+        )}
+
+        {/* expandable landscape ticket pass modal overlay */}
+        <AnimatePresence>
+          {selectedBooking && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[1000] bg-slate-950/80 flex items-center justify-center p-4 backdrop-blur-sm"
+              onClick={() => setSelectedBooking(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                className="relative max-w-2xl w-full"
+                onClick={(e) => e.stopPropagation()}
+              >
+                
+                {/* Vintage Ornate Gold Ticket Design (Horizontal Landscape Layout matching Live Map) */}
+                <div 
+                  id="printable-ticket-modal"
+                  className={`ticket-container relative bg-[#f7e49f] bg-gradient-to-br from-[#f7e49f] via-[#e5c167] to-[#d4af37] rounded-[20px] md:rounded-[40px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] overflow-hidden border-[6px] md:border-[12px] border-[#b8860b]/30 flex flex-col md:flex-row min-h-[500px] md:min-h-[380px] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-left ${isPrinting ? "print-active-ticket" : ""}`}
+                >
+                  <div className="absolute inset-0 opacity-100 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] print:opacity-50" />
+                  <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
+                  <div className="absolute inset-0 border-[6px] border-[#d4af37] opacity-80 pointer-events-none" />
+                  
+                  {/* Left Side: Main Info */}
+                  <div className="p-6 md:p-10 flex-1 relative border-b-4 md:border-b-0 md:border-r-4 border-dashed border-[#b8860b]/40">
+                    <div className="relative z-10 text-center mb-8">
+                      <div className="flex items-center justify-center gap-4 mb-3">
+                        <Image src="/logo2.png" alt="JeffBen" width={32} height={32} className="object-contain" />
+                        <div className="h-6 w-[1px] bg-[#5d4037]/25" />
+                        <Image src="/hero-logo.png" alt="Digi Bus Stand" width={32} height={32} className="object-contain mix-blend-multiply" />
+                      </div>
+                      <p className="text-[8px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Stand Framework</p>
+                      <p className="text-base font-vintage text-[#5d4037]/80 leading-none mb-1">Powered by <span className="text-black">Jeff</span>Ben</p>
+                      <h3 className="text-2xl md:text-4xl font-serif font-black tracking-tight text-[#5d4037] leading-none uppercase">Digi Bus Stand Ticket</h3>
+                    </div>
+
+                    <div className="space-y-4 text-left relative z-10 px-2 text-[#5d4037]">
+                      <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
+                        <div className="flex flex-col">
+                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Bus No:</span>
+                           <span className="text-lg font-serif font-black tracking-tight uppercase">{selectedBooking.busId?.busNumber || "TN-38"}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Passengers:</span>
+                          <span className="text-lg font-serif font-black tracking-tight">{selectedBooking.seats?.length || 1}</span>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
+                        <div className="flex flex-col">
+                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Boarding</span>
+                          <p className="text-sm font-serif font-bold uppercase truncate max-w-[120px]">{selectedBooking.boardingPoint || "Point A"}</p>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Destination</span>
+                          <p className="text-sm font-serif font-bold uppercase truncate max-w-[120px]">{selectedBooking.destination || "Point B"}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between text-[#5d4037]/75">
+                        <div className="flex flex-col">
+                          <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60">Travel Date</span>
+                          <span className="text-xs font-bold">{selectedBooking.bookingDate ? new Date(selectedBooking.bookingDate).toLocaleDateString() : new Date().toLocaleDateString()}</span>
+                        </div>
+                        <div className="text-right bg-[#5d4037]/5 px-3 py-1.5 rounded-xl border border-[#5d4037]/15">
+                          <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60 block mb-0.5">Total Fare</span>
+                          <p className="text-sm font-serif font-black text-slate-950">₹{selectedBooking.totalAmount}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Side: QR Secure Matrix */}
+                  <div className="p-6 md:p-8 md:w-[240px] flex flex-col justify-between items-center relative overflow-hidden bg-black/5">
+                    <div className="p-3 bg-[#b8860b]/10 rounded-2xl shadow-inner border-2 border-[#b8860b]/30 relative overflow-hidden group bg-white/20">
+                      {/* Secure Watermark Layer */}
+                      <div className="absolute inset-0 opacity-[0.2] pointer-events-none flex flex-wrap gap-2 items-center justify-center text-[5px] font-black uppercase tracking-tighter text-[#5d4037] -rotate-12 scale-110">
+                        {Array(15).fill(null).map((_, i) => (
+                          <span key={i} className="whitespace-nowrap">DIGI BUS •</span>
+                        ))}
+                      </div>
+                      <QRCodeSVG 
+                        value={selectedBooking.qrToken || "INVALID"} 
+                        size={120} 
+                        fgColor="#2d1a12" 
+                        bgColor="transparent"
+                        level="H" 
+                        imageSettings={{
+                          src: "/hero-logo.png",
+                           height: 28,
+                           width: 28,
+                          excavate: true,
+                        }}
+                      />
+                    </div>
+                    <div className="text-center mt-4">
+                      <p className="text-[8px] font-bold text-[#5d4037]/50 uppercase tracking-widest leading-none mb-1">Serial Key</p>
+                      <p className="text-xs font-serif font-black text-[#5d4037]">JB-{selectedBooking.ticketId?.slice(-8).toUpperCase()}</p>
+                    </div>
+                  </div>
+
+                  {/* Side Notches */}
+                  <div className="hidden md:block absolute left-[240px] top-0 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
+                  <div className="hidden md:block absolute left-[240px] bottom-0 translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
+                </div>
+
+                {/* Print Button Wrapper */}
+                <div className="w-full flex gap-3 mt-4 print:hidden">
+                  <button 
+                    onClick={handlePrint}
+                    className="flex-1 py-4 bg-slate-950 hover:bg-[#FF9933] text-white rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+                  >
+                    <Printer size={14} /> Print Pass
+                  </button>
+                </div>
+                
+                {/* Close Button */}
+                <button 
+                  onClick={() => setSelectedBooking(null)}
+                  className="absolute top-4 right-4 bg-slate-950 text-white p-2.5 rounded-full hover:bg-[#FF9933] transition-all shadow-md"
+                >
+                  <ChevronRight className="rotate-90" size={16} />
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+      </div>
+
+      {/* Global Bottom PhonePe Navigation */}
+      <MobileBottomNav />
+    </main>
+  );
+}

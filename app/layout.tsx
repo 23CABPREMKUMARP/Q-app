@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
-import { Navbar } from "@/src/components/Navbar";
+
 import { Footer } from "@/src/components/Footer";
+import { MobileBottomNav } from "@/src/components/MobileBottomNav";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,11 +20,11 @@ const manrope = Manrope({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#FF9933",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
+  maximumScale: 1,
+  userScalable: false,
   viewportFit: "cover",
 };
 
@@ -55,16 +57,38 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-white">
-      <body
-        className={`${inter.variable} ${manrope.variable} antialiased bg-white min-h-full flex flex-col`}
-      >
-        <Navbar />
-        <main className="flex-1 scroll-smooth">
-          {children}
-        </main>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#FF9933",
+          colorBackground: "#ffffff",
+          colorText: "#0f172a",
+          borderRadius: "1rem",
+          fontFamily: "Inter, Manrope, system-ui, sans-serif",
+        },
+        elements: {
+          card: "shadow-none border border-slate-100",
+          headerTitle: "font-black tracking-tight uppercase",
+          headerSubtitle: "text-slate-400 text-xs",
+          formButtonPrimary: "bg-[#FF9933] hover:bg-[#e07b1a] text-white font-black uppercase tracking-widest rounded-xl h-12",
+          footerActionLink: "text-[#FF9933] font-bold",
+        },
+      }}
+    >
+      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-white">
+        <body
+          className={`${inter.variable} ${manrope.variable} antialiased bg-slate-50 min-h-full flex flex-col`}
+        >
+
+          <main className="flex-1 scroll-smooth">
+            {children}
+          </main>
+          <MobileBottomNav />
+          <div className="hidden md:block">
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
-const Digit = ({ value }: { value: string }) => {
+const Digit = React.memo(({ value }: { value: string }) => {
   return (
     <div className="relative h-[1.2em] w-[0.6em] overflow-hidden">
       <AnimatePresence mode="popLayout">
@@ -17,16 +17,18 @@ const Digit = ({ value }: { value: string }) => {
             stiffness: 300,
             damping: 30,
           }}
-          className="absolute inset-0 flex items-center justify-center font-black italic font-ui"
+          className="absolute inset-0 flex items-center justify-center font-black"
         >
           {value}
         </motion.span>
       </AnimatePresence>
     </div>
   );
-};
+});
 
-export const RollingNumber = ({ value, prefix = "" }: { value: number; prefix?: string }) => {
+Digit.displayName = "Digit";
+
+export const RollingNumber = React.memo(({ value, prefix = "" }: { value: number; prefix?: string }) => {
   const digits = value.toString().split("");
 
   return (
@@ -39,4 +41,6 @@ export const RollingNumber = ({ value, prefix = "" }: { value: number; prefix?: 
       </div>
     </div>
   );
-};
+});
+
+RollingNumber.displayName = "RollingNumber";

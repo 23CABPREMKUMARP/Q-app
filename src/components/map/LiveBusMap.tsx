@@ -34,11 +34,10 @@ const BusMarker = React.memo(({ isRunning, busNumber, isSelected, speed, availab
           </div>
       </div>
 
-      {/* 2D Bus Marker with Rapido-style Elevation */}
       <div 
         className="w-16 h-16 relative flex items-center justify-center transition-transform duration-300 ease-out will-change-transform"
         style={{ 
-          transform: `translate3d(0,0,0) scale(calc(var(--bus-scale, 1.0) * ${isSelected ? 1.4 : 1})) rotate(${(rotationDegrees || 0) - (mapBearing || 0)}deg)`, 
+          transform: `translate3d(0,0,0) scale(calc(var(--bus-scale, 1.0) * ${isSelected ? 1.4 : 1}))`, 
           transformOrigin: 'center center' 
         }}
       >
@@ -79,10 +78,23 @@ const LiveBusMap = React.memo(({
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const busMarkers = useRef<{ [key: string]: { marker: maplibregl.Marker, root: Root, isRunning: boolean, isSelected: boolean } }>({});
+  const busMarkers = useRef<{ [key: string]: { marker: maplibregl.Marker, root: Root, isRunning: boolean, isSelected: boolean, rotation?: number, speed?: number, availableSeats?: number } }>({});
   const stopMarkersRef = useRef<{ [key: string]: maplibregl.Marker }>({});
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapBearing, setMapBearing] = useState(-15);
+
+  // Memoize unique stops list to prevent nested iteration on every telemetry tick
+  const allStops = React.useMemo(() => {
+    const stopsMap = new Map();
+    buses.forEach(bus => {
+      if (bus.routeId?.stops) {
+        bus.routeId.stops.forEach((stop: any) => {
+          stopsMap.set(stop._id, stop);
+        });
+      }
+    });
+    return Array.from(stopsMap.values());
+  }, [buses.length]);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -355,6 +367,8 @@ const LiveBusMap = React.memo(({
         busMarkers.current[bus._id] = { 
             marker, root, isRunning, isSelected, 
             rotation: bus.location.rotation,
+            speed: bus.speed,
+            availableSeats: bus.availableSeats,
             targetLng: bus.location.lng, 
             targetLat: bus.location.lat 
         } as any;
@@ -364,12 +378,19 @@ const LiveBusMap = React.memo(({
         cache.targetLng = bus.location.lng;
         cache.targetLat = bus.location.lat;
         
-        // Critical: Re-render marker if telemetry or selection state shifts
-        if (cache.isRunning !== isRunning || cache.isSelected !== isSelected || cache.speed !== bus.speed || cache.availableSeats !== bus.availableSeats) {
+        // Critical: Re-render marker if telemetry, selection, or rotation state shifts
+        if (
+          cache.isRunning !== isRunning || 
+          cache.isSelected !== isSelected || 
+          cache.speed !== bus.speed || 
+          cache.availableSeats !== bus.availableSeats || 
+          cache.rotation !== bus.location.rotation
+        ) {
            cache.isRunning = isRunning;
            cache.isSelected = isSelected;
            cache.speed = bus.speed;
            cache.availableSeats = bus.availableSeats;
+           cache.rotation = bus.location.rotation;
            cache.root.render(
              <BusMarker 
                isRunning={isRunning} 
@@ -379,6 +400,8 @@ const LiveBusMap = React.memo(({
                availableSeats={bus.availableSeats} 
                from={bus.routeId?.from}
                to={bus.routeId?.to}
+               rotationDegrees={bus.location.rotation}
+               mapBearing={mapBearing}
              />
            );
         }
@@ -397,45 +420,52 @@ const LiveBusMap = React.memo(({
         }, 0);
       }
     });
-    
-    // Station/Stops Engine Handler
+  }, [buses, mapLoaded, selectedBusId, onBusClick, layers.showBuses, mapBearing]);
+
+  // Decoupled Station/Stops Engine Handler to avoid checking stops on every bus telemetry loop
+  useEffect(() => {
     const activeMap = mapRef.current;
-    if (layers.showMajorStops && activeMap) {
-        buses.forEach(bus => {
-           if (bus.routeId?.stops) {
-              bus.routeId.stops.forEach((stop: any) => {
-                 if (!stopMarkersRef.current[stop._id]) {
-                     const el = document.createElement('div');
-                     el.className = "relative flex flex-col items-center group cursor-pointer";
-                     
-                     // The Dot - Neural high-vis update
-                     const dot = document.createElement('div');
-                     dot.className = "w-3 h-3 bg-white border-2 border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.6)] rounded-full transition-transform hover:scale-150";
-                     
-                     // The Label (Always visible in Intelligence mode)
-                     const label = document.createElement('div');
-                     label.className = "absolute -bottom-8 bg-white/95 text-zinc-900 text-[10px] font-black tracking-tight px-3 py-1 rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.1)] whitespace-nowrap backdrop-blur-md opacity-100 scale-100 transition-all duration-300 pointer-events-none z-50 uppercase italic border border-zinc-200";
-                     label.innerText = stop.stopName;
-                     
-                     el.appendChild(dot);
-                     el.appendChild(label);
-                     
-                     const smarker = new maplibregl.Marker({ element: el, anchor: 'center' })
-                       .setLngLat([stop.lng, stop.lat])
-                       .addTo(activeMap);
-                     stopMarkersRef.current[stop._id] = smarker;
-                  }
-              });
-           }
-        });
+    if (!activeMap || !mapLoaded) return;
+
+    if (layers.showMajorStops) {
+      allStops.forEach((stop: any) => {
+        if (!stopMarkersRef.current[stop._id]) {
+          const el = document.createElement('div');
+          el.className = "relative flex flex-col items-center group cursor-pointer";
+          
+          // The Dot - Neural high-vis update
+          const dot = document.createElement('div');
+          dot.className = "w-3 h-3 bg-white border-2 border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.6)] rounded-full transition-transform hover:scale-150";
+          
+          // The Label (Always visible in Intelligence mode)
+          const label = document.createElement('div');
+          label.className = "absolute -bottom-8 bg-white/95 text-zinc-900 text-[10px] font-black tracking-tight px-3 py-1 rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.1)] whitespace-nowrap backdrop-blur-md opacity-100 scale-100 transition-all duration-300 pointer-events-none z-50 uppercase italic border border-zinc-200";
+          label.innerText = stop.stopName;
+          
+          el.appendChild(dot);
+          el.appendChild(label);
+          
+          const smarker = new maplibregl.Marker({ element: el, anchor: 'center' })
+            .setLngLat([stop.lng, stop.lat])
+            .addTo(activeMap);
+          stopMarkersRef.current[stop._id] = smarker;
+        }
+      });
+      
+      // Cleanup stops that are no longer in the active lists
+      Object.keys(stopMarkersRef.current).forEach(id => {
+        if (!allStops.some(s => s._id === id)) {
+          stopMarkersRef.current[id].remove();
+          delete stopMarkersRef.current[id];
+        }
+      });
     } else {
-        Object.keys(stopMarkersRef.current).forEach(id => {
-            stopMarkersRef.current[id].remove();
-            delete stopMarkersRef.current[id];
-        });
+      Object.keys(stopMarkersRef.current).forEach(id => {
+        stopMarkersRef.current[id].remove();
+        delete stopMarkersRef.current[id];
+      });
     }
-    
-  }, [buses, mapLoaded, selectedBusId, onBusClick, layers.showTraffic, layers.showMajorStops, layers.showBuses, mapBearing]);
+  }, [allStops, mapLoaded, layers.showMajorStops]);
 
   // Buttery-Smooth Fast-Rendering GPU Interpolator
   useEffect(() => {
@@ -447,12 +477,15 @@ const LiveBusMap = React.memo(({
               const dx = cache.targetLng - curr.lng;
               const dy = cache.targetLat - curr.lat;
               
-              // Glide marker position smoothly (15% closer per frame, achieving ~60FPS visual snap)
+              // Glide marker position smoothly (12% closer per frame, achieving ~60FPS visual snap)
               if (Math.abs(dx) > 0.000001 || Math.abs(dy) > 0.000001) {
                   cache.marker.setLngLat([
                     curr.lng + dx * 0.12, 
                     curr.lat + dy * 0.12
                   ]);
+              } else if (dx !== 0 || dy !== 0) {
+                  // Perfect snapping once reached target, stopping continuous setLngLat paint calls
+                  cache.marker.setLngLat([cache.targetLng, cache.targetLat]);
               }
            }
         });

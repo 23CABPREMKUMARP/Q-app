@@ -20,6 +20,7 @@ export interface BusStop {
 export interface BusData {
   _id: string;
   busNumber: string;
+  busCode: string;
   status: string;
   speed: number;
   fare: number;
@@ -37,6 +38,7 @@ export interface BusData {
     stops: BusStop[];
   };
 }
+
 
 export interface MapLayers {
   showBuses: boolean;
