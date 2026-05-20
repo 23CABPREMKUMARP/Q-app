@@ -58,7 +58,6 @@ export const Footer = React.memo(function Footer() {
             <nav className="flex flex-col gap-4">
               {[
                 { label: "Live Tracking", href: "/live-map" },
-                { label: "Book Ticket", href: "/get-ticket" },
                 { label: "Conductor Portal", href: "/conductor" },
               ].map((link) => (
                 <Link 

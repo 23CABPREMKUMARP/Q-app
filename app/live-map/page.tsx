@@ -1236,15 +1236,8 @@ function LiveMapContent() {
                 </motion.div>
               ) : (step === 1 || step === 2 || step === 3 || step === 4) && !isBooking ? (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-                  {/* TRIP PEEK STATE */}
                   {/* Primary CTA Stack - Promoted to top for Rapido speed */}
                   <div className="flex flex-col gap-3">
-                    <button 
-                       onClick={() => { setIsBooking(true); setStep(2); }}
-                       className="w-full h-20 bg-primary text-white rounded-[32px] font-bold text-xl tracking-tight hover:bg-zinc-950 transition-all shadow-[0_20px_40px_rgba(255,107,0,0.3)] flex items-center justify-center gap-3 active:scale-95 group"
-                     >
-                       Book Ticket <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
-                     </button>
                     <div className="grid grid-cols-2 gap-3">
                       <button 
                         onClick={() => setIsDrawerClosed(true)}

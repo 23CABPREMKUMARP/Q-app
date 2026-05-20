@@ -367,14 +367,7 @@ export default function MobileDashboard() {
           {/* Quick Actions (Money Transfers / Primary Services) */}
           <div className="bg-white rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Transit & Payments</h3>
-            <div className="grid grid-cols-4 gap-x-1 gap-y-4 text-center">
-              <Link href="/live-map?action=book" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
-                  <Ticket size={18} />
-                </div>
-                <span className="text-[9px] font-semibold text-slate-700 leading-tight">Book<br/>Ticket</span>
-              </Link>
-
+            <div className="grid grid-cols-3 gap-x-1 gap-y-4 text-center">
               <button 
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"

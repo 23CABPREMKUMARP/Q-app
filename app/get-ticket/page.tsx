@@ -293,13 +293,13 @@ export default function GetTicketPage() {
           <div className="pt-8 space-y-3">
             <div className="text-center">
               <h2 className="text-lg font-black text-slate-950 uppercase tracking-tight">Need a new Pass?</h2>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mt-1">Book ticket via GPS mapping engine</p>
+              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mt-1">Get passes via GPS mapping engine</p>
             </div>
             <Link 
               href="/live-map" 
               className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
             >
-              Launch Live Booking Map <ChevronRight size={14} />
+              Launch Live Map <ChevronRight size={14} />
             </Link>
           </div>
         </div>
