@@ -5,8 +5,9 @@ const config: CapacitorConfig = {
   appName: 'jeffben',
   webDir: 'public',
   server: {
-    url: 'http://10.155.254.210:3000',
-    cleartext: true
+    url: 'https://app-woad-beta.vercel.app?_vercel_share=xGhhMqD6mX0rHCmw2Yqvj3G608s6LC5M',
+    cleartext: true,
+    allowNavigation: ['app-woad-beta.vercel.app', '*.vercel.app']
   }
 };
 
