@@ -412,15 +412,12 @@ export default function MobileDashboard() {
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Search<br/>Routes</span>
               </Link>
 
-              <button 
-                onClick={() => setShowPassModal(true)} 
-                className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
-              >
-                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+              <div className="flex flex-col items-center gap-2 opacity-50 cursor-not-allowed">
+                <div className="w-11 h-11 bg-slate-200 rounded-xl flex items-center justify-center shadow-sm text-slate-400 mx-auto">
                   <Ticket size={18} />
                 </div>
-                <span className="text-[9px] font-semibold text-slate-700 leading-tight">View<br/>Pass</span>
-              </button>
+                <span className="text-[9px] font-semibold text-slate-500 leading-tight">Coming<br/>Soon</span>
+              </div>
             </div>
           </div>
 
@@ -446,7 +443,7 @@ export default function MobileDashboard() {
                 </div>
                 <p className="text-lg font-bold text-slate-900">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
                 <div className="mt-2 text-xs font-bold text-[#FF9933] flex items-center gap-1">
-                  VIEW ALL <ChevronRight size={12} />
+                  VIEW PASS <ChevronRight size={12} />
                 </div>
                 <History className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
               </Link>

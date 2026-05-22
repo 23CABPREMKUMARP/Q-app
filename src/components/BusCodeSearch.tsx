@@ -105,7 +105,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               value={busCode}
               onChange={(e) => setBusCode(e.target.value.toUpperCase())}
               placeholder="ENTER BUS CODE (e.g. 1024)"
-              className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl py-5 pl-14 pr-32 text-sm md:text-base font-bold tracking-widest text-zinc-950 placeholder:text-zinc-300 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/5 transition-all uppercase"
+              className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl py-5 pl-14 pr-32 text-base md:text-xl font-black tracking-widest text-black placeholder:text-zinc-500 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/10 transition-all uppercase"
             />
             <div className="absolute inset-y-2 right-2 flex items-center">
               <button

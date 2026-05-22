@@ -14,7 +14,13 @@ export async function GET() {
       return NextResponse.json([]); 
     }
 
-    const buses = await Bus.find().populate("routeId");
+    const buses = await Bus.find().populate({
+      path: "routeId",
+      populate: {
+        path: "stops",
+        model: "Stop",
+      },
+    });
     
     // Get latest location for each bus
     const busesWithLocation = await Promise.all(

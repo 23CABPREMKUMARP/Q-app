@@ -24,7 +24,13 @@ export async function GET(request: Request) {
 
     if (dbConnected) {
       try {
-        bus = await Bus.findOne({ busCode: code.toUpperCase() }).populate("routeId");
+        bus = await Bus.findOne({ busCode: code.toUpperCase() }).populate({
+          path: "routeId",
+          populate: {
+            path: "stops",
+            model: "Stop",
+          },
+        });
       } catch (queryError) {
         console.error("Database query failed:", queryError);
       }

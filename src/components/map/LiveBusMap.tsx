@@ -8,7 +8,7 @@ import { Bus, Navigation, Radar } from "lucide-react";
 
 import { BusData, MapLayers } from "@/src/types";
 
-const BusMarker = React.memo(({ isRunning, busNumber, isSelected, speed, availableSeats, from, to, rotationDegrees, mapBearing }: { isRunning: boolean, busNumber: string, isSelected: boolean, speed?: number, availableSeats?: number, from?: string, to?: string, rotationDegrees?: number, mapBearing?: number }) => {
+const BusMarker = React.memo(({ isRunning, busNumber, isSelected, isNearby, speed, availableSeats, from, to, rotationDegrees, mapBearing }: { isRunning: boolean, busNumber: string, isSelected: boolean, isNearby?: boolean, speed?: number, availableSeats?: number, from?: string, to?: string, rotationDegrees?: number, mapBearing?: number }) => {
   return (
     <div className={`flex flex-col items-center justify-center relative transition-all duration-300 ${isSelected ? "z-50" : "z-10"}`}>
       {/* HUD Plate - Pure Origin-Dest Zero-Gap Interface */}
@@ -57,12 +57,15 @@ const BusMarker = React.memo(({ isRunning, busNumber, isSelected, speed, availab
             src="/bus-marker-3d.png" 
             alt="Bus" 
             loading="lazy"
-            className={`w-14 h-14 object-contain transition-transform duration-500 ${isSelected ? "scale-110 drop-shadow-xl" : "scale-100"}`} 
+            className={`w-14 h-14 object-contain transition-transform duration-500 ${isSelected ? "scale-110 drop-shadow-xl" : isNearby ? "scale-125 drop-shadow-2xl" : "scale-100"}`} 
           />
         </div>
 
         {isSelected && (
           <div className="absolute -inset-1 rounded-full border-[3px] border-orange-500 shadow-[0_0_20px_rgba(255,107,0,0.5)] md:shadow-[0_0_40px_rgba(255,107,0,0.8)] animate-pulse" />
+        )}
+        {!isSelected && isNearby && (
+          <div className="absolute -inset-1 rounded-full border-[2px] border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)] animate-pulse" />
         )}
       </div>
     </div>
@@ -70,10 +73,10 @@ const BusMarker = React.memo(({ isRunning, busNumber, isSelected, speed, availab
 });
 
 const LiveBusMap = React.memo(({ 
-    onBusClick, buses, selectedBusId, layers, onUserLocationUpdate,
+    onBusClick, buses, selectedBusId, nearbyBusIds, layers, onUserLocationUpdate,
     userLocation, nearestBus, centerOn, navPath, navStats
 }: { 
-    onBusClick: (bus: any) => void, buses: BusData[], selectedBusId?: string | null, layers: MapLayers, onUserLocationUpdate?: (pos: {lat: number, lng: number}) => void,
+    onBusClick: (bus: any) => void, buses: BusData[], selectedBusId?: string | null, nearbyBusIds?: string[], layers: MapLayers, onUserLocationUpdate?: (pos: {lat: number, lng: number}) => void,
     userLocation?: {lat: number, lng: number} | null, nearestBus?: any, centerOn?: any, navPath?: any, navStats?: any
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -347,6 +350,7 @@ const LiveBusMap = React.memo(({
 
     buses.forEach(bus => {
       const isSelected = selectedBusId === bus._id;
+      const isNearby = nearbyBusIds?.includes(bus._id) || false;
       const isRunning = bus.status === 'Running';
 
       if (!busMarkers.current[bus._id]) {
@@ -363,7 +367,7 @@ const LiveBusMap = React.memo(({
           .addTo(map);
           
         const root = createRoot(el);
-        root.render(<BusMarker rotationDegrees={bus.location.rotation} isRunning={isRunning} busNumber={bus.busNumber} isSelected={isSelected} mapBearing={mapBearing} from={bus.routeId?.from} to={bus.routeId?.to} speed={bus.speed} availableSeats={bus.availableSeats} />);
+        root.render(<BusMarker rotationDegrees={bus.location.rotation} isRunning={isRunning} busNumber={bus.busNumber} isSelected={isSelected} isNearby={isNearby} mapBearing={mapBearing} from={bus.routeId?.from} to={bus.routeId?.to} speed={bus.speed} availableSeats={bus.availableSeats} />);
         busMarkers.current[bus._id] = { 
             marker, root, isRunning, isSelected, 
             rotation: bus.location.rotation,
@@ -381,13 +385,13 @@ const LiveBusMap = React.memo(({
         // Critical: Re-render marker if telemetry, selection, or rotation state shifts
         if (
           cache.isRunning !== isRunning || 
-          cache.isSelected !== isSelected || 
+          cache.isSelected !== isSelected || cache.isNearby !== isNearby || 
           cache.speed !== bus.speed || 
           cache.availableSeats !== bus.availableSeats || 
           cache.rotation !== bus.location.rotation
         ) {
            cache.isRunning = isRunning;
-           cache.isSelected = isSelected;
+           cache.isSelected = isSelected; cache.isNearby = isNearby;
            cache.speed = bus.speed;
            cache.availableSeats = bus.availableSeats;
            cache.rotation = bus.location.rotation;
@@ -395,7 +399,7 @@ const LiveBusMap = React.memo(({
              <BusMarker 
                isRunning={isRunning} 
                busNumber={bus.busNumber} 
-               isSelected={isSelected} 
+               isSelected={isSelected} isNearby={isNearby} 
                speed={bus.speed} 
                availableSeats={bus.availableSeats} 
                from={bus.routeId?.from}
@@ -502,12 +506,7 @@ const LiveBusMap = React.memo(({
         className="w-full h-full relative" 
         style={{ minHeight: '600px', position: 'relative' }} 
       />
-      {!mapLoaded && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-xl z-[1000]">
-           <div className="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4" />
-           <p className="text-[10px] font-black tracking-[0.2em] text-zinc-400 uppercase">Synchronizing Network State</p>
-        </div>
-      )}
+      
     </div>
   );
 });
