@@ -15,6 +15,7 @@ export default function GetTicketPage() {
   const [searched, setSearched] = useState(false);
   const [diagnostics, setDiagnostics] = useState<string>("");
   const [activePrintIndex, setActivePrintIndex] = useState<number | null>(null);
+  const [currentTime, setCurrentTime] = useState(Date.now());
 
   const handlePrint = (idx: number) => {
     setActivePrintIndex(idx);
@@ -34,6 +35,11 @@ export default function GetTicketPage() {
     }
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(Date.now()), 60000);
+    return () => clearInterval(timer);
+  }, []);
+
   const fetchBookings = async (phoneNum: string) => {
     setLoading(true);
     setSearched(true);
@@ -46,7 +52,20 @@ export default function GetTicketPage() {
 
       if (res.ok) {
         const data = await res.json();
-        const paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid");
+        let paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid");
+        
+        // Sort bookings: Valid first, closest to expiring first. Expired last.
+        paidBookings.sort((a: any, b: any) => {
+          const aTime = a.bookingDate ? new Date(a.bookingDate).getTime() : 0;
+          const bTime = b.bookingDate ? new Date(b.bookingDate).getTime() : 0;
+          const aExpired = Date.now() > aTime + 7200000;
+          const bExpired = Date.now() > bTime + 7200000;
+          
+          if (aExpired && !bExpired) return 1;
+          if (!aExpired && bExpired) return -1;
+          return bTime - aTime;
+        });
+
         setBookings(paidBookings);
         setDiagnostics(`Sync active. Cluster queried. Found ${paidBookings.length} active passes.`);
         localStorage.setItem("registeredPhone", phoneNum);
@@ -166,18 +185,32 @@ export default function GetTicketPage() {
           <AnimatePresence>
             {bookings.length > 0 && (
               <div className="space-y-6">
-                {bookings.map((booking, idx) => (
+                {bookings.map((booking, idx) => {
+                  const bookingTime = booking.bookingDate ? new Date(booking.bookingDate).getTime() : Date.now();
+                  const expiryTime = bookingTime + 7200000; // 2 hours
+                  const isExpired = currentTime > expiryTime;
+                  const timeRemainingMs = expiryTime - currentTime;
+                  
+                  let timeRemainingStr = "";
+                  if (!isExpired) {
+                     const hours = Math.floor(timeRemainingMs / 3600000);
+                     const mins = Math.floor((timeRemainingMs % 3600000) / 60000);
+                     if (hours > 0) timeRemainingStr = `${hours}h ${mins}m`;
+                     else timeRemainingStr = `${mins}m`;
+                  }
+
+                  return (
                   <motion.div
                     key={booking.id || booking._id || `booking-${idx}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className="w-full overflow-hidden flex flex-col items-center justify-center py-4"
+                    className={`w-full overflow-hidden flex flex-col items-center justify-center py-4 ${isExpired ? "opacity-75 grayscale-[0.5]" : ""}`}
                   >
                     {/* Vintage Ornate Gold Ticket Design (Horizontal Landscape Layout matching Live Map) */}
                     <div 
                       id={`printable-ticket-${idx}`}
-                      className={`ticket-container relative bg-[#f7e49f] bg-gradient-to-br from-[#f7e49f] via-[#e5c167] to-[#d4af37] rounded-[20px] md:rounded-[40px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] overflow-hidden border-[6px] md:border-[12px] border-[#b8860b]/30 flex flex-col md:flex-row min-h-[500px] md:min-h-[380px] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-left ${activePrintIndex === idx ? "print-active-ticket" : ""}`}
+                      className={`ticket-container relative bg-[#f7e49f] bg-gradient-to-br from-[#f7e49f] via-[#e5c167] to-[#d4af37] rounded-[20px] md:rounded-[40px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] overflow-hidden border-[6px] md:border-[12px] flex flex-col md:flex-row min-h-[500px] md:min-h-[380px] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-left ${activePrintIndex === idx ? "print-active-ticket" : ""} ${isExpired ? "border-red-500/80" : "border-green-500/80"}`}
                     >
                       <div className="absolute inset-0 opacity-100 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] print:opacity-50" />
                       <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
@@ -194,6 +227,23 @@ export default function GetTicketPage() {
                           <p className="text-[8px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Stand Framework</p>
                           <p className="text-base font-vintage text-[#5d4037]/80 leading-none mb-1">Powered by <span className="text-black">Jeff</span>Ben</p>
                           <h3 className="text-2xl md:text-4xl font-serif font-black tracking-tight text-[#5d4037] leading-none uppercase">Digi Bus Stand Ticket</h3>
+                          
+                          {/* Validity Status Badge */}
+                          <div className="mt-4 flex flex-col items-center justify-center gap-1">
+                            <div className={`px-4 py-1.5 rounded-full border-2 inline-flex items-center gap-2 ${isExpired ? "bg-red-100 border-red-500 text-red-700" : "bg-green-100 border-green-500 text-green-700"}`}>
+                              {!isExpired && <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />}
+                              <span className="font-bold text-xs uppercase tracking-widest">{isExpired ? "Expired" : "Valid"}</span>
+                            </div>
+                            {!isExpired ? (
+                              <p className="text-[10px] font-bold text-green-700 uppercase tracking-widest">
+                                Expires in {timeRemainingStr}
+                              </p>
+                            ) : (
+                              <p className="text-[10px] font-bold text-red-700 uppercase tracking-widest">
+                                Ticket Validity Ended
+                              </p>
+                            )}
+                          </div>
                         </div>
 
                         <div className="space-y-4 text-left relative z-10 px-2 text-[#5d4037]">
@@ -235,6 +285,11 @@ export default function GetTicketPage() {
                       {/* Right Side: QR Secure Matrix */}
                       <div className="p-6 md:p-8 md:w-[240px] flex flex-col justify-between items-center relative overflow-hidden bg-black/5">
                         <div className="p-3 bg-[#b8860b]/10 rounded-2xl shadow-inner border-2 border-[#b8860b]/30 relative overflow-hidden group bg-white/20">
+                          {isExpired && (
+                            <div className="absolute inset-0 z-20 bg-red-500/20 backdrop-blur-[1px] flex items-center justify-center">
+                              <span className="bg-red-600 text-white text-[10px] font-black uppercase px-2 py-1 rounded shadow-lg -rotate-12 border border-red-400">EXPIRED</span>
+                            </div>
+                          )}
                           {/* Secure Watermark Layer */}
                           <div className="absolute inset-0 opacity-[0.2] pointer-events-none flex flex-wrap gap-2 items-center justify-center text-[5px] font-black uppercase tracking-tighter text-[#5d4037] -rotate-12 scale-110">
                             {Array(15).fill(null).map((_, i) => (
@@ -267,6 +322,7 @@ export default function GetTicketPage() {
                     </div>
 
                     {/* Print Button (Outside/underneath, only visible when not printing) */}
+                    {!isExpired && (
                     <div className="w-full flex gap-3 mt-4 print:hidden">
                       <button 
                         onClick={() => handlePrint(idx)}
@@ -275,8 +331,9 @@ export default function GetTicketPage() {
                         <Download size={14} /> Download Pass PDF
                       </button>
                     </div>
+                    )}
                   </motion.div>
-                ))}
+                )})}
               </div>
             )}
           </AnimatePresence>

@@ -53,6 +53,18 @@ export async function POST(req: Request) {
     }
 
     // 2. Validation Logic
+    
+    // Automatic 2-hour expiration rule
+    const bookingTime = bookingData.booking_date || bookingData.created_at;
+    const bookingTimeMs = bookingTime ? new Date(bookingTime).getTime() : Date.now();
+    if (Date.now() > bookingTimeMs + 7200000) { // 2 hours
+      return NextResponse.json({ 
+        success: false, 
+        message: "Ticket Expired", 
+        booking: { ticketId: bookingData.ticket_id } 
+      });
+    }
+
     if (bookingData.status === "Used") {
       return NextResponse.json({ 
         success: false, 
