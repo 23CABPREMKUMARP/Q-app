@@ -8,6 +8,46 @@ import { Bus, Navigation, Radar } from "lucide-react";
 
 import { BusData, MapLayers } from "@/src/types";
 
+function getSimulatedLocation(bus: any, timeMs: number) {
+  if (bus.status !== "Running" || !bus.routeId?.path || bus.routeId.path.length < 2) {
+    return bus.location;
+  }
+  
+  // 120 seconds for a full loop along the route
+  const loopDuration = 120000; 
+  // Offset by bus ID to spread them out
+  const offset = String(bus._id).split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0) * 1000;
+  
+  let progress = ((timeMs + offset) % loopDuration) / loopDuration; 
+  // Make it go back and forth (triangle wave)
+  if (progress > 0.5) {
+     progress = 1 - (progress - 0.5) * 2;
+  } else {
+     progress = progress * 2;
+  }
+
+  const path = bus.routeId.path;
+  const totalSegments = path.length - 1;
+  const exactSegment = progress * totalSegments;
+  const segmentIndex = Math.floor(exactSegment);
+  const segmentProgress = exactSegment - segmentIndex;
+
+  const startPoint = path[segmentIndex];
+  const endPoint = path[Math.min(segmentIndex + 1, path.length - 1)];
+
+  const lat = startPoint.lat + (endPoint.lat - startPoint.lat) * segmentProgress;
+  const lng = startPoint.lng + (endPoint.lng - startPoint.lng) * segmentProgress;
+
+  // Calculate rotation (bearing)
+  const dy = endPoint.lat - startPoint.lat;
+  const dx = endPoint.lng - startPoint.lng;
+  let rotation = Math.atan2(dy, dx) * 180 / Math.PI;
+  // Convert math angle to map bearing
+  rotation = 90 - rotation;
+
+  return { lat, lng, rotation };
+}
+
 const BusMarker = React.memo(({ isRunning, busNumber, isSelected, isNearby, speed, availableSeats, from, to, rotationDegrees, mapBearing }: { isRunning: boolean, busNumber: string, isSelected: boolean, isNearby?: boolean, speed?: number, availableSeats?: number, from?: string, to?: string, rotationDegrees?: number, mapBearing?: number }) => {
   return (
     <div className={`flex flex-col items-center justify-center relative transition-all duration-300 ${isSelected ? "z-50" : "z-10"}`}>
@@ -329,7 +369,17 @@ const LiveBusMap = React.memo(({
       if (userLocation) {
          if (!userMarkerRef.current) {
             const el = document.createElement('div');
-            el.className = 'w-5 h-5 bg-orange-600 border-[3px] border-white rounded-full shadow-[0_0_20px_rgba(255,107,0,0.8)] animate-pulse';
+            el.className = 'relative flex items-center justify-center';
+            
+            const radius = document.createElement('div');
+            radius.className = 'absolute w-32 h-32 bg-orange-500/10 rounded-full border border-orange-500/20 animate-pulse';
+            
+            const dot = document.createElement('div');
+            dot.className = 'w-5 h-5 bg-orange-600 border-[3px] border-white rounded-full shadow-[0_0_20px_rgba(255,107,0,0.8)] z-10';
+            
+            el.appendChild(radius);
+            el.appendChild(dot);
+            
             userMarkerRef.current = new maplibregl.Marker({ element: el })
               .setLngLat([userLocation.lng, userLocation.lat])
               .addTo(map);
@@ -374,13 +424,15 @@ const LiveBusMap = React.memo(({
             speed: bus.speed,
             availableSeats: bus.availableSeats,
             targetLng: bus.location.lng, 
-            targetLat: bus.location.lat 
+            targetLat: bus.location.lat,
+            busData: bus
         } as any;
       } else {
         const cache = busMarkers.current[bus._id] as any;
         // Set target coordinates for the smooth interpolator Engine!
         cache.targetLng = bus.location.lng;
         cache.targetLat = bus.location.lat;
+        cache.busData = bus;
         
         // Critical: Re-render marker if telemetry, selection, or rotation state shifts
         if (
@@ -476,6 +528,22 @@ const LiveBusMap = React.memo(({
      let frameId: number;
      const animateGL = () => {
         Object.values(busMarkers.current).forEach((cache: any) => {
+           const bus = cache.busData;
+           if (bus && bus.status === "Running" && bus.routeId?.path?.length > 1) {
+               const sim = getSimulatedLocation(bus, Date.now());
+               cache.targetLng = sim.lng;
+               cache.targetLat = sim.lat;
+               
+               // Smooth Camera Track for Selected Bus
+               if (cache.isSelected && mapRef.current) {
+                   const center = mapRef.current.getCenter();
+                   const dist = Math.hypot(center.lng - sim.lng, center.lat - sim.lat);
+                   if (dist > 0.0005) {
+                       mapRef.current.easeTo({ center: [sim.lng, sim.lat], duration: 100, easing: (t) => t });
+                   }
+               }
+           }
+
            if (cache.targetLng !== undefined && cache.targetLat !== undefined) {
               const curr = cache.marker.getLngLat();
               const dx = cache.targetLng - curr.lng;

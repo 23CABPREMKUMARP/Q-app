@@ -271,13 +271,7 @@ function LiveMapContent() {
           }));
           const finalBuses = matrixBuses.length > 0 ? matrixBuses : MOCK_BUSES;
           
-          // Apply Live Simulation Engine
-          const simulatedBuses = finalBuses.map((bus: any) => ({
-            ...bus,
-            location: getSimulatedLocation(bus, Date.now())
-          }));
-          
-          setBuses(simulatedBuses);
+          setBuses(finalBuses);
           
           if (targetBusId) {
             const found = finalBuses.find((b: any) => b._id === targetBusId || b.busId === targetBusId);
@@ -293,18 +287,10 @@ function LiveMapContent() {
             }
           }
         } else {
-          const simulatedMock = MOCK_BUSES.map((bus: any) => ({
-            ...bus,
-            location: getSimulatedLocation(bus, Date.now())
-          }));
-          setBuses(simulatedMock);
+          setBuses(MOCK_BUSES);
         }
       } catch (e) {
-        const simulatedMock = MOCK_BUSES.map((bus: any) => ({
-          ...bus,
-          location: getSimulatedLocation(bus, Date.now())
-        }));
-        setBuses(simulatedMock);
+        setBuses(MOCK_BUSES);
       } finally {
         setLoading(false);
       }
