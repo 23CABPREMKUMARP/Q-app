@@ -125,6 +125,7 @@ const LiveBusMap = React.memo(({
   const stopMarkersRef = useRef<{ [key: string]: maplibregl.Marker }>({});
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapBearing, setMapBearing] = useState(-15);
+  const [webglError, setWebglError] = useState(false);
 
   // Memoize unique stops list to prevent nested iteration on every telemetry tick
   const allStops = React.useMemo(() => {
@@ -143,36 +144,42 @@ const LiveBusMap = React.memo(({
     if (!mapContainer.current) return;
 
     // Vibrant Premium Map Theme (Voyager Style - Colorful and Detailed)
-    // Google Maps Style Roadmap Theme
-    const map = new maplibregl.Map({
-      container: mapContainer.current,
-      style: {
-        version: 8,
-        sources: {
-          google: {
-            type: "raster",
-            tiles: ["https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"],
-            tileSize: 256,
-            attribution: "Google Maps"
-          }
-        },
-        layers: [
-          {
-            id: "google-roadmap",
-            type: "raster",
-            source: "google",
-            paint: {
-              "raster-opacity": 1
+    let map: maplibregl.Map;
+    try {
+      map = new maplibregl.Map({
+        container: mapContainer.current,
+        style: {
+          version: 8,
+          sources: {
+            google: {
+              type: "raster",
+              tiles: ["https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"],
+              tileSize: 256,
+              attribution: "Google Maps"
             }
-          }
-        ]
-      },
-      center: [76.9558, 11.0168],
-      zoom: 14,
-      pitch: 45, // Professional angle
-      bearing: -10,
-      scrollZoom: true
-    });
+          },
+          layers: [
+            {
+              id: "google-roadmap",
+              type: "raster",
+              source: "google",
+              paint: {
+                "raster-opacity": 1
+              }
+            }
+          ]
+        },
+        center: [76.9558, 11.0168],
+        zoom: 14,
+        pitch: 45, // Professional angle
+        bearing: -10,
+        scrollZoom: true
+      });
+    } catch (e) {
+      console.error("WebGL Initialization failed:", e);
+      setWebglError(true);
+      return;
+    }
 
     // Dynamically scale buses perfectly with map zoom without React re-renders!
     const updateBusScale = () => {
@@ -566,6 +573,24 @@ const LiveBusMap = React.memo(({
      frameId = requestAnimationFrame(animateGL);
      return () => cancelAnimationFrame(frameId);
   }, []);
+
+  if (webglError) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full w-full bg-slate-900 rounded-3xl overflow-hidden shadow-2xl relative p-6 text-center">
+         <Radar size={48} className="text-orange-500 mb-4 animate-pulse" />
+         <h3 className="text-xl font-black text-white mb-2 uppercase tracking-widest">Graphics Context Lost</h3>
+         <p className="text-slate-400 text-sm mb-6 max-w-sm">
+            Your browser's WebGL hardware acceleration ran out of memory. This occasionally happens during development or on low-end devices.
+         </p>
+         <button 
+           onClick={() => window.location.reload()} 
+           className="bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest px-6 py-3 rounded-2xl transition-all shadow-lg shadow-orange-500/20 active:scale-95"
+         >
+           Reload Engine
+         </button>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full w-full relative bg-zinc-50 overflow-hidden">
