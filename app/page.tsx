@@ -101,12 +101,7 @@ HomeLoader.displayName = "HomeLoader";
 export default function MobileDashboard() {
   const router = useRouter();
   const { user } = useUser();
-  const [isLoading, setIsLoading] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem('hasSeenLoader');
-    }
-    return true;
-  });
+  const [isLoading, setIsLoading] = useState(true);
   const [buses, setBuses] = useState<any[]>([]);
   const [walletBalance, setWalletBalance] = useState("250.00");
   const [activeBookingsCount, setActiveBookingsCount] = useState(0);
@@ -123,6 +118,11 @@ export default function MobileDashboard() {
   const [showPassModal, setShowPassModal] = useState(false);
 
   useEffect(() => {
+    // Immediate check to skip loader if already seen
+    if (typeof window !== 'undefined' && sessionStorage.getItem('hasSeenLoader')) {
+      setIsLoading(false);
+    }
+
     const savedAddress = localStorage.getItem("passengerAddress");
     if (savedAddress) {
       setAddress(savedAddress);
