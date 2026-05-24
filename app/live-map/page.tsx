@@ -18,6 +18,47 @@ import { BusData, MapLayers } from "@/src/types";
 import { MOCK_BUSES } from "@/src/lib/constants";
 
 // --- Sub Components (Memoized for Performance) ---
+
+function getSimulatedLocation(bus: any, timeMs: number) {
+  if (bus.status !== "Running" || !bus.routeId?.path || bus.routeId.path.length < 2) {
+    return bus.location;
+  }
+  
+  // 120 seconds for a full loop along the route
+  const loopDuration = 120000; 
+  // Offset by bus ID to spread them out
+  const offset = String(bus._id).split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0) * 1000;
+  
+  let progress = ((timeMs + offset) % loopDuration) / loopDuration; 
+  // Make it go back and forth (triangle wave)
+  if (progress > 0.5) {
+     progress = 1 - (progress - 0.5) * 2;
+  } else {
+     progress = progress * 2;
+  }
+
+  const path = bus.routeId.path;
+  const totalSegments = path.length - 1;
+  const exactSegment = progress * totalSegments;
+  const segmentIndex = Math.floor(exactSegment);
+  const segmentProgress = exactSegment - segmentIndex;
+
+  const startPoint = path[segmentIndex];
+  const endPoint = path[Math.min(segmentIndex + 1, path.length - 1)];
+
+  const lat = startPoint.lat + (endPoint.lat - startPoint.lat) * segmentProgress;
+  const lng = startPoint.lng + (endPoint.lng - startPoint.lng) * segmentProgress;
+
+  // Calculate rotation (bearing)
+  const dy = endPoint.lat - startPoint.lat;
+  const dx = endPoint.lng - startPoint.lng;
+  let rotation = Math.atan2(dy, dx) * 180 / Math.PI;
+  // Convert math angle to map bearing
+  rotation = 90 - rotation;
+
+  return { lat, lng, rotation };
+}
+
 const LiveBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), {
   ssr: false,
 });
@@ -229,7 +270,14 @@ function LiveMapContent() {
             }
           }));
           const finalBuses = matrixBuses.length > 0 ? matrixBuses : MOCK_BUSES;
-          setBuses(finalBuses);
+          
+          // Apply Live Simulation Engine
+          const simulatedBuses = finalBuses.map((bus: any) => ({
+            ...bus,
+            location: getSimulatedLocation(bus, Date.now())
+          }));
+          
+          setBuses(simulatedBuses);
           
           if (targetBusId) {
             const found = finalBuses.find((b: any) => b._id === targetBusId || b.busId === targetBusId);
@@ -245,10 +293,18 @@ function LiveMapContent() {
             }
           }
         } else {
-          setBuses(MOCK_BUSES);
+          const simulatedMock = MOCK_BUSES.map((bus: any) => ({
+            ...bus,
+            location: getSimulatedLocation(bus, Date.now())
+          }));
+          setBuses(simulatedMock);
         }
       } catch (e) {
-        setBuses(MOCK_BUSES);
+        const simulatedMock = MOCK_BUSES.map((bus: any) => ({
+          ...bus,
+          location: getSimulatedLocation(bus, Date.now())
+        }));
+        setBuses(simulatedMock);
       } finally {
         setLoading(false);
       }
