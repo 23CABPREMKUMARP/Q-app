@@ -178,10 +178,19 @@ function LiveMapContent() {
             setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
           },
           (err) => {
-            console.warn("Background GPS fetch failed:", err);
-            setLocationError("Failed to acquire GPS location. Please check device settings.");
+            console.warn("High accuracy GPS failed, falling back to low accuracy:", err);
+            navigator.geolocation.getCurrentPosition(
+              (fallbackPos) => {
+                setUserLocation({ lat: fallbackPos.coords.latitude, lng: fallbackPos.coords.longitude });
+              },
+              (fallbackErr) => {
+                console.warn("All GPS fetches failed:", fallbackErr);
+                setLocationError("Failed to acquire GPS location. Please check device settings.");
+              },
+              { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+            );
           },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
         );
       }
     } else if (saved === 'skipped') {
@@ -648,12 +657,24 @@ function LiveMapContent() {
                       setShowNearbyBusesDrawer(true);
                     },
                     (err) => {
-                      console.warn("Location services unavailable:", err.message);
-                      alert("Unable to fetch live location. Please ensure GPS is enabled and permissions are granted.");
-                      setHasLocationPermission('denied');
-                      localStorage.setItem('hasLocationPermission', 'false');
+                      console.warn("High accuracy failed, trying low accuracy:", err.message);
+                      navigator.geolocation.getCurrentPosition(
+                        (fallbackPos) => {
+                          setUserLocation({ lat: fallbackPos.coords.latitude, lng: fallbackPos.coords.longitude });
+                          localStorage.setItem('hasLocationPermission', 'true');
+                          setHasLocationPermission('granted');
+                          setShowNearbyBusesDrawer(true);
+                        },
+                        (fallbackErr) => {
+                          console.error("Location completely failed:", fallbackErr.message);
+                          alert("Unable to fetch live location. Please ensure GPS is enabled and permissions are granted.");
+                          setHasLocationPermission('denied');
+                          localStorage.setItem('hasLocationPermission', 'false');
+                        },
+                        { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+                      );
                     },
-                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
                   );
                 }
               }}
