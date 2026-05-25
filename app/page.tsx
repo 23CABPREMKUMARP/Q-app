@@ -371,7 +371,7 @@ export default function MobileDashboard() {
                   <Sparkles size={14} className="text-amber-400" />
                   <p className="text-[10px] font-black text-amber-400 tracking-widest uppercase">Premium</p>
                 </div>
-                <h3 className="text-xl font-black tracking-tight mb-1">Gold Membership</h3>
+                <h3 className="text-xl font-black tracking-tight mb-1">Town Bus Memberships</h3>
                 <p className="text-xs text-slate-400 font-medium mb-3">Exclusive passes coming soon</p>
                 <button 
                   onClick={() => setShowMembershipModal(true)}
@@ -851,7 +851,7 @@ export default function MobileDashboard() {
                       <Crown size={24} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-black text-slate-900">Memberships</h3>
+                      <h3 className="text-lg font-black text-slate-900">Town Bus Memberships</h3>
                       <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Premium Tiers Coming Soon</p>
                     </div>
                   </div>
