@@ -168,30 +168,44 @@ function LiveMapContent() {
   const [hasLocationPermission, setHasLocationPermission] = useState<'granted' | 'skipped' | 'pending' | 'denied'>('pending');
   const [showNearbyBusesDrawer, setShowNearbyBusesDrawer] = useState(true);
 
+  const fetchLocation = () => {
+    setLocationError("");
+    if (!("geolocation" in navigator)) {
+      setLocationError("Geolocation is not supported by your browser.");
+      return;
+    }
+    
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setHasLocationPermission('granted');
+        localStorage.setItem('hasLocationPermission', 'true');
+      },
+      (err) => {
+        console.warn("High accuracy GPS failed, falling back to low accuracy:", err);
+        navigator.geolocation.getCurrentPosition(
+          (fallbackPos) => {
+            setUserLocation({ lat: fallbackPos.coords.latitude, lng: fallbackPos.coords.longitude });
+            setHasLocationPermission('granted');
+            localStorage.setItem('hasLocationPermission', 'true');
+          },
+          (fallbackErr) => {
+            console.warn("All GPS fetches failed:", fallbackErr);
+            setLocationError("Failed to acquire GPS location. Please check device settings and browser permissions.");
+          },
+          { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+        );
+      },
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+    );
+  };
+
   useEffect(() => {
     const saved = localStorage.getItem('hasLocationPermission');
     if (saved === 'true') {
       setHasLocationPermission('granted');
-      if ("geolocation" in navigator && !userLocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-          },
-          (err) => {
-            console.warn("High accuracy GPS failed, falling back to low accuracy:", err);
-            navigator.geolocation.getCurrentPosition(
-              (fallbackPos) => {
-                setUserLocation({ lat: fallbackPos.coords.latitude, lng: fallbackPos.coords.longitude });
-              },
-              (fallbackErr) => {
-                console.warn("All GPS fetches failed:", fallbackErr);
-                setLocationError("Failed to acquire GPS location. Please check device settings.");
-              },
-              { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
-            );
-          },
-          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-        );
+      if (!userLocation) {
+        fetchLocation();
       }
     } else if (saved === 'skipped') {
       setHasLocationPermission('skipped');
@@ -649,33 +663,8 @@ function LiveMapContent() {
             <button 
               onClick={() => {
                 if ("geolocation" in navigator) {
-                  navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                      setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-                      localStorage.setItem('hasLocationPermission', 'true');
-                      setHasLocationPermission('granted');
-                      setShowNearbyBusesDrawer(true);
-                    },
-                    (err) => {
-                      console.warn("High accuracy failed, trying low accuracy:", err.message);
-                      navigator.geolocation.getCurrentPosition(
-                        (fallbackPos) => {
-                          setUserLocation({ lat: fallbackPos.coords.latitude, lng: fallbackPos.coords.longitude });
-                          localStorage.setItem('hasLocationPermission', 'true');
-                          setHasLocationPermission('granted');
-                          setShowNearbyBusesDrawer(true);
-                        },
-                        (fallbackErr) => {
-                          console.error("Location completely failed:", fallbackErr.message);
-                          alert("Unable to fetch live location. Please ensure GPS is enabled and permissions are granted.");
-                          setHasLocationPermission('denied');
-                          localStorage.setItem('hasLocationPermission', 'false');
-                        },
-                        { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
-                      );
-                    },
-                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-                  );
+                  fetchLocation();
+                  setShowNearbyBusesDrawer(true);
                 }
               }}
               className="w-full bg-[#FF9933] text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#FF9933]/20 active:scale-95 flex items-center justify-center gap-3"
@@ -1591,7 +1580,13 @@ function LiveMapContent() {
                     {locationError ? (
                       <>
                         <MapPinOff size={32} className="text-red-400 mb-3 opacity-80" />
-                        <p className="text-[11px] font-black text-red-500 uppercase tracking-widest leading-relaxed">{locationError}</p>
+                        <p className="text-[11px] font-black text-red-500 uppercase tracking-widest leading-relaxed mb-4">{locationError}</p>
+                        <button 
+                          onClick={fetchLocation}
+                          className="px-6 py-2 bg-red-50 text-red-600 rounded-xl border border-red-100 font-black text-xs uppercase tracking-widest hover:bg-red-100 transition-colors active:scale-95"
+                        >
+                          Retry GPS
+                        </button>
                       </>
                     ) : !userLocation ? (
                       <>
