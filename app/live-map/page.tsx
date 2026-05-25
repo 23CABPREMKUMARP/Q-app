@@ -1533,7 +1533,7 @@ function LiveMapContent() {
 
       {/* Floating Nearby Buses Button (When drawer is closed) */}
       <AnimatePresence>
-        {!showNearbyBusesDrawer && hasLocationPermission === 'granted' && !selectedBus && (
+        {!showNearbyBusesDrawer && !selectedBus && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -1556,7 +1556,7 @@ function LiveMapContent() {
 
       {/* Nearby Buses Bottom Sheet */}
       <AnimatePresence>
-        {showNearbyBusesDrawer && hasLocationPermission === 'granted' && !selectedBus && (
+        {showNearbyBusesDrawer && !selectedBus && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
