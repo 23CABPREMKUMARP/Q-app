@@ -192,6 +192,8 @@ function LiveMapContent() {
           (fallbackErr) => {
             console.warn("All GPS fetches failed:", fallbackErr);
             setLocationError("Failed to acquire GPS location. Please check device settings and browser permissions.");
+            setHasLocationPermission('denied');
+            localStorage.setItem('hasLocationPermission', 'false');
           },
           { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
         );
