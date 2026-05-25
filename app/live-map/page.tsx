@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
-import { Bus, MapPin, Navigation, User, Phone, Mail, ChevronRight, X, CreditCard, Ticket, LayoutDashboard, QrCode, Zap, Info, Shield, ShieldCheck, Clock, CheckCircle, ArrowLeft, ArrowRight, Activity, Gauge, Search, Route, Camera, Wind, RefreshCw, Download, Wallet, Banknote, CheckCircle2, AlertCircle, ShieldAlert } from "lucide-react";
+import { Bus, MapPin, MapPinOff, Navigation, User, Phone, Mail, ChevronRight, X, CreditCard, Ticket, LayoutDashboard, QrCode, Zap, Info, Shield, ShieldCheck, Clock, CheckCircle, ArrowLeft, ArrowRight, Activity, Gauge, Search, Route, Camera, Wind, RefreshCw, Download, Wallet, Banknote, CheckCircle2, AlertCircle, ShieldAlert } from "lucide-react";
 import Script from "next/script";
 import { QRCodeSVG } from "qrcode.react";
 import Link from "next/link";
@@ -165,7 +165,7 @@ function LiveMapContent() {
   const [isAuthorizedToTrack, setIsAuthorizedToTrack] = useState(true);
   const [authChecking, setAuthChecking] = useState(false);
   const [isDrawerClosed, setIsDrawerClosed] = useState(false);
-  const [hasLocationPermission, setHasLocationPermission] = useState<'granted' | 'skipped' | 'pending'>('pending');
+  const [hasLocationPermission, setHasLocationPermission] = useState<'granted' | 'skipped' | 'pending' | 'denied'>('pending');
   const [showNearbyBusesDrawer, setShowNearbyBusesDrawer] = useState(true);
 
   useEffect(() => {
