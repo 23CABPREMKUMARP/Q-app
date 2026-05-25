@@ -467,7 +467,6 @@ function LiveMapContent() {
     const success = await fetchNavigationPath(userLocation, target.location || target);
     if (success) {
       setIsNavigating(true);
-      setShowNearbyOnly(false);
       // Zoom to route handled in map via centerOn or map effect
     }
   };
@@ -1442,7 +1441,7 @@ function LiveMapContent() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {isDrawerClosed && selectedBus && !isNavigating && (
+        {isDrawerClosed && selectedBus && (
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -1633,9 +1632,11 @@ function LiveMapContent() {
                         <button 
                           onClick={() => {
                             setShowNearbyBusesDrawer(false);
+                            // Pan map directly to this bus
+                            setCenterOn({ lat: bus.location.lat, lng: bus.location.lng });
                             setSelectedBus(bus);
-                            startNavigation(bus);
                             setIsDrawerClosed(true);
+                            startNavigation(bus);
                           }}
                           className={`flex-shrink-0 w-16 h-16 ${isNearest ? 'bg-[#FF9933] text-white shadow-xl shadow-[#FF9933]/20' : 'bg-slate-900 text-white'} rounded-[20px] font-black text-[10px] uppercase tracking-widest flex items-center justify-center hover:scale-105 transition-all active:scale-95`}
                         >
@@ -1647,65 +1648,6 @@ function LiveMapContent() {
                 )}
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Live Distance & Tracking Panel */}
-      <AnimatePresence>
-        {isNavigating && navTarget && navStats && (
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.95 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[2000] w-full max-w-sm px-4 pointer-events-auto"
-          >
-            <div className="bg-white rounded-[28px] shadow-2xl border border-slate-100 overflow-hidden relative group">
-              {/* Dynamic Progress/Pulse Line */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-slate-100">
-                 <motion.div 
-                   className="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF]"
-                   initial={{ width: 0 }}
-                   animate={{ width: "100%" }}
-                   transition={{ duration: 2, repeat: Infinity }}
-                 />
-              </div>
-              
-              <div className="p-5 flex flex-col gap-3">
-                 <div className="flex justify-between items-start">
-                    <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Live Tracking</p>
-                      <h3 className="text-2xl font-black tracking-tighter text-slate-900 leading-none">{navTarget.busNumber || navTarget.busCode || "BUS"}</h3>
-                    </div>
-                    <div className="bg-[#00E5FF]/10 text-[#00B8D4] text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border border-[#00E5FF]/20 flex items-center gap-1.5">
-                      <div className="w-1.5 h-1.5 bg-[#00E5FF] rounded-full animate-pulse" />
-                      {navTarget.status || "Moving"}
-                    </div>
-                 </div>
-                 
-                 <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wide truncate max-w-full">
-                    {navTarget.routeId?.routeName || "Routing..."}
-                 </p>
-                 
-                 <div className="flex gap-3 mt-1">
-                    <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center">
-                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Distance</p>
-                       <p className="text-lg font-black text-slate-900 tracking-tight">{navStats.distance.toFixed(1)} <span className="text-xs text-slate-400">km</span></p>
-                    </div>
-                    <div className="flex-1 bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-center">
-                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Live ETA</p>
-                       <p className="text-lg font-black text-[#FF9933] tracking-tight">{navStats.duration} <span className="text-xs text-[#FF9933]/60">min</span></p>
-                    </div>
-                 </div>
-                 
-                 <button 
-                   onClick={() => clearNavigation()}
-                   className="w-full mt-2 h-12 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/20 transition-all active:scale-95"
-                 >
-                   Stop Tracking
-                 </button>
-              </div>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
