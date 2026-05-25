@@ -676,7 +676,6 @@ function LiveMapContent() {
               onClick={() => {
                 localStorage.setItem('hasLocationPermission', 'skipped');
                 setHasLocationPermission('skipped');
-                setShowNearbyBusesDrawer(false);
               }}
               className="w-full bg-white/5 text-slate-400 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-colors active:scale-95"
             >
