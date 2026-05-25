@@ -172,12 +172,21 @@ function LiveMapContent() {
     const saved = localStorage.getItem('hasLocationPermission');
     if (saved === 'true') {
       setHasLocationPermission('granted');
+      if ("geolocation" in navigator && !userLocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+          },
+          (err) => console.warn("Background GPS fetch failed"),
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+        );
+      }
     } else if (saved === 'skipped') {
       setHasLocationPermission('skipped');
     } else {
       setHasLocationPermission('pending');
     }
-  }, []);
+  }, [userLocation]);
 
   useEffect(() => {
     if (selectedBus) {
@@ -1554,8 +1563,18 @@ function LiveMapContent() {
 
               <div className="flex-1 overflow-y-auto no-scrollbar p-6 space-y-4">
                 {nearbyBuses.length === 0 ? (
-                  <div className="text-center py-10 bg-slate-50 rounded-[24px] border border-slate-100">
-                    <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">No buses found nearby</p>
+                  <div className="flex flex-col items-center justify-center py-6 opacity-60">
+                    {!userLocation ? (
+                      <>
+                        <div className="w-8 h-8 border-4 border-slate-200 border-t-[#FF9933] rounded-full animate-spin mb-3"></div>
+                        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Acquiring GPS Lock...</p>
+                      </>
+                    ) : (
+                      <>
+                        <MapPinOff size={32} className="text-slate-300 mb-3" />
+                        <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">No buses found nearby</p>
+                      </>
+                    )}
                   </div>
                 ) : (
                   nearbyBuses.map((bus: any, idx: number) => {
