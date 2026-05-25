@@ -10,7 +10,7 @@ import { UserButton } from "@clerk/nextjs";
 import { 
   Search, QrCode, Ticket, MapPin, ShieldAlert, Sparkles, 
   Bell, ChevronRight, Bus, Wallet, Plus, Clock, User, 
-  ArrowRight, ShieldCheck, Zap, Navigation, History, Info, Play, ScanLine, WalletCards, CreditCard, Hash
+  ArrowRight, ShieldCheck, Zap, Navigation, History, Info, Play, ScanLine, WalletCards, CreditCard, Hash, Crown
 } from "lucide-react";
 import { BusCodeSearch } from "@/src/components/BusCodeSearch";
 
@@ -116,6 +116,7 @@ export default function MobileDashboard() {
   const [addressInput, setAddressInput] = useState("Coimbatore, TN");
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [showPassModal, setShowPassModal] = useState(false);
+  const [showMembershipModal, setShowMembershipModal] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
 
   useEffect(() => {
@@ -373,7 +374,7 @@ export default function MobileDashboard() {
                 <h3 className="text-xl font-black tracking-tight mb-1">Gold Membership</h3>
                 <p className="text-xs text-slate-400 font-medium mb-3">Exclusive passes coming soon</p>
                 <button 
-                  onClick={() => alert("Gold Membership Passes will be available soon!")}
+                  onClick={() => setShowMembershipModal(true)}
                   className="inline-block bg-gradient-to-r from-amber-400 to-amber-600 text-slate-900 border border-amber-400/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
                 >
                   Show Passes
@@ -417,38 +418,13 @@ export default function MobileDashboard() {
               </Link>
 
               <button 
-                onClick={() => {
-                  setIsLocating(true);
-                  if ("geolocation" in navigator) {
-                    navigator.geolocation.getCurrentPosition(
-                      (pos) => {
-                        setIsLocating(false);
-                        router.push(`/live-map?action=nearby&lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`);
-                      },
-                      (err) => {
-                        setIsLocating(false);
-                        alert("Unable to fetch location. Please enable GPS and allow location access.");
-                      },
-                      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-                    );
-                  } else {
-                    setIsLocating(false);
-                    alert("Geolocation is not supported.");
-                  }
-                }}
-                disabled={isLocating}
-                className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
+                onClick={() => setShowMembershipModal(true)}
+                className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto relative overflow-hidden">
-                  {isLocating ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  ) : (
-                    <MapPin size={18} />
-                  )}
+                <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl flex items-center justify-center shadow-md text-white mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                  <Crown size={18} className="drop-shadow-sm" />
                 </div>
-                <span className="text-[9px] font-semibold text-slate-700 leading-tight">
-                  {isLocating ? "Locating..." : <>Track<br/>Buses</>}
-                </span>
+                <span className="text-[9px] font-semibold text-slate-700 leading-tight">View<br/>Memberships</span>
               </button>
             </div>
           </div>
@@ -852,6 +828,101 @@ export default function MobileDashboard() {
 
 
 
+          {/* Memberships Modal */}
+          {showMembershipModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/40 backdrop-blur-sm p-4 sm:items-center"
+            >
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="w-full max-w-md bg-white rounded-[32px] p-6 shadow-2xl relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-bl-full -z-0"></div>
+                
+                <div className="flex justify-between items-start mb-6 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-md">
+                      <Crown size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-black text-slate-900">Memberships</h3>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Premium Tiers Coming Soon</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowMembershipModal(false)}
+                    className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full font-bold text-xs cursor-pointer"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                <div className="space-y-3 relative z-10">
+                  {/* Platinum Tier */}
+                  <div className="p-4 rounded-2xl border border-slate-100 bg-gradient-to-r from-slate-100 to-slate-50 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-slate-300 flex items-center justify-center shadow-sm">
+                        <Sparkles size={16} className="text-slate-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-slate-700">Platinum Pass</h4>
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Unlimited AC Travel</p>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-black bg-slate-200 text-slate-600 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                  </div>
+
+                  {/* Gold Tier */}
+                  <div className="p-4 rounded-2xl border border-amber-100 bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center shadow-sm">
+                        <Crown size={16} className="text-white" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-amber-600">Gold Pass</h4>
+                        <p className="text-[9px] font-bold text-amber-500/70 uppercase tracking-widest">Priority Seating + AC</p>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-black bg-amber-200 text-amber-700 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                  </div>
+
+                  {/* Silver Tier */}
+                  <div className="p-4 rounded-2xl border border-slate-100 bg-gradient-to-r from-zinc-50 to-slate-50 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-zinc-300 flex items-center justify-center shadow-sm">
+                        <Ticket size={16} className="text-zinc-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-zinc-600">Silver Pass</h4>
+                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Standard Monthly Travel</p>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-black bg-zinc-200 text-zinc-600 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                  </div>
+
+                  {/* Bronze Tier */}
+                  <div className="p-4 rounded-2xl border border-orange-100/50 bg-gradient-to-r from-orange-50/50 to-amber-50/50 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-orange-300 flex items-center justify-center shadow-sm">
+                        <Bus size={16} className="text-orange-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-orange-600">Bronze Pass</h4>
+                        <p className="text-[9px] font-bold text-orange-400 uppercase tracking-widest">Weekly standard travel</p>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-black bg-orange-200 text-orange-700 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
         </div>
       </motion.main>
     </AnimatePresence>
