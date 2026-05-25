@@ -339,17 +339,12 @@ function LiveMapContent() {
         
         setLocationError(msg);
 
-        // Set fallback to user's real-world location (Palladam, TN) since localhost testing blocks live GPS
-        setTimeout(() => {
-          if (!userLocation) setUserLocation({ lat: 11.0000, lng: 77.2880 });
-        }, 1000);
-
         // On fatal user permission denial, reset toggle
         if (err.code === 1) setIsLiveLocationOn(false);
       };
 
       watchIdRef.current = navigator.geolocation.watchPosition(success, error, {
-        enableHighAccuracy: false, // Less strictly accurate to avoid common timeout on some devices
+        enableHighAccuracy: true,
         timeout: 15000,
         maximumAge: 0
       });
@@ -634,13 +629,12 @@ function LiveMapContent() {
                       setShowNearbyBusesDrawer(true);
                     },
                     (err) => {
-                      console.warn("Location services unavailable, using fallback coordinates.");
-                      setUserLocation({ lat: 11.0168, lng: 76.9558 });
-                      localStorage.setItem('hasLocationPermission', 'true');
-                      setHasLocationPermission('granted');
-                      setShowNearbyBusesDrawer(true);
+                      console.warn("Location services unavailable:", err.message);
+                      alert("Unable to fetch live location. Please ensure GPS is enabled and permissions are granted.");
+                      setHasLocationPermission('denied');
+                      localStorage.setItem('hasLocationPermission', 'false');
                     },
-                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
                   );
                 }
               }}
