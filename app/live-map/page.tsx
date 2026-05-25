@@ -1581,12 +1581,23 @@ function LiveMapContent() {
                       <>
                         <MapPinOff size={32} className="text-red-400 mb-3 opacity-80" />
                         <p className="text-[11px] font-black text-red-500 uppercase tracking-widest leading-relaxed mb-4">{locationError}</p>
-                        <button 
-                          onClick={fetchLocation}
-                          className="px-6 py-2 bg-red-50 text-red-600 rounded-xl border border-red-100 font-black text-xs uppercase tracking-widest hover:bg-red-100 transition-colors active:scale-95"
-                        >
-                          Retry GPS
-                        </button>
+                        <div className="flex flex-wrap items-center justify-center gap-3">
+                          <button 
+                            onClick={fetchLocation}
+                            className="px-6 py-2 bg-red-50 text-red-600 rounded-xl border border-red-100 font-black text-xs uppercase tracking-widest hover:bg-red-100 transition-colors active:scale-95"
+                          >
+                            Retry GPS
+                          </button>
+                          <button 
+                            onClick={() => {
+                              setLocationError("");
+                              setUserLocation({ lat: 11.0168, lng: 76.9558 }); // Demo location
+                            }}
+                            className="px-6 py-2 bg-slate-100 text-slate-600 rounded-xl border border-slate-200 font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-colors active:scale-95"
+                          >
+                            Demo Location
+                          </button>
+                        </div>
                       </>
                     ) : !userLocation ? (
                       <>
