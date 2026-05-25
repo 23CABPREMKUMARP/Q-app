@@ -1588,15 +1588,6 @@ function LiveMapContent() {
                           >
                             Retry GPS
                           </button>
-                          <button 
-                            onClick={() => {
-                              setLocationError("");
-                              setUserLocation({ lat: 11.0168, lng: 76.9558 }); // Demo location
-                            }}
-                            className="px-6 py-2 bg-slate-100 text-slate-600 rounded-xl border border-slate-200 font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-colors active:scale-95"
-                          >
-                            Demo Location
-                          </button>
                         </div>
                       </>
                     ) : !userLocation ? (
