@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   description: "Pioneering industrial-grade automation and real-time telemetry for metropolitan public transit ecosystems across Tamil Nadu.",
   keywords: ["Transit Intelligence", "Public Transport Automation", "Jeffben Systems", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
   metadataBase: new URL('https://jeffben.org'),
-  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -76,6 +75,9 @@ export default function RootLayout({
       }}
     >
       <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-white">
+        <head>
+          <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
+        </head>
         <body
           className={`${inter.variable} ${manrope.variable} antialiased bg-slate-50 min-h-full flex flex-col`}
         >
