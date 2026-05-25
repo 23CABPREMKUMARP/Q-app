@@ -179,8 +179,7 @@ function LiveMapContent() {
           },
           (err) => {
             console.warn("Background GPS fetch failed:", err);
-            // Fallback to demo coordinates (Coimbatore) if GPS fails completely so UI doesn't hang
-            setUserLocation({ lat: 11.0168, lng: 76.9558 });
+            setLocationError("Failed to acquire GPS location. Please check device settings.");
           },
           { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
         );
@@ -1567,8 +1566,13 @@ function LiveMapContent() {
 
               <div className="flex-1 overflow-y-auto no-scrollbar p-6 space-y-4">
                 {nearbyBuses.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-6 opacity-60">
-                    {!userLocation ? (
+                  <div className="flex flex-col items-center justify-center py-6 opacity-60 text-center px-4">
+                    {locationError ? (
+                      <>
+                        <MapPinOff size={32} className="text-red-400 mb-3 opacity-80" />
+                        <p className="text-[11px] font-black text-red-500 uppercase tracking-widest leading-relaxed">{locationError}</p>
+                      </>
+                    ) : !userLocation ? (
                       <>
                         <div className="w-8 h-8 border-4 border-slate-200 border-t-[#FF9933] rounded-full animate-spin mb-3"></div>
                         <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">Acquiring GPS Lock...</p>
