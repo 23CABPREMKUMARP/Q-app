@@ -436,16 +436,16 @@ export default function MobileDashboard() {
                 </div>
               </div>
               
-              <Link href="/live-map?action=nearby" className="flex-1 bg-slate-50 rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
+              <Link href="/get-ticket" className="flex-1 bg-slate-50 rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
                 <div className="flex items-center gap-2 text-slate-600 mb-1">
-                  <MapPin size={16} className="text-[#FF9933]" />
-                  <span className="text-xs font-semibold">Nearby Fleet</span>
+                  <Ticket size={16} className="text-[#FF9933]" />
+                  <span className="text-xs font-semibold">My Passes</span>
                 </div>
-                <p className="text-lg font-bold text-slate-900">Live <span className="text-xs font-medium text-slate-500">Tracking</span></p>
+                <p className="text-lg font-bold text-slate-900">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
                 <div className="mt-2 text-xs font-bold text-[#FF9933] flex items-center gap-1">
-                  NEARBY BUSES <ChevronRight size={12} />
+                  VIEW PASS <ChevronRight size={12} />
                 </div>
-                <MapPin className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
+                <History className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
               </Link>
             </div>
           </div>
