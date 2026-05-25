@@ -177,7 +177,11 @@ function LiveMapContent() {
           (pos) => {
             setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
           },
-          (err) => console.warn("Background GPS fetch failed"),
+          (err) => {
+            console.warn("Background GPS fetch failed:", err);
+            // Fallback to demo coordinates (Coimbatore) if GPS fails completely so UI doesn't hang
+            setUserLocation({ lat: 11.0168, lng: 76.9558 });
+          },
           { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
         );
       }
