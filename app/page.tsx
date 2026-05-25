@@ -361,7 +361,7 @@ export default function MobileDashboard() {
             </motion.div>
           )}
 
-          {/* Jeffben Pass Premium Teaser */}
+          {/* Gold Membership Premium Teaser */}
           <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-md relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-200/10 to-transparent opacity-50"></div>
             <div className="p-5 text-white relative z-10 flex items-center justify-between">
@@ -370,11 +370,14 @@ export default function MobileDashboard() {
                   <Sparkles size={14} className="text-amber-400" />
                   <p className="text-[10px] font-black text-amber-400 tracking-widest uppercase">Premium</p>
                 </div>
-                <h3 className="text-xl font-black tracking-tight mb-1">Jeffben Pass</h3>
-                <p className="text-xs text-slate-400 font-medium mb-3">Exclusive Memberships Coming Soon</p>
-                <div className="inline-block bg-slate-800 text-amber-400 border border-amber-400/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase">
-                  Coming Soon
-                </div>
+                <h3 className="text-xl font-black tracking-tight mb-1">Gold Membership</h3>
+                <p className="text-xs text-slate-400 font-medium mb-3">Exclusive passes coming soon</p>
+                <button 
+                  onClick={() => alert("Gold Membership Passes will be available soon!")}
+                  className="inline-block bg-gradient-to-r from-amber-400 to-amber-600 text-slate-900 border border-amber-400/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
+                >
+                  Show Passes
+                </button>
               </div>
               <div className="absolute right-0 bottom-0 top-0 w-1/3 flex items-center justify-end pr-4 opacity-90 overflow-hidden">
                 <div className="w-24 h-24 bg-amber-400/20 rounded-full blur-2xl absolute -right-4"></div>
@@ -444,7 +447,7 @@ export default function MobileDashboard() {
                   )}
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">
-                  {isLocating ? "Locating..." : <>Nearby<br/>Buses</>}
+                  {isLocating ? "Locating..." : <>Track<br/>Buses</>}
                 </span>
               </button>
             </div>
