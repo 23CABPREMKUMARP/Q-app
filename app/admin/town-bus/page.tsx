@@ -1,64 +1,74 @@
 "use client";
-
 import React, { useState } from 'react';
-import { Bus, Plus, Edit2, Trash2 } from 'lucide-react';
+import { LayoutDashboard, Bus, MapPin, Users, User, FileText, CreditCard, BarChart2, Bell, Settings } from 'lucide-react';
+import Sidebar from '@/app/admin/components/Sidebar';
+import Header from '@/app/admin/components/Header';
+import DashboardTab from '@/app/admin/components/DashboardTab';
+import FleetTab from '@/app/admin/components/FleetTab';
+import RoutesTab from '@/app/admin/components/RoutesTab';
+import BookingsTab from '@/app/admin/components/BookingsTab';
+import PaymentsTab from '@/app/admin/components/PaymentsTab';
+import GpsTab from '@/app/admin/components/GpsTab';
+import ConductorsTab from '@/app/admin/components/ConductorsTab';
+import PassengersTab from '@/app/admin/components/PassengersTab';
+import AnalyticsTab from '@/app/admin/components/AnalyticsTab';
+import BroadcastTab from '@/app/admin/components/BroadcastTab';
+import SettingsTab from '@/app/admin/components/SettingsTab';
+
+const tabs = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'fleet', label: 'Fleet Manager', icon: Bus },
+  { id: 'routes', label: 'Routes', icon: MapPin },
+  { id: 'bookings', label: 'Bookings', icon: FileText },
+  { id: 'payments', label: 'Payments', icon: CreditCard },
+  { id: 'gps', label: 'GPS Center', icon: MapPin },
+  { id: 'conductors', label: 'Conductors', icon: Users },
+  { id: 'passengers', label: 'Passengers', icon: User },
+  { id: 'analytics', label: 'Analytics', icon: BarChart2 },
+  { id: 'broadcast', label: 'Broadcast', icon: Bell },
+  { id: 'settings', label: 'Settings', icon: Settings },
+];
 
 export default function AdminTownBusPage() {
-  const [routes, setRoutes] = useState([
-    { id: 1, name: "Gandhipuram - Ukkadam", fare: 15, crowdStatus: "Low", availableSeats: 45 },
-    { id: 2, name: "Singanallur - Marudamalai", fare: 25, crowdStatus: "High", availableSeats: 5 }
-  ]);
+  const [activeTab, setActiveTab] = useState('dashboard');
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return <DashboardTab />;
+      case 'fleet':
+        return <FleetTab />;
+      case 'routes':
+        return <RoutesTab />;
+      case 'bookings':
+        return <BookingsTab />;
+      case 'payments':
+        return <PaymentsTab />;
+      case 'gps':
+        return <GpsTab />;
+      case 'conductors':
+        return <ConductorsTab />;
+      case 'passengers':
+        return <PassengersTab />;
+      case 'analytics':
+        return <AnalyticsTab />;
+      case 'broadcast':
+        return <BroadcastTab />;
+      case 'settings':
+        return <SettingsTab />;
+      default:
+        return <DashboardTab />;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans p-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-black text-slate-900 tracking-tighter">Town Bus Admin</h1>
-            <p className="text-slate-500 font-medium">Manage routes, fares, and real-time crowd status</p>
-          </div>
-          <button className="bg-[#FF9933] text-white px-6 py-3 rounded-xl font-black uppercase tracking-widest text-xs flex items-center gap-2 hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/20">
-            <Plus size={16} /> Add Route
-          </button>
-        </div>
-
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-          <table className="w-full text-left">
-            <thead className="bg-slate-50 border-b border-slate-200">
-              <tr>
-                <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Route Name</th>
-                <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Fare</th>
-                <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Seats Left</th>
-                <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Crowd Status</th>
-                <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-500 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {routes.map(route => (
-                <tr key={route.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-6 font-bold text-slate-900 flex items-center gap-3">
-                    <div className="bg-slate-100 p-2 rounded-lg"><Bus size={16} className="text-[#FF9933]" /></div>
-                    {route.name}
-                  </td>
-                  <td className="py-4 px-6 font-bold text-slate-700">₹{route.fare}</td>
-                  <td className="py-4 px-6 font-bold text-slate-700">{route.availableSeats}</td>
-                  <td className="py-4 px-6">
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                      route.crowdStatus === 'Low' ? 'bg-emerald-100 text-emerald-600' :
-                      route.crowdStatus === 'High' ? 'bg-red-100 text-red-600' : 'bg-yellow-100 text-yellow-600'
-                    }`}>
-                      {route.crowdStatus}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 text-right space-x-2">
-                    <button className="p-2 text-slate-400 hover:text-[#FF9933] transition-colors rounded-lg hover:bg-slate-100"><Edit2 size={16} /></button>
-                    <button className="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-lg hover:bg-slate-100"><Trash2 size={16} /></button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <div className="flex h-screen bg-[#080c14] text-slate-100">
+      <Sidebar tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header />
+        <main className="flex-1 overflow-auto p-6">
+          {renderTab()}
+        </main>
       </div>
     </div>
   );
