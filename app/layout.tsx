@@ -83,9 +83,7 @@ export default function RootLayout({
         >
 
           <main className="flex-1 scroll-smooth">
-            <AppBootSplash>
-              {children}
-            </AppBootSplash>
+            {children}
           </main>
           <MobileBottomNav />
           <div className="hidden md:block">
