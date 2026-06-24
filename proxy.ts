@@ -5,8 +5,6 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/api/phonepe(.*)",
-  "/town-bus(.*)",
   "/about",
   "/privacy",
   "/terms",
@@ -20,6 +18,26 @@ const isPublicRoute = createRouteMatcher([
   "/bus-marker-3d.png",
   "/videos/(.*)",
   "/.well-known/(.*)",
+  // All town-bus passenger pages
+  "/town-bus(.*)",
+  "/live-map(.*)",
+  "/history(.*)",
+  "/get-ticket(.*)",
+  "/luggage-booking(.*)",
+  "/track/(.*)",
+  "/bus/(.*)",
+  // Public-facing API routes (read-only data, no auth needed)
+  "/api/buses(.*)",
+  "/api/town-bus/search(.*)",
+  "/api/town-bus/current-trip(.*)",
+  "/api/town-bus/active-trip(.*)",
+  "/api/buses/search(.*)",
+  "/api/luggage/track(.*)",
+  "/api/bookings/by-phone(.*)",
+  "/api/bookings/validate(.*)",
+  "/api/passenger/(.*)",
+  "/api/phonepe(.*)",
+  "/api/conductor/(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
