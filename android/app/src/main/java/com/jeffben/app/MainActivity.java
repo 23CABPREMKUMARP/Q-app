@@ -53,6 +53,19 @@ public class MainActivity extends BridgeActivity {
             if (path != null && !path.isEmpty() && !path.equals("/")) sb.append(path);
             if (query != null) sb.append("?").append(query);
             targetPath = sb.toString();
+        } else if ("https".equals(scheme) || "http".equals(scheme)) {
+            // https://app-woad-beta.vercel.app/town-bus/...
+            String host = data.getHost();
+            if ("app-woad-beta.vercel.app".equals(host)) {
+                StringBuilder sb = new StringBuilder();
+                String path  = data.getPath();
+                String query = data.getQuery();
+                String frag  = data.getFragment();
+                if (path != null)  sb.append(path);
+                if (query != null) sb.append("?").append(query);
+                if (frag  != null) sb.append("#").append(frag);
+                targetPath = sb.toString();
+            }
         }
 
         if (targetPath == null || targetPath.isEmpty()) return;
