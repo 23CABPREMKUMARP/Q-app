@@ -5,8 +5,8 @@ const config: CapacitorConfig = {
   appName: 'jeffben',
   webDir: 'public',
   server: {
-    url: 'https://app-woad-beta.vercel.app?_vercel_share=xGhhMqD6mX0rHCmw2Yqvj3G608s6LC5M',
-    cleartext: true,
+    url: 'https://app-woad-beta.vercel.app',
+    cleartext: false,
     allowNavigation: [
       'app-woad-beta.vercel.app',
       '*.vercel.app',
@@ -17,7 +17,11 @@ const config: CapacitorConfig = {
       '*.razorpay.com',
       '*.phonepe.com'
     ]
+  },
+  android: {
+    allowMixedContent: false
   }
 };
 
 export default config;
+
