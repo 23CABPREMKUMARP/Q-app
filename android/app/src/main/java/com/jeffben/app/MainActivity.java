@@ -10,6 +10,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebViewClient;
+import com.getcapacitor.BridgeWebChromeClient;
 
 public class MainActivity extends BridgeActivity {
 
@@ -34,6 +35,46 @@ public class MainActivity extends BridgeActivity {
         setIntent(intent);
         // Handle deep link when app is already running and brought to foreground
         handleDeepLinkIntent(intent);
+    }
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Absolute override to prevent Chrome from EVER opening
+    // ────────────────────────────────────────────────────────────────────────
+
+    @Override
+    public void startActivity(Intent intent) {
+        if (interceptBrowserIntent(intent)) return;
+        super.startActivity(intent);
+    }
+
+    @Override
+    public void startActivity(Intent intent, Bundle options) {
+        if (interceptBrowserIntent(intent)) return;
+        super.startActivity(intent, options);
+    }
+
+    /**
+     * If Capacitor (or anything else) tries to launch an ACTION_VIEW intent for
+     * an http or https URL, intercept it and load it inside our own WebView.
+     * This acts as a bulletproof safety net to prevent Chrome from opening.
+     */
+    private boolean interceptBrowserIntent(Intent intent) {
+        if (intent == null) return false;
+        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+            String scheme = intent.getData().getScheme();
+            if ("http".equals(scheme) || "https".equals(scheme)) {
+                try {
+                    WebView wv = getBridge().getWebView();
+                    if (wv != null) {
+                        wv.loadUrl(intent.getDataString());
+                        return true; // We handled it
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -73,7 +114,7 @@ public class MainActivity extends BridgeActivity {
             });
 
             // ---- WebChromeClient: redirect window.open() into the same WebView ----
-            wv.setWebChromeClient(new WebChromeClient() {
+            wv.setWebChromeClient(new BridgeWebChromeClient(getBridge()) {
                 @Override
                 public boolean onCreateWindow(WebView view, boolean isDialog,
                                               boolean isUserGesture,
