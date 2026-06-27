@@ -105,8 +105,8 @@ public class MainActivity extends BridgeActivity {
 
     /**
      * When the system fires an App Link intent (e.g. camera scans the boarding
-     * QR for https://app-woad-beta.vercel.app/bus/CBE001), load that path
-     * inside the Capacitor WebView instead of handing it to Chrome.
+     * QR for https://app-woad-beta.vercel.app/bus/CBE001 or jeffben://bus/CBE001),
+     * load that path inside the Capacitor WebView instead of handing it to Chrome.
      */
     private void handleDeepLinkIntent(final Intent intent) {
         if (intent == null) return;
@@ -116,35 +116,47 @@ public class MainActivity extends BridgeActivity {
         if (data == null) return;
 
         String scheme = data.getScheme();
-        String host   = data.getHost();
+        String targetPath = null;
 
-        boolean isOurDomain = ("https".equals(scheme) || "http".equals(scheme))
-                && APP_HOST.equals(host);
-        if (!isOurDomain) return;
+        if ("jeffben".equals(scheme)) {
+            // jeffben://bus/CBE001  →  /bus/CBE001
+            // jeffben://live-map    →  /live-map
+            String host = data.getHost();   // e.g. "bus"
+            String path = data.getPath();   // e.g. "/CBE001" or null
+            String query = data.getQuery();
+            StringBuilder sb = new StringBuilder("/");
+            if (host != null) sb.append(host);
+            if (path != null && !path.isEmpty() && !path.equals("/")) sb.append(path);
+            if (query != null) sb.append("?").append(query);
+            targetPath = sb.toString();
 
-        // Build the path (e.g. /bus/CBE001?from=Gandhipuram)
-        StringBuilder sb = new StringBuilder();
-        String path = data.getPath();
-        String query = data.getQuery();
-        String frag  = data.getFragment();
-        if (path != null)  sb.append(path);
-        if (query != null) sb.append("?").append(query);
-        if (frag  != null) sb.append("#").append(frag);
-        final String targetPath = sb.toString();
-        if (targetPath.isEmpty()) return;
+        } else if (("https".equals(scheme) || "http".equals(scheme))
+                && APP_HOST.equals(data.getHost())) {
+            // https://app-woad-beta.vercel.app/bus/CBE001  →  /bus/CBE001
+            StringBuilder sb = new StringBuilder();
+            String path  = data.getPath();
+            String query = data.getQuery();
+            String frag  = data.getFragment();
+            if (path != null)  sb.append(path);
+            if (query != null) sb.append("?").append(query);
+            if (frag  != null) sb.append("#").append(frag);
+            targetPath = sb.toString();
+        }
 
-        // Delay slightly so the Capacitor bridge and Next.js router are ready
+        if (targetPath == null || targetPath.isEmpty()) return;
+
+        final String finalPath = targetPath;
+        // Short delay so Next.js hydration is complete before navigating
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             try {
                 WebView wv = getBridge().getWebView();
                 if (wv == null) return;
-                // Use Next.js client-side router via JS so it renders correctly
                 String js = "window.location.href = '"
-                        + targetPath.replace("'", "\\'") + "';";
+                        + finalPath.replace("'", "\\'") + "';";
                 wv.evaluateJavascript(js, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 800); // 800 ms is enough for Next.js hydration to complete
+        }, 800);
     }
 }

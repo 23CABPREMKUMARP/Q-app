@@ -33,6 +33,14 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http" android:host="app-woad-beta.vercel.app" />
             </intent-filter>
+            <!-- Custom URI scheme: jeffben://bus/CBE001 - NO server verification needed -->
+            <!-- This ALWAYS opens the app when scanned, even without App Links working -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="jeffben" />
+            </intent-filter>
         </activity>
 
         <provider

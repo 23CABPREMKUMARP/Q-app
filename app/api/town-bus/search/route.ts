@@ -49,7 +49,7 @@ export async function GET(request: Request) {
       busId: { 
          busNumber: trip.bus_number, 
          busCode: trip.bus_number, 
-         qrCodeUrl: `https://app-woad-beta.vercel.app/bus/${trip.bus_number}` 
+         qrCodeUrl: `jeffben://bus/${trip.bus_number}` 
       },
       routeId: { routeName: trip.origin + " to " + trip.destination },
       departureTime: trip.departure_time,
@@ -87,7 +87,7 @@ export async function GET(request: Request) {
 
     const mockTrips = filteredMockTrips.map((bus: any) => ({
       _id: bus._id,
-      busId: { busNumber: bus.busNumber, busCode: bus.busCode, qrCodeUrl: `https://app-woad-beta.vercel.app/bus/${bus.busCode}` },
+      busId: { busNumber: bus.busNumber, busCode: bus.busCode, qrCodeUrl: `jeffben://bus/${bus.busCode}` },
       routeId: { routeName: bus.routeId.routeName },
       departureTime: bus.departureTime,
       arrivalTime: bus.arrivalTime,

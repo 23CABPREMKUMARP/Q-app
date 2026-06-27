@@ -409,7 +409,7 @@ export default function TicketCountSelectionPage() {
                         <span className="text-xs font-black text-slate-800 uppercase tracking-widest">{trip.busCode}</span>
                       </div>
                       <div className="bg-white p-1 rounded-lg shadow-sm border border-slate-100">
-                        <QRCodeSVG value={`https://app-woad-beta.vercel.app/bus/${trip.busCode}`} size={40} level="L" />
+                        <QRCodeSVG value={`jeffben://bus/${trip.busCode}`} size={40} level="L" />
                       </div>
                     </div>
                   )}
@@ -425,7 +425,7 @@ export default function TicketCountSelectionPage() {
                       className="w-full mb-8 flex flex-col items-center justify-center bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-inner"
                     >
                       <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
-                        <QRCodeSVG value={`https://app-woad-beta.vercel.app/bus/${trip.busCode}`} size={160} level="H" />
+                        <QRCodeSVG value={`jeffben://bus/${trip.busCode}`} size={160} level="H" />
                       </div>
                       <p className="text-xl font-black text-slate-900 uppercase tracking-widest">{trip.busCode}</p>
                       <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest text-center mt-2">Scan this code while boarding to book instantly</p>
