@@ -17,8 +17,9 @@ export default function BusQRRedirectPage() {
       // Redirect to the existing sign-in flow and return back here after login
       router.replace(`/sign-in?redirect_url=/bus/${busCode}`);
     } else {
-      // If signed in, immediately navigate to the existing bus boarding page
-      router.replace(`/town-bus/bus/${busCode}`);
+      // If signed in, immediately navigate to the boarding (seat-selection) page
+      const tripId = `bus_${busCode.toLowerCase()}`;
+      router.replace(`/town-bus/${tripId}/seat-selection`);
     }
   }, [isLoaded, isSignedIn, busCode, router]);
 
