@@ -8,6 +8,7 @@ const config: CapacitorConfig = {
     url: 'https://app-woad-beta.vercel.app',
     cleartext: false,
     allowNavigation: [
+      '*',
       'app-woad-beta.vercel.app',
       '*.vercel.app',
       '*.clerk.accounts.dev',
