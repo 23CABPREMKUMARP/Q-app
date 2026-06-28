@@ -13,6 +13,8 @@ import { MOCK_BUSES } from "@/src/lib/constants";
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import Splash from '@/src/components/Splash';
+import SecureView from "@/src/components/SecureView";
+
 export default function TicketCountSelectionPage() {
   const router = useRouter();
   const params = useParams();
@@ -277,7 +279,11 @@ export default function TicketCountSelectionPage() {
   }, [searchParams]);
 
   if (isProcessingRedirect) {
-    return <Splash />;
+    return (
+      <SecureView>
+        <Splash />
+      </SecureView>
+    );
   }
 
   const handleIncrement = () => {
@@ -341,8 +347,9 @@ export default function TicketCountSelectionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-[320px]">
-      {/* Header */}
+    <SecureView>
+      <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-[320px]">
+        {/* Header */}
       <div className="bg-white px-6 py-6 border-b border-zinc-200 sticky top-0 z-50 flex items-center justify-between shadow-sm">
         <button onClick={() => {
           if (step === 5 || step === 4) {
@@ -965,6 +972,7 @@ export default function TicketCountSelectionPage() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+      </div>
+    </SecureView>
   );
 }

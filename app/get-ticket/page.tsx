@@ -8,6 +8,7 @@ import { ArrowLeft, Phone, Search, Loader2, Ticket, MapPin, Clock, Calendar, QrC
 import { QRCodeSVG } from "qrcode.react";
 import { BusCodeSearch } from "@/src/components/BusCodeSearch";
 import { WatermarkOverlay } from "@/src/components/ui/WatermarkOverlay";
+import SecureView from "@/src/components/SecureView";
 
 export default function GetTicketPage() {
   const [phone, setPhone] = useState("");
@@ -79,7 +80,8 @@ export default function GetTicketPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom secure-content">
+    <SecureView>
+      <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom secure-content">
       <WatermarkOverlay text={`SECURE TICKET ${phone}`} />
       
       {/* Native Mobile Top Bar */}
@@ -377,6 +379,7 @@ export default function GetTicketPage() {
         </div>
       </div>
     </main>
+    </SecureView>
   );
 }
 

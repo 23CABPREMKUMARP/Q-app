@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Package, Truck, ArrowRight, User, Phone, MapPin, Scale, Box, CheckCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import SecureView from "@/src/components/SecureView";
 
 export default function LuggageBookingPage() {
   const router = useRouter();
@@ -208,7 +209,8 @@ export default function LuggageBookingPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-white pb-12">
+    <SecureView>
+      <div className="min-h-screen bg-slate-950 font-sans text-white pb-12">
       {/* Header */}
       <div className="bg-[#FF9933] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
@@ -244,5 +246,6 @@ export default function LuggageBookingPage() {
         </div>
       </div>
     </div>
+    </SecureView>
   );
 }

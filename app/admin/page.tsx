@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { BusData, MapLayers } from "@/src/types";
+import SecureView from "@/src/components/SecureView";
 
 // Load LiveBusMap dynamically to prevent SSR hydration issues with Maplibre
 const LiveBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), { ssr: false });
@@ -1553,15 +1554,17 @@ function EnterpriseAdminDashboardContent() {
 
 export default function EnterpriseAdminDashboard() {
   return (
-    <Suspense fallback={
-      <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white p-4">
-        <div className="text-center space-y-4">
-          <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-xs uppercase tracking-widest font-black text-zinc-400">Loading Control Center...</p>
+    <SecureView>
+      <Suspense fallback={
+        <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white p-4">
+          <div className="text-center space-y-4">
+            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <p className="text-xs uppercase tracking-widest font-black text-zinc-400">Loading Control Center...</p>
+          </div>
         </div>
-      </div>
-    }>
-      <EnterpriseAdminDashboardContent />
-    </Suspense>
+      }>
+        <EnterpriseAdminDashboardContent />
+      </Suspense>
+    </SecureView>
   );
 }

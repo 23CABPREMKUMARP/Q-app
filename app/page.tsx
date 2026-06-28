@@ -40,7 +40,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             initial={{ x: -30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 1, type: "spring" }}
-            className="relative w-28 h-28 md:w-36 md:h-36"
+            className="relative w-16 h-16 md:w-20 md:h-20"
           >
             <Image src="/logo2.png" alt="JeffBen" fill sizes="160px" className="object-contain" priority />
           </motion.div>
@@ -54,7 +54,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             initial={{ x: 30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1, type: "spring" }}
-            className="relative w-28 h-28 md:w-36 md:h-36"
+            className="relative w-16 h-16 md:w-20 md:h-20"
           >
             <Image src="/hero-logo.png" alt="Digi Bus Stand" fill sizes="160px" className="object-contain mix-blend-multiply" priority />
           </motion.div>

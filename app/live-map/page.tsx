@@ -15,6 +15,7 @@ import { lineString, bezierSpline } from '@turf/turf';
 
 import { BusData, MapLayers } from "@/src/types";
 import { MOCK_BUSES } from "@/src/lib/constants";
+import SecureView from "@/src/components/SecureView";
 
 // --- Sub Components (Memoized for Performance) ---
 
@@ -118,9 +119,11 @@ const Confetti = () => {
 
 export default function LiveMapBookingPage() {
   return (
-    <React.Suspense fallback={<MapLoadingSkeleton />}>
-      <LiveMapContent />
-    </React.Suspense>
+    <SecureView>
+      <React.Suspense fallback={<MapLoadingSkeleton />}>
+        <LiveMapContent />
+      </React.Suspense>
+    </SecureView>
   );
 }
 

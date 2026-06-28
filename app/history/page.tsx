@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { MobileBottomNav } from "@/src/components/MobileBottomNav";
+import SecureView from "@/src/components/SecureView";
 
 export default function HistoryPage() {
   const [phone, setPhone] = useState("");
@@ -113,7 +114,8 @@ export default function HistoryPage() {
   });
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
+    <SecureView>
+      <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
       
       {/* Saffron Gradient PhonePe Header */}
       <div className="bg-[#FF9933] text-white fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
@@ -448,5 +450,6 @@ export default function HistoryPage() {
       {/* Global Bottom PhonePe Navigation */}
       <MobileBottomNav />
     </main>
+    </SecureView>
   );
 }

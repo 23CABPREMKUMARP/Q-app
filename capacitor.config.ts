@@ -27,6 +27,10 @@ const config: CapacitorConfig = {
     SplashScreen: {
       launchShowDuration: 0,
       showSpinner: false
+    },
+    PrivacyScreen: {
+      enable: false,
+      preventScreenshots: true
     }
   }
 };

@@ -6,6 +6,7 @@ import { Search, MapPin, Calendar, Clock, Filter, Bus, Navigation, Users, Zap, A
 import { useRouter } from 'next/navigation';
 import { MOCK_BUSES } from "@/src/lib/constants";
 import { QRCodeSVG } from 'qrcode.react';
+import SecureView from "@/src/components/SecureView";
 
 export default function TownBusSearchPage() {
   const router = useRouter();
@@ -144,8 +145,9 @@ export default function TownBusSearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-24">
-      {/* Header */}
+    <SecureView>
+      <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-24">
+        {/* Header */}
       <div className="bg-[#FF9933] px-6 pt-12 pb-8 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10">
@@ -399,5 +401,6 @@ export default function TownBusSearchPage() {
         )}
       </div>
     </div>
+    </SecureView>
   );
 }

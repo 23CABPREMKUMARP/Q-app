@@ -12,10 +12,13 @@ import {
 import { BusMatrixQR } from "@/src/components/BusMatrixQR";
 import { QRCodeSVG } from "qrcode.react";
 import Image from "next/image";
+import { Html5QrcodeScanner } from 'html5-qrcode';
+import { supabase } from "@/src/lib/supabase";
+import SecureView from "@/src/components/SecureView";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
-// Configured Mock Stops & Ticket Lists
+// Hardcoded stops from town-bus
 const STOPS = ["Gandhipuram", "Lakshmi Mills", "Peelamedu", "Hope College", "Singanallur", "Ukkadam", "Railway Station"];
 
 const INITIAL_PASSENGERS = [
@@ -524,7 +527,8 @@ export default function EnterpriseConductorPortal() {
   });
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans antialiased overflow-x-hidden flex flex-col md:flex-row">
+    <SecureView>
+      <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans antialiased overflow-x-hidden flex flex-col md:flex-row">
       
       {/* 1. AUTHENTICATION MODULE (CLERK REPLACEMENT) */}
       <AnimatePresence>
@@ -1764,6 +1768,7 @@ export default function EnterpriseConductorPortal() {
         </>
       )}
 
-    </div>
+      </div>
+    </SecureView>
   );
 }
