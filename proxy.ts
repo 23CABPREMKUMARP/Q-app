@@ -18,11 +18,11 @@ const isPublicRoute = createRouteMatcher([
   "/api/phonepe(.*)",
 ]);
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
   if (!isPublicRoute(req)) {
-    const { userId } = auth();
+    const { userId, redirectToSignIn } = await auth();
     if (!userId) {
-      return auth().redirectToSignIn({ returnBackUrl: req.url });
+      return redirectToSignIn({ returnBackUrl: req.url });
     }
   }
 });
