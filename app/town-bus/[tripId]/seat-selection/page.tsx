@@ -35,8 +35,9 @@ export default function TicketCountSelectionPage() {
   const [step, setStep] = useState(1);
   const [paymentState, setPaymentState] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
   const [bookingResult, setBookingResult] = useState<any>(null);
-  const [luggageType, setLuggageType] = useState('');
-  const [phone, setPhone] = useState('');
+  const [passengers, setPassengers] = useState<Array<{ name: string, phone: string, luggage: string }>>([
+    { name: '', phone: '', luggage: 'None' }
+  ]);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function TicketCountSelectionPage() {
   }, [step]);
 
   const LUGGAGE_PRICES: Record<string, number> = { None: 0, Small: 1, Medium: 2, Large: 3 };
-  const totalAmount = ticketCount * farePerTicket + (LUGGAGE_PRICES[luggageType] || 0);
+  const totalAmount = ticketCount * farePerTicket + passengers.reduce((sum, p) => sum + (LUGGAGE_PRICES[p.luggage] || 0), 0);
   const { width, height } = typeof window !== 'undefined' ? { width: window.innerWidth, height: window.innerHeight } : { width: 0, height: 0 };
   const [phonePeMethod, setPhonePeMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
 
@@ -70,13 +71,12 @@ export default function TicketCountSelectionPage() {
         try {
           const parsed = JSON.parse(savedState);
           if (parsed.ticketCount) setTicketCount(parsed.ticketCount);
-          if (parsed.luggageType) setLuggageType(parsed.luggageType);
+          if (parsed.passengers) setPassengers(parsed.passengers);
           if (parsed.boardingPoint) {
             setBoardingPoint(parsed.boardingPoint);
             hasLoadedBookingState = true;
           }
           if (parsed.dropPoint) setDropPoint(parsed.dropPoint);
-          if (parsed.phone) setPhone(parsed.phone);
         } catch(e) {}
       }
     }
@@ -128,7 +128,7 @@ export default function TicketCountSelectionPage() {
       })();
       const freshBoarding = freshState.boardingPoint || '';
       const freshDrop = freshState.dropPoint || '';
-      const freshLuggage = freshState.luggageType || '';
+      const freshPassengers = freshState.passengers || [{ name: '', phone: '', luggage: 'None' }];
       const freshCount = freshState.ticketCount || 1;
       const freshBusNumber = freshState.busNumber || '';
       const pollStatus = async () => {
@@ -147,7 +147,8 @@ export default function TicketCountSelectionPage() {
               totalAmount: b.total_amount || totalAmount,
               boardingPoint: b.boarding_point || freshBoarding || 'Boarding Point',
               destination: b.destination || freshDrop || 'Destination',
-              luggageType: b.luggage_type || b.passengers?.[0]?.luggage || freshLuggage || 'None',
+              luggageType: b.luggage_type || b.passengers?.[0]?.luggage || freshPassengers[0]?.luggage || 'None',
+              passengers: b.passengers || freshPassengers,
               busNumber: freshBusNumber,
               seats: b.seats || Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: b.qr_token || '',
@@ -172,7 +173,7 @@ export default function TicketCountSelectionPage() {
                 totalAmount: totalAmount,
                 boardingPoint: freshBoarding || 'Boarding Point',
                 destination: freshDrop || 'Destination',
-                luggageType: freshLuggage || 'None',
+                luggageType: freshPassengers[0]?.luggage || 'None',
                 busNumber: freshBusNumber,
                 seats: Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
                 qrToken: ticketIdParam || '',
@@ -193,7 +194,7 @@ export default function TicketCountSelectionPage() {
               totalAmount: totalAmount,
               boardingPoint: freshBoarding || 'Boarding Point',
               destination: freshDrop || 'Destination',
-              luggageType: freshLuggage || 'None',
+              luggageType: freshPassengers[0]?.luggage || 'None',
               busNumber: freshBusNumber,
               seats: Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: ticketIdParam || '',
@@ -213,7 +214,7 @@ export default function TicketCountSelectionPage() {
       })();
       const freshBoarding = freshState.boardingPoint || '';
       const freshDrop = freshState.dropPoint || '';
-      const freshLuggage = freshState.luggageType || '';
+      const freshPassengers = freshState.passengers || [{ name: '', phone: '', luggage: 'None' }];
       const freshCount = freshState.ticketCount || 1;
       const freshBusNumber = freshState.busNumber || '';
       const getBookingDetails = async () => {
@@ -229,7 +230,8 @@ export default function TicketCountSelectionPage() {
               totalAmount: b.total_amount || totalAmount,
               boardingPoint: b.boarding_point || freshBoarding || 'Boarding Point',
               destination: b.destination || freshDrop || 'Destination',
-              luggageType: b.luggage_type || b.passengers?.[0]?.luggage || freshLuggage || 'None',
+              luggageType: b.luggage_type || b.passengers?.[0]?.luggage || freshPassengers[0]?.luggage || 'None',
+              passengers: b.passengers || freshPassengers,
               busNumber: freshBusNumber,
               seats: b.seats || Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: b.qr_token || '',
@@ -243,7 +245,7 @@ export default function TicketCountSelectionPage() {
               totalAmount: totalAmount,
               boardingPoint: freshBoarding || 'Boarding Point',
               destination: freshDrop || 'Destination',
-              luggageType: freshLuggage || 'None',
+              luggageType: freshPassengers[0]?.luggage || 'None',
               busNumber: freshBusNumber,
               seats: Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: '',
@@ -258,7 +260,7 @@ export default function TicketCountSelectionPage() {
             totalAmount: totalAmount,
             boardingPoint: freshBoarding || 'Boarding Point',
             destination: freshDrop || 'Destination',
-            luggageType: freshLuggage || 'None',
+            luggageType: freshPassengers[0]?.luggage || 'None',
             busNumber: freshBusNumber,
             seats: Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
             qrToken: '',
@@ -287,11 +289,17 @@ export default function TicketCountSelectionPage() {
   }
 
   const handleIncrement = () => {
-    if (ticketCount < 10) setTicketCount(prev => prev + 1);
+    if (ticketCount < 10) {
+      setTicketCount(prev => prev + 1);
+      setPassengers(prev => [...prev, { name: '', phone: prev[0]?.phone || '', luggage: 'None' }]);
+    }
   };
 
   const handleDecrement = () => {
-    if (ticketCount > 1) setTicketCount(prev => prev - 1);
+    if (ticketCount > 1) {
+      setTicketCount(prev => prev - 1);
+      setPassengers(prev => prev.slice(0, -1));
+    }
   };
 
   const handleProceed = async () => {
@@ -306,10 +314,9 @@ export default function TicketCountSelectionPage() {
     if (typeof window !== 'undefined') {
       localStorage.setItem('townBusBookingState', JSON.stringify({
         ticketCount,
-        luggageType,
+        passengers,
         boardingPoint,
         dropPoint,
-        phone,
         busNumber: trip?.busNumber || trip?.busCode || ''
       }));
     }
@@ -326,7 +333,11 @@ export default function TicketCountSelectionPage() {
           boardingPoint: boardingPoint,
           destination: dropPoint,
           busNumber: trip?.busNumber || trip?.busCode || '',
-          passengers: [{ phone: phone || "9999999999", luggage: luggageType }],
+          passengers: passengers.map(p => ({
+            name: p.name || "Passenger",
+            phone: p.phone || "9999999999",
+            luggage: p.luggage
+          })),
         })
       });
 
@@ -519,40 +530,69 @@ export default function TicketCountSelectionPage() {
                 </button>
               </div>
 
-              {/* Phone Details */}
-              <div className="mt-8 border-t border-zinc-200 pt-8">
-                <h2 className="text-xl font-black uppercase tracking-widest text-zinc-900 mb-2 flex items-center gap-2">
-                  <Phone className="text-[#FF9933]" /> Passenger Contact
-                </h2>
-                <p className="text-slate-500 text-sm mb-6">Enter phone number to receive your digital ticket.</p>
-                <IntelligentPhoneInput 
-                  value={phone}
-                  onChange={(val) => setPhone(val)}
-                />
-              </div>
+              <div className="mt-8 pt-4">
+                {passengers.map((passenger, index) => (
+                  <div key={index} className="mb-6 bg-zinc-50 border border-zinc-200 rounded-2xl p-5 relative">
+                    <div className="absolute -top-3 left-4 bg-white px-2 py-0.5 text-[10px] font-black text-[#FF9933] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm">
+                      Passenger {index + 1}
+                    </div>
+                    
+                    {/* Name */}
+                    <div className="mb-4 mt-2">
+                      <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-1 mb-1 block">Full Name (Optional)</label>
+                      <input 
+                        type="text"
+                        value={passenger.name}
+                        onChange={(e) => {
+                          const newP = [...passengers];
+                          newP[index].name = e.target.value;
+                          setPassengers(newP);
+                        }}
+                        placeholder="Enter name"
+                        className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#FF9933] transition-all"
+                      />
+                    </div>
 
-              {/* Luggage Selection */}
-              <div className="mt-8 border-t border-zinc-200 pt-8">
-                <h2 className="text-xl font-black uppercase tracking-widest text-zinc-900 mb-2 flex items-center gap-2">
-                  <Package className="text-[#FF9933]" /> Add Luggage?
-                </h2>
-                <p className="text-slate-500 text-sm mb-6">Select luggage size if you're carrying parcels.</p>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  {['None', 'Small', 'Medium', 'Large'].map(type => (
-                    <button 
-                      key={type}
-                      onClick={() => setLuggageType(type)}
-                      className={`py-4 rounded-2xl text-xs font-black uppercase tracking-widest border transition-all ${
-                        luggageType === type 
-                          ? 'bg-[#FF9933] text-white border-[#FF9933] shadow-lg shadow-[#FF9933]/20' 
-                          : 'bg-zinc-50 text-slate-500 border-zinc-200 hover:border-zinc-300 hover:bg-white'
-                      }`}
-                    >
-                      {type} {type !== 'None' && <span className="block mt-1 text-[10px] opacity-75">+₹{LUGGAGE_PRICES[type]}</span>}
-                    </button>
-                  ))}
-                </div>
+                    {/* Phone */}
+                    <div className="mb-4">
+                      <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-1 mb-1 block">Phone Number</label>
+                      <IntelligentPhoneInput 
+                        value={passenger.phone}
+                        onChange={(val) => {
+                          const newP = [...passengers];
+                          newP[index].phone = val;
+                          setPassengers(newP);
+                        }}
+                      />
+                    </div>
+
+                    {/* Luggage */}
+                    <div>
+                      <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-1 mb-2 flex items-center gap-1">
+                        <Package size={12} className="text-[#FF9933]" /> Luggage Add-on
+                      </label>
+                      <div className="grid grid-cols-4 gap-2">
+                        {['None', 'Small', 'Medium', 'Large'].map(type => (
+                          <button 
+                            key={type}
+                            onClick={() => {
+                              const newP = [...passengers];
+                              newP[index].luggage = type;
+                              setPassengers(newP);
+                            }}
+                            className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
+                              passenger.luggage === type 
+                                ? 'bg-[#FF9933] text-white border-[#FF9933] shadow-md shadow-[#FF9933]/20' 
+                                : 'bg-white text-slate-500 border-zinc-200 hover:border-zinc-300'
+                            }`}
+                          >
+                            {type} {type !== 'None' && <span className="block mt-0.5 opacity-75">+₹{LUGGAGE_PRICES[type]}</span>}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           )}
@@ -584,8 +624,12 @@ export default function TicketCountSelectionPage() {
                   </div>
                   <div className="space-y-1 text-right">
                     <p className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Luggage</p>
-                    <div className="text-lg font-black text-zinc-600 flex justify-end">
-                      {luggageType !== 'None' ? `${luggageType} (+₹${LUGGAGE_PRICES[luggageType]})` : 'None'}
+                    <div className="text-lg font-black text-zinc-600 flex flex-col items-end">
+                      {passengers.filter(p => p.luggage !== 'None').length > 0 ? (
+                        passengers.map((p, i) => p.luggage !== 'None' && (
+                          <span key={i} className="text-sm">P{i+1}: {p.luggage} (+₹{LUGGAGE_PRICES[p.luggage]})</span>
+                        ))
+                      ) : 'None'}
                     </div>
                   </div>
                   <div className="space-y-1 mt-4 col-span-2 text-right border-t border-zinc-100 pt-4">
@@ -728,8 +772,8 @@ export default function TicketCountSelectionPage() {
                                 <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Passengers:</span>
                                 <span className="text-lg font-serif font-black tracking-tight">
                                   {bookingResult.seats?.length || ticketCount}
-                                  {(bookingResult.luggageType || luggageType) && (bookingResult.luggageType || luggageType) !== 'None'
-                                    ? <span className="text-xs uppercase tracking-widest text-[#5d4037]/70 ml-1">(+ {bookingResult.luggageType || luggageType} Luggage)</span>
+                                  {bookingResult.passengers?.some((p: any) => p.luggage !== 'None') || passengers.some(p => p.luggage !== 'None')
+                                    ? <span className="text-xs uppercase tracking-widest text-[#5d4037]/70 ml-1">(+ Luggage)</span>
                                     : null}
                                 </span>
                               </div>
@@ -942,32 +986,27 @@ export default function TicketCountSelectionPage() {
 
       {/* Bottom Action Bar (Only for Step 2) */}
       <AnimatePresence>
-        {step === 2 && phone && phone.length >= 10 && luggageType !== '' && (
+        {step === 2 && passengers.every(p => p.phone?.length >= 10) && (
           <motion.div 
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            exit={{ y: 100 }}
-            className="fixed bottom-24 left-4 right-4 bg-white border border-zinc-200 p-6 z-50 rounded-[32px] shadow-2xl shadow-black/10"
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            className="fixed bottom-[80px] left-0 right-0 p-4 z-40"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">Total Fare</div>
-                <div className="text-2xl font-black text-zinc-900">₹{totalAmount}</div>
-              </div>
-              <div className="text-right flex flex-col gap-1 items-end">
-                <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">Tickets & Add-ons</div>
-                <div className="text-[10px] font-bold text-zinc-900 bg-zinc-100 px-2 py-1 rounded-md border border-zinc-200">
-                  {ticketCount} {ticketCount === 1 ? 'Seat' : 'Seats'} {luggageType !== 'None' && `+ ${luggageType} Luggage`}
-                </div>
-              </div>
-            </div>
-
             <button 
               onClick={handleProceed}
-              disabled={!phone || phone.length < 10}
-              className="w-full bg-[#FF9933] text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#FF9933]/20 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-30"
+              className="w-full bg-zinc-950 text-white h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
             >
-              Proceed to Pay <CreditCard size={18} />
+              <div className="flex flex-col items-start">
+                <span className="text-white">Proceed to Pay</span>
+                <span className="text-[10px] text-zinc-400 mt-0.5">
+                  {ticketCount} {ticketCount === 1 ? 'Seat' : 'Seats'} {passengers.some(p => p.luggage !== 'None') && `(+ Luggage)`}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xl">₹{totalAmount}</span>
+                <ArrowRight size={20} className="text-[#FF9933]" />
+              </div>
             </button>
           </motion.div>
         )}
