@@ -11,6 +11,7 @@
   "dependencies": {
     "@capacitor-community/privacy-screen": "^8.0.0",
     "@capacitor/android": "^8.3.4",
+    "@capacitor/app": "^8.1.0",
     "@capacitor/cli": "^8.3.4",
     "@capacitor/core": "^8.3.4",
     "@clerk/nextjs": "^7.3.5",

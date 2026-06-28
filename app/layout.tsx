@@ -6,6 +6,7 @@ import { AppBootSplash } from "@/src/components/AppBootSplash";
 import { Footer } from "@/src/components/Footer";
 import { MobileBottomNav } from "@/src/components/MobileBottomNav";
 import { GlobalLoader } from "@/src/components/GlobalLoader";
+import { CapacitorDeepLink } from "@/src/components/CapacitorDeepLink";
 import "./globals.css";
 
 const inter = Inter({
@@ -82,7 +83,7 @@ export default function RootLayout({
         <body
           className={`${inter.variable} ${manrope.variable} antialiased bg-slate-50 min-h-full flex flex-col`}
         >
-
+          <CapacitorDeepLink />
           <main className="flex-1 scroll-smooth">
             <GlobalLoader>
               {children}
