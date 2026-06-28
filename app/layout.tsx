@@ -5,6 +5,7 @@ import { AppBootSplash } from "@/src/components/AppBootSplash";
 
 import { Footer } from "@/src/components/Footer";
 import { MobileBottomNav } from "@/src/components/MobileBottomNav";
+import { GlobalLoader } from "@/src/components/GlobalLoader";
 import "./globals.css";
 
 const inter = Inter({
@@ -83,7 +84,9 @@ export default function RootLayout({
         >
 
           <main className="flex-1 scroll-smooth">
-            {children}
+            <GlobalLoader>
+              {children}
+            </GlobalLoader>
           </main>
           <MobileBottomNav />
           <div className="hidden md:block">
