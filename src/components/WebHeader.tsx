@@ -55,32 +55,32 @@ export function WebHeader() {
         scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
-      <div className="container mx-auto px-6 max-w-7xl h-16 flex items-center justify-between relative">
+      <div className="container mx-auto px-6 max-w-7xl h-24 flex items-center justify-between relative">
         
         {/* Left Side: Logos */}
         <a href="/" className="flex items-center gap-4">
-          <Image src="/logo2.png" alt="Digi Bus" width={44} height={44} className="object-contain drop-shadow-md" />
+          <Image src="/logo2.png" alt="Digi Bus" width={72} height={72} className="object-contain drop-shadow-md" />
           
           <div className="flex flex-col justify-center">
-            <span className="font-black text-[13px] tracking-tight text-zinc-900 uppercase leading-[1.1]">
+            <span className="font-black text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
               DIGI <span className="text-[#FF9933]">BUS</span>
             </span>
-            <span className="font-black text-[13px] tracking-tight text-zinc-900 uppercase leading-[1.1]">
+            <span className="font-black text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
               STAND
             </span>
           </div>
 
-          <div className="w-[1px] h-8 bg-zinc-300 mx-1"></div>
+          <div className="w-[1px] h-12 bg-zinc-300 mx-1"></div>
 
           <div className="flex flex-col justify-center gap-[2px]">
-            <span className="text-[6px] font-bold text-zinc-500 uppercase tracking-widest leading-none">
+            <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest leading-none">
               Powered By
             </span>
             <div className="flex flex-col leading-none">
-              <span className="text-[13px] font-black tracking-tight leading-none">
+              <span className="text-[18px] font-black tracking-tight leading-none">
                 <span className="text-zinc-900">JEFF</span><span className="text-[#FF9933]">BEN</span>
               </span>
-              <span className="text-[6px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-[2px]">
+              <span className="text-[8px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-[2px]">
                 Systems
               </span>
             </div>
@@ -95,7 +95,7 @@ export function WebHeader() {
               <a 
                 key={link.href} 
                 href={link.href}
-                className={`text-[11px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
+                className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
                   isActive ? "text-[#FF9933]" : "text-zinc-600 hover:text-zinc-900"
                 }`}
               >
@@ -110,7 +110,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-zinc-950 text-white hover:bg-zinc-800 text-[11px] font-bold uppercase tracking-widest px-6 py-3 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-zinc-950 text-white hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
