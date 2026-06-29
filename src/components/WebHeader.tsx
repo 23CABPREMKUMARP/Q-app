@@ -4,12 +4,10 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { UserButton, SignInButton, useUser } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
 
 export function WebHeader() {
   const pathname = usePathname();
-  const { isSignedIn, isLoaded } = useUser();
   const [isNative, setIsNative] = useState<boolean | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -72,33 +70,10 @@ export function WebHeader() {
               </Link>
             );
           })}
-          
-          <div className="ml-4 border-l border-zinc-200 pl-4 flex items-center">
-            {isLoaded && isSignedIn && (
-              <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
-            )}
-            {isLoaded && !isSignedIn && (
-              <SignInButton mode="modal">
-                <button className="bg-[#FF9933] text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-sm">
-                  Sign In
-                </button>
-              </SignInButton>
-            )}
-          </div>
         </nav>
 
         {/* Mobile Nav Toggle */}
         <div className="md:hidden flex items-center gap-4">
-            {isLoaded && isSignedIn && (
-              <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
-            )}
-            {isLoaded && !isSignedIn && (
-              <SignInButton mode="modal">
-                <button className="bg-[#FF9933] text-white px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest">
-                  Sign In
-                </button>
-              </SignInButton>
-            )}
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-zinc-600 active:scale-95 transition-transform p-1">
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
