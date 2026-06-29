@@ -59,9 +59,9 @@ export default function BoardingPage() {
       
       <header className="w-full py-4 px-6 flex justify-center mb-8 z-[100] sticky top-0 bg-[#FF9933]/90 backdrop-blur-xl shadow-md border-b border-[#FF9933]/30">
         <Link href="/" className="flex items-center gap-6">
-          <Image src="/logo2.png" alt="Digi Bus" width={80} height={80} className="drop-shadow-md" />
+          <img src="/logo2.png" alt="Digi Bus" style={{ width: 80, height: 80, objectFit: "contain" }} className="drop-shadow-md" />
           <div className="h-12 w-[2px] bg-black/20" />
-          <Image src="/hero-logo.png" alt="JeffBen" width={80} height={80} className="mix-blend-multiply" />
+          <img src="/hero-logo.png" alt="JeffBen" style={{ width: 80, height: 80, objectFit: "contain" }} className="mix-blend-multiply" />
         </Link>
       </header>
 

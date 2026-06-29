@@ -59,7 +59,7 @@ export function WebHeader() {
         
         {/* Left Side: Logos */}
         <a href="/" className="flex items-center gap-4">
-          <Image src="/logo2.png" alt="Digi Bus" width={72} height={72} className="object-contain drop-shadow-md" />
+          <img src="/logo2.png" alt="Digi Bus" style={{ width: 72, height: 72, objectFit: "contain" }} className="drop-shadow-md" />
           
           <div className="flex flex-col justify-center">
             <span className="font-black text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
