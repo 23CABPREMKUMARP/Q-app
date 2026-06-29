@@ -5,6 +5,7 @@ import { AppBootSplash } from "@/src/components/AppBootSplash";
 
 import { Footer } from "@/src/components/Footer";
 import { MobileBottomNav } from "@/src/components/MobileBottomNav";
+import { WebHeader } from "@/src/components/WebHeader";
 import { GlobalLoader } from "@/src/components/GlobalLoader";
 import { CapacitorDeepLink } from "@/src/components/CapacitorDeepLink";
 import "./globals.css";
@@ -84,6 +85,7 @@ export default function RootLayout({
           className={`${inter.variable} ${manrope.variable} antialiased bg-slate-50 min-h-full flex flex-col`}
         >
           <CapacitorDeepLink />
+          <WebHeader />
           <main className="flex-1 scroll-smooth">
             <GlobalLoader>
               {children}
