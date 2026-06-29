@@ -113,8 +113,8 @@ export const Footer = React.memo(function Footer() {
             © {currentYear} JeffBen Systems. All Rights Reserved.
           </p>
           <div className="flex items-center gap-8">
-            <Link href="/privacy" className="text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-[0.2em] transition-all">Privacy Policy</Link>
-            <Link href="/terms" className="text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-[0.2em] transition-all">Terms of Service</Link>
+            <Link href="/privacy" className="text-[#FF9933] hover:text-orange-400 text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Privacy Policy</Link>
+            <Link href="/terms" className="text-[#FF9933] hover:text-orange-400 text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Terms of Service</Link>
           </div>
         </div>
       </div>
