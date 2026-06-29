@@ -172,14 +172,22 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
         </button>
       </div>
       
-      {/* Manual Entry Toggle */}
-      <div className="absolute top-12 left-6 z-20">
+      {/* Top Left: Logo & Manual Entry */}
+      <div className="absolute top-12 left-6 z-20 flex flex-col gap-4 items-start">
+        <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
+          <img src="/logo2.png" alt="Digi Bus" className="w-8 h-8 object-contain" />
+          <div className="flex flex-col">
+            <span className="text-[10px] font-black text-white leading-none tracking-tight">DIGI <span className="text-[#FF9933]">BUS</span></span>
+            <span className="text-[8px] font-bold text-white/70 tracking-widest uppercase">Scanner</span>
+          </div>
+        </div>
+        
         <button 
           onClick={() => setShowManual(!showManual)}
-          className="h-12 px-4 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center gap-2 transition-all border border-white/10 text-white font-bold text-xs uppercase tracking-widest"
+          className="h-10 px-4 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center gap-2 transition-all border border-white/10 text-white font-bold text-[10px] uppercase tracking-widest"
         >
-          <Keyboard size={18} />
-          {showManual ? "Hide" : "Manual Code"}
+          <Keyboard size={14} />
+          {showManual ? "Hide" : "Manual Entry"}
         </button>
       </div>
 
