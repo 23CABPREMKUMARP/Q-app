@@ -54,14 +54,14 @@ export default function BoardingPage() {
 
   // BROWSER USER: IF APP NOT INSTALLED -> Open Website Automatically
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center p-6 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center pb-12 relative overflow-hidden font-sans">
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#FF9933]/10 rounded-full blur-[100px]" />
       
-      <header className="w-full max-w-5xl py-6 flex justify-center mb-4 z-10">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/hero-logo.png" alt="JeffBen" width={40} height={40} />
-          <div className="h-6 w-px bg-slate-300" />
-          <Image src="/hero-logo.png" alt="Digi Bus" width={40} height={40} className="mix-blend-multiply" />
+      <header className="w-full py-4 px-6 flex justify-center mb-8 z-[100] sticky top-0 bg-[#FF9933]/90 backdrop-blur-xl shadow-md border-b border-[#FF9933]/30">
+        <Link href="/" className="flex items-center gap-6">
+          <Image src="/logo2.png" alt="Digi Bus" width={80} height={80} className="drop-shadow-md" />
+          <div className="h-12 w-[2px] bg-black/20" />
+          <Image src="/hero-logo.png" alt="JeffBen" width={80} height={80} className="mix-blend-multiply" />
         </Link>
       </header>
 

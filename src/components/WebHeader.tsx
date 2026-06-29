@@ -44,7 +44,6 @@ export function WebHeader() {
     { label: "Home", href: "/" },
     { label: "Solutions", href: "/#solutions" },
     { label: "Live Map", href: "/live-map" },
-    { label: "Get Ticket", href: "/town-bus" },
     { label: "Passes", href: "/get-ticket" },
     { label: "History", href: "/history" },
     { label: "Scan QR", href: "/scan" },
