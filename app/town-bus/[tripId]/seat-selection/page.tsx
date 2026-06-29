@@ -36,6 +36,7 @@ export default function TicketCountSelectionPage() {
   const [step, setStep] = useState(1);
   const [paymentState, setPaymentState] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
   const [bookingResult, setBookingResult] = useState<any>(null);
+  const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
   const [passengers, setPassengers] = useState<Array<{ phone: string, luggage: string, destination: string, boarding: string, fare: number }>>([
     { phone: '', luggage: 'None', destination: '', boarding: '', fare: 20 }
   ]);
