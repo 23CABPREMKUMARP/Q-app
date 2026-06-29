@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Users, CreditCard, Plus, Minus, ChevronRight, CheckCircle2, Download, RefreshCw, AlertCircle, MapPin, Phone, Package, Bus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Users, CreditCard, Plus, Minus, ChevronRight, CheckCircle2, Download, RefreshCw, AlertCircle, MapPin, Phone, Package, Bus, X } from 'lucide-react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { UserButton, useUser } from "@clerk/nextjs";
 import { QRCodeSVG } from "qrcode.react";
