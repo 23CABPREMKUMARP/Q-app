@@ -1,129 +1,134 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
-import { Loader2, Bus, QrCode, ShieldCheck, MapPin, Ticket, Route, CreditCard, ChevronRight } from "lucide-react";
-import Image from "next/image";
+import { Bus, ShieldCheck, QrCode, Ticket, MapPin, Download, Globe } from "lucide-react";
 import Link from "next/link";
 
 export default function BoardingPage() {
-  const { busCode } = useParams();
+  const params = useParams();
   const router = useRouter();
-  const { isLoaded, isSignedIn } = useUser();
-  const [isNative, setIsNative] = useState<boolean | null>(null);
+  const busCode = params.busCode as string;
+  const [isApp, setIsApp] = useState(false);
 
   useEffect(() => {
-    import("@capacitor/core")
-      .then(({ Capacitor }) => {
-        setIsNative(Capacitor.isNativePlatform());
-      })
-      .catch(() => setIsNative(false));
-  }, []);
+    // Check if running inside Capacitor (Native App)
+    if (typeof window !== "undefined") {
+      const isCapacitor = (window as any).Capacitor !== undefined;
+      setIsApp(isCapacitor);
 
-  useEffect(() => {
-    // IF APP IS INSTALLED -> Open App Boarding Screen
-    if (isNative === true && isLoaded && busCode) {
-      if (!isSignedIn) {
-        router.replace(`/sign-in?redirect_url=/boarding/${busCode}`);
-      } else {
-        const codeStr = Array.isArray(busCode) ? busCode[0] : busCode;
-        const tripId = `bus_${codeStr.toLowerCase()}`;
-        router.replace(`/town-bus/${tripId}/seat-selection`);
+      if (isCapacitor) {
+        // If in app, automatically route to seat selection if valid bus
+        // Or if you want them to click a button, leave this out
+        // router.push(`/town-bus/${busCode}/seat-selection`);
       }
     }
-  }, [isNative, isLoaded, isSignedIn, busCode, router]);
+  }, [busCode, router]);
 
-  if (isNative === null) {
+  // If in Native App, you might render something else or auto-redirect.
+  // We'll just show a simplified version for the native app
+  if (isApp) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center text-white">
-        <Loader2 className="animate-spin text-[#FF9933]" size={40} />
-      </div>
-    );
-  }
-
-  // APP USER: Return loading while redirecting to native screen
-  if (isNative) {
-    return (
-      <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center text-white">
-        <Loader2 className="animate-spin text-[#FF9933]" size={40} />
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center font-sans">
+        <Bus size={48} className="text-[#FF9933] mb-4 animate-bounce" />
+        <h1 className="text-2xl font-black text-slate-900 uppercase">Connecting...</h1>
         <p className="mt-4 text-xs font-black uppercase tracking-widest text-zinc-500">Establishing boarding link...</p>
       </div>
     );
   }
 
-  // BROWSER USER: IF APP NOT INSTALLED -> Open Website Automatically
+  // BROWSER USER: Show the beautiful "Bus Found" card
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center pb-12 relative overflow-hidden font-sans">
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#FF9933]/10 rounded-full blur-[100px]" />
       
-      <header className="w-full py-4 px-6 flex justify-center mb-8 z-[100] sticky top-0 bg-[#FF9933]/90 backdrop-blur-xl shadow-md border-b border-[#FF9933]/30">
+      {/* Logos at top */}
+      <header className="w-full py-8 px-6 flex justify-center z-[100]">
         <Link href="/" className="flex items-center gap-6">
-          <img src="/logo2.png" alt="Digi Bus" style={{ width: 80, height: 80, objectFit: "contain" }} className="drop-shadow-md" />
-          <div className="h-12 w-[2px] bg-black/20" />
           <img src="/hero-logo.png" alt="JeffBen" style={{ width: 80, height: 80, objectFit: "contain" }} className="mix-blend-multiply" />
+          <div className="h-12 w-[1px] bg-black/20" />
+          <img src="/logo2.png" alt="Digi Bus" style={{ width: 80, height: 80, objectFit: "contain" }} className="drop-shadow-md" />
         </Link>
       </header>
 
-      <main className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 p-8 flex flex-col items-center text-center z-10 relative">
-        <div className="absolute -top-6 bg-gradient-to-tr from-orange-500 to-[#FF9933] text-white px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest shadow-lg flex items-center gap-2">
+      <main className="w-full max-w-sm bg-white rounded-t-[48px] rounded-b-[48px] shadow-2xl border border-slate-100 p-8 flex flex-col items-center text-center z-10 relative mt-4">
+        {/* Verified Matrix Node Pill */}
+        <div className="absolute -top-5 bg-[#FF9933] text-white px-8 py-2.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_8px_20px_rgba(255,153,51,0.4)] flex items-center gap-2">
           <ShieldCheck size={16} />
-          Verified JeffBen Node
+          VERIFIED MATRIX NODE
         </div>
 
-        <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4 mt-4 border-8 border-white shadow-inner">
-          <Bus size={32} className="text-slate-400" />
+        {/* Bus Icon */}
+        <div className="w-20 h-20 bg-[#F8F9FA] rounded-full flex items-center justify-center mt-6 mb-6">
+          <Bus size={36} className="text-slate-500" />
         </div>
 
-        <h1 className="text-3xl font-black text-slate-900 tracking-tight uppercase">Ready to Board</h1>
-        <p className="text-slate-500 mt-2 text-sm font-medium">You scanned boarding code:</p>
+        <h1 className="text-3xl font-black text-[#0A192F] tracking-tight uppercase mb-2">BUS FOUND</h1>
+        <p className="text-slate-500 text-sm font-medium mb-4">You have scanned the QR code for:</p>
         
-        <div className="mt-3 py-3 px-8 bg-slate-100 rounded-xl border border-slate-200">
+        {/* Bus Code Pill */}
+        <div className="py-2.5 px-8 bg-[#F8F9FA] rounded-full border border-slate-100 mb-8">
           <p className="text-2xl font-black text-[#FF9933] uppercase tracking-widest">{busCode}</p>
         </div>
 
-        <div className="w-full mt-6 space-y-3 text-left">
-          {/* Route Details */}
-          <div className="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
-            <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
-              <Route size={18} />
+        <div className="w-full h-px bg-slate-100 mb-8" />
+
+        <h2 className="text-sm font-black text-[#0A192F] tracking-widest uppercase mb-6">HOW TO BOARD</h2>
+
+        <div className="w-full space-y-6 text-left mb-8">
+          {/* Step 1 */}
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <QrCode size={18} />
             </div>
             <div className="flex-1">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Route Information</p>
-              <p className="text-sm font-bold text-slate-900">Coimbatore Metro Network</p>
+              <p className="text-sm font-bold text-[#0A192F]">1. Open the JeffBen App</p>
+              <p className="text-[11px] font-medium text-slate-500 mt-0.5">Don't have it? Download it below.</p>
             </div>
           </div>
 
-          {/* Fare Information */}
-          <div className="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
-            <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
-              <CreditCard size={18} />
+          {/* Step 2 */}
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-orange-50 text-[#FF9933] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Ticket size={18} />
             </div>
             <div className="flex-1">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Fare System</p>
-              <p className="text-sm font-bold text-slate-900">Digital Ticketing Active</p>
+              <p className="text-sm font-bold text-[#0A192F]">2. Tap "Scan QR"</p>
+              <p className="text-[11px] font-medium text-slate-500 mt-0.5">Scan this matrix code using the app.</p>
             </div>
           </div>
-        </div>
 
-        <div className="w-full h-px bg-slate-100 my-6" />
-
-        <div className="w-full flex flex-col gap-3">
-          <a href="#" onClick={(e) => e.preventDefault()} className="w-full bg-[#FF9933] text-white rounded-xl h-14 font-black uppercase tracking-widest text-sm hover:bg-[#e07b1a] transition-colors shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2">
-            <Ticket size={18} />
-            Book Ticket
-            <ChevronRight size={16} className="opacity-50" />
-          </a>
-          
-          <a href="#" onClick={(e) => e.preventDefault()} className="w-full bg-slate-900 text-white rounded-xl h-14 font-black uppercase tracking-widest text-sm hover:bg-slate-800 transition-colors shadow-xl flex items-center justify-center gap-2">
-            Install JeffBen App
-          </a>
+          {/* Step 3 */}
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <MapPin size={18} />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-bold text-[#0A192F]">3. Select Seat & Pay</p>
+              <p className="text-[11px] font-medium text-slate-500 mt-0.5">Get your digital ticket instantly.</p>
+            </div>
+          </div>
         </div>
       </main>
       
-      <footer className="mt-auto py-8 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
-        Metropolitan Transit Intelligence
-      </footer>
+      {/* Action Buttons at the bottom */}
+      <div className="w-full max-w-sm mt-8 px-6 space-y-3 z-10">
+        <a 
+          href="/digibus-debug.apk" // Replace with actual download link if needed
+          className="w-full bg-[#0A192F] text-white rounded-full h-14 font-black uppercase tracking-widest text-xs hover:bg-[#112240] transition-colors shadow-[0_8px_20px_rgba(10,25,47,0.3)] flex items-center justify-center gap-2"
+        >
+          <Download size={18} />
+          Download App
+        </a>
+        
+        <Link 
+          href={`/town-bus/${busCode}/seat-selection`}
+          className="w-full bg-white text-[#0A192F] border border-slate-200 rounded-full h-14 font-black uppercase tracking-widest text-xs hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 shadow-sm"
+        >
+          <Globe size={18} />
+          Continue in Web
+        </Link>
+      </div>
     </div>
   );
 }
