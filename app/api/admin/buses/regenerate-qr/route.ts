@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       newBusCode = `TNB${randomInt}`;
     }
 
-    const qrCodeUrl = `https://app-woad-beta.vercel.app/bus/${newBusCode}`; // Custom scheme – always opens app
+    const qrCodeUrl = `https://jeffben.org/bus/${newBusCode}`; // Custom scheme – always opens app
     
     const { data: updatedBus, error: updateError } = await supabase
       .from('buses')

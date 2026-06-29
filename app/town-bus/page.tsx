@@ -320,7 +320,7 @@ export default function TownBusSearchPage() {
                       {trip.busId.busCode && (
                         <div className="bg-white p-1 rounded-md shadow-sm border border-slate-100">
                           <QRCodeSVG 
-                            value={`https://app-woad-beta.vercel.app/bus/${trip.busId.busCode}`} 
+                            value={`https://jeffben.org/bus/${trip.busId.busCode}`} 
                             size={32} 
                             level="L" 
                           />
@@ -346,7 +346,7 @@ export default function TownBusSearchPage() {
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
-                      <QRCodeSVG value={`https://app-woad-beta.vercel.app/bus/${trip.busId.busCode}`} size={160} level="H" />
+                      <QRCodeSVG value={`https://jeffben.org/bus/${trip.busId.busCode}`} size={160} level="H" />
                     </div>
                     <p className="text-xl font-black text-slate-900 uppercase tracking-widest">{trip.busId.busCode}</p>
                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest text-center mt-2">Scan this code while boarding to book instantly</p>

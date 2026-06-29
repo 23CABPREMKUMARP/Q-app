@@ -54,9 +54,9 @@ public class MainActivity extends BridgeActivity {
             if (query != null) sb.append("?").append(query);
             targetPath = sb.toString();
         } else if ("https".equals(scheme) || "http".equals(scheme)) {
-            // https://app-woad-beta.vercel.app/town-bus/...
+            // https://jeffben.org/town-bus/...
             String host = data.getHost();
-            if ("app-woad-beta.vercel.app".equals(host)) {
+            if ("jeffben.org".equals(host)) {
                 StringBuilder sb = new StringBuilder();
                 String path  = data.getPath();
                 String query = data.getQuery();
