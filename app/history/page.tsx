@@ -24,6 +24,12 @@ export default function HistoryPage() {
   const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
   const [filterType, setFilterType] = useState<"all" | "bookings" | "spends">("all");
   const [isPrinting, setIsPrinting] = useState(false);
+  const [currentTime, setCurrentTime] = useState(Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handlePrint = () => {
     setIsPrinting(true);
