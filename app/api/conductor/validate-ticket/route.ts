@@ -10,6 +10,11 @@ export async function POST(req: Request) {
     }
 
     let searchVal = token;
+
+    // Handle full URLs from the boarding pass QR
+    if (typeof token === 'string' && token.includes('jeffben.org/ticket/')) {
+      searchVal = token.split('jeffben.org/ticket/')[1].trim();
+    }
     let isTicketId = false;
     let isSerialKey = false;
 

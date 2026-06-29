@@ -75,7 +75,7 @@ export function PremiumBoardingPass({
   const dateStr = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   const timeStr = dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   
-  const qrValue = booking.qrToken || (booking.ticketId ? btoa(JSON.stringify({ t: booking.ticketId, b: booking.busId || "TOWNBUS" })) : "INVALID");
+  const qrValue = booking.qrToken ? `https://jeffben.org/ticket/${booking.qrToken}` : (booking.ticketId ? `https://jeffben.org/ticket/${booking.ticketId}` : "INVALID");
   const ticketNo = booking.ticketId?.toUpperCase() || "PENDING";
 
   return (
