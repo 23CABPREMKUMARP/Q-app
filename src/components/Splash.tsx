@@ -17,11 +17,11 @@ export default function Splash() {
         className="relative flex flex-col items-center"
       >
         <div className="flex items-center gap-6 mb-12">
-          <div className="relative w-24 h-24">
+          <div className="relative w-48 h-48">
             <Image src="/hero-logo.png" alt="Digi Bus" fill sizes="96px" className="object-contain" priority />
           </div>
-          <div className="w-px h-16 bg-black/20" />
-          <div className="relative w-24 h-24">
+          <div className="w-px h-32 bg-black/20" />
+          <div className="relative w-48 h-48">
             <Image src="/logo2.png" alt="JeffBen" fill sizes="96px" className="object-contain mix-blend-multiply" priority />
           </div>
         </div>

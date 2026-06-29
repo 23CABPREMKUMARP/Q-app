@@ -46,7 +46,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.5, duration: 1, type: "spring" }}
-                  className="relative w-16 h-16 md:w-20 md:h-20"
+                  className="relative w-32 h-32 md:w-48 md:h-48"
                 >
                   <Image src="/logo2.png" alt="Digi Bus" fill sizes="160px" className="object-contain" priority />
                 </motion.div>
@@ -54,13 +54,13 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   initial={{ scaleY: 0 }}
                   animate={{ scaleY: 1 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className="w-px h-20 bg-black/20"
+                  className="w-px h-32 md:h-48 bg-black/20"
                 />
                 <motion.div
                   initial={{ x: 30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 1, duration: 1, type: "spring" }}
-                  className="relative w-16 h-16 md:w-20 md:h-20"
+                  className="relative w-32 h-32 md:w-48 md:h-48"
                 >
                   <Image src="/hero-logo.png" alt="Digi Bus Stand" fill sizes="160px" className="object-contain mix-blend-multiply" priority />
                 </motion.div>
