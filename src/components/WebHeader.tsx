@@ -49,17 +49,17 @@ export function WebHeader() {
   return (
     <header className="sticky top-0 z-[900] w-full bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-sm">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo2.png" alt="JeffBen" width={28} height={28} className="object-contain" />
+        <a href="/" className="flex items-center gap-2">
+          <Image src="/hero-logo.png" alt="Digi Bus" width={48} height={48} className="object-contain" />
           <span className="font-black text-lg tracking-tight text-zinc-900 uppercase">Digi Bus</span>
-        </Link>
+        </a>
         
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
-              <Link 
+              <a 
                 key={link.href} 
                 href={link.href}
                 className={`text-xs font-black uppercase tracking-widest transition-colors ${
@@ -67,7 +67,7 @@ export function WebHeader() {
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             );
           })}
         </nav>
@@ -86,7 +86,7 @@ export function WebHeader() {
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
-              <Link 
+              <a 
                 key={link.href} 
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -95,7 +95,7 @@ export function WebHeader() {
                 }`}
               >
                 {link.label}
-              </Link>
+              </a>
             );
           })}
         </div>

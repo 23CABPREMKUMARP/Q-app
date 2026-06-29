@@ -41,7 +41,7 @@ export default function AboutPage() {
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
-                <Image src="/logo2.png" alt="JeffBen" width={36} height={36} className="object-contain" />
+                <Image src="/hero-logo.png" alt="JeffBen" width={36} height={36} className="object-contain" />
               </div>
               <div>
                 <h2 className="text-xl font-bold tracking-tight text-white">JeffBen Systems</h2>

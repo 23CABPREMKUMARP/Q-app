@@ -48,7 +48,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   transition={{ delay: 0.5, duration: 1, type: "spring" }}
                   className="relative w-16 h-16 md:w-20 md:h-20"
                 >
-                  <Image src="/logo2.png" alt="JeffBen" fill sizes="160px" className="object-contain" priority />
+                  <Image src="/logo2.png" alt="Digi Bus" fill sizes="160px" className="object-contain" priority />
                 </motion.div>
                 <motion.div
                   initial={{ scaleY: 0 }}

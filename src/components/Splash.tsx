@@ -16,15 +16,14 @@ export default function Splash() {
         }}
         className="relative flex flex-col items-center"
       >
-        <div className="relative w-32 h-32 mb-12">
-          <Image
-            src="/logo2.png"
-            alt="JeffBen"
-            fill
-            sizes="128px"
-            className="object-contain"
-            priority
-          />
+        <div className="flex items-center gap-6 mb-12">
+          <div className="relative w-24 h-24">
+            <Image src="/hero-logo.png" alt="Digi Bus" fill sizes="96px" className="object-contain" priority />
+          </div>
+          <div className="w-px h-16 bg-black/20" />
+          <div className="relative w-24 h-24">
+            <Image src="/logo2.png" alt="JeffBen" fill sizes="96px" className="object-contain mix-blend-multiply" priority />
+          </div>
         </div>
         
         <div className="w-48 h-1 bg-black/10 rounded-full overflow-hidden relative">

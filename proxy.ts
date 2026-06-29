@@ -6,6 +6,8 @@ const isPublicRoute = createRouteMatcher([
   "/", // Web landing page is fully public
   "/sign-in(.*)",
   "/sign-up(.*)",
+  "/privacy(.*)",
+  "/terms(.*)",
   "/api/webhooks(.*)",
   // Allow assets to load
   "/favicon.ico",
@@ -18,22 +20,25 @@ const isPublicRoute = createRouteMatcher([
   "/.well-known/(.*)",
   // Allow external callbacks like PhonePe if they exist
   "/api/phonepe(.*)",
+  "/api/town-bus(.*)",
+  "/api/bookings(.*)",
+  "/api/buses(.*)",
   // The bus public info page is public
   "/bus(.*)",
-  "/boarding(.*)"
+  "/boarding(.*)",
+  "/town-bus(.*)",
+  "/get-ticket(.*)",
+  "/scan(.*)",
+  "/history(.*)",
+  "/live-map(.*)",
+  "/luggage-booking(.*)",
+  "/track(.*)"
 ]);
 
 // APP ONLY Routes
 const appOnlyRoutes = createRouteMatcher([
   "/mobile-dashboard(.*)",
-  "/conductor(.*)",
-  "/town-bus(.*)",
-  "/live-map(.*)",
-  "/history(.*)",
-  "/get-ticket(.*)",
-  "/scan(.*)",
-  "/luggage-booking(.*)",
-  "/track(.*)"
+  "/conductor(.*)"
 ]);
 
 // WEB ONLY Routes

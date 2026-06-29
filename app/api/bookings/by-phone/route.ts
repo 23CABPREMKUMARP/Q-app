@@ -56,6 +56,7 @@ export async function POST(req: Request) {
         boardingPoint: b.boarding_point,
         destination: b.destination,
         paymentStatus: b.payment_status || (b.status === "Confirmed" ? "Paid" : "Failed"),
+        phonepeTransactionId: b.phonepe_transaction_id || b.transaction_id || "",
         totalAmount: b.total_amount || b.amount,
         busId: b.buses ? { 
           busNumber: b.buses.bus_number, 
@@ -79,6 +80,7 @@ export async function POST(req: Request) {
           boardingPoint: b.boarding_point,
           destination: b.destination,
           paymentStatus: b.payment_status,
+          phonepeTransactionId: b.phonepe_transaction_id || b.transaction_id || "",
           totalAmount: b.total_amount || b.amount,
           busId: { 
             busNumber: resolvedBusNumber,

@@ -14,7 +14,7 @@ import {
 import dynamic from "next/dynamic";
 
 const Globe = dynamic(() => import("@/src/registry/magicui/globe").then(m => m.Globe), { ssr: false });
-const AuroraBackground = dynamic(() => import("../src/components/ui/aurora-background").then(m => m.AuroraBackground), { ssr: false });
+
 const ContainerScroll = dynamic(() => import("../src/components/ui/container-scroll-animation").then(m => m.ContainerScroll), { ssr: false });
 
 const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
@@ -38,7 +38,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             transition={{ delay: 0.5, duration: 1, type: "spring" }}
             className="relative w-32 h-32 md:w-48 md:h-48"
           >
-            <Image src="/logo2.png" alt="JeffBen" fill sizes="200px" className="object-contain" priority />
+            <Image src="/logo2.png" alt="Digi Bus" fill sizes="200px" className="object-contain" priority />
           </motion.div>
           <motion.div 
             initial={{ scaleY: 0 }}
@@ -52,7 +52,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             transition={{ delay: 1, duration: 1, type: "spring" }}
             className="relative w-32 h-32 md:w-48 md:h-48"
           >
-            <Image src="/hero-logo.png" alt="Digi Bus Stand" fill sizes="200px" className="object-contain mix-blend-multiply" priority />
+            <Image src="/hero-logo.png" alt="Jeff Ben" fill sizes="200px" className="object-contain mix-blend-multiply" priority />
           </motion.div>
         </div>
 
@@ -134,7 +134,7 @@ export default function ProductPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-orange-50/20 via-transparent to-orange-50" />
         </div>
 
-        <AuroraBackground className="bg-transparent text-black h-full w-full gpu-accelerated">
+        <div className="bg-transparent text-black h-full w-full gpu-accelerated relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -192,7 +192,7 @@ export default function ProductPage() {
               </div>
             </div>
           </motion.div>
-        </AuroraBackground>
+        </div>
         <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.1),rgba(255,255,255,0))]" />
       </section>
 
@@ -210,16 +210,21 @@ export default function ProductPage() {
             </div>
           }
         >
-          <video
-            src="/mobility-demo.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            className="mx-auto rounded-2xl object-cover h-full w-full gpu-accelerated shadow-2xl bg-zinc-900"
-            draggable={false}
-            onContextMenu={(e) => e.preventDefault()}
+          <div 
+            className="mx-auto rounded-2xl object-cover h-[40rem] w-full shadow-2xl bg-zinc-900 overflow-hidden relative"
+            dangerouslySetInnerHTML={{
+              __html: `
+                <video
+                  src="/mobility-demo.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  preload="auto"
+                  style="width: 100%; height: 100%; object-fit: cover;"
+                ></video>
+              `
+            }}
           />
         </ContainerScroll>
         <motion.div

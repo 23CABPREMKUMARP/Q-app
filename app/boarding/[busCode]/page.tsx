@@ -59,7 +59,7 @@ export default function BoardingPage() {
       
       <header className="w-full max-w-5xl py-6 flex justify-center mb-4 z-10">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo2.png" alt="JeffBen" width={40} height={40} />
+          <Image src="/hero-logo.png" alt="JeffBen" width={40} height={40} />
           <div className="h-6 w-px bg-slate-300" />
           <Image src="/hero-logo.png" alt="Digi Bus" width={40} height={40} className="mix-blend-multiply" />
         </Link>

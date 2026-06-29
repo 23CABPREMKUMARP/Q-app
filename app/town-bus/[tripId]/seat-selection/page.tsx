@@ -13,6 +13,8 @@ import { MOCK_BUSES } from "@/src/lib/constants";
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import Splash from '@/src/components/Splash';
+import { BusCodeSearch } from "@/src/components/BusCodeSearch";
+import { PremiumBoardingPass } from "@/src/components/PremiumBoardingPass";
 import SecureView from "@/src/components/SecureView";
 
 export default function TicketCountSelectionPage() {
@@ -294,14 +296,57 @@ export default function TicketCountSelectionPage() {
     return (
       <SecureView>
         <Splash />
-      </SecureView>
+      
+      {/* FULL TICKET MODAL */}
+      <AnimatePresence>
+        {selectedTicket && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center p-4"
+          >
+            <div className="absolute inset-0" onClick={() => setSelectedTicket(null)}></div>
+            
+            <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
+              <button 
+                onClick={() => setSelectedTicket(null)}
+                className="bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-md transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="w-[750px] md:w-max flex justify-center items-center relative z-10 transform rotate-90 md:rotate-0 origin-center scale-[0.95] sm:scale-[1] md:scale-100 transition-transform"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <PremiumBoardingPass booking={selectedTicket} currentTime={currentTime} />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="mt-6 relative z-10 text-white text-xs font-bold uppercase tracking-widest opacity-70"
+            >
+              Tap outside to close
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+    </SecureView>
     );
   }
 
   const handleIncrement = () => {
     if (ticketCount < 10) {
       setTicketCount(prev => prev + 1);
-      setPassengers(prev => [...prev, { phone: prev[0]?.phone || '', luggage: 'None', boarding: prev[prev.length - 1]?.destination || '', destination: '', fare: 20 }]);
+      setPassengers(prev => [...prev, { phone: '', luggage: 'None', boarding: prev[prev.length - 1]?.destination || '', destination: '', fare: 20 }]);
     }
   };
 
@@ -488,7 +533,27 @@ export default function TicketCountSelectionPage() {
 
                       {/* Phone */}
                       <div className="mb-4">
-                        <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-1 mb-1 block">Phone Number</label>
+                        <div className="flex justify-between items-center mb-1 pl-1">
+                          <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest block">Phone Number</label>
+                          {index > 0 && (
+                            <label className="flex items-center gap-1.5 cursor-pointer hover:bg-zinc-100 px-2 py-0.5 rounded transition-colors">
+                              <input 
+                                type="checkbox" 
+                                className="accent-[#FF9933] w-3 h-3 cursor-pointer"
+                                onChange={(e) => {
+                                  const newP = [...passengers];
+                                  if (e.target.checked) {
+                                    newP[index].phone = newP[0].phone;
+                                  } else {
+                                    newP[index].phone = '';
+                                  }
+                                  setPassengers(newP);
+                                }}
+                              />
+                              <span className="text-[9px] font-bold text-zinc-500 uppercase">Same as Journey 1</span>
+                            </label>
+                          )}
+                        </div>
                         <IntelligentPhoneInput 
                           value={passenger.phone}
                           onChange={(val) => {
@@ -683,152 +748,56 @@ export default function TicketCountSelectionPage() {
                       transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.3 }}
                       className={`w-full overflow-hidden flex flex-col items-center justify-center py-4 ${isExpired ? "opacity-75 grayscale-[0.5]" : ""}`}
                     >
-                      <div
-                        id="printable-ticket"
-                        className={`ticket-container relative bg-[#f7e49f] bg-gradient-to-br from-[#f7e49f] via-[#e5c167] to-[#d4af37] rounded-[20px] md:rounded-[40px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] overflow-hidden border-[6px] md:border-[12px] flex flex-col md:flex-row min-h-[500px] md:min-h-[380px] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-left ${isExpired ? "border-red-500/80" : "border-green-500/80"}`}
-                      >
-                        <div className="absolute inset-0 opacity-100 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] print:opacity-50" />
-                        <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
-                        <div className="absolute inset-0 border-[6px] border-[#d4af37] opacity-80 pointer-events-none" />
+                      
+<div 
+  onClick={() => setSelectedTicket({
+    ...bookingResult,
+    busNumber: bookingResult.busNumber || bookingResult.busId?.busNumber || trip?.busNumber || trip?.busCode || 'TOWN-BUS',
+    busCode: bookingResult.busCode || bookingResult.busId?.busCode || trip?.busCode || 'N/A',
+    boardingPoint: bookingResult.boardingPoint || boardingPoint || 'Point A',
+    destination: bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'
+  })}
+  className="w-full max-w-sm mx-auto border bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden"
+>
+  <div className="flex justify-between items-start">
+    <div className="flex flex-col">
+      <span className="text-[9px] font-bold text-black uppercase tracking-widest mb-1">Pass No.</span>
+      <span className="font-mono font-black text-black/90 text-sm">{bookingResult.ticketId || "PENDING"}</span>
+    </div>
+    <div className="bg-black/10 px-2 py-1 rounded-md">
+      <span className="text-[10px] font-black text-black flex items-center gap-1">
+        <Bus size={10} /> Town Bus
+      </span>
+    </div>
+  </div>
+  
+  <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 mt-2">
+    <div className="flex flex-col">
+      <span className="text-[8px] font-bold text-black/70 uppercase">From</span>
+      <span className="font-bold text-black text-sm truncate">{bookingResult.boardingPoint || boardingPoint || 'Point A'}</span>
+    </div>
+    <div className="flex flex-col items-center px-2">
+      <ArrowRight size={14} className="text-black/50" />
+    </div>
+    <div className="flex flex-col items-end">
+      <span className="text-[8px] font-bold text-black/70 uppercase">To</span>
+      <span className="font-bold text-black text-sm truncate text-right">{bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'}</span>
+    </div>
+  </div>
+  
+  <div className="flex justify-between items-end mt-2 pt-3 border-t border-[#B8860B]/30">
+    <div className="flex flex-col">
+      <span className="text-[8px] font-bold text-black/70 uppercase mb-0.5">Time</span>
+      <span className="font-bold text-black text-xs">
+        {new Date(bookingTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+      </span>
+    </div>
+    <span className="text-[10px] font-black text-black uppercase tracking-widest flex items-center gap-1">
+      Tap to View <ChevronRight size={12} className="text-black/50" />
+    </span>
+  </div>
+</div>
 
-                        {/* Left Side: Main Info */}
-                        <div className="p-6 md:p-10 flex-1 relative border-b-4 md:border-b-0 md:border-r-4 border-dashed border-[#b8860b]/40">
-                          <div className="relative z-10 text-center mb-8">
-                            <div className="flex items-center justify-center gap-4 mb-3">
-                              <Image src="/logo2.png" alt="JeffBen" width={32} height={32} className="object-contain" />
-                              <div className="h-6 w-[1px] bg-[#5d4037]/25" />
-                              <Image src="/hero-logo.png" alt="Digi Bus Stand" width={32} height={32} className="object-contain mix-blend-multiply" />
-                            </div>
-                            <p className="text-[8px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Stand Framework</p>
-                            <p className="text-base font-vintage text-[#5d4037]/80 leading-none mb-1">Powered by <span className="text-black">Jeff</span>Ben</p>
-                            <h3 className="text-2xl md:text-4xl font-serif font-black tracking-tight text-[#5d4037] leading-none uppercase">Digi Bus Stand Ticket</h3>
-
-                            {/* Validity Status Badge */}
-                            <div className="mt-4 flex flex-col items-center justify-center gap-1">
-                              <div className={`px-4 py-1.5 rounded-full border-2 inline-flex items-center gap-2 ${isExpired ? "bg-red-100 border-red-500 text-red-700" : "bg-green-100 border-green-500 text-green-700"}`}>
-                                {!isExpired && <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />}
-                                <span className="font-bold text-xs uppercase tracking-widest">{isExpired ? "Expired" : "Valid"}</span>
-                              </div>
-                              {!isExpired ? (
-                                <p className="text-[10px] font-bold text-green-700 uppercase tracking-widest">Expires in {timeRemainingStr}</p>
-                              ) : (
-                                <p className="text-[10px] font-bold text-red-700 uppercase tracking-widest">Ticket Validity Ended</p>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="space-y-4 text-left relative z-10 px-2 text-[#5d4037]">
-                            {/* Row 1: Bus No | Passengers (with luggage inline) — matches My Passes exactly */}
-                            <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
-                              <div className="flex flex-col">
-                                <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Bus No:</span>
-                                <span className="text-lg font-serif font-black tracking-tight uppercase">{bookingResult.busNumber || bookingResult.busId?.busNumber || trip?.busNumber || trip?.busCode || 'TOWN-BUS'}</span>
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Passengers:</span>
-                                <span className="text-lg font-serif font-black tracking-tight">
-                                  {bookingResult.seats?.length || ticketCount}
-                                  {bookingResult.passengers?.some((p: any) => p.luggage !== 'None') || passengers.some(p => p.luggage !== 'None')
-                                    ? <span className="text-xs uppercase tracking-widest text-[#5d4037]/70 ml-1">(+ Luggage)</span>
-                                    : null}
-                                </span>
-                              </div>
-                            </div>
-
-                            {/* Row 2: Boarding | Destination */}
-                            <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
-                              <div className="flex flex-col">
-                                <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Boarding</span>
-                                <p className="text-sm font-serif font-bold uppercase truncate max-w-[120px]">{bookingResult.boardingPoint || boardingPoint || 'Point A'}</p>
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Destination</span>
-                                <p className="text-sm font-serif font-bold uppercase truncate max-w-[120px]">{bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'}</p>
-                              </div>
-                            </div>
-
-                            {/* Row 3: Travel Date | Total Fare */}
-                            <div className="flex items-center justify-between text-[#5d4037]/75">
-                              <div className="flex flex-col">
-                                <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60">Travel Date</span>
-                                <span className="text-xs font-bold">{bookingResult.bookingDate ? new Date(bookingResult.bookingDate).toLocaleDateString() : new Date().toLocaleDateString()}</span>
-                              </div>
-                              <div className="text-right bg-[#5d4037]/5 px-3 py-1.5 rounded-xl border border-[#5d4037]/15">
-                                <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60 block mb-0.5">Total Fare</span>
-                                <p className="text-sm font-serif font-black text-slate-950">₹{bookingResult.totalAmount}</p>
-                              </div>
-                            </div>
-
-                            {bookingResult.phonepeTransactionId && (
-                              <div className="mt-4 pt-3 border-t border-[#5d4037]/10 flex items-center justify-between">
-                                <div className="flex items-center gap-1.5">
-                                  <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center">
-                                    <span className="font-black text-purple-600 text-[8px]">Pe</span>
-                                  </div>
-                                  <span className="text-[8px] font-bold text-[#5d4037]/60 uppercase tracking-widest">PhonePe Confirmed</span>
-                                </div>
-                                <span className="text-[9px] font-bold text-[#5d4037]/80 uppercase tracking-widest">TXN: {bookingResult.phonepeTransactionId}</span>
-                              </div>
-                            )}
-
-                            {/* Track Bus Button */}
-                            <div className="mt-4 pt-4 border-t border-[#5d4037]/20 flex justify-center">
-                              {!isExpired ? (
-                                <button
-                                  onClick={() => router.push(`/live-map?busId=${tripId}`)}
-                                  className="w-full bg-[#FF9933] text-white py-3 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/30"
-                                >
-                                  <MapPin size={14} />
-                                  Track Bus Live
-                                </button>
-                              ) : (
-                                <div className="w-full bg-slate-200 text-slate-500 py-3 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2">
-                                  <MapPin size={14} />
-                                  Tracking Ended
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Right Side: QR Secure Matrix */}
-                        <div className="p-6 md:p-8 md:w-[240px] flex flex-col justify-between items-center relative overflow-hidden bg-black/5">
-                          <div className="p-3 bg-[#b8860b]/10 rounded-2xl shadow-inner border-2 border-[#b8860b]/30 relative overflow-hidden group bg-white/20">
-                            {isExpired && (
-                              <div className="absolute inset-0 z-20 bg-red-500/20 backdrop-blur-[1px] flex items-center justify-center">
-                                <span className="bg-red-600 text-white text-[10px] font-black uppercase px-2 py-1 rounded shadow-lg -rotate-12 border border-red-400">EXPIRED</span>
-                              </div>
-                            )}
-                            {/* Secure Watermark Layer */}
-                            <div className="absolute inset-0 opacity-[0.2] pointer-events-none flex flex-wrap gap-2 items-center justify-center text-[5px] font-black uppercase tracking-tighter text-[#5d4037] -rotate-12 scale-110">
-                              {Array(15).fill(null).map((_, i) => (
-                                <span key={i} className="whitespace-nowrap">DIGI BUS •</span>
-                              ))}
-                            </div>
-                            <QRCodeSVG
-                              value={bookingResult.qrToken || btoa(JSON.stringify({ t: bookingResult.ticketId || "TOWNBUS", b: tripId }))}
-                              size={120}
-                              fgColor="#2d1a12"
-                              bgColor="transparent"
-                              level="H"
-                              imageSettings={{
-                                src: "/hero-logo.png",
-                                height: 28,
-                                width: 28,
-                                excavate: true,
-                              }}
-                            />
-                          </div>
-                          <div className="text-center mt-4">
-                            <p className="text-[8px] font-bold text-[#5d4037]/50 uppercase tracking-widest leading-none mb-1">Serial Key</p>
-                            <p className="text-xs font-serif font-black text-[#5d4037]">JB-{bookingResult.ticketId?.slice(-8).toUpperCase() || '00000000'}</p>
-                          </div>
-                        </div>
-
-                        {/* Side Notches */}
-                        <div className="hidden md:block absolute left-[240px] top-0 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
-                        <div className="hidden md:block absolute left-[240px] bottom-0 translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
-                      </div>
                     </motion.div>
                   </div>
                 );

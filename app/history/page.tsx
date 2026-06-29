@@ -11,6 +11,8 @@ import {
   Info, Filter, Share2, Printer
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import { WatermarkOverlay } from "@/src/components/ui/WatermarkOverlay";
+import { PremiumBoardingPass } from "@/src/components/PremiumBoardingPass";
 import { MobileBottomNav } from "@/src/components/MobileBottomNav";
 import SecureView from "@/src/components/SecureView";
 
@@ -312,157 +314,7 @@ export default function HistoryPage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 
-                {/* Vintage Ornate Gold Ticket Design (Horizontal Landscape Layout matching Live Map) */}
-                <div 
-                  id="printable-ticket-modal"
-                  className={`ticket-container relative bg-[#f7e49f] bg-gradient-to-br from-[#f7e49f] via-[#e5c167] to-[#d4af37] rounded-[20px] md:rounded-[40px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] overflow-hidden border-[6px] md:border-[12px] border-[#b8860b]/30 flex flex-col md:flex-row min-h-[500px] md:min-h-[380px] w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-left ${isPrinting ? "print-active-ticket" : ""}`}
-                >
-                  <div className="absolute inset-0 opacity-100 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] print:opacity-50" />
-                  <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
-                  <div className="absolute inset-0 border-[6px] border-[#d4af37] opacity-80 pointer-events-none" />
-                  
-                  {/* Left Side: Main Info */}
-                  <div className="p-6 md:p-10 flex-1 relative border-b-4 md:border-b-0 md:border-r-4 border-dashed border-[#b8860b]/40">
-                    <div className="relative z-10 text-center mb-8">
-                      <div className="flex items-center justify-center gap-4 mb-3">
-                        <Image src="/logo2.png" alt="JeffBen" width={32} height={32} className="object-contain" />
-                        <div className="h-6 w-[1px] bg-[#5d4037]/25" />
-                        <Image src="/hero-logo.png" alt="Digi Bus Stand" width={32} height={32} className="object-contain mix-blend-multiply" />
-                      </div>
-                      <p className="text-[8px] font-black text-[#5d4037]/50 uppercase tracking-[0.4em] mb-1">Digi Bus Stand Framework</p>
-                      <p className="text-base font-vintage text-[#5d4037]/80 leading-none mb-1">Powered by <span className="text-black">Jeff</span>Ben</p>
-                      <h3 className="text-2xl md:text-4xl font-serif font-black tracking-tight text-[#5d4037] leading-none uppercase">Digi Bus Stand Ticket</h3>
-                    </div>
-
-                    <div className="space-y-4 text-left relative z-10 px-2 text-[#5d4037]">
-                      <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
-                        <div className="flex flex-col">
-                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Bus No:</span>
-                           <span className="text-lg font-serif font-black tracking-tight uppercase">{selectedBooking.busId?.busNumber || "TN-38"}</span>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60">Passengers:</span>
-                          <span className="text-lg font-serif font-black tracking-tight">
-                            {selectedBooking.seats?.length || 1}
-                            {selectedBooking.passengers?.some((p: any) => p.luggage && p.luggage !== 'None')
-                              ? <span className="text-xs uppercase tracking-widest text-[#5d4037]/70 ml-1">(+ Luggage)</span>
-                              : null}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4 border-b border-[#5d4037]/20 pb-3">
-                        <div className="flex flex-col">
-                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60 mb-1">Boarding Points</span>
-                          <p className="text-xs font-serif font-bold uppercase leading-tight pr-2">
-                            {selectedBooking.boardingPoint === "Combined Journey" && selectedBooking.passengers 
-                              ? selectedBooking.passengers.map((p: any) => p.boarding).join(' • ') 
-                              : (selectedBooking.boardingPoint || "Point A")}
-                          </p>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60 mb-1">Drop Points</span>
-                          <p className="text-xs font-serif font-bold uppercase leading-tight pr-2">
-                            {selectedBooking.destination === "Multi-Stop" && selectedBooking.passengers 
-                              ? selectedBooking.passengers.map((p: any) => p.destination).join(' • ') 
-                              : (selectedBooking.destination || "Point B")}
-                          </p>
-                        </div>
-                      </div>
-
-                      {selectedBooking.passengers && selectedBooking.passengers.length > 0 && selectedBooking.boardingPoint === "Combined Journey" ? (
-                        <div className="border-b border-[#5d4037]/20 pb-3">
-                          <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60 block mb-2">Journey Segments</span>
-                          <div className="space-y-2">
-                            {selectedBooking.passengers.map((p: any, idx: number) => (
-                              <div key={idx} className="text-xs bg-[#5d4037]/5 p-2 rounded-lg border border-[#5d4037]/10">
-                                <div className="flex justify-between mb-1">
-                                  <span className="font-bold text-[#5d4037]/80">Journey {idx + 1} {p.luggage && p.luggage !== 'None' ? `(+${p.luggage})` : ''}</span>
-                                  <span className="font-black text-[#5d4037]">₹{p.fare || 20}</span>
-                                </div>
-                                <div className="flex justify-between items-center text-[10px] text-[#5d4037]/70 font-bold uppercase">
-                                  <span className="truncate max-w-[80px]">{p.boarding || "Unknown"}</span>
-                                  <span>→</span>
-                                  <span className="truncate max-w-[80px]">{p.destination || "Unknown"}</span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ) : (
-                        selectedBooking.passengers && selectedBooking.passengers.length > 0 && selectedBooking.destination === "Multi-Stop" && (
-                          <div className="border-b border-[#5d4037]/20 pb-3">
-                            <span className="font-sans font-bold uppercase text-[9px] tracking-[0.2em] text-[#5d4037]/60 block mb-2">Destinations</span>
-                            <div className="space-y-1">
-                              {selectedBooking.passengers.map((p: any, idx: number) => (
-                                <div key={idx} className="flex justify-between items-center text-xs">
-                                  <span className="font-bold text-[#5d4037]/80">Passenger {idx + 1} {p.luggage && p.luggage !== 'None' ? `(${p.luggage})` : ''}</span>
-                                  <span className="font-serif font-bold uppercase truncate max-w-[100px] text-[#5d4037]">{p.destination || "Unknown"}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )
-                      )}
-
-                      <div className="flex items-center justify-between text-[#5d4037]/75">
-                        <div className="flex flex-col">
-                          <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60">Travel Date</span>
-                          <span className="text-xs font-bold">{selectedBooking.bookingDate ? new Date(selectedBooking.bookingDate).toLocaleDateString() : new Date().toLocaleDateString()}</span>
-                        </div>
-                        <div className="text-right bg-[#5d4037]/5 px-3 py-1.5 rounded-xl border border-[#5d4037]/15">
-                          <span className="font-sans font-bold uppercase text-[8px] tracking-[0.2em] text-[#5d4037]/60 block mb-0.5">Total Fare</span>
-                          <p className="text-sm font-serif font-black text-slate-950">₹{selectedBooking.totalAmount}</p>
-                        </div>
-                      </div>
-                      
-                      {selectedBooking.phonepeTransactionId && (
-                        <div className="mt-4 pt-3 border-t border-[#5d4037]/10 flex items-center justify-between">
-                           <div className="flex items-center gap-1.5">
-                             <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center">
-                               <span className="font-black text-purple-600 text-[8px]">Pe</span>
-                             </div>
-                             <span className="text-[8px] font-bold text-[#5d4037]/60 uppercase tracking-widest">PhonePe Confirmed</span>
-                           </div>
-                           <span className="text-[9px] font-bold text-[#5d4037]/80 uppercase tracking-widest">TXN: {selectedBooking.phonepeTransactionId}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Right Side: QR Secure Matrix */}
-                  <div className="p-6 md:p-8 md:w-[240px] flex flex-col justify-between items-center relative overflow-hidden bg-black/5">
-                    <div className="p-3 bg-[#b8860b]/10 rounded-2xl shadow-inner border-2 border-[#b8860b]/30 relative overflow-hidden group bg-white/20">
-                      {/* Secure Watermark Layer */}
-                      <div className="absolute inset-0 opacity-[0.2] pointer-events-none flex flex-wrap gap-2 items-center justify-center text-[5px] font-black uppercase tracking-tighter text-[#5d4037] -rotate-12 scale-110">
-                        {Array(15).fill(null).map((_, i) => (
-                          <span key={i} className="whitespace-nowrap">DIGI BUS •</span>
-                        ))}
-                      </div>
-                      <QRCodeSVG 
-                        value={selectedBooking.qrToken || "INVALID"} 
-                        size={120} 
-                        fgColor="#2d1a12" 
-                        bgColor="transparent"
-                        level="H" 
-                        imageSettings={{
-                          src: "/hero-logo.png",
-                           height: 28,
-                           width: 28,
-                          excavate: true,
-                        }}
-                      />
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-[8px] font-bold text-[#5d4037]/50 uppercase tracking-widest leading-none mb-1">Serial Key</p>
-                      <p className="text-xs font-serif font-black text-[#5d4037]">JB-{selectedBooking.ticketId?.slice(-8).toUpperCase()}</p>
-                    </div>
-                  </div>
-
-                  {/* Side Notches */}
-                  <div className="hidden md:block absolute left-[240px] top-0 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
-                  <div className="hidden md:block absolute left-[240px] bottom-0 translate-y-1/2 w-8 h-8 rounded-full bg-slate-50 border border-slate-100/50" />
-                </div>
+                <PremiumBoardingPass booking={selectedBooking} currentTime={currentTime} isPrinting={isPrinting} />
 
                 {/* Print Button Wrapper */}
                 <div className="w-full flex gap-3 mt-4 print:hidden">

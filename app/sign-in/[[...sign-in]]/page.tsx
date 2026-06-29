@@ -17,11 +17,11 @@ export default function SignInPage() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-4">
             <div className="relative w-12 h-12">
-              <Image src="/logo2.png" alt="JeffBen" fill sizes="48px" className="object-contain" priority />
+              <Image src="/logo2.png" alt="Digi Bus" fill sizes="48px" className="object-contain" priority />
             </div>
             <div className="w-px h-8 bg-slate-200" />
             <div className="relative w-12 h-12">
-              <Image src="/hero-logo.png" alt="Digi Bus Stand" fill sizes="48px" className="object-contain mix-blend-multiply" priority />
+              <Image src="/hero-logo.png" alt="Jeff Ben" fill sizes="48px" className="object-contain mix-blend-multiply" priority />
             </div>
           </div>
           <div className="space-y-1">

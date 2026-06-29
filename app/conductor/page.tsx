@@ -587,7 +587,7 @@ export default function EnterpriseConductorPortal() {
           <aside className="hidden md:flex flex-col w-72 bg-zinc-900 border-r border-zinc-800 p-6 space-y-6 shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-600/30">
-                <Image src="/logo2.png" alt="JB" width={22} height={22} className="invert brightness-0" />
+                <Image src="/hero-logo.png" alt="JB" width={22} height={22} className="invert brightness-0" />
               </div>
               <div>
                 <h2 className="text-xs font-black uppercase tracking-tight">Transit Console</h2>
@@ -652,7 +652,7 @@ export default function EnterpriseConductorPortal() {
               </button>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-600/30">
-                  <Image src="/logo2.png" alt="JB" width={18} height={18} className="invert brightness-0" />
+                  <Image src="/hero-logo.png" alt="JB" width={18} height={18} className="invert brightness-0" />
                 </div>
                 <div>
                   <h2 className="text-[10px] font-black uppercase tracking-tight text-white leading-tight">Console</h2>
@@ -709,7 +709,7 @@ export default function EnterpriseConductorPortal() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center">
-                          <Image src="/logo2.png" alt="JB" width={18} height={18} className="invert brightness-0" />
+                          <Image src="/hero-logo.png" alt="JB" width={18} height={18} className="invert brightness-0" />
                         </div>
                         <span className="font-black text-xs tracking-tight text-white uppercase">Transit Menu</span>
                       </div>
