@@ -60,32 +60,32 @@ export function WebHeader() {
         scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
-      <div className="container mx-auto px-6 max-w-7xl h-24 flex items-center justify-between relative">
+      <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
         
         {/* Left Side: Logos */}
-        <a href="/" className="flex items-center gap-4">
-          <img src="/logo2.png" alt="Digi Bus" style={{ width: 72, height: 72, objectFit: "contain" }} className="drop-shadow-md" />
+        <a href="/" className="flex items-center gap-2 md:gap-4 shrink-0">
+          <img src="/logo2.png" alt="Digi Bus" className="w-10 h-10 md:w-[72px] md:h-[72px] object-contain drop-shadow-md" />
           
           <div className="flex flex-col justify-center">
-            <span className="font-black text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
+            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
               DIGI <span className="text-[#FF9933]">BUS</span>
             </span>
-            <span className="font-black text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
+            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
               STAND
             </span>
           </div>
 
-          <div className="w-[1px] h-12 bg-zinc-300 mx-1"></div>
+          <div className="w-[1px] h-8 md:h-12 bg-zinc-300 mx-1 md:mx-2"></div>
 
-          <div className="flex flex-col justify-center gap-[2px]">
-            <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest leading-none">
+          <div className="flex flex-col justify-center gap-[1px] md:gap-[2px]">
+            <span className="text-[6px] md:text-[8px] font-bold text-zinc-500 uppercase tracking-widest leading-none">
               Powered By
             </span>
             <div className="flex flex-col leading-none">
-              <span className="text-[18px] font-black tracking-tight leading-none">
+              <span className="text-[12px] md:text-[18px] font-black tracking-tight leading-none">
                 <span className="text-zinc-900">JEFF</span><span className="text-[#FF9933]">BEN</span>
               </span>
-              <span className="text-[8px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-[2px]">
+              <span className="text-[6px] md:text-[8px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
                 Systems
               </span>
             </div>
