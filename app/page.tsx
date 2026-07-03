@@ -217,20 +217,17 @@ export default function ProductPage() {
         >
           <div 
             className="mx-auto rounded-2xl object-cover h-[40rem] w-full shadow-2xl bg-zinc-900 overflow-hidden relative"
-            dangerouslySetInnerHTML={{
-              __html: `
-                <video
-                  src="/mobility-demo.mp4"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  preload="auto"
-                  style="width: 100%; height: 100%; object-fit: cover;"
-                ></video>
-              `
-            }}
-          />
+          >
+            <video
+              src="/mobility-demo.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
         </ContainerScroll>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
