@@ -54,7 +54,7 @@ export const ContainerScroll = ({
                 }}
             >
                 <Header translate={translate} titleComponent={titleComponent} />
-                <Card rotate={rotateMobileSafe} translate={translate} scale={scale}>
+                <Card rotate={rotate} translate={translate} scale={scale} isMobile={isMobile}>
                     {children}
                 </Card>
             </div>
@@ -79,27 +79,29 @@ export const Card = ({
     rotate,
     scale,
     translate,
+    isMobile,
     children,
 }: {
-    rotate: MotionValue<number>;
+    rotate: MotionValue<number> | number;
     scale: MotionValue<number>;
     translate: MotionValue<number>;
+    isMobile?: boolean;
     children: React.ReactNode;
 }) => {
     return (
         <motion.div
             style={{
-                rotateX: rotate,
+                ...(isMobile ? {} : { rotateX: rotate, willChange: "transform" }),
                 scale,
                 translateY: translate,
                 boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-                willChange: "transform",
             }}
             className={cn(
-                "max-w-5xl -mt-12 mx-auto h-[18rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl relative gpu-accelerated"
+                "max-w-5xl -mt-12 mx-auto h-[18rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl relative gpu-accelerated",
+                isMobile ? "transform-none" : ""
             )}
         >
-            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-gray-100 md:rounded-2xl md:p-4 ">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-black md:rounded-2xl md:p-4 ">
                 {children}
             </div>
         </motion.div>

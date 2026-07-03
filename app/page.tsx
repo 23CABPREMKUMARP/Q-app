@@ -225,14 +225,16 @@ export default function ProductPage() {
           >
             <video
               ref={videoRef}
-              src="/mobility-demo.mp4"
               autoPlay
               loop
               muted
               playsInline
+              controls={false}
               preload="auto"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+              style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#000' }}
+            >
+              <source src="/mobility-demo.mp4" type="video/mp4" />
+            </video>
           </div>
         </ContainerScroll>
         <motion.div
