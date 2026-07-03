@@ -231,7 +231,7 @@ export default function ProductPage() {
               playsInline
               controls={false}
               preload="auto"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#000' }}
+              style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#000' }}
             >
               <source src="/mobility-demo.mp4" type="video/mp4" />
             </video>
