@@ -119,21 +119,16 @@ export default function ProductPage() {
 
       {/* ================= HERO SECTION ================= */}
       <section className="relative h-screen w-full overflow-hidden flex items-center justify-center gpu-accelerated">
-        {/* Background Bus Video */}
+        {/* Background Bus Image */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 w-full h-full" dangerouslySetInnerHTML={{
-            __html: `
-              <video
-                src="/mobility-demo.mp4"
-                autoplay
-                loop
-                muted
-                playsinline
-                preload="auto"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9;"
-              ></video>
-            `
-          }} />
+          <Image
+            src="/hero-bus.jpg"
+            alt="Strategic Automated Mobility Infrastructure"
+            fill
+            sizes="100vw"
+            className="object-cover md:object-center opacity-90 gpu-accelerated"
+            priority
+          />
           {/* Professional Overlays for Legibility - Replaced blur with standard gradient for performance */}
           <div className="absolute inset-0 bg-gradient-to-r from-orange-50/90 via-orange-50/60 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-orange-50/20 via-transparent to-orange-50 pointer-events-none" />
