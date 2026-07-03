@@ -144,7 +144,7 @@ export default function ProductPage() {
               ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for premium feel
             }}
             viewport={{ once: true }}
-            className="relative z-10 flex flex-col items-center justify-start text-center px-6 md:px-24 pt-12 md:pt-24 w-full h-full"
+            className="relative z-10 flex flex-col items-center justify-center text-center px-6 md:px-24 pt-8 md:pt-12 w-full h-full"
           >
             <div className="max-w-4xl relative">
               <motion.div
