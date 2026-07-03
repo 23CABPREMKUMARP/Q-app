@@ -96,6 +96,16 @@ HomeLoader.displayName = "HomeLoader";
 export default function ProductPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    // Bulletproof video playback for mobile browsers
+    if (!isLoading && videoRef.current) {
+      videoRef.current.play().catch((e) => {
+        console.warn("Video autoplay prevented:", e);
+      });
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2500);
@@ -214,6 +224,7 @@ export default function ProductPage() {
             className="mx-auto rounded-2xl object-cover h-[40rem] w-full shadow-2xl bg-zinc-900 overflow-hidden relative"
           >
             <video
+              ref={videoRef}
               src="/mobility-demo.mp4"
               autoPlay
               loop

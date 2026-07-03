@@ -32,6 +32,8 @@ export const ContainerScroll = ({
     };
 
     const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+    // Fix WebKit mobile video black screen bug by disabling 3D rotation on mobile
+    const rotateMobileSafe = isMobile ? 0 : rotate;
     const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
     const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
@@ -52,7 +54,7 @@ export const ContainerScroll = ({
                 }}
             >
                 <Header translate={translate} titleComponent={titleComponent} />
-                <Card rotate={rotate} translate={translate} scale={scale}>
+                <Card rotate={rotateMobileSafe} translate={translate} scale={scale}>
                     {children}
                 </Card>
             </div>
