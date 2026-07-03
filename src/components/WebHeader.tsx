@@ -39,7 +39,8 @@ export function WebHeader() {
     pathname?.startsWith("/history") ||
     pathname?.startsWith("/scan") ||
     pathname?.startsWith("/live-map") ||
-    pathname?.startsWith("/get-ticket")
+    pathname?.startsWith("/get-ticket") ||
+    pathname?.startsWith("/town-bus")
   ) {
     return null;
   }
