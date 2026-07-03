@@ -221,7 +221,7 @@ export default function ProductPage() {
           }
         >
           <div 
-            className="mx-auto rounded-2xl object-cover h-[40rem] w-full shadow-2xl bg-zinc-900 overflow-hidden relative"
+            className="mx-auto rounded-2xl object-cover h-full w-full shadow-2xl bg-zinc-900 overflow-hidden relative"
           >
             <video
               ref={videoRef}
