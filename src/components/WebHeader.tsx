@@ -35,7 +35,11 @@ export function WebHeader() {
     pathname?.startsWith("/sign-in") || 
     pathname?.startsWith("/sign-up") ||
     pathname?.startsWith("/admin") ||
-    pathname?.startsWith("/conductor")
+    pathname?.startsWith("/conductor") ||
+    pathname?.startsWith("/history") ||
+    pathname?.startsWith("/scan") ||
+    pathname?.startsWith("/live-map") ||
+    pathname?.startsWith("/get-ticket")
   ) {
     return null;
   }
