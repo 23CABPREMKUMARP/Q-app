@@ -7,8 +7,10 @@ import {
   Clock, MapPin, User, ChevronLeft, Volume2, Vibrate, LayoutDashboard, 
   History, Settings, Bus, Share2, X, Fingerprint, Lock, Shield, KeyRound,
   Search, Plus, Minus, AlertCircle, RefreshCw, Smartphone, CreditCard, 
-  HelpCircle, HardDrive, Wifi, WifiOff, FileText, Bell, Users, DollarSign, Menu
+  HelpCircle, HardDrive, Wifi, WifiOff, FileText, Bell, Users, DollarSign, Menu,
+  Radio, Navigation, Gauge, BatteryMedium, Signal
 } from "lucide-react";
+import { useGPS } from "@/src/hooks/useGPS";
 import { BusMatrixQR } from "@/src/components/BusMatrixQR";
 import { QRCodeSVG } from "qrcode.react";
 import Image from "next/image";
@@ -53,6 +55,22 @@ export default function EnterpriseConductorPortal() {
   const [lng, setLng] = useState(76.9558);
   const [broadcasting, setBroadcasting] = useState(false);
   const [pathIndex, setPathIndex] = useState(0);
+  const [gpsEnabled, setGpsEnabled] = useState(false);
+  const [networkStatus, setNetworkStatus] = useState<'online' | 'offline'>('online');
+  const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
+
+  // Real GPS via useGPS hook
+  const gpsState = useGPS({
+    busId: busDbId,
+    conductorId: employeeId,
+    enabled: gpsEnabled && !!busDbId,
+    onLocationUpdate: ({ lat: newLat, lng: newLng, speed: newSpeed }) => {
+      setLat(newLat);
+      setLng(newLng);
+      setSpeed(newSpeed);
+    },
+    onError: (err) => setError(err),
+  });
 
   // Statistics & Log Registers (persisted to state)
   const [ticketsSold, setTicketsSold] = useState(12);
@@ -1433,49 +1451,120 @@ export default function EnterpriseConductorPortal() {
 
               {/* TAB CONTENT: 6. TRIP & GPS TRACKER */}
               {activeTab === "gps" && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
-                  
-                  {/* GPS Telemetry control */}
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 space-y-4">
-                    <div className="flex justify-between items-center">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5 text-left">
+
+                  {/* GPS Status Header Card */}
+                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+                    <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-2xl flex items-center justify-center ${broadcasting ? "bg-green-500 text-white animate-pulse" : "bg-zinc-955 text-zinc-600 border border-zinc-850"}`}>
-                          <Share2 size={20} />
+                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
+                          gpsState.status === 'broadcasting'
+                            ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                            : gpsState.status === 'no_permission'
+                            ? 'bg-red-500/10 border border-red-500/20 text-red-400'
+                            : 'bg-zinc-800 text-zinc-500 border border-zinc-700'
+                        }`}>
+                          {gpsState.status === 'broadcasting'
+                            ? <Radio size={22} className="animate-pulse" />
+                            : <Navigation size={22} />}
                         </div>
                         <div>
-                          <h3 className="text-sm font-bold text-zinc-200">GPS Signal Streamer</h3>
-                          <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">
-                            {broadcasting ? "Broadcasting live coordinates" : "Broadcaster offline"}
+                          <h3 className="text-sm font-black text-zinc-100">GPS Tracker</h3>
+                          <p className={`text-[9px] font-bold uppercase tracking-widest ${
+                            gpsState.status === 'broadcasting' ? 'text-emerald-400' :
+                            gpsState.status === 'error' ? 'text-red-400' :
+                            gpsState.status === 'no_permission' ? 'text-amber-400' :
+                            'text-zinc-500'
+                          }`}>
+                            {gpsState.status === 'broadcasting' ? '● Broadcasting Live' :
+                             gpsState.status === 'error' ? '⚠ GPS Error' :
+                             gpsState.status === 'no_permission' ? '⚠ Permission Denied' :
+                             '○ Standby'}
                           </p>
                         </div>
                       </div>
 
+                      {/* Start / End Trip */}
                       <button
                         onClick={() => {
-                          setBroadcasting(!broadcasting);
+                          const next = !gpsEnabled;
+                          setGpsEnabled(next);
+                          if (!next) setBroadcasting(false);
+                          else { setBroadcasting(true); setTripStatus('Trip Started'); }
                           playBeep(true);
                         }}
-                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${broadcasting ? "bg-red-500/10 border border-red-500/20 text-red-500" : "bg-orange-600 text-white"}`}
+                        disabled={!busDbId}
+                        className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-40 ${
+                          gpsEnabled
+                            ? 'bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/30'
+                            : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/30'
+                        }`}
                       >
-                        {broadcasting ? "Disconnect" : "Go Live"}
+                        {gpsEnabled ? 'End Trip' : 'Start Trip'}
                       </button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 bg-zinc-955 p-4 rounded-xl border border-zinc-850 font-mono text-xs">
-                      <div>
-                        <span className="text-[8px] font-bold text-zinc-500 block uppercase mb-0.5">Latitude</span>
-                        <span className="font-bold text-zinc-200">{lat.toFixed(6)}</span>
+                    {/* Error message */}
+                    {gpsState.errorMessage && (
+                      <div className="flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-[10px] font-bold mb-4">
+                        <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
+                        {gpsState.errorMessage}
                       </div>
-                      <div>
-                        <span className="text-[8px] font-bold text-zinc-500 block uppercase mb-0.5">Longitude</span>
-                        <span className="font-bold text-zinc-200">{lng.toFixed(6)}</span>
+                    )}
+
+                    {/* Coordinate Readout */}
+                    <div className="grid grid-cols-2 gap-3 font-mono">
+                      <div className="bg-zinc-950 rounded-xl p-3 border border-zinc-800">
+                        <span className="text-[8px] font-bold text-zinc-500 block uppercase tracking-wider mb-1">Latitude</span>
+                        <span className="text-sm font-bold text-zinc-200">
+                          {gpsState.lat !== null ? gpsState.lat.toFixed(6) : (lat !== 0 ? lat.toFixed(6) : '—')}
+                        </span>
+                      </div>
+                      <div className="bg-zinc-950 rounded-xl p-3 border border-zinc-800">
+                        <span className="text-[8px] font-bold text-zinc-500 block uppercase tracking-wider mb-1">Longitude</span>
+                        <span className="text-sm font-bold text-zinc-200">
+                          {gpsState.lng !== null ? gpsState.lng.toFixed(6) : (lng !== 0 ? lng.toFixed(6) : '—')}
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Trip status changes */}
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 space-y-4">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400">Manage Trip Status</h3>
+                  {/* Live Stats */}
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
+                      <Gauge size={18} className="text-[#FF9933] mx-auto mb-2" />
+                      <p className="text-2xl font-black text-white">{gpsState.speed || speed}</p>
+                      <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">km/h</p>
+                    </div>
+                    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
+                      <Radio size={18} className="text-emerald-400 mx-auto mb-2" />
+                      <p className="text-2xl font-black text-white">{gpsState.updateCount}</p>
+                      <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Updates</p>
+                    </div>
+                    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
+                      <Signal size={18} className="text-blue-400 mx-auto mb-2" />
+                      <p className="text-[11px] font-black text-white">{gpsState.accuracy ? `${Math.round(gpsState.accuracy)}m` : '—'}</p>
+                      <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Accuracy</p>
+                    </div>
+                  </div>
+
+                  {/* Current Route */}
+                  <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex items-center gap-3">
+                    <Bus size={20} className="text-[#FF9933] flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Current Route</p>
+                      <p className="text-sm font-black text-zinc-100 truncate">{assignedRouteName || 'Not Assigned'}</p>
+                    </div>
+                    <div className={`text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest ${
+                      tripStatus === 'Trip Started' || tripStatus === 'Boarding'
+                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                        : 'bg-zinc-800 text-zinc-400'
+                    }`}>{tripStatus}</div>
+                  </div>
+
+                  {/* Trip Status Controls */}
+                  <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-3">
+                    <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Update Trip Status</h3>
                     <div className="grid grid-cols-3 gap-2">
                       {[
                         { name: "Scheduled", icon: Clock },
@@ -1484,59 +1573,22 @@ export default function EnterpriseConductorPortal() {
                         { name: "Reached Stop", icon: MapPin },
                         { name: "Arriving Soon", icon: Volume2 },
                         { name: "Completed", icon: CheckCircle2 }
-                      ].map((status) => {
-                        const Icon = status.icon;
-                        const isActive = tripStatus === status.name;
+                      ].map((s) => {
+                        const Icon = s.icon;
+                        const isActive = tripStatus === s.name;
                         return (
                           <button
-                            key={status.name}
-                            onClick={() => {
-                              setTripStatus(status.name);
-                              triggerTripBroadcast(status.name);
-                              playBeep(true);
-                            }}
-                            className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-all text-center gap-2 cursor-pointer ${isActive ? "bg-orange-600 border-orange-500 text-white shadow-md" : "bg-zinc-955 border-zinc-850 text-zinc-500 hover:border-zinc-800 hover:text-zinc-300"}`}
+                            key={s.name}
+                            onClick={() => { setTripStatus(s.name); triggerTripBroadcast(s.name); playBeep(true); }}
+                            className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all text-center gap-1.5 cursor-pointer ${
+                              isActive ? 'bg-orange-600 border-orange-500 text-white shadow-md' : 'bg-zinc-950 border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                            }`}
                           >
-                            <Icon size={18} />
-                            <span className="text-[9px] uppercase tracking-wider font-bold leading-none">{status.name}</span>
+                            <Icon size={16} />
+                            <span className="text-[8px] uppercase tracking-wide font-bold leading-tight">{s.name}</span>
                           </button>
                         );
                       })}
-                    </div>
-                  </div>
-
-                  {/* Telemetry Dial */}
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400">Current Speed Dial</h3>
-                      <p className="text-3xl font-black text-white tracking-tight mt-1">
-                        {speed} <span className="text-xs font-normal text-zinc-500 uppercase tracking-widest">km/h</span>
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => {
-                          const ns = Math.max(0, speed - 5);
-                          setSpeed(ns);
-                          triggerTripBroadcast(tripStatus);
-                          playBeep(true);
-                        }}
-                        className="w-10 h-10 bg-zinc-955 border border-zinc-800 hover:border-zinc-700 rounded-xl flex items-center justify-center font-bold text-lg text-zinc-300 cursor-pointer"
-                      >
-                        -
-                      </button>
-                      <button
-                        onClick={() => {
-                          const ns = Math.min(100, speed + 5);
-                          setSpeed(ns);
-                          triggerTripBroadcast(tripStatus);
-                          playBeep(true);
-                        }}
-                        className="w-10 h-10 bg-zinc-955 border border-zinc-800 hover:border-zinc-700 rounded-xl flex items-center justify-center font-bold text-lg text-zinc-300 cursor-pointer"
-                      >
-                        +
-                      </button>
                     </div>
                   </div>
                 </motion.div>

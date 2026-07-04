@@ -1,40 +1,77 @@
-import React, { useMemo } from 'react';
-import { motion } from 'motion/react';
-import { Navigation, Clock, MapPin, X, ArrowRight, Route, ShieldCheck, Zap } from 'lucide-react';
+"use client";
+
+import React, { useMemo } from "react";
+import { motion } from "motion/react";
+import { Navigation, Clock, MapPin, X, ArrowRight, Route, ShieldCheck, Wifi, WifiOff, Gauge, Bus, Radio } from "lucide-react";
+import type { BusData } from "@/src/types";
+import type { BusPosition } from "@/src/hooks/useBusRealtime";
 
 interface TrackingStatusPanelProps {
-  bus: any;
+  bus: BusData;
+  livePosition: BusPosition | null;
   userLocation: { lat: number; lng: number } | null;
   onClose: () => void;
   onMinimize: () => void;
 }
 
-export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({ bus, userLocation, onClose, onMinimize }) => {
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
+  bus,
+  livePosition,
+  userLocation,
+  onClose,
+  onMinimize,
+}) => {
   const from = bus?.routeId?.from || "Start";
   const to = bus?.routeId?.to || "End";
-  const speed = bus?.speed || 0;
-  const isGpsEnabled = !!(bus?.location?.lat && bus?.location?.lng);
+  const isGpsOnline = livePosition?.deviceStatus === "Online";
 
-  // Simple progress and status logic for advanced tracking
-  const progressPercent = useMemo(() => {
-    // In a real app this would use the GPS coordinates vs route path
-    const seed = Date.now() + (bus?._id ? bus._id.charCodeAt(0) : 0) * 1000;
-    const loopDuration = 120000; 
-    let progress = (seed % loopDuration) / loopDuration;
-    if (progress > 0.5) progress = 1 - (progress - 0.5) * 2;
-    else progress = progress * 2;
-    return Math.floor(progress * 100);
-  }, [bus]);
+  const speed = livePosition?.speed ?? bus?.speed ?? 0;
+  const lat = livePosition?.lat ?? bus?.location?.lat ?? null;
+  const lng = livePosition?.lng ?? bus?.location?.lng ?? null;
 
-  const trackingStatus = useMemo(() => {
-    if (progressPercent < 5) return "Departed";
-    if (progressPercent < 85) return "On Route";
-    if (progressPercent < 98) return "Nearing Destination";
-    return "Arrived";
-  }, [progressPercent]);
+  const distanceToUser = useMemo(() => {
+    if (!userLocation || !lat || !lng) return null;
+    const d = haversineKm(userLocation.lat, userLocation.lng, lat, lng);
+    return d < 1 ? `${Math.round(d * 1000)}m` : `${d.toFixed(1)}km`;
+  }, [userLocation, lat, lng]);
 
-  const etaMinutes = Math.max(1, Math.floor((100 - progressPercent) / 2));
-  const distanceRemaining = Math.max(0.5, ((100 - progressPercent) * 0.15)).toFixed(1);
+  const lastSeenText = useMemo(() => {
+    if (!livePosition?.timestamp) return "Unknown";
+    const diff = Math.floor((Date.now() - new Date(livePosition.timestamp).getTime()) / 1000);
+    if (diff < 10) return "Just now";
+    if (diff < 60) return `${diff}s ago`;
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+    return `${Math.floor(diff / 3600)}h ago`;
+  }, [livePosition]);
+
+  const nextStop = useMemo(() => {
+    const stops = bus?.routeId?.stops || [];
+    if (!lat || !lng || stops.length === 0) return null;
+    let minDist = Infinity;
+    let nearest: any = null;
+    for (const stop of stops) {
+      const d = haversineKm(lat, lng, stop.lat, stop.lng);
+      if (d < minDist) { minDist = d; nearest = stop; }
+    }
+    return nearest;
+  }, [bus, lat, lng]);
+
+  const etaMinutes = useMemo(() => {
+    if (!nextStop || !lat || !lng) return null;
+    const dist = haversineKm(lat, lng, nextStop.lat, nextStop.lng);
+    const avgSpeed = speed > 5 ? speed : 25; // assume 25km/h if stopped
+    return Math.ceil((dist / avgSpeed) * 60);
+  }, [nextStop, lat, lng, speed]);
 
   return (
     <motion.div
@@ -45,112 +82,104 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({ bus, u
       drag="y"
       dragConstraints={{ top: 0 }}
       dragElastic={0.2}
-      onDragEnd={(_, info) => {
-        if (info.offset.y > 150) {
-          onMinimize();
-        }
-      }}
-      className="fixed inset-x-0 bottom-0 z-[1000] bg-white rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-slate-100 flex flex-col max-h-[92vh] overflow-hidden"
+      onDragEnd={(_, info) => { if (info.offset.y > 150) onMinimize(); }}
+      className="fixed inset-x-0 bottom-0 z-[1000] bg-white rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
     >
-      <div className="w-full flex justify-center py-4 cursor-grab active:cursor-grabbing">
-        <div className="w-12 h-1.5 bg-zinc-200 rounded-full" />
+      {/* Drag handle */}
+      <div className="w-full flex justify-center py-3 cursor-grab active:cursor-grabbing flex-shrink-0">
+        <div className="w-10 h-1 bg-zinc-200 rounded-full" />
       </div>
 
-      <div className="px-6 md:px-12 pb-12 overflow-y-auto no-scrollbar">
-        <div className="flex justify-between items-start mb-6">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              {isGpsEnabled ? (
-                <>
-                  <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[9px] font-black uppercase tracking-widest rounded">
-                    {trackingStatus}
-                  </span>
-                  <span className="flex items-center gap-1 text-[9px] font-bold text-slate-400">
-                    <ShieldCheck size={10} /> Live GPS
-                  </span>
-                </>
+      <div className="px-5 md:px-8 pb-8 overflow-y-auto">
+        {/* Header */}
+        <div className="flex justify-between items-start mb-5">
+          <div className="flex-1 pr-3">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              {isGpsOnline ? (
+                <span className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-200">
+                  <Radio size={10} className="animate-pulse" /> Live GPS
+                </span>
               ) : (
-                <span className="px-2 py-0.5 bg-zinc-100 text-zinc-500 text-[9px] font-black uppercase tracking-widest rounded flex items-center gap-1 border border-zinc-200">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-300"></span>
-                  GPS Not Installed
+                <span className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded-full border border-amber-200">
+                  <WifiOff size={10} /> Last Known · {lastSeenText}
                 </span>
               )}
+              <span className="px-2 py-0.5 bg-zinc-100 text-zinc-500 text-[9px] font-bold rounded-full">
+                {bus.busCode || bus.busNumber}
+              </span>
             </div>
-            <h2 className="text-2xl font-black text-zinc-900 tracking-tight uppercase">
-              {bus.busNumber}
-            </h2>
+            <h2 className="text-2xl font-black text-zinc-900 tracking-tight uppercase">{bus.busNumber}</h2>
             <p className="text-sm font-bold text-zinc-500">{bus.routeId?.routeName}</p>
           </div>
-          <button 
+          <button
             onClick={onClose}
-            className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center text-zinc-500 hover:bg-zinc-200 transition-colors"
+            className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center text-zinc-500 hover:bg-zinc-200 transition-colors flex-shrink-0"
           >
             <X size={18} />
           </button>
         </div>
 
-        {/* Route Visualizer */}
-        <div className="bg-zinc-950 rounded-[24px] p-6 mb-6 relative overflow-hidden group">
-          <div className="absolute inset-y-0 left-0 w-1 bg-primary" />
-          <div className="flex flex-col gap-1">
-            <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Boarding</span>
-            <span className="text-sm font-black text-white uppercase truncate">{from}</span>
-          </div>
-          <div className="flex-1 flex flex-col items-center px-4 my-4">
-            <div className="w-full h-1 bg-zinc-800 relative rounded-full overflow-hidden">
-              <div 
-                className="absolute inset-y-0 left-0 bg-primary transition-all duration-1000 ease-linear"
-                style={{ width: `${progressPercent}%` }}
-              />
+        {/* Route card */}
+        <div className="bg-zinc-950 rounded-2xl p-5 mb-4 relative overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-1 bg-[#FF9933] rounded-l-2xl" />
+          <div className="flex items-center gap-4 pl-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">From</p>
+              <p className="text-sm font-black text-white uppercase truncate">{from}</p>
             </div>
-          </div>
-          <div className="flex flex-col gap-1 text-right">
-            <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Destination</span>
-            <span className="text-sm font-black text-white uppercase truncate">{to}</span>
+            <ArrowRight size={16} className="text-[#FF9933] flex-shrink-0" />
+            <div className="flex-1 min-w-0 text-right">
+              <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">To</p>
+              <p className="text-sm font-black text-white uppercase truncate">{to}</p>
+            </div>
           </div>
         </div>
 
-        {/* Live Stats */}
-        {isGpsEnabled ? (
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            <div className="bg-orange-50 rounded-[20px] p-4 flex flex-col items-center justify-center border border-orange-100">
-              <Clock size={20} className="text-primary mb-1" />
-              <span className="text-lg font-black text-zinc-900">{etaMinutes} <span className="text-[10px]">mins</span></span>
-              <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mt-1">ETA</span>
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
+            <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-400 uppercase tracking-widest">
+              <Gauge size={11} /> Speed
             </div>
-            <div className="bg-blue-50 rounded-[20px] p-4 flex flex-col items-center justify-center border border-blue-100">
-              <Route size={20} className="text-blue-500 mb-1" />
-              <span className="text-lg font-black text-zinc-900">{distanceRemaining} <span className="text-[10px]">km</span></span>
-              <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mt-1">Remaining</span>
-            </div>
-            <div className="bg-emerald-50 rounded-[20px] p-4 flex flex-col items-center justify-center border border-emerald-100">
-              <Zap size={20} className="text-emerald-500 mb-1" />
-              <span className="text-lg font-black text-zinc-900">{speed} <span className="text-[10px]">km/h</span></span>
-              <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest mt-1">Speed</span>
-            </div>
+            <p className="text-2xl font-black text-zinc-900">{speed}<span className="text-sm font-bold text-zinc-400 ml-1">km/h</span></p>
           </div>
-        ) : (
-          <div className="bg-zinc-50 rounded-[20px] p-6 mb-6 flex flex-col items-center justify-center border border-zinc-200 text-center">
-            <MapPin size={32} className="text-zinc-300 mb-2" />
-            <span className="text-sm font-black text-zinc-500 uppercase tracking-widest">Live tracking is not available for this bus.</span>
-            <span className="text-[10px] font-bold text-zinc-400 uppercase mt-1">Route schedule shown instead</span>
+
+          <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
+            <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-400 uppercase tracking-widest">
+              <Navigation size={11} /> Distance
+            </div>
+            <p className="text-2xl font-black text-zinc-900">{distanceToUser || <span className="text-sm text-zinc-400">No location</span>}</p>
+          </div>
+
+          {nextStop && (
+            <div className="bg-[#FFF8F0] border border-[#FF9933]/20 rounded-2xl p-4 flex flex-col gap-1">
+              <div className="flex items-center gap-1.5 text-[9px] font-black text-[#FF9933] uppercase tracking-widest">
+                <MapPin size={11} /> Next Stop
+              </div>
+              <p className="text-sm font-black text-zinc-900 leading-tight">{nextStop.stopName}</p>
+            </div>
+          )}
+
+          {etaMinutes !== null && (
+            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex flex-col gap-1">
+              <div className="flex items-center gap-1.5 text-[9px] font-black text-emerald-600 uppercase tracking-widest">
+                <Clock size={11} /> ETA
+              </div>
+              <p className="text-2xl font-black text-zinc-900">{etaMinutes}<span className="text-sm font-bold text-zinc-400 ml-1">min</span></p>
+            </div>
+          )}
+        </div>
+
+        {/* GPS offline warning */}
+        {!isGpsOnline && (
+          <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-2xl text-amber-800">
+            <WifiOff size={18} className="flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-xs font-black uppercase tracking-wide">GPS Offline</p>
+              <p className="text-xs font-medium mt-0.5 text-amber-700">Showing last known location · Updated {lastSeenText}</p>
+            </div>
           </div>
         )}
-
-        <div className="grid grid-cols-2 gap-3">
-          <button 
-            onClick={onMinimize}
-            className="h-14 bg-zinc-100 text-zinc-900 rounded-[20px] font-black uppercase tracking-widest text-[10px] hover:bg-zinc-200 transition-all flex items-center justify-center gap-2"
-          >
-            <Navigation size={14} className="text-zinc-500 rotate-45" /> Map View
-          </button>
-          <button 
-            onClick={onClose}
-            className="h-14 bg-zinc-900 text-white rounded-[20px] font-black uppercase tracking-widest text-[10px] hover:bg-zinc-800 transition-all flex items-center justify-center gap-2"
-          >
-            End Tracking
-          </button>
-        </div>
       </div>
     </motion.div>
   );

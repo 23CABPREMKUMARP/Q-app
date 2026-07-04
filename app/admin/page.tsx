@@ -15,7 +15,7 @@ import {
 import { BusData, MapLayers } from "@/src/types";
 import SecureView from "@/src/components/SecureView";
 
-// Load LiveBusMap dynamically to prevent SSR hydration issues with Maplibre
+// Load LeafletBusMap dynamically to prevent SSR hydration issues with Leaflet
 const LiveBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), { ssr: false });
 
 interface ConductorAssignment {
@@ -735,18 +735,13 @@ function EnterpriseAdminDashboardContent() {
                     </div>
                     
                     <div className="flex-1 w-full relative">
-                      <LiveBusMap 
-                        buses={buses} 
-                        layers={{ 
-                          showBuses: true, 
-                          showRoutes: true, 
-                          showMajorStops: true,
-                          showSmallStops: false,
-                          showTraffic: false,
-                          showBuildings: false
-                        }} 
+                      <LiveBusMap
+                        buses={buses}
+                        livePositions={{}}
                         onBusClick={(bus: any) => setSelectedBus(bus)}
                         selectedBusId={selectedBus?._id}
+                        showRoutes={true}
+                        showStops={false}
                       />
                     </div>
                   </div>
@@ -919,67 +914,93 @@ function EnterpriseAdminDashboardContent() {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-zinc-950 border-b border-zinc-800 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                        <th className="py-4 px-6">Transponder ID</th>
-                        <th className="py-4 px-6">Bus Reg Number</th>
-                        <th className="py-4 px-6">Type & Amenities</th>
-                        <th className="py-4 px-6">Assigned Route</th>
-                        <th className="py-4 px-6">Active Speed</th>
-                        <th className="py-4 px-6">Seat Occupancy</th>
-                        <th className="py-4 px-6 text-right">Telemetry Matrix</th>
+                        <th className="py-4 px-5">Bus Code</th>
+                        <th className="py-4 px-5">Reg Number</th>
+                        <th className="py-4 px-5">Route</th>
+                        <th className="py-4 px-5">Speed</th>
+                        <th className="py-4 px-5">GPS Status</th>
+                        <th className="py-4 px-5">Last Online</th>
+                        <th className="py-4 px-5 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-zinc-800/50 text-xs">
-                      {filteredBuses.map(bus => (
+                      {filteredBuses.map(bus => {
+                        const gpsOn = (bus as any).gps_enabled || (bus as any).gpsEnabled || false;
+                        const devStatus = (bus as any).device_status || (bus as any).deviceStatus || 'Offline';
+                        const lastSeen = (bus as any).last_seen || null;
+                        const lastSeenText = lastSeen
+                          ? (() => {
+                              const diff = Math.floor((Date.now() - new Date(lastSeen).getTime()) / 1000);
+                              if (diff < 60) return `${diff}s ago`;
+                              if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+                              return `${Math.floor(diff / 3600)}h ago`;
+                            })()
+                          : 'Never';
+
+                        return (
                         <tr key={bus._id} className="hover:bg-zinc-800/25 transition-colors">
-                          <td className="py-4 px-6 font-mono font-black text-orange-400 uppercase">{bus.busCode || "BUS"}</td>
-                          <td className="py-4 px-6 font-bold text-white uppercase">{bus.busNumber}</td>
-                          <td className="py-4 px-6">
-                            <div className="font-semibold text-white">{bus.status || "Regular"}</div>
-                            <div className="text-[9px] text-zinc-500 mt-0.5">AC • WiFi • Seatbelt</div>
-                          </td>
-                          <td className="py-4 px-6 text-zinc-300 font-semibold italic">
-                            {bus.routeId?.routeName || "Depot Standby"}
-                          </td>
-                          <td className="py-4 px-6 font-semibold">
-                            <span className={bus.status === "Running" ? "text-emerald-400 font-mono font-extrabold" : "text-zinc-500"}>
-                              {bus.status === "Running" ? `${bus.speed} km/h` : "Stationary"}
+                          <td className="py-4 px-5 font-mono font-black text-orange-400 uppercase text-xs">{bus.busCode || 'BUS'}</td>
+                          <td className="py-4 px-5 font-bold text-white uppercase text-xs">{bus.busNumber}</td>
+                          <td className="py-4 px-5 text-zinc-300 font-semibold italic text-xs">{bus.routeId?.routeName || 'Depot Standby'}</td>
+                          <td className="py-4 px-5 text-xs">
+                            <span className={bus.status === 'Running' ? 'text-emerald-400 font-mono font-extrabold' : 'text-zinc-500'}>
+                              {bus.status === 'Running' ? `${bus.speed} km/h` : 'Stationary'}
                             </span>
                           </td>
-                          <td className="py-4 px-6">
-                            <div className="flex items-center gap-2">
-                              <div className="w-16 bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                                <div 
-                                  className={`h-full rounded-full ${
-                                    (bus.availableSeats || 0) < 10 ? "bg-red-500" : "bg-emerald-500"
-                                  }`} 
-                                  style={{ width: `${Math.max(10, 100 - ((bus.availableSeats || 0) / 45) * 100)}%` }}
-                                ></div>
-                              </div>
-                              <span className="text-[10px] font-black text-zinc-400">
-                                {45 - (bus.availableSeats || 0)} / 45
+                          {/* GPS Status */}
+                          <td className="py-4 px-5">
+                            <div className="flex flex-col gap-1">
+                              <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest w-fit ${
+                                devStatus === 'Online'
+                                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                  : 'bg-zinc-800 text-zinc-500 border border-zinc-700'
+                              }`}>
+                                <span className={`w-1.5 h-1.5 rounded-full ${devStatus === 'Online' ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500'}`} />
+                                {devStatus}
                               </span>
+                              <button
+                                onClick={async () => {
+                                  await fetch(`/api/buses/${bus._id}`, {
+                                    method: 'PATCH',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ gps_enabled: !gpsOn })
+                                  });
+                                  setBuses(prev => prev.map(b => b._id === bus._id ? { ...b, gps_enabled: !gpsOn } as any : b));
+                                }}
+                                className={`text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest transition-all w-fit cursor-pointer ${
+                                  gpsOn
+                                    ? 'bg-orange-500 text-white hover:bg-orange-600'
+                                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 border border-zinc-700'
+                                }`}
+                              >
+                                {gpsOn ? 'GPS On' : 'GPS Off'}
+                              </button>
                             </div>
                           </td>
-                          <td className="py-4 px-6 text-right space-x-2">
-                            <button 
+                          {/* Last Online */}
+                          <td className="py-4 px-5 text-[10px] text-zinc-500 font-bold">{lastSeenText}</td>
+                          {/* Actions */}
+                          <td className="py-4 px-5 text-right space-x-2">
+                            <button
                               onClick={() => handleRegenerateQR(bus._id)}
                               className="px-3 py-1.5 bg-zinc-800 border border-zinc-700 hover:bg-zinc-700/80 hover:text-white rounded-lg text-zinc-400 text-[10px] font-black uppercase tracking-wider transition-colors inline-flex items-center gap-1"
                             >
-                              QR Matrix
+                              QR
                             </button>
-                            <button 
+                            <button
                               onClick={() => handleDeleteBus(bus._id)}
                               className="p-1.5 bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white rounded-lg transition-all inline-flex"
-                              title="Retire from service"
+                              title="Delete bus"
                             >
                               <Trash2 size={12} />
                             </button>
                           </td>
                         </tr>
-                      ))}
+                        );
+                      })}
                       {filteredBuses.length === 0 && (
                         <tr>
-                          <td colSpan={7} className="py-8 text-center text-zinc-500 font-bold uppercase tracking-widest text-[10px]">No active transponders match search criteria</td>
+                          <td colSpan={7} className="py-8 text-center text-zinc-500 font-bold uppercase tracking-widest text-[10px]">No buses match search criteria</td>
                         </tr>
                       )}
                     </tbody>

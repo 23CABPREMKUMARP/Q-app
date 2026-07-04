@@ -1,514 +1,250 @@
-import React, { useEffect, useState, useRef, Suspense } from "react";
-import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
+"use client";
 
+import React, { useEffect, useRef, useCallback } from "react";
+import { MapContainer, TileLayer, Marker, Polyline, Circle, useMap, Tooltip, ZoomControl } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import type { BusData } from "@/src/types";
+import type { BusPosition } from "@/src/hooks/useBusRealtime";
 
-import { createRoot, Root } from "react-dom/client";
-import { Bus, Navigation, Radar } from "lucide-react";
+// ─── Fix Leaflet default icon paths (Next.js static assets) ──────────────────
+if (typeof window !== "undefined") {
+  // @ts-ignore
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+  });
+}
 
-import { BusData, MapLayers } from "@/src/types";
+// ─── Icon Factories ───────────────────────────────────────────────────────────
 
-const BusMarker = React.memo(({ isRunning, busNumber, isSelected, isNearby, speed, availableSeats, from, to, rotationDegrees, mapBearing }: { isRunning: boolean, busNumber: string, isSelected: boolean, isNearby?: boolean, speed?: number, availableSeats?: number, from?: string, to?: string, rotationDegrees?: number, mapBearing?: number }) => {
-  return (
-    <div className={`flex flex-col items-center justify-center relative transition-all duration-300 ${isSelected ? "z-50" : "z-10"}`}>
-      {/* HUD Plate - Pure Origin-Dest Zero-Gap Interface */}
-      <div className={`absolute -top-5 left-1/2 -translate-x-1/2 flex flex-col items-center transition-all duration-300 ${isSelected ? "z-50 scale-110" : "z-10 scale-90"}`}>
-          <div className={`bg-zinc-900/95 premium-blur border border-white/20 rounded-md px-2 py-0.5 shadow-2xl flex items-center gap-2 whitespace-nowrap ${isSelected ? "ring-2 ring-orange-500" : ""}`}>
-             {/* Dynamic Status Pulsar */}
-             <div className={`w-1 h-1 rounded-full bg-orange-500 ${isRunning ? "animate-pulse" : ""}`} />
+function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: boolean): L.DivIcon {
+  const isOnline = livePos?.deviceStatus === "Online";
+  const isRunning = bus.status === "Running" || isOnline;
+  const heading = livePos?.heading ?? bus.location?.rotation ?? 0;
+  const speed = livePos?.speed ?? bus.speed ?? 0;
 
-             {/* Pure Route Telemetry */}
-             <div className="flex items-center gap-1.5 text-[8px] font-black tracking-tight text-white uppercase italic">
-                <span className="text-orange-400">{from || "Origin"}</span>
-                <Navigation size={6} className="rotate-90 text-zinc-500 opacity-50" />
-                <span className="text-orange-400">{to || "Dest"}</span>
-             </div>
+  const pulseClass = isRunning ? "animate-ping" : "";
+  const ringColor = isSelected ? "#f97316" : isRunning ? "#22c55e" : "#94a3b8";
+  const ringClass = isSelected ? "ring-orange-500 shadow-orange-400/50" : isRunning ? "ring-green-400 shadow-green-400/40" : "ring-slate-300";
 
-             {/* Micro Stats (Contextual on Selection) */}
-             {isSelected && (
-                <div className="flex items-center gap-1.5 border-l border-white/10 ml-0.5 pl-1.5 transition-all">
-                   <span className="text-[7px] font-black text-white">{speed || 0}<span className="text-zinc-500 pl-0.5">K</span></span>
-                   <span className="text-[7px] font-black text-emerald-400">{availableSeats || 0}<span className="text-zinc-500 pl-0.5">S</span></span>
-                </div>
-             )}
-          </div>
-      </div>
-
-      <div 
-        className="w-16 h-16 relative flex items-center justify-center transition-transform duration-300 ease-out will-change-transform"
-        style={{ 
-          transform: `translate3d(0,0,0) scale(calc(var(--bus-scale, 1.0) * ${isSelected ? 1.4 : 1}))`, 
-          transformOrigin: 'center center' 
-        }}
-      >
-        {/* Soft Shadow Underneath (Simulated Elevation) */}
-        <div className="absolute top-[80%] left-1/4 right-1/4 h-2 bg-black/40 blur-sm rounded-full transform scale-x-150 md:blur-md" />
-
-        {/* Live Neural Pulse Glow - High Contrast for Rapido Aesthetic */}
-        {isRunning && (
-          <div className="absolute inset-[-10px] rounded-full border-2 border-orange-500/30 animate-[ping_3s_infinite] opacity-50" />
-        )}
-
-        {/* Main Icon Body - Using the Premium Front-Face Asset */}
-        <div 
-          className="w-full h-full flex items-center justify-center transition-all duration-500 relative z-10"
-        >
-          <img 
-            src="/bus-marker-3d.png" 
-            alt="Bus" 
-            loading="lazy"
-            className={`w-14 h-14 object-contain transition-transform duration-500 ${isSelected ? "scale-110 drop-shadow-xl" : isNearby ? "scale-125 drop-shadow-2xl" : "scale-100"}`} 
-          />
+  const html = `
+    <div class="relative flex flex-col items-center" style="transform: rotate(${heading}deg)">
+      <div class="relative">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-white shadow-xl ring-2 ${ringClass} ring-offset-2 overflow-hidden" style="box-shadow: 0 4px 20px ${ringColor}40">
+          <img src="/bus-marker-3d.png" alt="Bus" style="width:40px;height:40px;object-fit:contain;" />
         </div>
-
-        {isSelected && (
-          <div className="absolute -inset-1 rounded-full border-[3px] border-orange-500 shadow-[0_0_20px_rgba(255,107,0,0.5)] md:shadow-[0_0_40px_rgba(255,107,0,0.8)] animate-pulse" />
-        )}
-        {!isSelected && isNearby && (
-          <div className="absolute -inset-1 rounded-full border-[2px] border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)] animate-pulse" />
-        )}
+        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-400 ring-2 ring-white ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-white z-10"></span>`}
       </div>
-    </div>
-  );
-});
+      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-zinc-900 text-white text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-white/10">
+        ${bus.busCode || bus.busNumber}${speed > 0 ? ` · ${speed}km/h` : ""}
+      </div>
+    </div>`;
 
-const LiveBusMap = React.memo(({ 
-    onBusClick, buses, selectedBusId, nearbyBusIds, layers, onUserLocationUpdate,
-    userLocation, nearestBus, centerOn, navPath, navStats
-}: { 
-    onBusClick: (bus: any) => void, buses: BusData[], selectedBusId?: string | null, nearbyBusIds?: string[], layers: MapLayers, onUserLocationUpdate?: (pos: {lat: number, lng: number}) => void,
-    userLocation?: {lat: number, lng: number} | null, nearestBus?: any, centerOn?: any, navPath?: any, navStats?: any
-}) => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
-  const busMarkers = useRef<{ [key: string]: { marker: maplibregl.Marker, root: Root, isRunning: boolean, isSelected: boolean, rotation?: number, speed?: number, availableSeats?: number } }>({});
-  const stopMarkersRef = useRef<{ [key: string]: maplibregl.Marker }>({});
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const [mapBearing, setMapBearing] = useState(-15);
+  return L.divIcon({
+    html,
+    className: "",
+    iconSize: [64, 80],
+    iconAnchor: [32, 48],
+    popupAnchor: [0, -48],
+  });
+}
 
-  // Memoize unique stops list to prevent nested iteration on every telemetry tick
-  const allStops = React.useMemo(() => {
-    const stopsMap = new Map();
-    buses.forEach(bus => {
-      if (bus.routeId?.stops) {
-        bus.routeId.stops.forEach((stop: any) => {
-          stopsMap.set(stop._id, stop);
-        });
-      }
-    });
-    return Array.from(stopsMap.values());
-  }, [buses.length]);
+function createUserIcon(): L.DivIcon {
+  const html = `
+    <div class="relative flex items-center justify-center">
+      <div class="w-5 h-5 rounded-full bg-blue-500 ring-4 ring-blue-300/60 shadow-lg"></div>
+      <div class="absolute w-12 h-12 rounded-full bg-blue-400/20 animate-ping"></div>
+    </div>`;
+  return L.divIcon({ html, className: "", iconSize: [24, 24], iconAnchor: [12, 12] });
+}
+
+function createStopIcon(type: "major" | "small"): L.DivIcon {
+  const size = type === "major" ? 10 : 6;
+  const color = type === "major" ? "#f97316" : "#94a3b8";
+  const html = `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>`;
+  return L.divIcon({ html, className: "", iconSize: [size, size], iconAnchor: [size / 2, size / 2] });
+}
+
+// ─── Map auto-fit component ───────────────────────────────────────────────────
+
+function AutoFit({ buses, livePositions, centerOn }: { buses: BusData[]; livePositions: Record<string, BusPosition>; centerOn?: { lat: number; lng: number } | null }) {
+  const map = useMap();
 
   useEffect(() => {
-    if (!mapContainer.current) return;
+    if (centerOn) {
+      map.setView([centerOn.lat, centerOn.lng], 16, { animate: true, duration: 0.8 });
+      return;
+    }
 
-    // Vibrant Premium Map Theme (Voyager Style - Colorful and Detailed)
-    // Google Maps Style Roadmap Theme
-    const map = new maplibregl.Map({
-      container: mapContainer.current,
-      style: {
-        version: 8,
-        sources: {
-          google: {
-            type: "raster",
-            tiles: ["https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"],
-            tileSize: 256,
-            attribution: "Google Maps"
-          }
-        },
-        layers: [
-          {
-            id: "google-roadmap",
-            type: "raster",
-            source: "google",
-            paint: {
-              "raster-opacity": 1
-            }
-          }
-        ]
-      },
-      center: [76.9558, 11.0168],
-      zoom: 14,
-      pitch: 45, // Professional angle
-      bearing: -10,
-      scrollZoom: true
-    });
+    const points: [number, number][] = buses
+      .map((b) => {
+        const live = livePositions[b._id];
+        const lat = live?.lat ?? b.location?.lat;
+        const lng = live?.lng ?? b.location?.lng;
+        return lat && lng ? ([lat, lng] as [number, number]) : null;
+      })
+      .filter(Boolean) as [number, number][];
 
-    // Dynamically scale buses perfectly with map zoom without React re-renders!
-    const updateBusScale = () => {
-      if (mapContainer.current) {
-        const zoom = map.getZoom();
-        // SUBTLE SCALING: Gentle zoom curve to prevent massive distortion during tracking
-        const scale = Math.max(0.65, Math.min(1.2, 0.95 * Math.pow(1.04, zoom - 14)));
-        mapContainer.current.style.setProperty('--bus-scale', scale.toString());
-      }
-    };
+    if (points.length === 1) {
+      map.setView(points[0], 15, { animate: true });
+    } else if (points.length > 1) {
+      map.fitBounds(points, { padding: [50, 50], animate: true, duration: 0.8, maxZoom: 15 });
+    }
+  }, [centerOn, buses.length]);
 
-    map.on('zoom', updateBusScale);
-    map.on('rotate', () => setMapBearing(map.getBearing()));
+  return null;
+}
 
-    map.on("load", () => {
-      setMapLoaded(true);
-      updateBusScale(); // Apply initial scale
+// ─── Animated marker wrapper ──────────────────────────────────────────────────
+// Smoothly slides markers to new positions via CSS transitions baked into divIcon
 
-      // Only adding essential route sources
-      map.addSource("routes", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
-      
-      // 0. Volumetric Drop Shadow (Depth)
-      map.addLayer({
-        id: "routes-layer-shadow",
-        type: "line",
-        source: "routes",
-        layout: {
-          "line-cap": "round",
-          "line-join": "round"
-        },
-        paint: {
-          "line-color": "rgba(0,0,0,0.15)",
-          "line-width": [
-            "interpolate", ["linear"], ["zoom"],
-            10, 16,
-            14, 30,
-            18, 64
-          ],
-          "line-blur": 2,
-          "line-offset": 2
-        }
-      });
+function AnimatedBusMarker({
+  bus,
+  livePos,
+  isSelected,
+  onClick,
+  showRoute,
+}: {
+  bus: BusData;
+  livePos: BusPosition | null;
+  isSelected: boolean;
+  onClick: () => void;
+  showRoute: boolean;
+}) {
+  const markerRef = useRef<L.Marker | null>(null);
 
-      // 1. Outer Casing (The "road structure" base)
-      map.addLayer({
-        id: "routes-layer-casing",
-        type: "line",
-        source: "routes",
-        layout: {
-          "line-cap": "round",
-          "line-join": "round"
-        },
-        paint: {
-          "line-color": [
-            "case",
-            ["==", ["get", "isActive"], true], "#FFEDD5", // Light orange border for active
-            "#e2e8f0" // Faint gray for inactive
-          ],
-          "line-width": [
-            "interpolate", ["linear"], ["zoom"],
-            10, 10,
-            14, 26,
-            18, 60
-          ],
-          "line-opacity": [
-            "case",
-            ["==", ["get", "isActive"], true], 1.0,
-            0.5
-          ]
-        }
-      });
+  const lat = livePos?.lat ?? bus.location?.lat ?? 11.0168;
+  const lng = livePos?.lng ?? bus.location?.lng ?? 76.9558;
+  const icon = createBusIcon(bus, livePos, isSelected);
 
-      // 2. Inner Route Line (The high-intensity "lane")
-      map.addLayer({
-        id: "routes-layer-inner",
-        type: "line",
-        source: "routes",
-        layout: {
-          "line-cap": "round",
-          "line-join": "round"
-        },
-        paint: {
-          "line-color": [
-            "case",
-            ["==", ["get", "isActive"], true], "#FF3D00", // Neural Hot Orange
-            "#64748b" // Cool Slate for background routes
-          ],
-          "line-width": [
-            "interpolate", ["linear"], ["zoom"],
-            10, 8,
-            14, 20,
-            18, 52
-          ],
-          "line-opacity": [
-            "case",
-            ["==", ["get", "isActive"], true], 0.9,
-            0.4
-          ]
-        }
-      });
-
-      // 3. User to Bus Navigation Path (Neon Radioactive Highlights)
-      map.addSource("nav-routes", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
-      map.addLayer({
-        id: "nav-routes-casing",
-        type: "line",
-        source: "nav-routes",
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: { 
-          "line-color": "#00E5FF", // Cyber Cyan Casing
-          "line-width": ["interpolate", ["linear"], ["zoom"], 10, 10, 14, 22, 18, 36], 
-          "line-opacity": 0.3 
-        }
-      });
-      map.addLayer({
-        id: "nav-routes-inner",
-        type: "line",
-        source: "nav-routes",
-        layout: { "line-cap": "round", "line-join": "round" },
-        paint: { 
-          "line-color": "#18FFFF", // Radioactive Cyan
-          "line-width": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 12, 18, 24] 
-        }
-      });
-    });
-
-    mapRef.current = map;
-    return () => {
-      if (mapRef.current) mapRef.current.remove();
-      mapRef.current = null;
-    };
-  }, []);
-
-  // Update Polyline
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapLoaded || !map.getStyle()) return;
-    const routeFeatures = !layers.showRoutes ? [] : buses.filter(b => b.routeId?.path && b.routeId.path.length >= 2).map(bus => ({
-      type: "Feature",
-      properties: {
-        isActive: selectedBusId ? selectedBusId === bus._id : true
-      },
-      geometry: { type: "LineString", coordinates: bus.routeId!.path.map(p => [p.lng, p.lat]) }
-    }));
-    
-    try {
-      const s = map.getSource("routes") as maplibregl.GeoJSONSource;
-      if (s) s.setData({ type: "FeatureCollection", features: routeFeatures } as any);
-
-      // Update Live Navigation Paths
-      const navSource = map.getSource("nav-routes") as maplibregl.GeoJSONSource;
-      if (navSource) {
-        if (navPath) {
-          navSource.setData({
-            type: "FeatureCollection",
-            features: [{ type: "Feature", properties: {}, geometry: navPath }]
-          } as any);
-        
-        // Auto-center and perfectly frame the user's nav path on screen
-        if (navPath.coordinates && navPath.coordinates.length > 0) {
-           const bounds = new maplibregl.LngLatBounds();
-           navPath.coordinates.forEach((coord: any) => bounds.extend(coord));
-           map.fitBounds(bounds, { padding: 120, duration: 2000, pitch: 45, maxZoom: 16 });
-        }
-      } else {
-        navSource.setData({ type: "FeatureCollection", features: [] } as any);
+    if (markerRef.current) {
+      markerRef.current.setIcon(icon);
+      // Smoothly animate to new position
+      const current = markerRef.current.getLatLng();
+      if (Math.abs(current.lat - lat) > 0.00001 || Math.abs(current.lng - lng) > 0.00001) {
+        markerRef.current.setLatLng([lat, lng]);
       }
     }
-    } catch (error) {
-      console.warn("Map layer update error:", error);
-    }
-  }, [buses, mapLoaded, selectedBusId, navPath, layers.showRoutes]);
+  }, [lat, lng, livePos?.heading, isSelected]);
 
-  // Center Map when Search or Navigation triggers
-  useEffect(() => {
-    if (mapRef.current && centerOn && mapLoaded) {
-      mapRef.current.flyTo({ 
-        center: [centerOn.lng, centerOn.lat], 
-        zoom: centerOn.zoom || 16, 
-        pitch: centerOn.pitch !== undefined ? centerOn.pitch : 45,
-        bearing: centerOn.bearing !== undefined ? centerOn.bearing : 0,
-        essential: true, 
-        duration: 2500 
-      });
-    }
-  }, [centerOn, mapLoaded]);
-
-  // Handle User Location Map Marker
-  const userMarkerRef = useRef<maplibregl.Marker | null>(null);
-  useEffect(() => {
-      const map = mapRef.current;
-      if (!map || !mapLoaded) return;
-      
-      if (userLocation) {
-         if (!userMarkerRef.current) {
-            const el = document.createElement('div');
-            el.className = 'w-5 h-5 bg-primary border-[3px] border-white rounded-full gps-pulse-marker';
-            userMarkerRef.current = new maplibregl.Marker({ element: el })
-              .setLngLat([userLocation.lng, userLocation.lat])
-              .addTo(map);
-         } else {
-            userMarkerRef.current.setLngLat([userLocation.lng, userLocation.lat]);
-         }
-      } else if (userMarkerRef.current) {
-         userMarkerRef.current.remove();
-         userMarkerRef.current = null;
-      }
-  }, [userLocation, mapLoaded]);
-
-
-  // Update Markers Target Engine
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapLoaded) return;
-
-    buses.forEach(bus => {
-      const isSelected = selectedBusId === bus._id;
-      const isNearby = nearbyBusIds?.includes(bus._id) || false;
-      const isRunning = bus.status === 'Running';
-
-      if (!busMarkers.current[bus._id]) {
-        const el = document.createElement('div');
-        el.className = "bus-marker-canvas-wrapper";
-        el.addEventListener('click', (e) => {
-          e.stopPropagation();
-          onBusClick(bus);
-          map.flyTo({ center: [bus.location.lng, bus.location.lat], zoom: 15 });
-        });
-        
-        const marker = new maplibregl.Marker({ element: el })
-          .setLngLat([bus.location.lng, bus.location.lat])
-          .addTo(map);
-          
-        const root = createRoot(el);
-        root.render(<BusMarker rotationDegrees={bus.location.rotation} isRunning={isRunning} busNumber={bus.busNumber} isSelected={isSelected} isNearby={isNearby} mapBearing={mapBearing} from={bus.routeId?.from} to={bus.routeId?.to} speed={bus.speed} availableSeats={bus.availableSeats} />);
-        busMarkers.current[bus._id] = { 
-            marker, root, isRunning, isSelected, 
-            rotation: bus.location.rotation,
-            speed: bus.speed,
-            availableSeats: bus.availableSeats,
-            targetLng: bus.location.lng, 
-            targetLat: bus.location.lat 
-        } as any;
-      } else {
-        const cache = busMarkers.current[bus._id] as any;
-        // Set target coordinates for the smooth interpolator Engine!
-        cache.targetLng = bus.location.lng;
-        cache.targetLat = bus.location.lat;
-        
-        // Critical: Re-render marker if telemetry, selection, or rotation state shifts
-        if (
-          cache.isRunning !== isRunning || 
-          cache.isSelected !== isSelected || cache.isNearby !== isNearby || 
-          cache.speed !== bus.speed || 
-          cache.availableSeats !== bus.availableSeats || 
-          cache.rotation !== bus.location.rotation
-        ) {
-           cache.isRunning = isRunning;
-           cache.isSelected = isSelected; cache.isNearby = isNearby;
-           cache.speed = bus.speed;
-           cache.availableSeats = bus.availableSeats;
-           cache.rotation = bus.location.rotation;
-           cache.root.render(
-             <BusMarker 
-               isRunning={isRunning} 
-               busNumber={bus.busNumber} 
-               isSelected={isSelected} isNearby={isNearby} 
-               speed={bus.speed} 
-               availableSeats={bus.availableSeats} 
-               from={bus.routeId?.from}
-               to={bus.routeId?.to}
-               rotationDegrees={bus.location.rotation}
-               mapBearing={mapBearing}
-             />
-           );
-        }
-        cache.marker.getElement().style.display = layers.showBuses ? 'block' : 'none';
-      }
-    });
-
-    Object.keys(busMarkers.current).forEach(id => {
-      if (!buses.find(b => b._id === id)) {
-        setTimeout(() => {
-           if (busMarkers.current[id]) {
-               busMarkers.current[id].root.unmount();
-               busMarkers.current[id].marker.remove();
-               delete busMarkers.current[id];
-           }
-        }, 0);
-      }
-    });
-  }, [buses, mapLoaded, selectedBusId, onBusClick, layers.showBuses, mapBearing]);
-
-  // Decoupled Station/Stops Engine Handler to avoid checking stops on every bus telemetry loop
-  useEffect(() => {
-    const activeMap = mapRef.current;
-    if (!activeMap || !mapLoaded) return;
-
-    if (layers.showMajorStops) {
-      allStops.forEach((stop: any) => {
-        if (!stopMarkersRef.current[stop._id]) {
-          const el = document.createElement('div');
-          el.className = "relative flex flex-col items-center group cursor-pointer";
-          
-          // The Dot - Neural high-vis update
-          const dot = document.createElement('div');
-          dot.className = "w-3 h-3 bg-white border-2 border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.6)] rounded-full transition-transform hover:scale-150";
-          
-          // The Label (Always visible in Intelligence mode)
-          const label = document.createElement('div');
-          label.className = "absolute -bottom-8 bg-white/95 text-zinc-900 text-[10px] font-black tracking-tight px-3 py-1 rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.1)] whitespace-nowrap backdrop-blur-md opacity-100 scale-100 transition-all duration-300 pointer-events-none z-50 uppercase italic border border-zinc-200";
-          label.innerText = stop.stopName;
-          
-          el.appendChild(dot);
-          el.appendChild(label);
-          
-          const smarker = new maplibregl.Marker({ element: el, anchor: 'center' })
-            .setLngLat([stop.lng, stop.lat])
-            .addTo(activeMap);
-          stopMarkersRef.current[stop._id] = smarker;
-        }
-      });
-      
-      // Cleanup stops that are no longer in the active lists
-      Object.keys(stopMarkersRef.current).forEach(id => {
-        if (!allStops.some(s => s._id === id)) {
-          stopMarkersRef.current[id].remove();
-          delete stopMarkersRef.current[id];
-        }
-      });
-    } else {
-      Object.keys(stopMarkersRef.current).forEach(id => {
-        stopMarkersRef.current[id].remove();
-        delete stopMarkersRef.current[id];
-      });
-    }
-  }, [allStops, mapLoaded, layers.showMajorStops]);
-
-  // Buttery-Smooth Fast-Rendering GPU Interpolator
-  useEffect(() => {
-     let frameId: number;
-     const animateGL = () => {
-        Object.values(busMarkers.current).forEach((cache: any) => {
-           if (cache.targetLng !== undefined && cache.targetLat !== undefined) {
-              const curr = cache.marker.getLngLat();
-              const dx = cache.targetLng - curr.lng;
-              const dy = cache.targetLat - curr.lat;
-              
-              // Glide marker position smoothly (12% closer per frame, achieving ~60FPS visual snap)
-              if (Math.abs(dx) > 0.000001 || Math.abs(dy) > 0.000001) {
-                  cache.marker.setLngLat([
-                    curr.lng + dx * 0.12, 
-                    curr.lat + dy * 0.12
-                  ]);
-              } else if (dx !== 0 || dy !== 0) {
-                  // Perfect snapping once reached target, stopping continuous setLngLat paint calls
-                  cache.marker.setLngLat([cache.targetLng, cache.targetLat]);
-              }
-           }
-        });
-        frameId = requestAnimationFrame(animateGL);
-     };
-     frameId = requestAnimationFrame(animateGL);
-     return () => cancelAnimationFrame(frameId);
-  }, []);
+  const routePath: [number, number][] = showRoute && bus.routeId?.stops
+    ? bus.routeId.stops.map((s: any) => [s.lat, s.lng] as [number, number])
+    : [];
 
   return (
-    <div className="h-full w-full relative bg-zinc-50 overflow-hidden">
-      <div 
-        ref={mapContainer} 
-        className="w-full h-full relative" 
-        style={{ minHeight: '600px', position: 'relative' }} 
-      />
-      
-    </div>
+    <>
+      {showRoute && routePath.length > 1 && (
+        <Polyline
+          positions={routePath}
+          pathOptions={{ color: isSelected ? "#f97316" : "#94a3b8", weight: isSelected ? 4 : 2, opacity: isSelected ? 0.9 : 0.4, dashArray: isSelected ? undefined : "6 6" }}
+        />
+      )}
+      <Marker
+        ref={markerRef as any}
+        position={[lat, lng]}
+        icon={icon}
+        eventHandlers={{ click: onClick }}
+        zIndexOffset={isSelected ? 1000 : 0}
+      >
+        <Tooltip direction="top" offset={[0, -50]} permanent={false}>
+          <div className="font-bold text-xs">
+            {bus.routeId?.from} → {bus.routeId?.to}
+          </div>
+        </Tooltip>
+      </Marker>
+    </>
   );
-});
+}
 
-export default LiveBusMap;
+// ─── Stop markers ─────────────────────────────────────────────────────────────
+
+function StopMarkers({ bus }: { bus: BusData }) {
+  const stops = bus.routeId?.stops || [];
+  return (
+    <>
+      {stops.map((stop: any) => (
+        <Marker
+          key={stop._id}
+          position={[stop.lat, stop.lng]}
+          icon={createStopIcon(stop.type)}
+        >
+          <Tooltip direction="top" offset={[0, -4]}>
+            <span className="text-xs font-semibold">{stop.stopName}</span>
+          </Tooltip>
+        </Marker>
+      ))}
+    </>
+  );
+}
+
+// ─── Main Map Component ───────────────────────────────────────────────────────
+
+interface LeafletBusMapProps {
+  buses: BusData[];
+  livePositions: Record<string, BusPosition>;
+  selectedBusId?: string | null;
+  onBusClick: (bus: BusData) => void;
+  userLocation?: { lat: number; lng: number } | null;
+  centerOn?: { lat: number; lng: number } | null;
+  showRoutes?: boolean;
+  showStops?: boolean;
+}
+
+const OSM_TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+const DEFAULT_CENTER: [number, number] = [11.0168, 76.9558]; // Coimbatore
+
+const LeafletBusMap = React.memo(
+  ({ buses, livePositions, selectedBusId, onBusClick, userLocation, centerOn, showRoutes = true, showStops = false }: LeafletBusMapProps) => {
+    return (
+      <MapContainer
+        center={DEFAULT_CENTER}
+        zoom={13}
+        className="w-full h-full rounded-3xl z-0"
+        zoomControl={false}
+        scrollWheelZoom={true}
+      >
+        <TileLayer url={OSM_TILE_URL} attribution={OSM_ATTRIBUTION} maxZoom={19} />
+        <ZoomControl position="bottomright" />
+
+        <AutoFit buses={buses} livePositions={livePositions} centerOn={centerOn} />
+
+        {buses.map((bus) => (
+          <React.Fragment key={bus._id}>
+            <AnimatedBusMarker
+              bus={bus}
+              livePos={livePositions[bus._id] || null}
+              isSelected={selectedBusId === bus._id}
+              onClick={() => onBusClick(bus)}
+              showRoute={showRoutes}
+            />
+            {showStops && selectedBusId === bus._id && <StopMarkers bus={bus} />}
+          </React.Fragment>
+        ))}
+
+        {userLocation && (
+          <>
+            <Marker position={[userLocation.lat, userLocation.lng]} icon={createUserIcon()}>
+              <Tooltip direction="top" offset={[0, -12]}>
+                <span className="text-xs font-bold">Your Location</span>
+              </Tooltip>
+            </Marker>
+            <Circle
+              center={[userLocation.lat, userLocation.lng]}
+              radius={500}
+              pathOptions={{ color: "#3b82f6", fillColor: "#3b82f6", fillOpacity: 0.06, weight: 1, opacity: 0.3 }}
+            />
+          </>
+        )}
+      </MapContainer>
+    );
+  }
+);
+
+LeafletBusMap.displayName = "LeafletBusMap";
+export default LeafletBusMap;

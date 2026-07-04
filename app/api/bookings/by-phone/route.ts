@@ -58,10 +58,12 @@ export async function POST(req: Request) {
         paymentStatus: b.payment_status || (b.status === "Confirmed" ? "Paid" : "Failed"),
         phonepeTransactionId: b.phonepe_transaction_id || b.transaction_id || "",
         totalAmount: b.total_amount || b.amount,
+        busCode: b.bus_code || (b.buses ? b.buses.bus_code : "N/A"),
         busId: b.buses ? { 
           busNumber: b.buses.bus_number, 
+          busCode: b.buses.bus_code,
           routeId: b.buses.routes ? { routeName: b.buses.routes.name } : null 
-        } : { busNumber: "TN-38-REG" }
+        } : { busNumber: "TN-38-REG", busCode: "N/A" }
       }));
       allBookings = [...allBookings, ...mappedRegular];
     }
@@ -73,6 +75,7 @@ export async function POST(req: Request) {
         // Try to resolve bus number: passengers[0].bus_number → MOCK_BUSES lookup by bus_id/trip_id → trip join → fallback
         const mockBus = MOCK_BUSES.find((m: any) => m._id === b.bus_id || m._id === b.trip_id) || null;
         const resolvedBusNumber = b.bus_number || b.passengers?.[0]?.bus_number || mockBus?.busNumber || b.town_bus_trips?.bus_number || 'TOWN-BUS';
+        const resolvedBusCode = b.bus_code || b.passengers?.[0]?.busCode || mockBus?.busCode || b.town_bus_trips?.bus_code || 'N/A';
         return {
           ...b,
           ticketId: b.ticket_id,
@@ -82,8 +85,10 @@ export async function POST(req: Request) {
           paymentStatus: b.payment_status,
           phonepeTransactionId: b.phonepe_transaction_id || b.transaction_id || "",
           totalAmount: b.total_amount || b.amount,
+          busCode: resolvedBusCode,
           busId: { 
             busNumber: resolvedBusNumber,
+            busCode: resolvedBusCode,
             _id: b.town_bus_trips?.id || b.trip_id 
           }
         };

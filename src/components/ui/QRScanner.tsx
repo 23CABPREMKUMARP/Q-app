@@ -187,7 +187,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
           className="h-10 px-4 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center gap-2 transition-all border border-white/10 text-white font-bold text-[10px] uppercase tracking-widest"
         >
           <Keyboard size={14} />
-          {showManual ? "Hide" : "Manual Entry"}
+          {showManual ? "Hide" : "Bus Code"}
         </button>
       </div>
 

@@ -29,10 +29,6 @@ export default function TownBusSearchPage() {
   // Restore search state on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const prevPath = sessionStorage.getItem('prevPath') || '';
-      const isFromTownBus = prevPath.startsWith('/town-bus');
-      
-      if (isFromTownBus) {
         const savedStateStr = sessionStorage.getItem('townBusSearchState');
         if (savedStateStr) {
           try {
@@ -46,11 +42,6 @@ export default function TownBusSearchPage() {
             console.error('Error restoring town bus search state:', e);
           }
         }
-      } else {
-        // Exited town-bus module: clear search cache
-        sessionStorage.removeItem('townBusSearchState');
-        sessionStorage.removeItem('townBusScrollY');
-      }
     }
   }, []);
 

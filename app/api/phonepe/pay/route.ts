@@ -14,7 +14,8 @@ export async function POST(req: Request) {
       boardingPoint, 
       destination, 
       passengers,
-      busNumber
+      busNumber,
+      busCode
     } = body;
 
     let isSimulationMode = false;
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
     // Create Pending Booking
     // Note: bus_number is embedded in passengers[0].bus_number to avoid schema changes
     const enrichedPassengers = Array.isArray(passengers)
-      ? passengers.map((p: any, i: number) => i === 0 ? { ...p, bus_number: busNumber || '' } : p)
+      ? passengers.map((p: any, i: number) => i === 0 ? { ...p, bus_number: busNumber || '', busCode: busCode || '' } : p)
       : passengers;
 
     const bookingData = {
