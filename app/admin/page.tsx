@@ -570,7 +570,7 @@ function EnterpriseAdminDashboardContent() {
             <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center shadow-lg shadow-orange-500/20">
               <Sparkles size={12} className="text-white" />
             </div>
-            <div className="font-semibold text-sm tracking-tight text-zinc-100">DigiBus Admin</div>
+            <div className="font-semibold text-sm tracking-tight text-zinc-100">Smart Tamizha Admin</div>
           </div>
 
           {/* Nav Items */}

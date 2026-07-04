@@ -37,7 +37,7 @@ export async function GET() {
 
   return new NextResponse(stream, {
     headers: {
-      'Content-Disposition': 'attachment; filename="DigiBus-App.apk"',
+      'Content-Disposition': 'attachment; filename="Smart-Tamizha-App.apk"',
       'Content-Type': 'application/vnd.android.package-archive',
       'Content-Length': totalSize.toString(),
       'Cache-Control': 'no-cache, no-store, must-revalidate',
