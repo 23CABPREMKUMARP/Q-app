@@ -36,7 +36,7 @@ export default function BusCodeDetailsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#FF9933]" size={48} />
+        <Loader2 className="animate-spin text-[#8B1E2E]" size={48} />
       </div>
     );
   }
@@ -44,7 +44,7 @@ export default function BusCodeDetailsPage() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans pb-24">
       {/* Header */}
-      <div className="bg-[#FF9933] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#8B1E2E] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <button onClick={() => router.back()} className="bg-white/20 p-2 rounded-xl backdrop-blur-md">
@@ -112,7 +112,7 @@ export default function BusCodeDetailsPage() {
                 className="bg-slate-900 text-white p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Bus size={20} className="text-[#FF9933]" />
+                  <Bus size={20} className="text-[#8B1E2E]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>
               </Link>

@@ -4,15 +4,15 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f3f4f6; 
-  --foreground: #111827; 
-  --dark-saffron: #FF9933;
+  --background: #FAF6F0; 
+  --foreground: #333333; 
+  --dark-saffron: #8B1E2E;
   --radius: 1rem;
   --card: #ffffff;
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #111827;
-  --primary: #FF9933; 
+  --primary: #8B1E2E; 
   --primary-foreground: #ffffff;
 
   --secondary: #f3f4f6;
@@ -20,27 +20,66 @@
   --muted: #f3f4f6;
   --muted-foreground: #6b7280;
   --accent: #fff7ed; 
-  --accent-foreground: #FF9933;
+  --accent-foreground: #8B1E2E;
   --destructive: #ef4444;
   --border: #e5e7eb;
   --input: #e5e7eb;
-  --ring: #FF9933;
-  --chart-1: #FF9933;
-  --chart-2: #10b981;
-  --chart-3: #3b82f6;
+  --ring: #D4A017;
+  --chart-1: #8B1E2E;
+  --chart-2: #0F6B5C;
+  --chart-3: #0F6B5C;
   --chart-4: #f59e0b;
   --chart-5: #6366f1;
   --sidebar: #ffffff;
   --sidebar-foreground: #111827;
-  --sidebar-primary: #FF9933;
+  --sidebar-primary: #8B1E2E;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f3f4f6;
   --sidebar-accent-foreground: #111827;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: #FF9933;
+  --sidebar-ring: #8B1E2E;
 }
 
 @theme inline {
+  /* Smart Tamizha Color Overrides */
+  --color-orange-50: #fae8eb;
+  --color-orange-100: #f2c7ce;
+  --color-orange-200: #e79da9;
+  --color-orange-300: #da6a7e;
+  --color-orange-400: #c63f58;
+  --color-orange-500: #8B1E2E; /* Primary Maroon */
+  --color-orange-600: #7a1826;
+  --color-orange-700: #65121e;
+  --color-orange-800: #54101a;
+  --color-orange-900: #461118;
+
+  --color-blue-50: #e2f4f1;
+  --color-blue-100: #b8e4dc;
+  --color-blue-200: #89cfc3;
+  --color-blue-300: #5bb6a8;
+  --color-blue-400: #339d8d;
+  --color-blue-500: #0F6B5C; /* Supporting Teal */
+  --color-blue-600: #0c594c;
+  --color-blue-700: #09473d;
+  --color-blue-800: #07372f;
+  --color-blue-900: #052923;
+
+  --color-slate-50: #FAF6F0; /* Warm sand background */
+  --color-slate-100: #f0e9df;
+  --color-slate-200: #e3d7c7;
+  --color-slate-300: #d4c2ab;
+  --color-slate-400: #a9967f;
+  --color-slate-500: #82725e;
+  --color-slate-600: #635646;
+  --color-slate-700: #4f4438;
+  --color-slate-800: #3d352b;
+  --color-slate-900: #333333; /* Dark Charcoal text */
+  --color-slate-950: #222222;
+
+  --color-yellow-400: #e8b84b;
+  --color-yellow-500: #D4A017; /* Temple Gold */
+  --color-yellow-600: #b8860b;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-dark-saffron: var(--dark-saffron);

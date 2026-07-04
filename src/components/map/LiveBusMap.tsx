@@ -27,7 +27,7 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
   const speed = livePos?.speed ?? bus.speed ?? 0;
 
   const pulseClass = isRunning ? "animate-ping" : "";
-  const ringColor = isSelected ? "#f97316" : isRunning ? "#22c55e" : "#94a3b8";
+  const ringColor = isSelected ? "#D4A017" : isRunning ? "#0F6B5C" : "#94a3b8";
   const ringClass = isSelected ? "ring-orange-500 shadow-orange-400/50" : isRunning ? "ring-green-400 shadow-green-400/40" : "ring-slate-300";
 
   const html = `
@@ -63,7 +63,7 @@ function createUserIcon(): L.DivIcon {
 
 function createStopIcon(type: "major" | "small"): L.DivIcon {
   const size = type === "major" ? 10 : 6;
-  const color = type === "major" ? "#f97316" : "#94a3b8";
+  const color = type === "major" ? "#D4A017" : "#94a3b8";
   const html = `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>`;
   return L.divIcon({ html, className: "", iconSize: [size, size], iconAnchor: [size / 2, size / 2] });
 }
@@ -140,7 +140,7 @@ function AnimatedBusMarker({
       {showRoute && routePath.length > 1 && (
         <Polyline
           positions={routePath}
-          pathOptions={{ color: isSelected ? "#f97316" : "#94a3b8", weight: isSelected ? 4 : 2, opacity: isSelected ? 0.9 : 0.4, dashArray: isSelected ? undefined : "6 6" }}
+          pathOptions={{ color: isSelected ? "#D4A017" : "#94a3b8", weight: isSelected ? 4 : 2, opacity: isSelected ? 0.9 : 0.4, dashArray: isSelected ? undefined : "6 6" }}
         />
       )}
       <Marker
@@ -237,7 +237,7 @@ const LeafletBusMap = React.memo(
             <Circle
               center={[userLocation.lat, userLocation.lng]}
               radius={500}
-              pathOptions={{ color: "#3b82f6", fillColor: "#3b82f6", fillOpacity: 0.06, weight: 1, opacity: 0.3 }}
+              pathOptions={{ color: "#0F6B5C", fillColor: "#0F6B5C", fillOpacity: 0.06, weight: 1, opacity: 0.3 }}
             />
           </>
         )}

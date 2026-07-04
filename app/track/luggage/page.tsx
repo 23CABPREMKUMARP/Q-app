@@ -36,7 +36,7 @@ export default function LuggageTrackingPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 font-sans text-white pb-24">
-      <div className="bg-[#FF9933] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#8B1E2E] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <div>
@@ -61,7 +61,7 @@ export default function LuggageTrackingPage() {
           <button 
             type="submit"
             disabled={isSearching || !trackingId}
-            className="bg-[#FF9933] text-white p-3 rounded-2xl shadow-lg shadow-[#FF9933]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
+            className="bg-[#8B1E2E] text-white p-3 rounded-2xl shadow-lg shadow-[#8B1E2E]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
           >
             {isSearching ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : <Search size={20} />}
           </button>
@@ -77,13 +77,13 @@ export default function LuggageTrackingPage() {
               {/* Status Card */}
               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4">
-                  <div className="w-16 h-16 bg-[#FF9933]/10 rounded-full flex items-center justify-center">
-                    <Truck size={32} className="text-[#FF9933]" />
+                  <div className="w-16 h-16 bg-[#8B1E2E]/10 rounded-full flex items-center justify-center">
+                    <Truck size={32} className="text-[#8B1E2E]" />
                   </div>
                 </div>
                 
                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Current Status</div>
-                <div className="text-3xl font-black tracking-tighter text-[#FF9933] mb-6">{trackingData.status}</div>
+                <div className="text-3xl font-black tracking-tighter text-[#8B1E2E] mb-6">{trackingData.status}</div>
                 
                 <div className="flex items-center justify-between border-t border-slate-800 pt-4">
                   <div>
@@ -108,7 +108,7 @@ export default function LuggageTrackingPage() {
                   {trackingData.steps.map((step: any, idx: number) => (
                     <div key={idx} className="flex gap-4 relative z-10">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        step.active ? 'bg-[#FF9933] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
+                        step.active ? 'bg-[#8B1E2E] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
                         step.completed ? 'bg-emerald-500' : 'bg-slate-800'
                       }`}>
                         {step.completed && !step.active ? <CheckCircle size={14} className="text-white" /> : 
@@ -117,7 +117,7 @@ export default function LuggageTrackingPage() {
                       </div>
                       
                       <div className="pt-1.5 flex-1 pb-4 border-b border-slate-800/50">
-                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#FF9933]' : step.completed ? 'text-white' : 'text-slate-500'}`}>
+                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#8B1E2E]' : step.completed ? 'text-white' : 'text-slate-500'}`}>
                           {step.status}
                         </div>
                         <div className="text-[10px] font-bold text-slate-500 mt-1 flex items-center gap-1">

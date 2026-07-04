@@ -127,7 +127,7 @@ export default function MobileDashboard() {
         className="min-h-screen bg-[#f3f4f6] text-slate-900 font-sans pb-28 relative"
       >
         {/* PhonePe Header */}
-        <div className="bg-[#FF9933] px-4 pt-12 pb-4 text-white sticky top-0 z-[100] shadow-md rounded-b-2xl">
+        <div className="bg-[#8B1E2E] px-4 pt-12 pb-4 text-white sticky top-0 z-[100] shadow-md rounded-b-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="bg-white/20 p-1 rounded-full">
@@ -164,7 +164,7 @@ export default function MobileDashboard() {
               >
                 <Bell size={24} />
                 {notifications.length > 0 && (
-                  <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-[#FF9933] rounded-full" />
+                  <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-[#8B1E2E] rounded-full" />
                 )}
               </button>
               <Link href="/about" className="relative text-white" title="Help">
@@ -203,16 +203,16 @@ export default function MobileDashboard() {
                 <div className="space-y-1 text-left">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FF9933]">Live Trip Active</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#8B1E2E]">Live Trip Active</span>
                   </div>
-                  <h3 className="text-base font-bold tracking-tight text-white group-hover:text-[#FF9933] transition-colors">
+                  <h3 className="text-base font-bold tracking-tight text-white group-hover:text-[#8B1E2E] transition-colors">
                     Track Bus JB-{liveTripTrack.busId?.busCode || "1024"}
                   </h3>
                   <p className="text-xs text-slate-400">
                     Status: <span className="text-white font-semibold">{liveTripTrack.busId?.status || "Running"}</span>
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-[#FF9933] text-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
+                <div className="w-12 h-12 bg-[#8B1E2E] text-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
                   <MapPin size={22} className="animate-bounce" />
                 </div>
               </div>
@@ -228,8 +228,8 @@ export default function MobileDashboard() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-[#FF9933]/10 rounded-xl flex items-center justify-center">
-                    <Bell size={16} className="text-[#FF9933]" />
+                  <div className="w-8 h-8 bg-[#8B1E2E]/10 rounded-xl flex items-center justify-center">
+                    <Bell size={16} className="text-[#8B1E2E]" />
                   </div>
                   <div>
                     <h3 className="text-sm font-black text-slate-900">Trip Broadcasts</h3>
@@ -247,7 +247,7 @@ export default function MobileDashboard() {
                     key={notif._id}
                     className="p-3.5 bg-slate-50 hover:bg-slate-100/70 transition-all rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden"
                   >
-                    <div className="w-1.5 h-full bg-[#FF9933] absolute left-0 top-0 bottom-0" />
+                    <div className="w-1.5 h-full bg-[#8B1E2E] absolute left-0 top-0 bottom-0" />
                     <div className="flex-1 pl-1 space-y-1">
                       <p className="text-xs font-bold text-slate-950 flex items-center justify-between">
                         <span>{notif.title}</span>
@@ -265,25 +265,25 @@ export default function MobileDashboard() {
 
           {/* Town Bus Booking Teaser */}
           <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-md relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#FF9933]/10 to-transparent opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#8B1E2E]/10 to-transparent opacity-50"></div>
             <div className="p-5 text-white relative z-10 flex items-center justify-between">
               <div className="w-2/3 pr-2">
                 <div className="flex items-center gap-1.5 mb-2">
-                  <Bus size={14} className="text-[#FF9933]" />
-                  <p className="text-[10px] font-black text-[#FF9933] tracking-widest uppercase">Town Bus</p>
+                  <Bus size={14} className="text-[#8B1E2E]" />
+                  <p className="text-[10px] font-black text-[#8B1E2E] tracking-widest uppercase">Town Bus</p>
                 </div>
                 <h3 className="text-xl font-black tracking-tight mb-1">Town Bus Booking</h3>
                 <p className="text-[10px] text-slate-400 font-medium mb-3 leading-tight">Only buses equipped with GPS tracking can be tracked in real time. If a bus does not have GPS installed, live location and tracking features will not be available.</p>
                 <button 
                   onClick={() => router.push('/town-bus')}
-                  className="inline-block bg-[#FF9933] hover:bg-orange-600 text-white border border-[#FF9933]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
+                  className="inline-block bg-[#8B1E2E] hover:bg-orange-600 text-white border border-[#8B1E2E]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
                 >
                   Get Tickets
                 </button>
               </div>
               <div className="absolute right-0 bottom-0 top-0 w-1/3 flex items-center justify-end pr-4 opacity-90 overflow-hidden">
-                <div className="w-24 h-24 bg-[#FF9933]/20 rounded-full blur-2xl absolute -right-4"></div>
-                <div className="bg-gradient-to-br from-[#FF9933] to-orange-600 w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10">
+                <div className="w-24 h-24 bg-[#8B1E2E]/20 rounded-full blur-2xl absolute -right-4"></div>
+                <div className="bg-gradient-to-br from-[#8B1E2E] to-orange-600 w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10">
                   <Ticket size={32} className="text-white" />
                 </div>
               </div>
@@ -298,21 +298,21 @@ export default function MobileDashboard() {
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                <div className="w-11 h-11 bg-[#8B1E2E] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
                   <Hash size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Bus<br/>Code</span>
               </button>
               
               <Link href="/scan" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                <div className="w-11 h-11 bg-[#8B1E2E] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
                   <ScanLine size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Scan<br/>QR</span>
               </Link>
 
               <Link href="/town-bus" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF9933] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
+                <div className="w-11 h-11 bg-[#8B1E2E] rounded-xl flex items-center justify-center shadow-md text-white mx-auto">
                   <Bus size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Town<br/>Bus</span>
@@ -336,7 +336,7 @@ export default function MobileDashboard() {
             <div className="flex gap-4">
               <div className="flex-1 bg-slate-50 rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
                 <div className="flex items-center gap-2 text-slate-600 mb-2">
-                  <WalletCards size={16} className="text-[#FF9933]" />
+                  <WalletCards size={16} className="text-[#8B1E2E]" />
                   <span className="text-[11px] font-semibold truncate">Digi Bus Stand App</span>
                 </div>
                 <div>
@@ -347,11 +347,11 @@ export default function MobileDashboard() {
               
               <Link href="/get-ticket" className="flex-1 bg-slate-50 rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
                 <div className="flex items-center gap-2 text-slate-600 mb-1">
-                  <Ticket size={16} className="text-[#FF9933]" />
+                  <Ticket size={16} className="text-[#8B1E2E]" />
                   <span className="text-xs font-semibold">My Passes</span>
                 </div>
                 <p className="text-lg font-bold text-slate-900">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
-                <div className="mt-2 text-xs font-bold text-[#FF9933] flex items-center gap-1">
+                <div className="mt-2 text-xs font-bold text-[#8B1E2E] flex items-center gap-1">
                   VIEW PASS <ChevronRight size={12} />
                 </div>
                 <History className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
@@ -370,7 +370,7 @@ export default function MobileDashboard() {
             <div className="bg-white rounded-2xl p-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[13px] font-bold text-slate-800 px-1">Live Telemetry Status</h3>
-                <Link href="/live-map" className="text-xs font-bold text-[#FF9933]">View Map</Link>
+                <Link href="/live-map" className="text-xs font-bold text-[#8B1E2E]">View Map</Link>
               </div>
               
               <div 
@@ -443,8 +443,8 @@ export default function MobileDashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF9933]/15 rounded-xl flex items-center justify-center">
-                      <Bell size={20} className="text-[#FF9933]" />
+                    <div className="w-10 h-10 bg-[#8B1E2E]/15 rounded-xl flex items-center justify-center">
+                      <Bell size={20} className="text-[#8B1E2E]" />
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-slate-900">Notifications</h3>
@@ -471,7 +471,7 @@ export default function MobileDashboard() {
                         key={notif._id}
                         className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden text-left"
                       >
-                        <div className="w-2.5 h-full bg-[#FF9933] absolute left-0 top-0 bottom-0" />
+                        <div className="w-2.5 h-full bg-[#8B1E2E] absolute left-0 top-0 bottom-0" />
                         <div className="flex-1 pl-1.5 space-y-1">
                           <p className="text-xs font-bold text-slate-950">{notif.title}</p>
                           <p className="text-xs text-slate-600 leading-tight">{notif.message}</p>
@@ -506,8 +506,8 @@ export default function MobileDashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF9933]/15 rounded-xl flex items-center justify-center">
-                      <Hash size={20} className="text-[#FF9933]" />
+                    <div className="w-10 h-10 bg-[#8B1E2E]/15 rounded-xl flex items-center justify-center">
+                      <Hash size={20} className="text-[#8B1E2E]" />
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-slate-900">Track with Bus Code</h3>
@@ -663,8 +663,8 @@ export default function MobileDashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF9933]/15 rounded-xl flex items-center justify-center">
-                      <MapPin size={20} className="text-[#FF9933]" />
+                    <div className="w-10 h-10 bg-[#8B1E2E]/15 rounded-xl flex items-center justify-center">
+                      <MapPin size={20} className="text-[#8B1E2E]" />
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-slate-900">Change Location</h3>
@@ -717,7 +717,7 @@ export default function MobileDashboard() {
                         setShowAddressModal(false);
                       }
                     }}
-                    className="w-full h-12 bg-slate-950 hover:bg-[#FF9933] text-white rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
+                    className="w-full h-12 bg-slate-950 hover:bg-[#8B1E2E] text-white rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
                   >
                     Confirm & Update Address
                   </button>

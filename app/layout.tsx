@@ -23,7 +23,7 @@ const manrope = Manrope({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FF9933",
+  themeColor: "#8B1E2E",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -62,18 +62,18 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         variables: {
-          colorPrimary: "#FF9933",
-          colorBackground: "#ffffff",
-          colorText: "#0f172a",
+          colorPrimary: "#8B1E2E",
+          colorBackground: "#FAF6F0",
+          colorText: "#333333",
           borderRadius: "1rem",
           fontFamily: "Inter, Manrope, system-ui, sans-serif",
         },
         elements: {
-          card: "shadow-none border border-slate-100",
+          card: "shadow-none border border-slate-200",
           headerTitle: "font-black tracking-tight uppercase",
-          headerSubtitle: "text-slate-400 text-xs",
-          formButtonPrimary: "bg-[#FF9933] hover:bg-[#e07b1a] text-white font-black uppercase tracking-widest rounded-xl h-12",
-          footerActionLink: "text-[#FF9933] font-bold",
+          headerSubtitle: "text-[#635646] text-xs",
+          formButtonPrimary: "bg-[#8B1E2E] hover:bg-[#6B1723] text-white font-black uppercase tracking-widest rounded-xl h-12",
+          footerActionLink: "text-[#D4A017] font-bold",
         },
       }}
     >

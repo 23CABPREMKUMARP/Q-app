@@ -37,7 +37,7 @@ export default function AboutPage() {
       <div className="px-5 space-y-6 mt-6 max-w-md mx-auto">
         {/* Core Profile Card */}
         <div className="bg-gradient-to-br from-zinc-950 to-zinc-900 rounded-[32px] p-6 text-white shadow-xl relative overflow-hidden">
-          <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#FF9933]/15 rounded-full blur-3xl" />
+          <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#8B1E2E]/15 rounded-full blur-3xl" />
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">

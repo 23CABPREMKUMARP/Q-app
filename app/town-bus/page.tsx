@@ -139,7 +139,7 @@ export default function TownBusSearchPage() {
     <SecureView>
       <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-24">
         {/* Header */}
-      <div className="bg-[#FF9933] px-6 pt-12 pb-8 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#8B1E2E] px-6 pt-12 pb-8 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-6">
@@ -165,7 +165,7 @@ export default function TownBusSearchPage() {
               <div className="absolute left-6 top-10 bottom-10 w-0.5 bg-slate-200 border-l-2 border-dashed border-slate-300"></div>
               
               <div className="relative">
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#FF9933] transition-colors relative z-10">
+                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#8B1E2E] transition-colors relative z-10">
                   <MapPin size={20} className="text-emerald-500" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Boarding Point</label>
@@ -197,7 +197,7 @@ export default function TownBusSearchPage() {
               </div>
 
               <div className="relative">
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#FF9933] transition-colors relative z-10">
+                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#8B1E2E] transition-colors relative z-10">
                   <Navigation size={20} className="text-red-500" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Drop Point</label>
@@ -232,7 +232,7 @@ export default function TownBusSearchPage() {
             <button 
               type="submit"
               disabled={isSearching}
-              className="w-full bg-[#FF9933] text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#FF9933]/20 active:scale-95 flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-[#8B1E2E] text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#8B1E2E]/20 active:scale-95 flex items-center justify-center gap-2 mt-2"
             >
               {isSearching ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -275,7 +275,7 @@ export default function TownBusSearchPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white rounded-3xl p-5 mb-4 border border-zinc-100 relative overflow-hidden group hover:border-[#FF9933]/50 transition-colors cursor-pointer shadow-sm hover:shadow-md"
+              className="bg-white rounded-3xl p-5 mb-4 border border-zinc-100 relative overflow-hidden group hover:border-[#8B1E2E]/50 transition-colors cursor-pointer shadow-sm hover:shadow-md"
               onClick={() => router.push(`/town-bus/${trip._id}/seat-selection`)}
             >
 
@@ -299,7 +299,7 @@ export default function TownBusSearchPage() {
                   </div>
                 </div>
                 <div className="text-right flex flex-col items-end gap-2">
-                  <div className="text-[#FF9933] font-black text-2xl tracking-tighter">₹{trip.fare}</div>
+                  <div className="text-[#8B1E2E] font-black text-2xl tracking-tighter">₹{trip.fare}</div>
                   <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Per Seat</div>
                   
                   {/* Bus Code & QR Section */}
@@ -346,15 +346,15 @@ export default function TownBusSearchPage() {
               </AnimatePresence>
 
               <div className="bg-zinc-950 rounded-[24px] p-4 flex items-center justify-between relative overflow-hidden group mb-4">
-                <div className="absolute inset-y-0 left-0 w-1 bg-[#FF9933]" />
+                <div className="absolute inset-y-0 left-0 w-1 bg-[#8B1E2E]" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Boarding</span>
                   <span className="text-sm font-black text-white uppercase truncate max-w-[120px]">{from || "Start"}</span>
                 </div>
                 <div className="flex-1 flex flex-col items-center px-4">
                   <div className="w-full h-[1px] bg-zinc-800 relative">
-                    <div className="absolute inset-0 bg-[#FF9933] animate-pulse" />
-                    <ArrowRight size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#FF9933]" />
+                    <div className="absolute inset-0 bg-[#8B1E2E] animate-pulse" />
+                    <ArrowRight size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#8B1E2E]" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 text-right">
@@ -368,7 +368,7 @@ export default function TownBusSearchPage() {
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                   <span className="text-xs font-bold text-zinc-600">{trip.availableSeats} Seats Left</span>
                 </div>
-                <button className="bg-[#FF9933] hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#FF9933]/20">
+                <button className="bg-[#8B1E2E] hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#8B1E2E]/20">
                   Select Tickets <Navigation size={14} />
                 </button>
               </div>

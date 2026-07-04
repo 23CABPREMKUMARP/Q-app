@@ -748,12 +748,12 @@ function EnterpriseAdminDashboardContent() {
                         <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
                           <defs>
                             <linearGradient id="chartGrad1" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.2" />
-                              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.0" />
+                              <stop offset="0%" stopColor="#0F6B5C" stopOpacity="0.2" />
+                              <stop offset="100%" stopColor="#0F6B5C" stopOpacity="0.0" />
                             </linearGradient>
                           </defs>
                           <path d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30 L 300 100 L 0 100 Z" fill="url(#chartGrad1)" />
-                          <path d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                          <path d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30" fill="none" stroke="#0F6B5C" strokeWidth="2" />
                         </svg>
                       </div>
                     </div>
@@ -768,12 +768,12 @@ function EnterpriseAdminDashboardContent() {
                         <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
                           <defs>
                             <linearGradient id="chartGrad2" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#10b981" stopOpacity="0.2" />
-                              <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
+                              <stop offset="0%" stopColor="#0F6B5C" stopOpacity="0.2" />
+                              <stop offset="100%" stopColor="#0F6B5C" stopOpacity="0.0" />
                             </linearGradient>
                           </defs>
                           <path d="M 0 90 Q 75 40 150 70 T 300 20 L 300 100 L 0 100 Z" fill="url(#chartGrad2)" />
-                          <path d="M 0 90 Q 75 40 150 70 T 300 20" fill="none" stroke="#10b981" strokeWidth="2" />
+                          <path d="M 0 90 Q 75 40 150 70 T 300 20" fill="none" stroke="#0F6B5C" strokeWidth="2" />
                         </svg>
                       </div>
                     </div>
