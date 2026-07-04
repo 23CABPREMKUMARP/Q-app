@@ -1532,7 +1532,7 @@ export default function EnterpriseConductorPortal() {
                   {/* Live Stats */}
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
-                      <Gauge size={18} className="text-[#8B1E2E] mx-auto mb-2" />
+                      <Gauge size={18} className="text-[#A4E5E0] mx-auto mb-2" />
                       <p className="text-2xl font-black text-white">{gpsState.speed || speed}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">km/h</p>
                     </div>
@@ -1550,7 +1550,7 @@ export default function EnterpriseConductorPortal() {
 
                   {/* Current Route */}
                   <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex items-center gap-3">
-                    <Bus size={20} className="text-[#8B1E2E] flex-shrink-0" />
+                    <Bus size={20} className="text-[#A4E5E0] flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Current Route</p>
                       <p className="text-sm font-black text-zinc-100 truncate">{assignedRouteName || 'Not Assigned'}</p>

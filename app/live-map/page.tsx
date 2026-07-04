@@ -181,7 +181,7 @@ function LiveMapContent() {
           </div>
 
           {/* Profile avatar circle */}
-          <div className="w-10 h-10 rounded-full bg-[#8B1E2E] flex items-center justify-center shadow-md flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-[#A4E5E0] flex items-center justify-center shadow-md flex-shrink-0">
             <Bus size={18} className="text-white" />
           </div>
         </div>
@@ -374,7 +374,7 @@ function LiveMapContent() {
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">From</p>
                       <p className="text-sm font-black text-white truncate">{from}</p>
                     </div>
-                    <Navigation size={16} className="text-[#8B1E2E] flex-shrink-0" />
+                    <Navigation size={16} className="text-[#A4E5E0] flex-shrink-0" />
                     <div className="flex-1 min-w-0 text-right">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">To</p>
                       <p className="text-sm font-black text-white truncate">{to}</p>
@@ -423,7 +423,7 @@ function LiveMapContent() {
           >
             {/* Left: bus count pill */}
             <div className="bg-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
-              <Bus size={14} className="text-[#8B1E2E]" />
+              <Bus size={14} className="text-[#A4E5E0]" />
               <span className="text-xs font-bold text-gray-700">Digi Bus Stand</span>
               {liveCount > 0 && (
                 <>

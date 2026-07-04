@@ -471,15 +471,15 @@ export default function TicketCountSelectionPage() {
       <div className="px-6 mt-12">
         {/* Routing Dynamic Highlight */}
         <div className="bg-zinc-950 rounded-[32px] p-6 flex items-center justify-between relative overflow-hidden group mb-8 shadow-lg shadow-black/10">
-          <div className="absolute inset-y-0 left-0 w-1 bg-[#8B1E2E]" />
+          <div className="absolute inset-y-0 left-0 w-1 bg-[#A4E5E0]" />
           <div className="flex flex-col gap-1">
             <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Total Journeys</span>
             <span className="text-sm font-black text-white uppercase truncate max-w-[120px]">{passengers.length}</span>
           </div>
           <div className="flex-1 flex flex-col items-center px-4">
             <div className="w-full h-[1px] bg-zinc-800 relative">
-              <div className="absolute inset-0 bg-[#8B1E2E] animate-pulse" />
-              <Bus size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#8B1E2E]" />
+              <div className="absolute inset-0 bg-[#A4E5E0] animate-pulse" />
+              <Bus size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#A4E5E0]" />
             </div>
           </div>
           <div className="flex flex-col gap-1 text-right">
@@ -514,7 +514,7 @@ export default function TicketCountSelectionPage() {
                 <div className="mt-8 pt-4">
                   {passengers.map((passenger, index) => (
                     <div key={index} className="mb-6 bg-zinc-50 border border-zinc-200 rounded-2xl p-5 relative">
-                      <div className="absolute -top-3 left-4 bg-white px-2 py-0.5 text-[10px] font-black text-[#8B1E2E] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm flex items-center gap-2">
+                      <div className="absolute -top-3 left-4 bg-white px-2 py-0.5 text-[10px] font-black text-[#A4E5E0] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm flex items-center gap-2">
                         Journey {index + 1}
                         {passengers.length > 1 && (
                           <button onClick={() => {
@@ -540,7 +540,7 @@ export default function TicketCountSelectionPage() {
                               newP[index].fare = calculateFare(newP[index].boarding, newP[index].destination);
                               setPassengers(newP);
                             }} 
-                            className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#8B1E2E] transition-all cursor-pointer"
+                            className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#A4E5E0] transition-all cursor-pointer"
                           >
                             <option value="">Choose Start</option>
                             {stops.map((s: any) => <option key={s._id} value={s.stopName}>{s.stopName}</option>)}
@@ -558,7 +558,7 @@ export default function TicketCountSelectionPage() {
                               newP[index].fare = calculateFare(newP[index].boarding, newP[index].destination);
                               setPassengers(newP);
                             }} 
-                            className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#8B1E2E] transition-all cursor-pointer"
+                            className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#A4E5E0] transition-all cursor-pointer"
                           >
                             <option value="">Choose End</option>
                             {stops
@@ -576,7 +576,7 @@ export default function TicketCountSelectionPage() {
                             <label className="flex items-center gap-1.5 cursor-pointer hover:bg-zinc-100 px-2 py-0.5 rounded transition-colors">
                               <input 
                                 type="checkbox" 
-                                className="accent-[#8B1E2E] w-3 h-3 cursor-pointer"
+                                className="accent-[#A4E5E0] w-3 h-3 cursor-pointer"
                                 onChange={(e) => {
                                   const newP = [...passengers];
                                   if (e.target.checked) {
@@ -605,7 +605,7 @@ export default function TicketCountSelectionPage() {
                       <div className="flex justify-between items-end">
                         <div className="flex-1">
                           <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest pl-1 mb-2 flex items-center gap-1">
-                            <Package size={12} className="text-[#8B1E2E]" /> Luggage Add-on
+                            <Package size={12} className="text-[#A4E5E0]" /> Luggage Add-on
                           </label>
                           <div className="grid grid-cols-4 gap-2">
                             {['None', 'Small', 'Medium', 'Large'].map(type => (
@@ -618,7 +618,7 @@ export default function TicketCountSelectionPage() {
                                 }}
                                 className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
                                   passenger.luggage === type 
-                                    ? 'bg-[#8B1E2E] text-white border-[#8B1E2E] shadow-md shadow-[#8B1E2E]/20' 
+                                    ? 'bg-[#A4E5E0] text-white border-[#A4E5E0] shadow-md shadow-[#A4E5E0]/20' 
                                     : 'bg-white text-slate-500 border-zinc-200 hover:border-zinc-300'
                                 }`}
                               >
@@ -638,7 +638,7 @@ export default function TicketCountSelectionPage() {
                   <button
                     onClick={handleIncrement}
                     disabled={ticketCount >= 10}
-                    className="w-full py-4 border-2 border-dashed border-zinc-300 text-zinc-500 rounded-2xl font-bold uppercase tracking-widest text-xs hover:border-[#8B1E2E] hover:text-[#8B1E2E] transition-all flex items-center justify-center gap-2"
+                    className="w-full py-4 border-2 border-dashed border-zinc-300 text-zinc-500 rounded-2xl font-bold uppercase tracking-widest text-xs hover:border-[#A4E5E0] hover:text-[#A4E5E0] transition-all flex items-center justify-center gap-2"
                   >
                     <Plus size={16} /> Add Another Journey
                   </button>
@@ -647,7 +647,7 @@ export default function TicketCountSelectionPage() {
                 <button 
                   onClick={() => setStep(3)}
                   disabled={passengers.some(p => !p.boarding || !p.destination)}
-                  className="w-full h-20 bg-[#8B1E2E] text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#8B1E2E]/20"
+                  className="w-full h-20 bg-[#A4E5E0] text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#A4E5E0]/20"
                 >
                   Proceed to Payment <ChevronRight size={24} />
                 </button>
@@ -664,11 +664,11 @@ export default function TicketCountSelectionPage() {
               className="space-y-8"
             >
               <div className="bg-white rounded-[40px] p-8 text-zinc-900 space-y-6 relative overflow-hidden group border border-zinc-200 shadow-sm">
-                <div className="absolute top-0 right-0 p-6 opacity-5 text-[#8B1E2E]">
+                <div className="absolute top-0 right-0 p-6 opacity-5 text-[#A4E5E0]">
                   <CreditCard size={120} />
                 </div>
                 <div className="space-y-1 relative z-10">
-                  <p className="text-[10px] font-black text-[#8B1E2E] uppercase tracking-[0.4em]">Payment Summary</p>
+                  <p className="text-[10px] font-black text-[#A4E5E0] uppercase tracking-[0.4em]">Payment Summary</p>
                   <h4 className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap truncate font-heading">Town Bus</h4>
                 </div>
                 
@@ -692,7 +692,7 @@ export default function TicketCountSelectionPage() {
                   </div>
                   <div className="space-y-1 mt-4 col-span-2 text-right border-t border-zinc-100 pt-4">
                     <p className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Total Fare</p>
-                    <div className="text-3xl font-black text-[#8B1E2E] flex justify-end">
+                    <div className="text-3xl font-black text-[#A4E5E0] flex justify-end">
                       ₹{totalAmount}
                     </div>
                   </div>
@@ -701,7 +701,7 @@ export default function TicketCountSelectionPage() {
 
               <div className="bg-white rounded-[32px] p-8 border border-zinc-200 shadow-sm mt-6">
                 {paymentState === 'processing' ? (
-                  <div className="w-full h-20 bg-[#8B1E2E] rounded-[32px] flex items-center justify-center">
+                  <div className="w-full h-20 bg-[#A4E5E0] rounded-[32px] flex items-center justify-center">
                     <motion.div className="flex items-center gap-3 text-white">
                       <RefreshCw size={24} className="animate-spin" />
                       <span className="uppercase tracking-widest text-sm font-black">Processing via PhonePe...</span>
@@ -717,7 +717,7 @@ export default function TicketCountSelectionPage() {
                     </button>
                     <button 
                       onClick={() => handlePayment()}
-                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#8B1E2E] text-white hover:bg-[#e07b1a] transition-colors shadow-lg shadow-[#8B1E2E]/20"
+                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#A4E5E0] text-white hover:bg-[#e07b1a] transition-colors shadow-lg shadow-[#A4E5E0]/20"
                     >
                       Pay ₹{totalAmount}
                     </button>
@@ -734,7 +734,7 @@ export default function TicketCountSelectionPage() {
               animate={{ opacity: 1 }}
               className="space-y-8 relative"
             >
-              <Confetti width={width} height={height} recycle={false} numberOfPieces={500} gravity={0.2} colors={['#8B1E2E', '#0F6B5C', '#8B5CF6', '#F43F5E']} style={{ pointerEvents: 'none' }} />
+              <Confetti width={width} height={height} recycle={false} numberOfPieces={500} gravity={0.2} colors={['#A4E5E0', '#0F6B5C', '#8B5CF6', '#F43F5E']} style={{ pointerEvents: 'none' }} />
               <div className="text-center space-y-4 relative z-10 mb-12">
                 <motion.div 
                   initial={{ scale: 0, rotate: -45 }}
@@ -856,7 +856,7 @@ export default function TicketCountSelectionPage() {
 
                  <button 
                    onClick={() => router.push('/town-bus')}
-                   className="col-span-2 md:col-span-1 h-16 bg-[#8B1E2E] text-white rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#8B1E2E]/20 border border-[#8B1E2E]"
+                   className="col-span-2 md:col-span-1 h-16 bg-[#A4E5E0] text-white rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#A4E5E0]/20 border border-[#A4E5E0]"
                  >
                    <Bus size={16} />
                    Return to Bus List
@@ -903,7 +903,7 @@ export default function TicketCountSelectionPage() {
               <div className="w-full max-w-sm space-y-4">
                 <button 
                   onClick={() => handlePayment()}
-                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-white bg-[#8B1E2E] hover:bg-[#e07b1a] transition-all active:scale-[0.98] shadow-xl shadow-[#8B1E2E]/20"
+                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-white bg-[#A4E5E0] hover:bg-[#e07b1a] transition-all active:scale-[0.98] shadow-xl shadow-[#A4E5E0]/20"
                 >
                   Retry Payment
                 </button>
@@ -929,7 +929,7 @@ export default function TicketCountSelectionPage() {
             >
               <div className="w-24 h-24 mb-8 relative">
                 <div className="absolute inset-0 border-4 border-zinc-200 rounded-full"></div>
-                <div className="absolute inset-0 border-4 border-[#8B1E2E] rounded-full border-t-transparent animate-spin"></div>
+                <div className="absolute inset-0 border-4 border-[#A4E5E0] rounded-full border-t-transparent animate-spin"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <CreditCard className="text-zinc-400" size={32} />
                 </div>
@@ -967,7 +967,7 @@ export default function TicketCountSelectionPage() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xl">₹{totalAmount}</span>
-                <ArrowRight size={20} className="text-[#8B1E2E]" />
+                <ArrowRight size={20} className="text-[#A4E5E0]" />
               </div>
             </button>
           </motion.div>
@@ -1006,7 +1006,7 @@ export default function TicketCountSelectionPage() {
               </div>
               
               <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">Bus Code</p>
-              <p className="text-3xl font-black text-[#8B1E2E] uppercase tracking-widest">
+              <p className="text-3xl font-black text-[#A4E5E0] uppercase tracking-widest">
                 {trip?.busCode || trip?.busNumber || tripId}
               </p>
             </motion.div>

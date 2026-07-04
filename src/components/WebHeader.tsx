@@ -68,7 +68,7 @@ export function WebHeader() {
           
           <div className="flex flex-col justify-center">
             <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
-              DIGI <span className="text-[#8B1E2E]">BUS</span>
+              DIGI <span className="text-[#A4E5E0]">BUS</span>
             </span>
             <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
               STAND
@@ -83,7 +83,7 @@ export function WebHeader() {
             </span>
             <div className="flex flex-col leading-none">
               <span className="text-[12px] md:text-[18px] font-black tracking-tight leading-none">
-                <span className="text-zinc-900">JEFF</span><span className="text-[#8B1E2E]">BEN</span>
+                <span className="text-zinc-900">JEFF</span><span className="text-[#A4E5E0]">BEN</span>
               </span>
               <span className="text-[6px] md:text-[8px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
                 Systems
@@ -101,12 +101,12 @@ export function WebHeader() {
                 key={link.href} 
                 href={link.href}
                 className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
-                  isActive ? "text-[#8B1E2E]" : "text-zinc-600 hover:text-zinc-900"
+                  isActive ? "text-[#A4E5E0]" : "text-zinc-600 hover:text-zinc-900"
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#8B1E2E] rounded-full"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#A4E5E0] rounded-full"></span>
                 )}
               </a>
             );
@@ -139,7 +139,7 @@ export function WebHeader() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xs font-black uppercase tracking-widest p-4 rounded-xl transition-colors ${
-                  isActive ? "bg-[#8B1E2E]/10 text-[#8B1E2E]" : "text-zinc-500 hover:bg-zinc-50"
+                  isActive ? "bg-[#A4E5E0]/10 text-[#A4E5E0]" : "text-zinc-500 hover:bg-zinc-50"
                 }`}
               >
                 {link.label}

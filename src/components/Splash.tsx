@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Splash() {
   return (
-    <div className="fixed inset-0 z-[200] bg-[#8B1E2E] flex flex-col items-center justify-center p-6">
+    <div className="fixed inset-0 z-[200] bg-[#A4E5E0] flex flex-col items-center justify-center p-6">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
