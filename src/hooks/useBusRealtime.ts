@@ -102,6 +102,12 @@ export function useBusRealtime({ busId, pollFallbackMs = 5000 }: UseBusRealtimeO
           pollGPSStatus(busId);
         }
       }, pollFallbackMs);
+    } else {
+      // Fleet tracking
+      subscribeToChannel("fleet");
+      
+      // We don't poll /api/gps/status for all buses constantly to avoid spam.
+      // But we can do an initial fetch for all buses if needed, or rely on the main page fetching /api/buses once.
     }
 
     return () => {

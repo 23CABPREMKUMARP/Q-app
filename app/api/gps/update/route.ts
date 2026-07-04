@@ -54,15 +54,24 @@ export async function POST(req: Request) {
     }
 
     // Broadcast via Supabase Realtime to all listening passengers
+    const payload = {
+      busId,
+      ...locationPayload,
+      timestamp: now,
+      deviceStatus: "Online",
+    };
+
     await supabase.channel(`gps:${busId}`).send({
       type: "broadcast",
       event: "location",
-      payload: {
-        busId,
-        ...locationPayload,
-        timestamp: now,
-        deviceStatus: "Online",
-      },
+      payload
+    });
+
+    // Also broadcast to the global fleet channel
+    await supabase.channel(`gps:fleet`).send({
+      type: "broadcast",
+      event: "location",
+      payload
     });
 
     return NextResponse.json({
