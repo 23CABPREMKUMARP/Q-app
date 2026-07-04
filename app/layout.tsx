@@ -23,7 +23,7 @@ const manrope = Manrope({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#8B1E2E",
+  themeColor: "#FF9933",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -34,19 +34,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Smart Tamizha by JeffBen Systems | Metropolitan Transit Intelligence",
   description: "Smart Tamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
-  keywords: ["Smart Tamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit", "Coimbatore Town Bus", "Live Bus Tracking"],
+  keywords: ["Smart Tamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
   metadataBase: new URL('https://jeffben.org'),
-  alternates: {
-    canonical: 'https://jeffben.org',
-  },
-  authors: [{ name: 'JeffBen Systems' }],
-  creator: 'JeffBen Systems',
-  publisher: 'JeffBen Systems',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -54,24 +43,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Smart Tamizha by JeffBen Systems - Future of Automated Mobility",
-    description: "Official platform for advanced transit telemetry and smart city infrastructure integration by JeffBen Systems.",
-    url: 'https://jeffben.org',
-    siteName: 'Smart Tamizha',
-    images: [
-      {
-        url: '/hero-logo.png',
-        width: 800,
-        height: 600,
-      }
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Smart Tamizha by JeffBen Systems",
     description: "Official platform for advanced transit telemetry and smart city infrastructure integration.",
     images: ['/hero-logo.png'],
+    type: 'website',
   },
   icons: {
     icon: '/hero-logo.png',
@@ -88,24 +62,41 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         variables: {
-          colorPrimary: "#8B1E2E",
-          colorBackground: "#FAF6F0",
-          colorText: "#333333",
+          colorPrimary: "#FF9933",
+          colorBackground: "#ffffff",
+          colorText: "#0f172a",
           borderRadius: "1rem",
           fontFamily: "Inter, Manrope, system-ui, sans-serif",
         },
         elements: {
-          card: "shadow-none border border-slate-200",
+          card: "shadow-none border border-slate-100",
           headerTitle: "font-black tracking-tight uppercase",
-          headerSubtitle: "text-[#635646] text-xs",
-          formButtonPrimary: "bg-[#8B1E2E] hover:bg-[#6B1723] text-white font-black uppercase tracking-widest rounded-xl h-12",
-          footerActionLink: "text-[#D4A017] font-bold",
+          headerSubtitle: "text-slate-400 text-xs",
+          formButtonPrimary: "bg-[#FF9933] hover:bg-[#e07b1a] text-white font-black uppercase tracking-widest rounded-xl h-12",
+          footerActionLink: "text-[#FF9933] font-bold",
         },
       }}
     >
       <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-white">
         <head>
           <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Smart Tamizha",
+                "alternateName": "JeffBen Systems",
+                "url": "https://jeffben.org",
+                "logo": "https://jeffben.org/hero-logo.png",
+                "description": "Smart Tamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
+                "sameAs": [
+                  "https://jeffben.org"
+                ]
+              })
+            }}
+          />
         </head>
         <body
           className={`${inter.variable} ${manrope.variable} antialiased bg-slate-50 min-h-full flex flex-col`}
