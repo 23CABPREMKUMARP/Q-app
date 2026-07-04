@@ -523,7 +523,7 @@ export default function TicketCountSelectionPage() {
                             setPassengers(newP);
                             setTicketCount(newP.length);
                           }} className="text-red-500 hover:text-red-700 ml-2">
-                            <Minus size={12} />
+                            <X size={12} />
                           </button>
                         )}
                       </div>
