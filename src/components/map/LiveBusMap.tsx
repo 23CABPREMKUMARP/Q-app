@@ -81,7 +81,7 @@ function AutoFit({ buses, livePositions, centerOn }: { buses: BusData[]; livePos
 
     const points: [number, number][] = buses
       .map((b) => {
-        const live = livePositions[b._id];
+        const live = livePositions[b._id] || livePositions[b.busCode as string] || livePositions[b.busNumber as string];
         const lat = live?.lat ?? b.location?.lat;
         const lng = live?.lng ?? b.location?.lng;
         return lat && lng ? ([lat, lng] as [number, number]) : null;
@@ -218,7 +218,7 @@ const LeafletBusMap = React.memo(
           <React.Fragment key={bus._id}>
             <AnimatedBusMarker
               bus={bus}
-              livePos={livePositions[bus._id] || null}
+              livePos={livePositions[bus._id] || livePositions[bus.busCode as string] || livePositions[bus.busNumber as string] || null}
               isSelected={selectedBusId === bus._id}
               onClick={() => onBusClick(bus)}
               showRoute={showRoutes}
