@@ -10,7 +10,7 @@ export const WatermarkOverlay = ({ text = "JEFFBEN PROTECTED" }: { text?: string
         {tileArray.map((t, i) => (
           <span 
             key={i} 
-            className="text-[#ffffff] text-2xl font-black uppercase tracking-[0.5em] whitespace-nowrap"
+            className="text-black text-2xl font-black uppercase tracking-[0.5em] whitespace-nowrap"
           >
             {t}
           </span>

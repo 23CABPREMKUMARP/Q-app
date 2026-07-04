@@ -74,14 +74,14 @@ export const Navbar = React.memo(function Navbar() {
           </Link>
 
           <Link href="/" aria-label="JeffBen Systems" className="relative flex flex-col items-center gap-0 group">
-            <span className="text-[7px] font-semibold text-zinc-400 uppercase tracking-widest leading-none mb-1">
+            <span className="text-[7px] font-semibold text-zinc-600 uppercase tracking-widest leading-none mb-1">
               Powered By
             </span>
             <div className="flex flex-col -gap-1">
               <span className="text-lg md:text-xl font-bold tracking-tight leading-none">
                 <span className="text-black">JEFF</span><span className="text-primary">BEN</span>
               </span>
-              <span className="text-[8px] font-semibold text-zinc-400 uppercase tracking-wider leading-none">
+              <span className="text-[8px] font-semibold text-zinc-600 uppercase tracking-wider leading-none">
                 Systems
               </span>
             </div>
@@ -114,7 +114,7 @@ export const Navbar = React.memo(function Navbar() {
           <Link 
             href="/get-ticket"
             aria-label="Book Now"
-            className="hidden md:flex items-center gap-2 bg-zinc-900 text-[#ffffff] px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-primary transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
+            className="hidden md:flex items-center gap-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-primary transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
           >
             Book Now <ChevronRight size={16} />
           </Link>
@@ -162,7 +162,7 @@ export const Navbar = React.memo(function Navbar() {
               <div className="mt-4 pt-6 border-t border-zinc-100">
                 <Link 
                   href="/get-ticket"
-                  className="flex items-center justify-center gap-2 bg-zinc-900 text-[#ffffff] w-full py-4 rounded-2xl text-base font-black uppercase tracking-widest hover:bg-primary transition-all"
+                  className="flex items-center justify-center gap-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black w-full py-4 rounded-2xl text-base font-black uppercase tracking-widest hover:bg-primary transition-all"
                 >
                   Book Now <ChevronRight size={18} />
                 </Link>

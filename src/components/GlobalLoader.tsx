@@ -73,14 +73,14 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   transition={{ delay: 1.5, duration: 0.8 }}
                   className="text-5xl md:text-7xl font-black tracking-tighter uppercase font-heading"
                 >
-                  <span className="text-black">Digi Bus</span> <span className="text-[#ffffff]">Stand</span>
+                  <span className="text-black">Digi Bus</span> <span className="text-black">Stand</span>
                 </motion.h1>
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 2.2, duration: 2.5, ease: "linear" }}
                   style={{ transformOrigin: "left center", willChange: "transform" }}
-                  className="h-1.5 w-full bg-black rounded-full mx-auto"
+                  className="h-1.5 w-full bg-[#ffffff] border border-slate-200 text-black rounded-full mx-auto"
                 />
                 <motion.p
                   initial={{ opacity: 0 }}

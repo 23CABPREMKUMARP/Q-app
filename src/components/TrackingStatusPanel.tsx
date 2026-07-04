@@ -120,17 +120,17 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
         </div>
 
         {/* Route card */}
-        <div className="bg-zinc-950 rounded-2xl p-5 mb-4 relative overflow-hidden">
+        <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl p-5 mb-4 relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1 bg-[#A4E5E0] rounded-l-2xl" />
           <div className="flex items-center gap-4 pl-3">
             <div className="flex-1 min-w-0">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">From</p>
-              <p className="text-sm font-black text-[#ffffff] uppercase truncate">{from}</p>
+              <p className="text-sm font-black text-black uppercase truncate">{from}</p>
             </div>
             <ArrowRight size={16} className="text-[#A4E5E0] flex-shrink-0" />
             <div className="flex-1 min-w-0 text-right">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">To</p>
-              <p className="text-sm font-black text-[#ffffff] uppercase truncate">{to}</p>
+              <p className="text-sm font-black text-black uppercase truncate">{to}</p>
             </div>
           </div>
         </div>
@@ -138,17 +138,17 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
-            <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-400 uppercase tracking-widest">
+            <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-600 uppercase tracking-widest">
               <Gauge size={11} /> Speed
             </div>
-            <p className="text-2xl font-black text-zinc-900">{speed}<span className="text-sm font-bold text-zinc-400 ml-1">km/h</span></p>
+            <p className="text-2xl font-black text-zinc-900">{speed}<span className="text-sm font-bold text-zinc-600 ml-1">km/h</span></p>
           </div>
 
           <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
-            <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-400 uppercase tracking-widest">
+            <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-600 uppercase tracking-widest">
               <Navigation size={11} /> Distance
             </div>
-            <p className="text-2xl font-black text-zinc-900">{distanceToUser || <span className="text-sm text-zinc-400">No location</span>}</p>
+            <p className="text-2xl font-black text-zinc-900">{distanceToUser || <span className="text-sm text-zinc-600">No location</span>}</p>
           </div>
 
           {nextStop && (
@@ -165,7 +165,7 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
               <div className="flex items-center gap-1.5 text-[9px] font-black text-emerald-600 uppercase tracking-widest">
                 <Clock size={11} /> ETA
               </div>
-              <p className="text-2xl font-black text-zinc-900">{etaMinutes}<span className="text-sm font-bold text-zinc-400 ml-1">min</span></p>
+              <p className="text-2xl font-black text-zinc-900">{etaMinutes}<span className="text-sm font-bold text-zinc-600 ml-1">min</span></p>
             </div>
           )}
         </div>

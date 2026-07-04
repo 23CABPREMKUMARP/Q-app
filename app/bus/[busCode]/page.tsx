@@ -18,7 +18,7 @@ export default function BusQRRedirectPage() {
           
           {/* Top Floating Badge */}
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <div className="bg-[#FF8A00] text-[#ffffff] px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
+            <div className="bg-[#FF8A00] text-black px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
               <ShieldCheck size={14} />
               Verified Matrix Node
             </div>
@@ -29,7 +29,7 @@ export default function BusQRRedirectPage() {
             
             {/* Bus Icon */}
             <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-6">
-              <Bus size={28} className="text-slate-400" />
+              <Bus size={28} className="text-slate-600" />
             </div>
 
             <h1 className="text-2xl font-black text-[#0f172a] tracking-tight mb-2">BUS FOUND</h1>
@@ -85,13 +85,13 @@ export default function BusQRRedirectPage() {
             <a 
               href="/api/download-app" 
               download="Smart-Tamizha-App.apk"
-              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-[#ffffff] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
+              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-black font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
               DOWNLOAD APP TO BOARD
             </a>
 
             <div className="space-y-2">
-              <p className="text-[11px] text-slate-400">App not installed?</p>
+              <p className="text-[11px] text-slate-600">App not installed?</p>
               <Link 
                 href={`/town-bus/bus/${codeStr}`}
                 className="block text-[12px] font-bold text-[#FF8A00] hover:text-[#e67a00] transition-colors tracking-widest"

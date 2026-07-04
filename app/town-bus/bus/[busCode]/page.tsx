@@ -48,11 +48,11 @@ export default function BusCodeDetailsPage() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <button onClick={() => router.back()} className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
-            <ArrowRight size={24} className="text-[#ffffff] rotate-180" />
+            <ArrowRight size={24} className="text-black rotate-180" />
           </button>
           <div className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md px-4 flex items-center gap-2">
-            <Bus size={18} className="text-[#ffffff]" />
-            <span className="text-[#ffffff] font-black tracking-widest">{busCode}</span>
+            <Bus size={18} className="text-black" />
+            <span className="text-black font-black tracking-widest">{busCode}</span>
           </div>
         </div>
       </div>
@@ -64,8 +64,8 @@ export default function BusCodeDetailsPage() {
               <Info size={32} />
             </div>
             <h2 className="text-xl font-black text-slate-800 uppercase">Bus Not Active</h2>
-            <p className="text-sm font-bold text-slate-400">{error}</p>
-            <button onClick={() => router.push('/')} className="mt-4 px-6 py-3 bg-slate-900 text-[#ffffff] rounded-xl font-black uppercase text-xs tracking-widest w-full">Back to Home</button>
+            <p className="text-sm font-bold text-slate-600">{error}</p>
+            <button onClick={() => router.push('/')} className="mt-4 px-6 py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black rounded-xl font-black uppercase text-xs tracking-widest w-full">Back to Home</button>
           </div>
         ) : (
           <motion.div 
@@ -79,7 +79,7 @@ export default function BusCodeDetailsPage() {
                 <Bus size={120} />
               </div>
               <div className="relative z-10">
-                <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Route Info</h2>
+                <h2 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-1">Route Info</h2>
                 <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-6">
                   {trip.routeId?.routeName || "City Route"}
                 </h3>
@@ -89,13 +89,13 @@ export default function BusCodeDetailsPage() {
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center"><Clock size={16} /></div>
                       <div>
-                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Departure</p>
+                        <p className="text-[9px] font-black text-slate-600 uppercase tracking-widest">Departure</p>
                         <p className="font-bold text-slate-800">{trip.departureTime}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 text-right">
                       <div>
-                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Fare</p>
+                        <p className="text-[9px] font-black text-slate-600 uppercase tracking-widest">Fare</p>
                         <p className="font-bold text-slate-800">₹{trip.fare}</p>
                       </div>
                       <div className="w-8 h-8 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center"><Zap size={16} /></div>
@@ -109,9 +109,9 @@ export default function BusCodeDetailsPage() {
             <div className="grid grid-cols-2 gap-4">
               <Link 
                 href={`/town-bus/${trip._id}/seat-selection`}
-                className="bg-slate-900 text-[#ffffff] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
+                className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
-                <div className="w-10 h-10 rounded-full bg-[#ffffff]/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 text-black flex items-center justify-center">
                   <Bus size={20} className="text-[#A4E5E0]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>

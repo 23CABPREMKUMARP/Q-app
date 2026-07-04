@@ -89,16 +89,16 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl md:text-2xl font-black text-zinc-950 tracking-tight leading-none">Bus Quick-Code</h2>
-              <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Instant Fleet Access</p>
+              <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-2">Instant Fleet Access</p>
             </div>
-            <div className="w-12 h-12 bg-zinc-950 rounded-2xl flex items-center justify-center shadow-lg">
-              <Zap size={24} className="text-[#ffffff] fill-current" />
+            <div className="w-12 h-12 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl flex items-center justify-center shadow-lg">
+              <Zap size={24} className="text-black fill-current" />
             </div>
           </div>
 
           <form onSubmit={handleSearch} className="relative group">
             <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-              <Search size={20} className="text-zinc-400 group-focus-within:text-zinc-950 transition-colors" />
+              <Search size={20} className="text-zinc-600 group-focus-within:text-zinc-950 transition-colors" />
             </div>
             <input
               type="text"
@@ -111,7 +111,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               <button
                 type="submit"
                 disabled={isLoading || !busCode}
-                className="h-full px-4 w-14 justify-center bg-zinc-950 text-[#ffffff] rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
+                className="h-full px-4 w-14 justify-center bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={18} />}
               </button>
@@ -170,7 +170,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
           <div className="mt-8 pt-6 border-t border-zinc-50 flex items-center justify-between">
             <button 
               onClick={onScanClick || (() => router.push('/live-map?action=scan'))}
-              className="flex items-center gap-3 text-zinc-400 hover:text-zinc-950 transition-colors group"
+              className="flex items-center gap-3 text-zinc-600 hover:text-zinc-950 transition-colors group"
             >
               <div className="w-10 h-10 bg-zinc-50 rounded-xl flex items-center justify-center group-hover:bg-zinc-100 transition-all">
                 <QrCode size={20} />

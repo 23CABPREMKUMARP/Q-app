@@ -182,7 +182,7 @@ function LiveMapContent() {
 
           {/* Profile avatar circle */}
           <div className="w-10 h-10 rounded-full bg-[#A4E5E0] flex items-center justify-center shadow-md flex-shrink-0">
-            <Bus size={18} className="text-[#ffffff]" />
+            <Bus size={18} className="text-black" />
           </div>
         </div>
 
@@ -372,12 +372,12 @@ function LiveMapContent() {
                   <div className="bg-gray-900 rounded-2xl p-4 flex items-center gap-4">
                     <div className="flex-1 min-w-0">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">From</p>
-                      <p className="text-sm font-black text-[#ffffff] truncate">{from}</p>
+                      <p className="text-sm font-black text-black truncate">{from}</p>
                     </div>
                     <Navigation size={16} className="text-[#A4E5E0] flex-shrink-0" />
                     <div className="flex-1 min-w-0 text-right">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">To</p>
-                      <p className="text-sm font-black text-[#ffffff] truncate">{to}</p>
+                      <p className="text-sm font-black text-black truncate">{to}</p>
                     </div>
                   </div>
 

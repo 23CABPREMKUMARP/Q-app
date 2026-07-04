@@ -37,7 +37,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
   return (
     <div className="space-y-3 w-full">
       <div className="flex justify-between items-center px-2">
-        <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">
+        <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">
           Secure Link (Phone)
         </label>
         <AnimatePresence>

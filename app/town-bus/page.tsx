@@ -143,9 +143,9 @@ export default function TownBusSearchPage() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-black uppercase tracking-tighter text-[#ffffff]">Town Bus</h1>
+            <h1 className="text-3xl font-black uppercase tracking-tighter text-black">Town Bus</h1>
             <div className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
-              <Bus size={24} className="text-[#ffffff]" />
+              <Bus size={24} className="text-black" />
             </div>
           </div>
           <p className="text-[#ffffff]/80 font-medium text-sm tracking-wide">Premium City Transit & Express Routes</p>
@@ -168,7 +168,7 @@ export default function TownBusSearchPage() {
                 <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#A4E5E0] transition-colors relative z-10">
                   <MapPin size={20} className="text-emerald-500" />
                   <div className="flex-1">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Boarding Point</label>
+                    <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-1">Boarding Point</label>
                     <input 
                       type="text" 
                       placeholder="E.g. Gandhipuram"
@@ -200,7 +200,7 @@ export default function TownBusSearchPage() {
                 <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#A4E5E0] transition-colors relative z-10">
                   <Navigation size={20} className="text-red-500" />
                   <div className="flex-1">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Drop Point</label>
+                    <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-1">Drop Point</label>
                     <input 
                       type="text" 
                       placeholder="E.g. Ukkadam"
@@ -232,7 +232,7 @@ export default function TownBusSearchPage() {
             <button 
               type="submit"
               disabled={isSearching}
-              className="w-full bg-[#A4E5E0] text-[#ffffff] py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#A4E5E0]/20 active:scale-95 flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-[#A4E5E0] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#A4E5E0]/20 active:scale-95 flex items-center justify-center gap-2 mt-2"
             >
               {isSearching ? (
                 <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div>
@@ -318,7 +318,7 @@ export default function TownBusSearchPage() {
                         </div>
                       )}
                       <div className="text-right">
-                        <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest block leading-none mb-1">Bus Code</span>
+                        <span className="text-[8px] font-black text-slate-600 uppercase tracking-widest block leading-none mb-1">Bus Code</span>
                         <span className="text-xs font-black text-slate-800 uppercase tracking-widest">{trip.busId.busCode}</span>
                       </div>
                     </div>
@@ -345,21 +345,21 @@ export default function TownBusSearchPage() {
                 )}
               </AnimatePresence>
 
-              <div className="bg-zinc-950 rounded-[24px] p-4 flex items-center justify-between relative overflow-hidden group mb-4">
+              <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-[24px] p-4 flex items-center justify-between relative overflow-hidden group mb-4">
                 <div className="absolute inset-y-0 left-0 w-1 bg-[#A4E5E0]" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Boarding</span>
-                  <span className="text-sm font-black text-[#ffffff] uppercase truncate max-w-[120px]">{from || "Start"}</span>
+                  <span className="text-sm font-black text-black uppercase truncate max-w-[120px]">{from || "Start"}</span>
                 </div>
                 <div className="flex-1 flex flex-col items-center px-4">
-                  <div className="w-full h-[1px] bg-zinc-800 relative">
+                  <div className="w-full h-[1px] bg-slate-50 border border-slate-200 shadow-sm text-black relative">
                     <div className="absolute inset-0 bg-[#A4E5E0] animate-pulse" />
                     <ArrowRight size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#A4E5E0]" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 text-right">
                   <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Destination</span>
-                  <span className="text-sm font-black text-[#ffffff] uppercase truncate max-w-[120px]">{to || "End"}</span>
+                  <span className="text-sm font-black text-black uppercase truncate max-w-[120px]">{to || "End"}</span>
                 </div>
               </div>
 
@@ -368,7 +368,7 @@ export default function TownBusSearchPage() {
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                   <span className="text-xs font-bold text-zinc-600">{trip.availableSeats} Seats Left</span>
                 </div>
-                <button className="bg-[#A4E5E0] hover:bg-orange-600 text-[#ffffff] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#A4E5E0]/20">
+                <button className="bg-[#A4E5E0] hover:bg-orange-600 text-black px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#A4E5E0]/20">
                   Select Tickets <Navigation size={14} />
                 </button>
               </div>

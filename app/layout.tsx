@@ -71,7 +71,7 @@ export default function RootLayout({
         elements: {
           card: "shadow-none border border-slate-100",
           headerTitle: "font-black tracking-tight uppercase",
-          headerSubtitle: "text-slate-400 text-xs",
+          headerSubtitle: "text-slate-600 text-xs",
           formButtonPrimary: "bg-[#A4E5E0] hover:bg-[#8bd9d3] text-slate-900 font-black uppercase tracking-widest rounded-xl h-12",
           footerActionLink: "text-[#A4E5E0] font-bold",
         },
@@ -99,7 +99,7 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${inter.variable} ${manrope.variable} antialiased bg-slate-50 min-h-full flex flex-col`}
+          className={`${inter.variable} ${manrope.variable} antialiased bg-[#ffffff] text-black min-h-full flex flex-col`}
         >
           <CapacitorDeepLink />
           <WebHeader />

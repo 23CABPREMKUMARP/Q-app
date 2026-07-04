@@ -85,7 +85,7 @@ export function WebHeader() {
               <span className="text-[12px] md:text-[18px] font-black tracking-tight leading-none">
                 <span className="text-zinc-900">JEFF</span><span className="text-[#A4E5E0]">BEN</span>
               </span>
-              <span className="text-[6px] md:text-[8px] font-bold text-zinc-400 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
+              <span className="text-[6px] md:text-[8px] font-bold text-zinc-600 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
                 Systems
               </span>
             </div>
@@ -115,7 +115,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-zinc-950 text-[#ffffff] hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -146,7 +146,7 @@ export function WebHeader() {
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-zinc-950 text-[#ffffff] hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

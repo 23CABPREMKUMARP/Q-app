@@ -63,7 +63,7 @@ export const MatrixIdSearch = () => {
 
           <div className="w-full text-center mb-8">
             <h2 className="text-2xl font-bold text-dark-saffron tracking-tight leading-tight">Identify & Book</h2>
-            <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Enter Unique Matrix ID</p>
+            <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-2">Enter Unique Matrix ID</p>
           </div>
 
           {/* Search Field */}
@@ -96,7 +96,7 @@ export const MatrixIdSearch = () => {
             <button
               type="submit"
               disabled={isLoading || !matrixId}
-              className="w-full bg-dark-saffron hover:bg-primary text-[#ffffff] rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
+              className="w-full bg-dark-saffron hover:bg-primary text-black rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
             >
               {isLoading ? (
                 <div className="w-6 h-6 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin" />
@@ -116,7 +116,7 @@ export const MatrixIdSearch = () => {
                   onClick={() => router.push('/live-map?action=scan')}
                   className="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100 hover:bg-[#ffffff] hover:shadow-md transition-all group"
                 >
-                  <QrCode size={14} className="text-zinc-400 group-hover:text-primary" />
+                  <QrCode size={14} className="text-zinc-600 group-hover:text-primary" />
                   <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Scan QR instead</span>
                 </button>
              </div>

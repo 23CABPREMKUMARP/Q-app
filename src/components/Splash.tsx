@@ -35,7 +35,7 @@ export default function Splash() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-0 bottom-0 w-1/2 bg-black rounded-full"
+            className="absolute top-0 bottom-0 w-1/2 bg-[#ffffff] border border-slate-200 text-black rounded-full"
           />
         </div>
         

@@ -58,7 +58,7 @@ export default function ScanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-[#ffffff] flex flex-col items-center justify-center p-6 relative overflow-hidden secure-content">
+    <div className="min-h-screen bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black flex flex-col items-center justify-center p-6 relative overflow-hidden secure-content">
       <WatermarkOverlay />
       <AnimatePresence>
         {showScanner && (
@@ -104,7 +104,7 @@ export default function ScanPage() {
           <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-orange-600 rounded-bl-3xl" />
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-orange-600 rounded-br-3xl" />
           
-          <div className="absolute inset-4 bg-zinc-900 rounded-[32px] flex items-center justify-center overflow-hidden border border-[#ffffff]/5 shadow-2xl">
+          <div className="absolute inset-4 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-[32px] flex items-center justify-center overflow-hidden border border-[#ffffff]/5 shadow-2xl">
             <QrCode size={120} className="text-orange-600/20" />
             <motion.div 
               animate={{ top: ["0%", "100%", "0%"] }}
@@ -119,7 +119,7 @@ export default function ScanPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-zinc-400 text-sm font-medium px-8 leading-relaxed"
+          className="text-zinc-600 text-sm font-medium px-8 leading-relaxed"
         >
           Point your camera at the JeffBen Matrix code located on the bus dashboard to establish a boarding link.
         </motion.p>

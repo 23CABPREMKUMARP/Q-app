@@ -127,7 +127,7 @@ export default function MobileDashboard() {
         className="min-h-screen bg-[#f3f4f6] text-slate-900 font-sans pb-28 relative"
       >
         {/* PhonePe Header */}
-        <div className="bg-[#A4E5E0] px-4 pt-12 pb-4 text-[#ffffff] sticky top-0 z-[100] shadow-md rounded-b-2xl">
+        <div className="bg-[#A4E5E0] px-4 pt-12 pb-4 text-black sticky top-0 z-[100] shadow-md rounded-b-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="bg-[#ffffff]/20 p-1 rounded-full">
@@ -144,7 +144,7 @@ export default function MobileDashboard() {
                 className="flex flex-col text-left bg-transparent border-none outline-none cursor-pointer focus:outline-none"
               >
                 <p className="text-[10px] font-bold text-[#ffffff]/70 uppercase tracking-wider">My Address</p>
-                <div className="flex items-center gap-1 text-sm font-black text-[#ffffff]">
+                <div className="flex items-center gap-1 text-sm font-black text-black">
                   <span className="truncate max-w-[140px]">{address}</span>
                   <ChevronRight size={14} className="opacity-80 shrink-0" />
                 </div>
@@ -152,14 +152,14 @@ export default function MobileDashboard() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Link href="/scan" className="relative text-[#ffffff]" title="Scan QR">
+              <Link href="/scan" className="relative text-black" title="Scan QR">
                 <ScanLine size={24} />
               </Link>
               <button 
                 onClick={() => {
                   setShowNotificationsModal(true);
                 }}
-                className="relative text-[#ffffff] cursor-pointer" 
+                className="relative text-black cursor-pointer" 
                 title="Notifications"
               >
                 <Bell size={24} />
@@ -167,7 +167,7 @@ export default function MobileDashboard() {
                   <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-[#A4E5E0] rounded-full" />
                 )}
               </button>
-              <Link href="/about" className="relative text-[#ffffff]" title="Help">
+              <Link href="/about" className="relative text-black" title="Help">
                 <Info size={24} />
               </Link>
             </div>
@@ -176,7 +176,7 @@ export default function MobileDashboard() {
           {/* Search Bar - PhonePe Style */}
           <div className="relative mt-2">
             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search size={18} className="text-slate-400" />
+              <Search size={18} className="text-slate-600" />
             </div>
             <input 
               type="text" 
@@ -196,7 +196,7 @@ export default function MobileDashboard() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               onClick={() => router.push(`/live-map?busId=${liveTripTrack.busId?._id || liveTripTrack.busId}`)}
-              className="bg-gradient-to-br from-slate-900 to-zinc-950 text-[#ffffff] rounded-3xl p-5 shadow-xl border border-orange-500/30 relative overflow-hidden cursor-pointer group active:scale-[0.98] transition-all"
+              className="bg-gradient-to-br from-slate-900 to-zinc-950 text-black rounded-3xl p-5 shadow-xl border border-orange-500/30 relative overflow-hidden cursor-pointer group active:scale-[0.98] transition-all"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,153,51,0.15),transparent_60%)]" />
               <div className="relative z-10 flex items-center justify-between">
@@ -205,14 +205,14 @@ export default function MobileDashboard() {
                     <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-[#A4E5E0]">Live Trip Active</span>
                   </div>
-                  <h3 className="text-base font-bold tracking-tight text-[#ffffff] group-hover:text-[#A4E5E0] transition-colors">
+                  <h3 className="text-base font-bold tracking-tight text-black group-hover:text-[#A4E5E0] transition-colors">
                     Track Bus JB-{liveTripTrack.busId?.busCode || "1024"}
                   </h3>
-                  <p className="text-xs text-slate-400">
-                    Status: <span className="text-[#ffffff] font-semibold">{liveTripTrack.busId?.status || "Running"}</span>
+                  <p className="text-xs text-slate-600">
+                    Status: <span className="text-black font-semibold">{liveTripTrack.busId?.status || "Running"}</span>
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-[#A4E5E0] text-[#ffffff] rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
+                <div className="w-12 h-12 bg-[#A4E5E0] text-black rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
                   <MapPin size={22} className="animate-bounce" />
                 </div>
               </div>
@@ -233,7 +233,7 @@ export default function MobileDashboard() {
                   </div>
                   <div>
                     <h3 className="text-sm font-black text-slate-900">Trip Broadcasts</h3>
-                    <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Live Updates</p>
+                    <p className="text-[9px] text-slate-600 font-bold uppercase tracking-wider">Live Updates</p>
                   </div>
                 </div>
                 <span className="px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-100 rounded-full text-[9px] font-black uppercase tracking-wider animate-pulse shrink-0">
@@ -251,7 +251,7 @@ export default function MobileDashboard() {
                     <div className="flex-1 pl-1 space-y-1">
                       <p className="text-xs font-bold text-slate-950 flex items-center justify-between">
                         <span>{notif.title}</span>
-                        <span className="text-[8.5px] text-slate-400 font-bold shrink-0 ml-2">
+                        <span className="text-[8.5px] text-slate-600 font-bold shrink-0 ml-2">
                           {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </p>
@@ -264,19 +264,19 @@ export default function MobileDashboard() {
           )}
 
           {/* Town Bus Booking Teaser */}
-          <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-md relative group">
+          <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl overflow-hidden shadow-md relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-[#A4E5E0]/10 to-transparent opacity-50"></div>
-            <div className="p-5 text-[#ffffff] relative z-10 flex items-center justify-between">
+            <div className="p-5 text-black relative z-10 flex items-center justify-between">
               <div className="w-2/3 pr-2">
                 <div className="flex items-center gap-1.5 mb-2">
                   <Bus size={14} className="text-[#A4E5E0]" />
                   <p className="text-[10px] font-black text-[#A4E5E0] tracking-widest uppercase">Town Bus</p>
                 </div>
                 <h3 className="text-xl font-black tracking-tight mb-1">Town Bus Booking</h3>
-                <p className="text-[10px] text-slate-400 font-medium mb-3 leading-tight">Only buses equipped with GPS tracking can be tracked in real time. If a bus does not have GPS installed, live location and tracking features will not be available.</p>
+                <p className="text-[10px] text-slate-600 font-medium mb-3 leading-tight">Only buses equipped with GPS tracking can be tracked in real time. If a bus does not have GPS installed, live location and tracking features will not be available.</p>
                 <button 
                   onClick={() => router.push('/town-bus')}
-                  className="inline-block bg-[#A4E5E0] hover:bg-orange-600 text-[#ffffff] border border-[#A4E5E0]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
+                  className="inline-block bg-[#A4E5E0] hover:bg-orange-600 text-black border border-[#A4E5E0]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
                 >
                   Get Tickets
                 </button>
@@ -284,7 +284,7 @@ export default function MobileDashboard() {
               <div className="absolute right-0 bottom-0 top-0 w-1/3 flex items-center justify-end pr-4 opacity-90 overflow-hidden">
                 <div className="w-24 h-24 bg-[#A4E5E0]/20 rounded-full blur-2xl absolute -right-4"></div>
                 <div className="bg-gradient-to-br from-[#A4E5E0] to-orange-600 w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10">
-                  <Ticket size={32} className="text-[#ffffff]" />
+                  <Ticket size={32} className="text-black" />
                 </div>
               </div>
             </div>
@@ -298,21 +298,21 @@ export default function MobileDashboard() {
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                <div className="w-11 h-11 bg-[#A4E5E0] rounded-xl flex items-center justify-center shadow-md text-[#ffffff] mx-auto">
+                <div className="w-11 h-11 bg-[#A4E5E0] rounded-xl flex items-center justify-center shadow-md text-black mx-auto">
                   <Hash size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Bus<br/>Code</span>
               </button>
               
               <Link href="/scan" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#A4E5E0] rounded-xl flex items-center justify-center shadow-md text-[#ffffff] mx-auto">
+                <div className="w-11 h-11 bg-[#A4E5E0] rounded-xl flex items-center justify-center shadow-md text-black mx-auto">
                   <ScanLine size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Scan<br/>QR</span>
               </Link>
 
               <Link href="/town-bus" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#A4E5E0] rounded-xl flex items-center justify-center shadow-md text-[#ffffff] mx-auto">
+                <div className="w-11 h-11 bg-[#A4E5E0] rounded-xl flex items-center justify-center shadow-md text-black mx-auto">
                   <Bus size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">Town<br/>Bus</span>
@@ -322,7 +322,7 @@ export default function MobileDashboard() {
                 onClick={() => setShowMembershipModal(true)}
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl flex items-center justify-center shadow-md text-[#ffffff] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl flex items-center justify-center shadow-md text-black mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
                   <Crown size={18} className="drop-shadow-sm" />
                 </div>
                 <span className="text-[9px] font-semibold text-slate-700 leading-tight">View<br/>Memberships</span>
@@ -341,7 +341,7 @@ export default function MobileDashboard() {
                 </div>
                 <div>
                   <p className="text-lg font-bold text-slate-900 leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
+                  <span className="text-[9px] font-bold text-slate-600 uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
                 </div>
               </div>
               
@@ -388,7 +388,7 @@ export default function MobileDashboard() {
                   <p className="text-xs font-bold text-emerald-600 flex items-center gap-1 justify-end">
                     <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" /> Active
                   </p>
-                  <p className="text-[10px] text-slate-400 mt-1">TN-38-EF-2025</p>
+                  <p className="text-[10px] text-slate-600 mt-1">TN-38-EF-2025</p>
                 </div>
               </div>
             </div>
@@ -420,7 +420,7 @@ export default function MobileDashboard() {
           </div>
           
           <div className="text-center pt-4 pb-6">
-            <p className="text-[10px] font-medium text-slate-400 flex items-center justify-center gap-1">
+            <p className="text-[10px] font-medium text-slate-600 flex items-center justify-center gap-1">
               <ShieldCheck size={12} /> 100% Secure Payments by JeffBen
             </p>
           </div>
@@ -448,7 +448,7 @@ export default function MobileDashboard() {
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-slate-900">Notifications</h3>
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Your Live Trip Feed</p>
+                      <p className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Your Live Trip Feed</p>
                     </div>
                   </div>
                   <button
@@ -463,7 +463,7 @@ export default function MobileDashboard() {
                   {notifications.length === 0 ? (
                     <div className="text-center py-10 space-y-2">
                       <p className="text-sm font-bold text-slate-700">No Notifications Yet</p>
-                      <p className="text-xs text-slate-400">We'll alert you here when your booked bus trip starts or the driver sends updates.</p>
+                      <p className="text-xs text-slate-600">We'll alert you here when your booked bus trip starts or the driver sends updates.</p>
                     </div>
                   ) : (
                     notifications.map((notif: any) => (
@@ -475,7 +475,7 @@ export default function MobileDashboard() {
                         <div className="flex-1 pl-1.5 space-y-1">
                           <p className="text-xs font-bold text-slate-950">{notif.title}</p>
                           <p className="text-xs text-slate-600 leading-tight">{notif.message}</p>
-                          <p className="text-[9px] text-slate-400 font-medium">
+                          <p className="text-[9px] text-slate-600 font-medium">
                             {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </p>
                         </div>
@@ -511,7 +511,7 @@ export default function MobileDashboard() {
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-slate-900">Track with Bus Code</h3>
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Separate Fleet Access Mode</p>
+                      <p className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Separate Fleet Access Mode</p>
                     </div>
                   </div>
                   <button
@@ -547,7 +547,7 @@ export default function MobileDashboard() {
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="w-full max-w-md bg-slate-950 rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left border-t border-amber-900/30"
+                className="w-full max-w-md bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left border-t border-amber-900/30"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -555,13 +555,13 @@ export default function MobileDashboard() {
                       <Sparkles size={20} className="text-amber-400" />
                     </div>
                     <div className="text-left">
-                      <h3 className="text-base font-bold text-[#ffffff]">Jeffben Pass</h3>
+                      <h3 className="text-base font-bold text-black">Jeffben Pass</h3>
                       <p className="text-[10px] text-amber-400/80 font-bold uppercase tracking-wider">Premium Memberships</p>
                     </div>
                   </div>
                   <button
                     onClick={() => setShowPassModal(false)}
-                    className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-full font-bold text-xs cursor-pointer border-none outline-none focus:outline-none"
+                    className="p-2 bg-slate-50 border border-slate-200 text-black hover:bg-slate-700 text-slate-600 rounded-full font-bold text-xs cursor-pointer border-none outline-none focus:outline-none"
                   >
                     Close
                   </button>
@@ -569,71 +569,71 @@ export default function MobileDashboard() {
 
                 <div className="space-y-4">
                   <div className="text-center py-2">
-                    <p className="text-sm text-slate-300 font-medium">Coming soon. Unlock exclusive benefits, priority booking, and unlimited transit across the Digi Bus network.</p>
+                    <p className="text-sm text-slate-700 font-medium">Coming soon. Unlock exclusive benefits, priority booking, and unlimited transit across the Digi Bus network.</p>
                   </div>
                   
                   {/* Tiers */}
                   <div className="space-y-3">
                     {/* Platinum */}
                     <div className="bg-gradient-to-br from-slate-200 to-slate-400 p-[1px] rounded-2xl">
-                      <div className="bg-slate-900 rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center shadow-inner shrink-0">
                           <Zap size={24} className="text-slate-600" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#ffffff] tracking-wide">PLATINUM</h4>
-                          <p className="text-[10px] text-slate-400 font-medium">Unlimited free rides • Priority boarding</p>
+                          <h4 className="text-sm font-black text-black tracking-wide">PLATINUM</h4>
+                          <p className="text-[10px] text-slate-600 font-medium">Unlimited free rides • Priority boarding</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-slate-800 text-slate-300 px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-slate-50 border border-slate-200 text-black text-slate-700 px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Gold */}
                     <div className="bg-gradient-to-br from-amber-200 to-amber-500 p-[1px] rounded-2xl">
-                      <div className="bg-slate-900 rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 flex items-center justify-center shadow-inner shrink-0">
                           <Sparkles size={24} className="text-amber-900" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#ffffff] tracking-wide">GOLD</h4>
-                          <p className="text-[10px] text-slate-400 font-medium">50 rides/mo • Free cancellations</p>
+                          <h4 className="text-sm font-black text-black tracking-wide">GOLD</h4>
+                          <p className="text-[10px] text-slate-600 font-medium">50 rides/mo • Free cancellations</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-slate-800 text-slate-300 px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-slate-50 border border-slate-200 text-black text-slate-700 px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Silver */}
                     <div className="bg-gradient-to-br from-zinc-300 to-zinc-500 p-[1px] rounded-2xl">
-                      <div className="bg-slate-900 rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-zinc-300 flex items-center justify-center shadow-inner shrink-0">
                           <ShieldCheck size={24} className="text-zinc-700" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#ffffff] tracking-wide">SILVER</h4>
-                          <p className="text-[10px] text-slate-400 font-medium">20 rides/mo • Standard support</p>
+                          <h4 className="text-sm font-black text-black tracking-wide">SILVER</h4>
+                          <p className="text-[10px] text-slate-600 font-medium">20 rides/mo • Standard support</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-slate-800 text-slate-300 px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-slate-50 border border-slate-200 text-black text-slate-700 px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Bronze */}
                     <div className="bg-gradient-to-br from-orange-400 to-orange-700 p-[1px] rounded-2xl">
-                      <div className="bg-slate-900 rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-inner shrink-0">
                           <User size={24} className="text-orange-950" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#ffffff] tracking-wide">BRONZE</h4>
-                          <p className="text-[10px] text-slate-400 font-medium">Pay as you go • Reward points</p>
+                          <h4 className="text-sm font-black text-black tracking-wide">BRONZE</h4>
+                          <p className="text-[10px] text-slate-600 font-medium">Pay as you go • Reward points</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-slate-800 text-slate-300 px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-slate-50 border border-slate-200 text-black text-slate-700 px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
@@ -668,7 +668,7 @@ export default function MobileDashboard() {
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-slate-900">Change Location</h3>
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Set Custom Transit Origin</p>
+                      <p className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">Set Custom Transit Origin</p>
                     </div>
                   </div>
                   <button
@@ -681,7 +681,7 @@ export default function MobileDashboard() {
 
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Address / Neighborhood</label>
+                    <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest block">Address / Neighborhood</label>
                     <input 
                       type="text"
                       value={addressInput}
@@ -693,7 +693,7 @@ export default function MobileDashboard() {
 
                   {/* Preset Locations */}
                   <div className="space-y-2">
-                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest block">Popular Neighborhoods</span>
+                    <span className="text-[8px] font-black text-slate-600 uppercase tracking-widest block">Popular Neighborhoods</span>
                     <div className="flex flex-wrap gap-2">
                       {["Gandhipuram, CBE", "Ukkadam, TN", "Saravanampatti", "Annur Hub", "Mettupalayam"].map((preset) => (
                         <button
@@ -717,7 +717,7 @@ export default function MobileDashboard() {
                         setShowAddressModal(false);
                       }
                     }}
-                    className="w-full h-12 bg-slate-950 hover:bg-[#A4E5E0] text-[#ffffff] rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
+                    className="w-full h-12 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-[#A4E5E0] text-black rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
                   >
                     Confirm & Update Address
                   </button>
@@ -749,11 +749,11 @@ export default function MobileDashboard() {
                 <div className="flex justify-between items-start mb-6 relative z-10">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-md">
-                      <Crown size={24} className="text-[#ffffff]" />
+                      <Crown size={24} className="text-black" />
                     </div>
                     <div>
                       <h3 className="text-lg font-black text-slate-900">Bus Memberships</h3>
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Premium Tiers Coming Soon</p>
+                      <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Premium Tiers Coming Soon</p>
                     </div>
                   </div>
                   <button
@@ -773,7 +773,7 @@ export default function MobileDashboard() {
                       </div>
                       <div>
                         <h4 className="font-black text-slate-700">Platinum Pass</h4>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Unlimited Travel</p>
+                        <p className="text-[9px] font-bold text-slate-600 uppercase tracking-widest">Unlimited Travel</p>
                       </div>
                     </div>
                     <span className="text-[9px] font-black bg-slate-200 text-slate-600 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
@@ -783,7 +783,7 @@ export default function MobileDashboard() {
                   <div className="p-4 rounded-2xl border border-amber-100 bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center shadow-sm">
-                        <Crown size={16} className="text-[#ffffff]" />
+                        <Crown size={16} className="text-black" />
                       </div>
                       <div>
                         <h4 className="font-black text-amber-600">Gold Pass</h4>
@@ -801,7 +801,7 @@ export default function MobileDashboard() {
                       </div>
                       <div>
                         <h4 className="font-black text-zinc-600">Silver Pass</h4>
-                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Standard Monthly Travel</p>
+                        <p className="text-[9px] font-bold text-zinc-600 uppercase tracking-widest">Standard Monthly Travel</p>
                       </div>
                     </div>
                     <span className="text-[9px] font-black bg-zinc-200 text-zinc-600 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>

@@ -52,8 +52,8 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
           </div>
           <div className="mt-4 flex flex-col items-center gap-2">
             <p className="text-[7px] font-black text-blue-900/40 uppercase tracking-[0.4em]">Matrix ID</p>
-            <div className="px-10 py-4 bg-blue-600 rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.4)] border-4 border-[#ffffff]/20 transform hover:scale-105 transition-transform">
-               <span className="text-[#ffffff] font-black text-2xl tracking-[0.2em]">{busCode}</span>
+            <div className="px-10 py-4 bg-blue-600 rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.4)] border-4 border-slate-300 transform hover:scale-105 transition-transform">
+               <span className="text-black font-black text-2xl tracking-[0.2em]">{busCode}</span>
             </div>
           </div>
         </div>

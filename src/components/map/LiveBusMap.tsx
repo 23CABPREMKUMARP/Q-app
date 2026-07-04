@@ -38,7 +38,7 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
         </div>
         ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-400 ring-2 ring-[#ffffff] ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-[#ffffff] z-10"></span>`}
       </div>
-      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-zinc-900 text-[#ffffff] text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-[#ffffff]/10">
+      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-slate-200">
         ${bus.busCode || bus.busNumber}${speed > 0 ? ` · ${speed}km/h` : ""}
       </div>
     </div>`;

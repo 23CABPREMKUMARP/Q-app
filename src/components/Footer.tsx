@@ -15,7 +15,7 @@ export const Footer = React.memo(function Footer() {
   }
 
   return (
-    <footer className="bg-[#A4E5E0] text-[#ffffff] pt-24 pb-12 border-t border-[#ffffff]/20">
+    <footer className="bg-[#A4E5E0] text-black pt-24 pb-12 border-t border-slate-300">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {/* Brand Column */}
@@ -26,7 +26,7 @@ export const Footer = React.memo(function Footer() {
               </span>
               <div className="flex flex-col">
                 <span className="text-2xl font-bold tracking-tight leading-none">
-                  <span className="text-black">JEFF</span><span className="text-[#ffffff]">BEN</span>
+                  <span className="text-black">JEFF</span><span className="text-black">BEN</span>
                 </span>
                 <span className="text-[10px] font-bold text-[#ffffff]/80 uppercase tracking-wider leading-none">
                   Systems
@@ -50,7 +50,7 @@ export const Footer = React.memo(function Footer() {
                   aria-label={`Visit our ${social.href.includes('mail') ? 'Email' : social.href.includes('youtube') ? 'Youtube' : 'Facebook'}`}
                   whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-2xl bg-[#ffffff]/5 border border-[#ffffff]/20 flex items-center justify-center text-[#ffffff] hover:bg-[#ffffff]/10 transition-all"
+                  className="w-12 h-12 rounded-2xl bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-slate-300 flex items-center justify-center text-black hover:bg-[#ffffff]/10 transition-all"
                 >
                   {social.icon}
                 </motion.a>
@@ -86,21 +86,21 @@ export const Footer = React.memo(function Footer() {
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-black"><MapPin size={20} /></div>
                 <div className="flex flex-col">
-                  <span className="text-[#ffffff] font-bold">Regional Headquarters</span>
+                  <span className="text-black font-bold">Regional Headquarters</span>
                   <span className="text-[#ffffff]/90 text-sm font-bold">Tamil Nadu, India</span>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-black"><Mail size={20} /></div>
                 <div className="flex flex-col">
-                  <span className="text-[#ffffff] font-bold">Inquiries</span>
+                  <span className="text-black font-bold">Inquiries</span>
                   <span className="text-[#ffffff]/90 text-sm font-bold underline underline-offset-4">jeffbenofficial1@gmail.com</span>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-black"><Phone size={20} /></div>
                 <div className="flex flex-col">
-                  <span className="text-[#ffffff] font-bold">Support Line</span>
+                  <span className="text-black font-bold">Support Line</span>
                   <span className="text-[#ffffff]/90 text-sm font-bold">Industrial Telemetry Div.</span>
                 </div>
               </div>
@@ -108,13 +108,13 @@ export const Footer = React.memo(function Footer() {
           </div>
         </div>
 
-        <div className="mt-24 pt-8 border-t border-[#ffffff]/20 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-24 pt-8 border-t border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-[#ffffff]/70 text-sm font-bold uppercase tracking-widest">
             © {currentYear} JeffBen Systems. All Rights Reserved.
           </p>
           <div className="flex items-center gap-8">
-            <Link href="/privacy" className="text-[#ffffff] hover:text-black text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Privacy Policy</Link>
-            <Link href="/terms" className="text-[#ffffff] hover:text-black text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Terms of Service</Link>
+            <Link href="/privacy" className="text-black hover:text-black text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Privacy Policy</Link>
+            <Link href="/terms" className="text-black hover:text-black text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Terms of Service</Link>
           </div>
         </div>
       </div>

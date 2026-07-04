@@ -123,7 +123,7 @@ export default function GetTicketPage() {
         </Link>
         <div>
           <h1 className="text-xl font-bold tracking-tight text-slate-950">My Passes</h1>
-          <p className="text-[10px] font-bold ${isExpired ? 'text-slate-400' : 'text-black/70'} uppercase tracking-wider">Metropolitan Transit Passbook</p>
+          <p className="text-[10px] font-bold ${isExpired ? 'text-slate-600' : 'text-black/70'} uppercase tracking-wider">Metropolitan Transit Passbook</p>
         </div>
       </div>
 
@@ -150,7 +150,7 @@ export default function GetTicketPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-400 text-xs font-semibold max-w-xs mx-auto leading-relaxed"
+            className="text-slate-600 text-xs font-semibold max-w-xs mx-auto leading-relaxed"
           >
             Enter your registered mobile number to fetch, sync, and display your digital passes.
           </motion.p>
@@ -165,7 +165,7 @@ export default function GetTicketPage() {
           className="w-full relative"
         >
           <div className="relative">
-            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400">
+            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-600">
               <Phone size={18} />
             </div>
             <input
@@ -179,7 +179,7 @@ export default function GetTicketPage() {
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-slate-950 hover:bg-[#A4E5E0] text-[#ffffff] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-[#A4E5E0] text-black px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />
@@ -202,7 +202,7 @@ export default function GetTicketPage() {
           >
             <div className="flex items-center gap-2">
               <div className="relative flex-1">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600" />
                 <input 
                   type="text" 
                   placeholder="Search by ID, Bus, or Route..."
@@ -215,19 +215,19 @@ export default function GetTicketPage() {
             <div className="flex gap-2">
               <button 
                 onClick={() => setStatusFilter('ALL')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-slate-800 text-[#ffffff] border-slate-800' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-slate-50 border border-slate-200 text-black text-black border-slate-300' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 All Passes
               </button>
               <button 
                 onClick={() => setStatusFilter('ACTIVE')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ACTIVE' ? 'bg-green-600 text-[#ffffff] border-green-600' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ACTIVE' ? 'bg-green-600 text-black border-green-600' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 Active
               </button>
               <button 
                 onClick={() => setStatusFilter('EXPIRED')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'EXPIRED' ? 'bg-red-600 text-[#ffffff] border-red-600' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'EXPIRED' ? 'bg-red-600 text-black border-red-600' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 Expired
               </button>
@@ -243,12 +243,12 @@ export default function GetTicketPage() {
               animate={{ opacity: 1 }}
               className="text-center py-12 bg-[#ffffff] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
             >
-              <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-300">
+              <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-700">
                 <Ticket size={24} />
               </div>
               <div className="space-y-1">
                 <h3 className="text-sm font-bold ${isExpired ? 'text-slate-800' : 'text-black'} uppercase tracking-tight">No Passes Found</h3>
-                <p className="text-slate-400 text-[11px] font-semibold max-w-[200px] mx-auto leading-relaxed">We could not find any active tickets matching your criteria.</p>
+                <p className="text-slate-600 text-[11px] font-semibold max-w-[200px] mx-auto leading-relaxed">We could not find any active tickets matching your criteria.</p>
               </div>
             </motion.div>
           )}
@@ -284,10 +284,10 @@ export default function GetTicketPage() {
                     
                     <div className="flex justify-between items-start ml-2">
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold ${isExpired ? 'text-slate-400' : 'text-black/70'} uppercase">{dateStr}</span>
+                        <span className="text-xs font-bold ${isExpired ? 'text-slate-600' : 'text-black/70'} uppercase">{dateStr}</span>
                         <div className="font-bold ${isExpired ? 'text-slate-800' : 'text-black'} text-sm flex items-center gap-1.5 mt-1">
                           <span className="truncate max-w-[100px]">{boarding}</span>
-                          <ArrowLeft size={12} className="rotate-180 ${isExpired ? 'text-slate-400' : 'text-black/50'} shrink-0" />
+                          <ArrowLeft size={12} className="rotate-180 ${isExpired ? 'text-slate-600' : 'text-black/50'} shrink-0" />
                           <span className="truncate max-w-[100px]">{destination}</span>
                         </div>
                       </div>
@@ -320,7 +320,7 @@ export default function GetTicketPage() {
 
           {/* Diagnostic Sync plate */}
           <div className="border-t border-slate-100 pt-6 text-center">
-            <p className="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-3">Bus stand Sync Node</p>
+            <p className="text-[9px] font-bold text-slate-700 uppercase tracking-widest mb-3">Bus stand Sync Node</p>
             <div className="inline-flex items-center gap-2 bg-slate-100/50 px-4 py-2 rounded-xl border border-slate-100">
               <div className={`w-1.5 h-1.5 rounded-full ${diagnostics ? "bg-emerald-500 animate-pulse" : "bg-slate-300"}`} />
               <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{diagnostics || "Ready for sync signal"}</span>
@@ -330,11 +330,11 @@ export default function GetTicketPage() {
           <div className="pt-8 space-y-3">
             <div className="text-center">
               <h2 className="text-lg font-black text-slate-950 uppercase tracking-tight">Need a new Pass?</h2>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mt-1">Get passes via GPS mapping engine</p>
+              <p className="text-slate-600 text-[10px] font-bold uppercase tracking-wider mt-1">Get passes via GPS mapping engine</p>
             </div>
             <Link 
               href="/live-map" 
-              className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-[#ffffff] rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+              className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-black rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
             >
               Launch Live Map <ChevronRight size={14} />
             </Link>
@@ -356,7 +356,7 @@ export default function GetTicketPage() {
             <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
               <button 
                 onClick={() => setSelectedTicket(null)}
-                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#ffffff] rounded-full p-2 backdrop-blur-md transition-colors"
+                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-black rounded-full p-2 backdrop-blur-md transition-colors"
               >
                 <X size={24} />
               </button>
@@ -376,7 +376,7 @@ export default function GetTicketPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 relative z-10 text-[#ffffff] text-xs font-bold uppercase tracking-widest opacity-70"
+              className="mt-6 relative z-10 text-black text-xs font-bold uppercase tracking-widest opacity-70"
             >
               Tap outside to close
             </motion.div>
