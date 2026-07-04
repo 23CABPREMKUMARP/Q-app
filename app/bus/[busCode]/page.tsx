@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { ShieldCheck, Bus, Grid, QrCode, MapPin } from "lucide-react";
 import Link from "next/link";
-import { Navbar } from "@/src/components/Navbar";
+
 
 export default function BusQRRedirectPage() {
   const { busCode } = useParams();
@@ -11,7 +11,7 @@ export default function BusQRRedirectPage() {
 
   return (
     <div className="min-h-screen bg-[#fafafa] flex flex-col font-sans">
-      <Navbar />
+
       
       <main className="flex-1 flex flex-col items-center justify-center p-6 relative">
         <div className="w-full max-w-md relative mt-8">
