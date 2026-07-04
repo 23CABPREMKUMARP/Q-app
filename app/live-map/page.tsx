@@ -40,7 +40,7 @@ function LiveMapContent() {
   const targetBusId = searchParams.get("busId");
 
   // ── State ──────────────────────────────────────────────────────────────────
-  const [buses] = useState<BusData[]>([]); // buses intentionally empty on live map
+  const [buses, setBuses] = useState<BusData[]>([]); // Real buses fetched from DB
   const [selectedBus, setSelectedBus] = useState<BusData | null>(null);
   const [drawerState, setDrawerState] = useState<"closed" | "peek" | "full">("closed");
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -58,6 +58,23 @@ function LiveMapContent() {
   });
 
   const liveCount = Object.values(livePositions).filter((p) => p.deviceStatus === "Online").length;
+
+  // ── Fetch Buses ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    const fetchBuses = async () => {
+      try {
+        const res = await fetch("/api/buses");
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setBuses(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch buses for live map:", err);
+      }
+    };
+    fetchBuses();
+  }, []);
+
 
   // ── Location — manual only, no auto-request to avoid CoreLocation spam ─────
   const locationAttemptedRef = useRef(false);
