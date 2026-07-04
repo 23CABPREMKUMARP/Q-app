@@ -1,40 +1,30 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback, Suspense } from "react";
+import React, { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Bus, MapPin, Navigation, Search, X, RefreshCw, Radio,
-  WifiOff, ChevronDown, ShieldCheck, Layers, Locate,
+  Search, X, Locate, Layers, Bus, Navigation, MapPin,
+  Radio, WifiOff, ChevronUp, ChevronDown, Gauge,
 } from "lucide-react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { AnimatePresence as AP } from "motion/react";
-
-import { MOCK_BUSES } from "@/src/lib/constants";
-import { TrackingStatusPanel } from "@/src/components/TrackingStatusPanel";
 import { useBusRealtime } from "@/src/hooks/useBusRealtime";
 import SecureView from "@/src/components/SecureView";
 import type { BusData } from "@/src/types";
 
-// Dynamic import — no SSR for Leaflet
+// Leaflet map — no SSR
 const LeafletBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), { ssr: false });
 
-// ─── Loading skeleton ─────────────────────────────────────────────────────────
+// ─── Map skeleton ─────────────────────────────────────────────────────────────
 const MapSkeleton = () => (
-  <div className="flex items-center justify-center h-full w-full bg-white relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-slate-50 animate-pulse" />
-    <div className="relative z-10 flex flex-col items-center gap-6 text-center px-8">
-      <div className="w-20 h-20 border-4 border-orange-200 border-t-[#FF9933] rounded-full animate-spin" />
-      <div>
-        <p className="font-black text-xl text-zinc-900 uppercase tracking-tight">Loading Map</p>
-        <p className="text-zinc-400 text-xs font-semibold mt-1 uppercase tracking-widest">OpenStreetMap · Leaflet Engine</p>
-      </div>
+  <div className="flex items-center justify-center h-full w-full bg-[#e8eaed]">
+    <div className="flex flex-col items-center gap-4">
+      <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+      <p className="text-gray-500 text-sm font-medium">Loading map…</p>
     </div>
   </div>
 );
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
 export default function LiveMapPage() {
   return (
     <SecureView>
@@ -49,308 +39,401 @@ function LiveMapContent() {
   const searchParams = useSearchParams();
   const targetBusId = searchParams.get("busId");
 
-  // ── Data ──────────────────────────────────────────────────────────────────
-  const [buses, setBuses] = useState<BusData[]>([]);
-  const [loading, setLoading] = useState(true);
+  // ── State ──────────────────────────────────────────────────────────────────
+  const [buses] = useState<BusData[]>([]); // buses intentionally empty on live map
   const [selectedBus, setSelectedBus] = useState<BusData | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  // ── Map state ─────────────────────────────────────────────────────────────
+  const [drawerState, setDrawerState] = useState<"closed" | "peek" | "full">("closed");
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [centerOn, setCenterOn] = useState<{ lat: number; lng: number } | null>(null);
-  const [showRoutes, setShowRoutes] = useState(true);
-  const [showStops, setShowStops] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [showLayers, setShowLayers] = useState(false);
+  const [showRoutes, setShowRoutes] = useState(true);
+  const [locating, setLocating] = useState(false);
+  const [locationError, setLocationError] = useState(false);
 
-  // ── Realtime positions from Supabase ─────────────────────────────────────
-  // Subscribe to realtime for the targeted bus (if specific bus) or poll all
   const { positions: livePositions, isConnected } = useBusRealtime({
     busId: targetBusId || undefined,
     pollFallbackMs: 5000,
   });
 
-  // ── Load buses ────────────────────────────────────────────────────────────
-  useEffect(() => {
-    async function loadBuses() {
-      setLoading(true);
+  const liveCount = Object.values(livePositions).filter((p) => p.deviceStatus === "Online").length;
+
+  // ── Location — manual only, no auto-request to avoid CoreLocation spam ─────
+  const locationAttemptedRef = useRef(false);
+
+  const requestLocation = useCallback(() => {
+    if (!("geolocation" in navigator) || locationAttemptedRef.current) return;
+    locationAttemptedRef.current = true;
+    setLocating(true);
+    setLocationError(false);
+
+    const handleFallback = async () => {
       try {
-        const res = await fetch("/api/buses");
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.length > 0) {
-            const formatted: BusData[] = data.map((b: any) => ({
-              _id: b._id || b.id,
-              busNumber: b.busNumber || b.bus_number || "",
-              busCode: b.busCode || b.bus_code || "",
-              status: b.status || "Scheduled",
-              speed: Number(b.speed) || 0,
-              fare: Number(b.fare) || Number(b.price) || 15,
-              availableSeats: Number(b.availableSeats) || Number(b.available_seats) || 40,
-              departureTime: b.departureTime || b.departure_time || "",
-              arrivalTime: b.arrivalTime || b.arrival_time || "",
-              location: b.location || { lat: 11.0168, lng: 76.9558, rotation: 0 },
-              routeId: b.routeId || b.routes,
-            }));
-            setBuses(formatted);
-          } else {
-            // Fallback to local mock data
-            setBuses(MOCK_BUSES as any);
-          }
-        } else {
-          setBuses(MOCK_BUSES as any);
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        if (data && data.latitude && data.longitude) {
+          const loc = { lat: data.latitude, lng: data.longitude };
+          setUserLocation(loc);
+          // Small random offset to force centerOn object change so map recenters even if slightly unchanged
+          setCenterOn({ lat: data.latitude, lng: data.longitude + (Math.random() * 0.0000001) });
+          setLocating(false);
+          locationAttemptedRef.current = false;
+          return;
         }
-      } catch {
-        setBuses(MOCK_BUSES as any);
-      } finally {
-        setLoading(false);
+      } catch (err) {
+        // Fallback failed
       }
-    }
-    loadBuses();
-  }, []);
+      setLocating(false);
+      setLocationError(true);
+      locationAttemptedRef.current = false;
+    };
 
-  // ── Auto-select bus from URL param ────────────────────────────────────────
-  useEffect(() => {
-    if (targetBusId && buses.length > 0) {
-      const bus = buses.find((b) => b._id === targetBusId || b.busCode === targetBusId);
-      if (bus) {
-        setSelectedBus(bus);
-        setIsDrawerOpen(true);
-        const live = livePositions[bus._id];
-        const lat = live?.lat ?? bus.location?.lat;
-        const lng = live?.lng ?? bus.location?.lng;
-        if (lat && lng) setCenterOn({ lat, lng });
-      }
-    }
-  }, [targetBusId, buses.length]);
-
-  // ── User location ─────────────────────────────────────────────────────────
-  const requestUserLocation = useCallback(() => {
-    if (!("geolocation" in navigator)) return;
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const loc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         setUserLocation(loc);
-        setCenterOn(loc);
+        setCenterOn({ lat: loc.lat, lng: loc.lng + (Math.random() * 0.0000001) }); // force recenter
+        setLocating(false);
+        localStorage.setItem("hasLocationPermission", "true");
+        locationAttemptedRef.current = false;
       },
-      () => { /* permission denied — silently ignore */ },
-      { enableHighAccuracy: true, timeout: 8000 }
+      () => handleFallback(), // If GPS fails (e.g. desktop), use IP
+      { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
     );
   }, []);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("hasLocationPermission");
-    if (saved === "true") requestUserLocation();
+  const handleBusClick = useCallback((bus: BusData) => {
+    setSelectedBus(bus);
+    setDrawerState("peek");
+    const live = livePositions[bus._id];
+    const lat = live?.lat ?? bus.location?.lat;
+    const lng = live?.lng ?? bus.location?.lng;
+    if (lat && lng) setCenterOn({ lat, lng });
+  }, [livePositions]);
+
+  const handleCloseDrawer = useCallback(() => {
+    setDrawerState("closed");
+    setSelectedBus(null);
   }, []);
-
-  // ── Search ────────────────────────────────────────────────────────────────
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return [];
-    const q = searchQuery.toLowerCase();
-    return buses.filter(
-      (b) =>
-        b.busNumber.toLowerCase().includes(q) ||
-        (b.busCode && b.busCode.toLowerCase().includes(q)) ||
-        (b.routeId?.from && b.routeId.from.toLowerCase().includes(q)) ||
-        (b.routeId?.to && b.routeId.to.toLowerCase().includes(q)) ||
-        (b.routeId?.routeName && b.routeId.routeName.toLowerCase().includes(q))
-    );
-  }, [searchQuery, buses]);
-
-  const handleBusClick = useCallback(
-    (bus: BusData) => {
-      setSelectedBus(bus);
-      setIsDrawerOpen(true);
-      const live = livePositions[bus._id];
-      const lat = live?.lat ?? bus.location?.lat;
-      const lng = live?.lng ?? bus.location?.lng;
-      if (lat && lng) setCenterOn({ lat, lng });
-    },
-    [livePositions]
-  );
-
-  const liveCount = Object.values(livePositions).filter((p) => p.deviceStatus === "Online").length;
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-zinc-100 font-sans">
-      {/* ── Map ───────────────────────────────────────────────────────────── */}
+    <div className="relative w-screen h-screen overflow-hidden bg-[#e8eaed] select-none">
+
+      {/* ── FULL-SCREEN MAP ──────────────────────────────────────────────── */}
       <div className="absolute inset-0">
-        {loading ? (
-          <MapSkeleton />
-        ) : (
-          <LeafletBusMap
-            buses={buses}
-            livePositions={livePositions}
-            selectedBusId={selectedBus?._id}
-            onBusClick={handleBusClick}
-            userLocation={userLocation}
-            centerOn={centerOn}
-            showRoutes={showRoutes}
-            showStops={showStops}
-          />
-        )}
+        <LeafletBusMap
+          buses={buses}
+          livePositions={livePositions}
+          selectedBusId={selectedBus?._id}
+          onBusClick={handleBusClick}
+          userLocation={userLocation}
+          centerOn={centerOn}
+          showRoutes={showRoutes}
+          showStops={false}
+        />
       </div>
 
-      {/* ── Top bar ───────────────────────────────────────────────────────── */}
-      <div className="absolute top-0 inset-x-0 z-[500] p-4 flex flex-col gap-3 pointer-events-none">
-        {/* Header */}
-        <div className="flex items-center gap-3 pointer-events-auto">
-          <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-lg border border-white/50 px-4 py-3 flex items-center gap-3 flex-1">
-            <div className="w-8 h-8 bg-[#FF9933] rounded-xl flex items-center justify-center flex-shrink-0">
-              <Bus size={16} className="text-white" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-black text-zinc-900 uppercase tracking-widest leading-none">Live Tracking</p>
-              <div className="flex items-center gap-2 mt-0.5">
-                {isConnected ? (
-                  <span className="flex items-center gap-1 text-[9px] font-bold text-emerald-600">
-                    <Radio size={8} className="animate-pulse" /> Realtime Connected
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-1 text-[9px] font-bold text-zinc-400">
-                    <WifiOff size={8} /> Polling Mode
-                  </span>
-                )}
-                {liveCount > 0 && (
-                  <span className="text-[9px] font-bold text-zinc-400">· {liveCount} bus{liveCount !== 1 ? "es" : ""} live</span>
-                )}
-              </div>
-            </div>
-          </div>
+      {/* ── TOP BAR (Google Maps style) ──────────────────────────────────── */}
+      <div className="absolute top-0 inset-x-0 z-[500] p-3 md:p-4 pointer-events-none">
+        <div className="flex items-center gap-2 md:gap-3 pointer-events-auto max-w-xl mx-auto md:mx-0">
 
-          {/* Locate me */}
-          <button
-            onClick={() => { requestUserLocation(); localStorage.setItem("hasLocationPermission", "true"); }}
-            className="w-12 h-12 bg-white/95 backdrop-blur-xl rounded-2xl shadow-lg border border-white/50 flex items-center justify-center text-zinc-600 hover:text-[#FF9933] transition-colors pointer-events-auto"
-          >
-            <Locate size={20} />
-          </button>
-        </div>
-
-        {/* Search bar */}
-        <div className="relative pointer-events-auto">
-          <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-lg border border-white/50 flex items-center gap-3 px-4 h-12">
-            <Search size={16} className="text-zinc-400 flex-shrink-0" />
+          {/* Search box */}
+          <div className={`flex-1 bg-white rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-blue-400 shadow-xl" : ""}`}
+            style={{ height: 48 }}>
+            {searchFocused ? (
+              <button onClick={() => { setSearchFocused(false); setSearchQuery(""); }} className="text-gray-500">
+                <X size={20} />
+              </button>
+            ) : (
+              <Search size={18} className="text-gray-400 flex-shrink-0" />
+            )}
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search bus number, route, stop…"
-              className="flex-1 bg-transparent text-sm font-medium text-zinc-900 placeholder-zinc-400 outline-none"
+              onFocus={() => setSearchFocused(true)}
+              placeholder="Search buses, stops, routes…"
+              className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none"
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery("")} className="text-zinc-400 hover:text-zinc-700">
-                <X size={14} />
+              <button onClick={() => setSearchQuery("")} className="text-gray-400">
+                <X size={16} />
               </button>
             )}
           </div>
 
-          {/* Search results dropdown */}
+          {/* Profile avatar circle */}
+          <div className="w-10 h-10 rounded-full bg-[#FF9933] flex items-center justify-center shadow-md flex-shrink-0">
+            <Bus size={18} className="text-white" />
+          </div>
+        </div>
+
+        {/* Realtime status chip — below search */}
+        <div className="flex justify-center md:justify-start max-w-xl mx-auto md:mx-0 mt-2 pointer-events-none">
+          {isConnected ? (
+            <span className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-emerald-700 shadow">
+              <Radio size={9} className="animate-pulse" /> Realtime Connected
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-gray-500 shadow">
+              <WifiOff size={9} /> Polling Mode
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* ── RIGHT SIDE FLOATING BUTTONS (Google Maps style) ─────────────── */}
+      <div className="absolute right-3 md:right-4 z-[500] flex flex-col gap-3" style={{ bottom: drawerState === "full" ? "75%" : drawerState === "peek" ? 220 : 24 }}>
+
+        {/* Layers button */}
+        <div className="relative">
+          <button
+            onClick={() => setShowLayers((v) => !v)}
+            className="w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center text-gray-600 hover:shadow-xl transition-all active:scale-95"
+          >
+            <Layers size={20} />
+          </button>
+
+          {/* Layers popover */}
           <AnimatePresence>
-            {searchResults.length > 0 && (
+            {showLayers && (
               <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-zinc-100 overflow-hidden max-h-64 overflow-y-auto z-50"
+                initial={{ opacity: 0, scale: 0.9, x: 10 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.9, x: 10 }}
+                className="absolute right-14 top-0 bg-white rounded-2xl shadow-2xl p-4 w-44"
               >
-                {searchResults.map((bus) => {
-                  const live = livePositions[bus._id];
-                  return (
-                    <button
-                      key={bus._id}
-                      onClick={() => { handleBusClick(bus); setSearchQuery(""); }}
-                      className="w-full px-4 py-3 flex items-center gap-3 hover:bg-zinc-50 transition-colors border-b border-zinc-50 last:border-b-0"
-                    >
-                      <div className="w-8 h-8 rounded-xl bg-[#FF9933]/10 flex items-center justify-center flex-shrink-0">
-                        <Bus size={14} className="text-[#FF9933]" />
-                      </div>
-                      <div className="flex-1 text-left min-w-0">
-                        <p className="text-sm font-black text-zinc-900">{bus.busNumber}</p>
-                        <p className="text-xs text-zinc-500 truncate">{bus.routeId?.from} → {bus.routeId?.to}</p>
-                      </div>
-                      {live?.deviceStatus === "Online" && (
-                        <span className="text-[9px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex-shrink-0">LIVE</span>
-                      )}
-                    </button>
-                  );
-                })}
+                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Map Layers</p>
+                {[
+                  { label: "Routes", value: showRoutes, toggle: () => setShowRoutes((v) => !v) },
+                ].map((item) => (
+                  <button
+                    key={item.label}
+                    onClick={item.toggle}
+                    className="w-full flex items-center justify-between py-2 text-sm font-semibold text-gray-700"
+                  >
+                    {item.label}
+                    <div className={`w-10 h-5 rounded-full transition-colors relative ${item.value ? "bg-blue-500" : "bg-gray-200"}`}>
+                      <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all ${item.value ? "left-5" : "left-0.5"}`} />
+                    </div>
+                  </button>
+                ))}
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* Layer toggles */}
-        <div className="flex gap-2 pointer-events-auto">
-          <button
-            onClick={() => setShowRoutes((v) => !v)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-              showRoutes ? "bg-[#FF9933] text-white shadow-lg shadow-[#FF9933]/30" : "bg-white/90 text-zinc-600 shadow"
-            }`}
-          >
-            <Layers size={11} /> Routes
-          </button>
-          <button
-            onClick={() => setShowStops((v) => !v)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-              showStops ? "bg-[#FF9933] text-white shadow-lg shadow-[#FF9933]/30" : "bg-white/90 text-zinc-600 shadow"
-            }`}
-          >
-            <MapPin size={11} /> Stops
-          </button>
-        </div>
-      </div>
-
-      {/* ── Bus count chip (bottom-left) ───────────────────────────────────── */}
-      <div className="absolute bottom-6 left-4 z-[500] pointer-events-none">
-        <div className="bg-white/95 backdrop-blur-xl rounded-xl shadow-lg border border-white/50 px-3 py-2 flex items-center gap-2">
-          <Bus size={12} className="text-[#FF9933]" />
-          <span className="text-xs font-black text-zinc-900">{buses.length} buses</span>
-          {liveCount > 0 && (
-            <>
-              <span className="w-px h-3 bg-zinc-200" />
-              <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
-                {liveCount} live
-              </span>
-            </>
+        {/* Locate me button */}
+        <button
+          onClick={requestLocation}
+          disabled={locating}
+          className={`w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-red-400" : "text-blue-500"}`}
+        >
+          {locating ? (
+            <div className="w-5 h-5 border-2 border-blue-300 border-t-blue-500 rounded-full animate-spin" />
+          ) : (
+            <Locate size={20} />
           )}
-        </div>
+        </button>
       </div>
 
-      {/* ── Tracking status panel (drawer) ────────────────────────────────── */}
+      {/* ── BOTTOM SHEET DRAWER (Google Maps style) ─────────────────────── */}
       <AnimatePresence>
-        {selectedBus && isDrawerOpen && (
-          <TrackingStatusPanel
-            bus={selectedBus}
-            livePosition={livePositions[selectedBus._id] || null}
-            userLocation={userLocation}
-            onClose={() => { setIsDrawerOpen(false); setSelectedBus(null); }}
-            onMinimize={() => setIsDrawerOpen(false)}
-          />
+        {selectedBus && drawerState !== "closed" && (
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: drawerState === "full" ? "0%" : "calc(100% - 180px)" }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 32, stiffness: 280 }}
+            drag="y"
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={0.1}
+            onDragEnd={(_, info) => {
+              if (info.offset.y > 60) {
+                drawerState === "full" ? setDrawerState("peek") : handleCloseDrawer();
+              } else if (info.offset.y < -60) {
+                setDrawerState("full");
+              }
+            }}
+            className="absolute inset-x-0 bottom-0 z-[600] bg-white rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.15)]"
+            style={{ maxHeight: "85vh", overflow: "hidden" }}
+          >
+            {/* Drag handle */}
+            <div className="flex flex-col items-center pt-3 pb-2 cursor-grab active:cursor-grabbing">
+              <div className="w-10 h-1 bg-gray-200 rounded-full" />
+            </div>
+
+            {/* Peek preview */}
+            <div className="px-5 pb-4">
+              <div className="flex items-start gap-4">
+                {/* Bus icon */}
+                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 border border-blue-100">
+                  <Bus size={26} className="text-blue-500" />
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">{selectedBus.busNumber}</h2>
+                    {livePositions[selectedBus._id]?.deviceStatus === "Online" && (
+                      <span className="flex items-center gap-1 text-[9px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                        <Radio size={7} className="animate-pulse" /> LIVE
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-500 font-medium truncate">
+                    {selectedBus.routeId?.from} → {selectedBus.routeId?.to}
+                  </p>
+                  <p className="text-xs text-gray-400 mt-0.5">{selectedBus.routeId?.routeName}</p>
+                </div>
+
+                <button
+                  onClick={handleCloseDrawer}
+                  className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 flex-shrink-0"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+
+              {/* Quick stats row */}
+              <div className="grid grid-cols-3 gap-2 mt-4">
+                {[
+                  { icon: Gauge, label: "Speed", value: `${livePositions[selectedBus._id]?.speed ?? selectedBus.speed ?? 0} km/h` },
+                  { icon: MapPin, label: "Fare", value: `₹${selectedBus.fare}` },
+                  { icon: Bus, label: "Seats", value: `${selectedBus.availableSeats} left` },
+                ].map((stat) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div key={stat.label} className="bg-gray-50 rounded-2xl p-3 text-center">
+                      <Icon size={16} className="text-blue-500 mx-auto mb-1" />
+                      <p className="text-xs font-black text-gray-800">{stat.value}</p>
+                      <p className="text-[9px] text-gray-400 font-semibold mt-0.5">{stat.label}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Expand indicator */}
+              <button
+                onClick={() => setDrawerState(drawerState === "peek" ? "full" : "peek")}
+                className="w-full mt-3 py-2 flex items-center justify-center gap-1 text-xs font-bold text-blue-500"
+              >
+                {drawerState === "peek" ? "More info" : "Less info"}
+                {drawerState === "peek" ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              </button>
+            </div>
+
+            {/* Full details (visible when expanded) */}
+            {drawerState === "full" && selectedBus && (() => {
+              const live = livePositions[selectedBus._id] || null;
+              const from = selectedBus.routeId?.from || "Start";
+              const to = selectedBus.routeId?.to || "End";
+              const speed = live?.speed ?? selectedBus.speed ?? 0;
+              const lat = live?.lat ?? selectedBus.location?.lat ?? null;
+              const lng = live?.lng ?? selectedBus.location?.lng ?? null;
+              const isOnline = live?.deviceStatus === "Online";
+              const lastSeenText = live?.timestamp
+                ? (() => {
+                    const diff = Math.floor((Date.now() - new Date(live.timestamp).getTime()) / 1000);
+                    if (diff < 10) return "Just now";
+                    if (diff < 60) return `${diff}s ago`;
+                    return `${Math.floor(diff / 60)}m ago`;
+                  })()
+                : "Unknown";
+              const stops = selectedBus.routeId?.stops || [];
+              let nextStop: any = null;
+              if (lat && lng && stops.length) {
+                let min = Infinity;
+                stops.forEach((s: any) => {
+                  const d = Math.hypot(lat - s.lat, lng - s.lng);
+                  if (d < min) { min = d; nextStop = s; }
+                });
+              }
+              return (
+                <div className="px-5 pb-8 overflow-y-auto border-t border-gray-100 pt-5 space-y-4">
+                  {/* Route */}
+                  <div className="bg-gray-900 rounded-2xl p-4 flex items-center gap-4">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">From</p>
+                      <p className="text-sm font-black text-white truncate">{from}</p>
+                    </div>
+                    <Navigation size={16} className="text-[#FF9933] flex-shrink-0" />
+                    <div className="flex-1 min-w-0 text-right">
+                      <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">To</p>
+                      <p className="text-sm font-black text-white truncate">{to}</p>
+                    </div>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-gray-50 rounded-2xl p-4">
+                      <div className="flex items-center gap-1.5 text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><Gauge size={10} /> Speed</div>
+                      <p className="text-2xl font-black text-gray-900">{speed}<span className="text-sm font-semibold text-gray-400 ml-1">km/h</span></p>
+                    </div>
+                    {nextStop && (
+                      <div className="bg-blue-50 rounded-2xl p-4">
+                        <div className="flex items-center gap-1.5 text-[9px] font-black text-blue-400 uppercase tracking-widest mb-1"><MapPin size={10} /> Next Stop</div>
+                        <p className="text-sm font-black text-gray-900 leading-tight">{nextStop.stopName}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* GPS offline warning */}
+                  {!isOnline && (
+                    <div className="flex items-center gap-3 p-3 bg-amber-50 border border-amber-100 rounded-2xl">
+                      <WifiOff size={16} className="text-amber-500 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs font-black text-amber-800">GPS Offline</p>
+                        <p className="text-[10px] text-amber-600 mt-0.5">Last updated {lastSeenText}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Minimized bus pill (shown when drawer is closed but bus selected) */}
+      {/* ── BOTTOM STATUS BAR when no bus selected (Google Maps bottom pill) */}
       <AnimatePresence>
-        {selectedBus && !isDrawerOpen && (
-          <motion.button
+        {!selectedBus && (
+          <motion.div
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
-            onClick={() => setIsDrawerOpen(true)}
-            className="absolute bottom-6 inset-x-4 z-[500] bg-zinc-900 text-white rounded-2xl p-4 flex items-center gap-3 shadow-2xl"
+            className="absolute bottom-6 inset-x-4 z-[500] flex items-center justify-between"
           >
-            <div className="w-10 h-10 bg-[#FF9933] rounded-xl flex items-center justify-center flex-shrink-0">
-              <Bus size={18} />
+            {/* Left: bus count pill */}
+            <div className="bg-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
+              <Bus size={14} className="text-[#FF9933]" />
+              <span className="text-xs font-bold text-gray-700">Digi Bus Stand</span>
+              {liveCount > 0 && (
+                <>
+                  <span className="w-px h-3 bg-gray-200" />
+                  <span className="flex items-center gap-1 text-xs font-bold text-emerald-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+                    {liveCount} live
+                  </span>
+                </>
+              )}
             </div>
-            <div className="flex-1 text-left">
-              <p className="text-sm font-black uppercase tracking-tight">{selectedBus.busNumber}</p>
-              <p className="text-xs text-zinc-400">{selectedBus.routeId?.from} → {selectedBus.routeId?.to}</p>
-            </div>
-            <ChevronDown size={18} className="text-zinc-400" />
-          </motion.button>
+
+            {/* Right: location error note */}
+            {locationError && (
+              <div className="bg-white rounded-full shadow-lg px-3 py-2 flex items-center gap-1.5 text-xs font-semibold text-amber-600">
+                <MapPin size={12} />
+                Location unavailable
+              </div>
+            )}
+          </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Dismiss layers panel on outside click */}
+      {showLayers && (
+        <div className="absolute inset-0 z-[490]" onClick={() => setShowLayers(false)} />
+      )}
     </div>
   );
 }

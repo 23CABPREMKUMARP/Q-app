@@ -8,7 +8,7 @@ import { supabase } from "@/src/lib/supabase";
 import { 
   LayoutDashboard, Bus, UserCheck, Map, Package, WalletCards, 
   Search, Plus, ShieldAlert, Sparkles, Bell, RefreshCw, 
-  Trash2, Sliders, DollarSign, Users, Percent, 
+  Trash2, Sliders, DollarSign, Users, Percent, Gauge,
   TrendingUp, Clock, Navigation, CheckCircle, AlertTriangle, ArrowRight, X, LogOut, ShieldCheck, Ticket
 } from "lucide-react";
 
@@ -560,32 +560,28 @@ function EnterpriseAdminDashboardContent() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans flex overflow-hidden h-screen">
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans flex overflow-hidden">
       
-      {/* Sidebar Navigation */}
-      <aside className="w-64 border-r border-zinc-800/80 bg-zinc-900/40 p-4 flex flex-col justify-between flex-shrink-0 select-none backdrop-blur-md">
-        <div className="space-y-8">
-          
+      {/* ── SaaS Sidebar ──────────────────────────────────────────────────────── */}
+      <aside className="w-56 border-r border-zinc-800/50 bg-[#0a0a0a] flex flex-col justify-between flex-shrink-0 select-none z-20">
+        <div className="flex flex-col h-full">
           {/* Logo Brand */}
-          <div className="flex items-center gap-3 px-2 pt-2">
-            <div className="w-10 h-10 bg-white/15 rounded-xl p-1 flex items-center justify-center shadow-lg border border-zinc-800 flex-shrink-0">
-              <img src="/hero-logo.png" alt="Digi Bus" className="w-full h-full object-contain" />
+          <div className="h-14 flex items-center gap-3 px-4 border-b border-zinc-800/50">
+            <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center shadow-lg shadow-orange-500/20">
+              <Sparkles size={12} className="text-white" />
             </div>
-            <div>
-              <div className="text-sm font-black tracking-tight text-white uppercase leading-none">JEFFBEN</div>
-              <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Operations Hub</div>
-            </div>
+            <div className="font-semibold text-sm tracking-tight text-zinc-100">DigiBus Admin</div>
           </div>
 
           {/* Nav Items */}
-          <nav className="space-y-1">
+          <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-0.5">
             {[
-              { id: "operations", label: "Operations Control", icon: LayoutDashboard },
+              { id: "operations", label: "Operations", icon: LayoutDashboard },
               { id: "fleet", label: "Fleet Command", icon: Bus },
-              { id: "conductors", label: "Conductors Ledger", icon: UserCheck },
-              { id: "routes", label: "Route & Fare Matrix", icon: Map },
-              { id: "luggage", label: "Luggage Logistics", icon: Package },
-              { id: "financials", label: "Financials & Bookings", icon: WalletCards },
+              { id: "conductors", label: "Conductors", icon: UserCheck },
+              { id: "routes", label: "Routes & Fares", icon: Map },
+              { id: "luggage", label: "Logistics", icon: Package },
+              { id: "financials", label: "Financials", icon: WalletCards },
             ].map(item => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -593,88 +589,90 @@ function EnterpriseAdminDashboardContent() {
                 <button
                   key={item.id}
                   onClick={() => changeTab(item.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium transition-all ${
                     isActive 
-                      ? "bg-orange-500 text-white shadow-lg shadow-orange-500/10" 
-                      : "text-zinc-400 hover:text-white hover:bg-zinc-800/40"
+                      ? "bg-zinc-800/60 text-white" 
+                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
                   }`}
                 >
-                  <Icon size={18} className={isActive ? "text-white" : "text-zinc-400 group-hover:text-white"} />
+                  <Icon size={14} className={isActive ? "text-orange-500" : "text-zinc-500"} />
                   {item.label}
                 </button>
               );
             })}
           </nav>
-        </div>
-
-        {/* Footer Actions / Profile */}
-        <div className="space-y-4 border-t border-zinc-800/80 pt-4">
-          <div className="flex items-center justify-between px-2">
-            <div className="flex items-center gap-2">
-              <UserButton />
-              <div className="text-left">
-                <div className="text-[10px] font-black text-white max-w-[130px] truncate leading-none uppercase">{user?.fullName || "Transit Admin"}</div>
-                <div className="text-[8px] font-bold text-zinc-500 truncate max-w-[130px]">{user?.primaryEmailAddress?.emailAddress}</div>
-              </div>
-            </div>
-          </div>
           
-          <button 
-            onClick={() => router.push("/")}
-            className="w-full flex items-center justify-center gap-2 border border-zinc-800 hover:bg-zinc-800/40 text-zinc-400 hover:text-white font-bold uppercase tracking-wider text-[10px] py-3 rounded-xl transition-all"
-          >
-            <LogOut size={12} />
-            Passenger Portal
-          </button>
+          {/* Bottom Actions */}
+          <div className="p-2 border-t border-zinc-800/50">
+            <button 
+              onClick={() => router.push("/")}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition-all"
+            >
+              <LogOut size={14} className="text-zinc-500" />
+              Exit to Portal
+            </button>
+          </div>
         </div>
       </aside>
 
-      {/* Main Command Room Workspace */}
-      <main className="flex-1 flex flex-col overflow-hidden bg-zinc-950">
+      {/* ── Main Workspace ────────────────────────────────────────────────────── */}
+      <main className="flex-1 flex flex-col min-w-0 bg-[#0a0a0a]">
         
-        {/* Workspace Top Header Bar */}
-        <header className="h-16 border-b border-zinc-800/80 px-6 flex items-center justify-between select-none bg-zinc-900/10 backdrop-blur-md flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">
-              System Gateway: <span className="text-white">COIMBATORE METROPOLITAN</span>
+        {/* Top Header Bar */}
+        <header className="h-14 border-b border-zinc-800/50 px-6 flex items-center justify-between select-none bg-[#0a0a0a] flex-shrink-0 z-10">
+          <div className="flex items-center gap-4">
+            <h2 className="text-[13px] font-medium text-zinc-300 capitalize">
+              {activeTab.replace("-", " ")}
             </h2>
+            <div className="h-4 w-px bg-zinc-800"></div>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[11px] font-medium text-zinc-500">System Normal</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Search Input for relevant tabs */}
+            {/* Search Input */}
             {["fleet", "conductors", "luggage", "financials"].includes(activeTab) && (
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-1.5 flex items-center gap-2 w-64 shadow-inner">
-                <Search size={14} className="text-zinc-500" />
+              <div className="relative group">
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-orange-500 transition-colors" />
                 <input 
                   type="text" 
-                  placeholder={`Search ${activeTab}...`} 
+                  placeholder="Search..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent border-0 outline-none text-xs text-white placeholder-zinc-500 w-full"
+                  className="bg-zinc-900/50 border border-zinc-800 rounded-md pl-9 pr-8 py-1.5 text-[13px] text-zinc-200 placeholder-zinc-500 w-56 outline-none focus:border-zinc-600 transition-all"
                 />
-                {searchQuery && <X size={12} className="text-zinc-500 cursor-pointer" onClick={() => setSearchQuery("")} />}
+                {searchQuery && (
+                  <X 
+                    size={14} 
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 cursor-pointer hover:text-zinc-300" 
+                    onClick={() => setSearchQuery("")} 
+                  />
+                )}
               </div>
             )}
 
             <button 
               onClick={() => setRefreshKey(prev => prev + 1)}
-              className="p-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded-xl text-zinc-400 hover:text-white transition-colors"
-              title="Force Sync Database"
+              className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+              title="Sync Data"
             >
               <RefreshCw size={14} className={isLoading ? "animate-spin text-orange-500" : ""} />
             </button>
+
+            <div className="h-4 w-px bg-zinc-800"></div>
+            <UserButton appearance={{ elements: { avatarBox: "w-7 h-7 rounded-md" } }} />
           </div>
         </header>
 
-        {/* Dynamic Workspace Container */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
           
           {isLoading && (
-            <div className="absolute inset-0 bg-zinc-950/70 z-50 flex items-center justify-center backdrop-blur-sm">
+            <div className="absolute inset-0 bg-[#0a0a0a]/50 z-50 flex items-center justify-center backdrop-blur-sm">
               <div className="flex flex-col items-center gap-3">
-                <div className="w-10 h-10 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
-                <p className="text-xs font-black tracking-widest uppercase text-zinc-500">Querying Supabase Gateway...</p>
+                <div className="w-8 h-8 border-2 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
               </div>
             </div>
           )}
@@ -685,185 +683,139 @@ function EnterpriseAdminDashboardContent() {
           {activeTab === "operations" && (
             <div className="space-y-6">
               
-              {/* Telemetry Stats Tickers */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {/* SaaS KPI Cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 {[
-                  { label: "Today's Bookings", val: stats.totalBookings, trend: "+14.8%", color: "border-orange-500/30", icon: Ticket },
-                  { label: "Total Revenue", val: `₹${stats.totalRevenue.toLocaleString()}`, trend: "+18.2%", color: "border-emerald-500/30", icon: DollarSign },
-                  { label: "Active Transponders", val: stats.activeBuses, trend: "Stable", color: "border-blue-500/30", icon: Bus },
-                  { label: "Conductors On Road", val: stats.activeConductors, trend: "Optimal", color: "border-purple-500/30", icon: Users },
-                  { label: "Mean Occupancy", val: `${stats.occupancyRate}%`, trend: "+5.4%", color: "border-amber-500/30", icon: Percent },
+                  { label: "Total Bookings", val: stats.totalBookings, trend: "+14.8%", color: "bg-blue-500", icon: Ticket },
+                  { label: "Revenue (Today)", val: `₹${stats.totalRevenue.toLocaleString()}`, trend: "+18.2%", color: "bg-emerald-500", icon: DollarSign },
+                  { label: "Active Fleet", val: stats.activeBuses, trend: "Stable", color: "bg-orange-500", icon: Bus },
+                  { label: "Active Staff", val: stats.activeConductors, trend: "Optimal", color: "bg-purple-500", icon: Users },
+                  { label: "Avg Occupancy", val: `${stats.occupancyRate}%`, trend: "+5.4%", color: "bg-amber-500", icon: Percent },
                 ].map((stat, i) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={i} className={`bg-zinc-900/60 border ${stat.color} rounded-2xl p-4 flex flex-col justify-between h-28 shadow-lg shadow-black/20 hover:border-orange-500/50 transition-colors relative overflow-hidden group`}>
-                      <div className="flex items-center justify-between">
-                        <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">{stat.label}</span>
-                        <div className="w-7 h-7 bg-zinc-800 rounded-lg flex items-center justify-center border border-zinc-700/50">
-                          <Icon size={12} className="text-orange-400" />
-                        </div>
+                    <div key={i} className="bg-[#111] border border-zinc-800/80 rounded-xl p-4 flex flex-col justify-between h-28 relative overflow-hidden group">
+                      <div className={`absolute left-0 top-0 bottom-0 w-1 ${stat.color} opacity-50`}></div>
+                      <div className="flex items-center justify-between pl-2">
+                        <span className="text-[12px] font-medium text-zinc-400">{stat.label}</span>
+                        <Icon size={14} className="text-zinc-600 group-hover:text-zinc-400 transition-colors" />
                       </div>
-                      <div>
-                        <div className="text-xl font-black text-white tracking-tight">{stat.val}</div>
-                        <div className="flex items-center gap-1 mt-1 text-[9px] font-bold text-zinc-500">
-                          <span className="text-emerald-400 font-extrabold">{stat.trend}</span> vs yesterday
+                      <div className="pl-2">
+                        <div className="text-2xl font-semibold text-zinc-100">{stat.val}</div>
+                        <div className="flex items-center gap-1.5 mt-1 text-[11px] text-zinc-500 font-medium">
+                          <span className={stat.trend.includes("+") ? "text-emerald-400" : "text-zinc-400"}>{stat.trend}</span> 
+                          <span>vs last week</span>
                         </div>
-                      </div>
-                      <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-all pointer-events-none">
-                        <Icon size={72} />
                       </div>
                     </div>
                   );
                 })}
               </div>
-
-              {/* Main Operations Telemetry Panel */}
+              
+              {/* Map & Analytics Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
-                {/* Live map display */}
+                {/* Live Map */}
                 <div className="lg:col-span-2 space-y-6">
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl h-[450px] relative flex flex-col">
-                    <div className="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/80 backdrop-blur-md z-10">
-                      <div>
-                        <h3 className="text-xs font-black uppercase tracking-wider text-white">Live Operations Grid</h3>
-                        <p className="text-[10px] text-zinc-500">Real-time GPS transponder mapping and route traces</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
-                        <span className="text-[9px] font-black uppercase tracking-wider text-orange-400">Telemetry Live Stream</span>
+                  <div className="bg-[#111] border border-zinc-800/80 rounded-xl overflow-hidden h-[450px] flex flex-col">
+                    <div className="px-4 py-3 border-b border-zinc-800/80 flex items-center justify-between bg-[#111] z-10">
+                      <h3 className="text-[13px] font-medium text-zinc-200">Live Operations Grid</h3>
+                      <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-orange-500/10 border border-orange-500/20">
+                        <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                        <span className="text-[10px] font-semibold text-orange-400 uppercase tracking-wider">Live</span>
                       </div>
                     </div>
-                    
                     <div className="flex-1 w-full relative">
                       <LiveBusMap
-                        buses={buses}
+                        buses={[]}
                         livePositions={{}}
-                        onBusClick={(bus: any) => setSelectedBus(bus)}
-                        selectedBusId={selectedBus?._id}
-                        showRoutes={true}
+                        onBusClick={() => {}}
+                        showRoutes={false}
                         showStops={false}
                       />
                     </div>
                   </div>
 
-                  {/* Operational Analytics SVG Charts */}
+                  {/* Charts */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    {/* SVG Chart 1: Hourly Bookings Trend */}
-                    <div className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-5 shadow-xl space-y-4">
+                    {/* Chart 1 */}
+                    <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-5 space-y-4">
                       <div>
-                        <h3 className="text-xs font-black uppercase tracking-wider text-white">Booking Distribution</h3>
-                        <p className="text-[10px] text-zinc-500">Hourly transaction volumes (today)</p>
+                        <h3 className="text-[13px] font-medium text-zinc-200">Booking Volume</h3>
+                        <p className="text-[11px] text-zinc-500 mt-0.5">Today's transactions by hour</p>
                       </div>
-                      <div className="h-44 w-full flex items-end">
+                      <div className="h-32 w-full flex items-end">
                         <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
                           <defs>
-                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#FF9933" stopOpacity="0.4" />
-                              <stop offset="100%" stopColor="#FF9933" stopOpacity="0.0" />
+                            <linearGradient id="chartGrad1" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.2" />
+                              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.0" />
                             </linearGradient>
                           </defs>
-                          <path 
-                            d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30 L 300 100 L 0 100 Z" 
-                            fill="url(#chartGrad)"
-                          />
-                          <path 
-                            d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30" 
-                            fill="none" 
-                            stroke="#FF9933" 
-                            strokeWidth="2.5" 
-                          />
-                          <circle cx="100" cy="45" r="4" fill="#FF9933" />
-                          <circle cx="200" cy="10" r="4" fill="#FF9933" />
+                          <path d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30 L 300 100 L 0 100 Z" fill="url(#chartGrad1)" />
+                          <path d="M 0 80 Q 50 20 100 45 T 200 10 T 300 30" fill="none" stroke="#3b82f6" strokeWidth="2" />
                         </svg>
-                      </div>
-                      <div className="flex justify-between text-[8px] font-black uppercase tracking-widest text-zinc-500 px-1">
-                        <span>06:00</span>
-                        <span>12:00</span>
-                        <span>18:00</span>
-                        <span>24:00</span>
                       </div>
                     </div>
 
-                    {/* SVG Chart 2: Occupancy Rate Area Chart */}
-                    <div className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-5 shadow-xl space-y-4">
+                    {/* Chart 2 */}
+                    <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-5 space-y-4">
                       <div>
-                        <h3 className="text-xs font-black uppercase tracking-wider text-white">Occupancy Metrics</h3>
-                        <p className="text-[10px] text-zinc-500">Average load factor across routes</p>
+                        <h3 className="text-[13px] font-medium text-zinc-200">Average Occupancy</h3>
+                        <p className="text-[11px] text-zinc-500 mt-0.5">Load factor across active routes</p>
                       </div>
-                      <div className="h-44 w-full flex items-end">
+                      <div className="h-32 w-full flex items-end">
                         <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
                           <defs>
                             <linearGradient id="chartGrad2" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#10b981" stopOpacity="0.4" />
+                              <stop offset="0%" stopColor="#10b981" stopOpacity="0.2" />
                               <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
                             </linearGradient>
                           </defs>
-                          <path 
-                            d="M 0 90 Q 75 40 150 70 T 300 20 L 300 100 L 0 100 Z" 
-                            fill="url(#chartGrad2)"
-                          />
-                          <path 
-                            d="M 0 90 Q 75 40 150 70 T 300 20" 
-                            fill="none" 
-                            stroke="#10b981" 
-                            strokeWidth="2.5" 
-                          />
-                          <circle cx="150" cy="70" r="4" fill="#10b981" />
-                          <circle cx="300" cy="20" r="4" fill="#10b981" />
+                          <path d="M 0 90 Q 75 40 150 70 T 300 20 L 300 100 L 0 100 Z" fill="url(#chartGrad2)" />
+                          <path d="M 0 90 Q 75 40 150 70 T 300 20" fill="none" stroke="#10b981" strokeWidth="2" />
                         </svg>
-                      </div>
-                      <div className="flex justify-between text-[8px] font-black uppercase tracking-widest text-zinc-500 px-1">
-                        <span>Min: 32%</span>
-                        <span>Avg: 72%</span>
-                        <span>Max: 94%</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Sidebar telemetry events & critical alerts */}
+                {/* Right sidebar logic */}
                 <div className="space-y-6">
-                  
-                  {/* Alerts Panel */}
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 shadow-xl space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xs font-black uppercase tracking-wider text-white">Operations Warnings</h3>
-                      <span className="px-2 py-0.5 bg-red-500/10 border border-red-500/30 text-red-500 rounded text-[8px] font-black uppercase tracking-wider">
-                        {activeAlerts.length} Warnings
+                  {/* Alerts */}
+                  <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-[13px] font-medium text-zinc-200">System Alerts</h3>
+                      <span className="px-2 py-0.5 bg-zinc-800 rounded text-[10px] font-medium text-zinc-400">
+                        {activeAlerts.length}
                       </span>
                     </div>
-
-                    <div className="space-y-3 max-h-[150px] overflow-y-auto pr-1">
+                    <div className="space-y-2">
                       {activeAlerts.map(alert => (
-                        <div key={alert.id} className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl flex gap-3 items-start">
-                          <div className={`mt-0.5 p-1 rounded ${alert.severity === 'critical' ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-orange-500/10 text-orange-500 border border-orange-500/20'}`}>
-                            <AlertTriangle size={12} />
+                        <div key={alert.id} className="p-3 bg-[#161616] border border-zinc-800/80 rounded-lg flex gap-3 items-start">
+                          <div className={`mt-0.5 ${alert.severity === 'critical' ? 'text-red-400' : 'text-orange-400'}`}>
+                            <AlertTriangle size={14} />
                           </div>
-                          <div className="flex-1">
-                            <div className="text-[10px] font-extrabold text-zinc-300 leading-tight">{alert.text}</div>
-                            <div className="text-[8px] font-black text-zinc-500 uppercase tracking-widest mt-1">{alert.time}</div>
+                          <div>
+                            <div className="text-[12px] font-medium text-zinc-300 leading-snug">{alert.text}</div>
+                            <div className="text-[10px] text-zinc-500 mt-1">{alert.time}</div>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Real-time event log ticker */}
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 shadow-xl space-y-4 h-[350px] flex flex-col">
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-wider text-white">Telemetry Event Ticker</h3>
-                      <p className="text-[10px] text-zinc-500">Live operational audit stream</p>
-                    </div>
-
-                    <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-[11px] font-mono scrollbar-none">
+                  {/* Ticker */}
+                  <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-4 h-[350px] flex flex-col">
+                    <h3 className="text-[13px] font-medium text-zinc-200 mb-4">Activity Stream</h3>
+                    <div className="flex-1 overflow-y-auto space-y-3 scrollbar-none">
                       {telemetryLogs.map(log => (
-                        <div key={log.id} className="flex gap-2 items-start leading-normal hover:bg-zinc-800/10 p-1 rounded transition-colors">
-                          <span className="text-zinc-500 select-none">[{log.time}]</span>
-                          <span className={`w-1 h-3 rounded-full flex-shrink-0 mt-0.5 ${
+                        <div key={log.id} className="flex gap-3 items-start text-[12px]">
+                          <span className="text-zinc-600 font-mono text-[10px] mt-0.5 w-12">{log.time.substring(0, 5)}</span>
+                          <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
                             log.type === 'success' ? 'bg-emerald-500' : log.type === 'warn' ? 'bg-red-500' : 'bg-blue-500'
                           }`}></span>
-                          <span className="text-zinc-300 flex-1">{log.text}</span>
+                          <span className="text-zinc-400 leading-snug flex-1">{log.text}</span>
                         </div>
                       ))}
                     </div>
@@ -871,444 +823,379 @@ function EnterpriseAdminDashboardContent() {
                 </div>
 
               </div>
-
             </div>
           )}
 
           {/* ======================================================== */}
-          {/* TAB: FLEET MANAGEMENT                                    */}
+          {/* TAB: FLEET COMMAND                                       */}
           {/* ======================================================== */}
           {activeTab === "fleet" && (
-            <div className="space-y-6 animate-fade-in">
-              <div className="flex justify-between items-center">
+            <div className="space-y-6">
+              <div className="flex justify-between items-end">
                 <div>
-                  <h1 className="text-xl font-black uppercase tracking-tight">Fleet Command Matrix</h1>
-                  <p className="text-xs text-zinc-500 font-medium">Telemetry transponders and bus fleet tracking control</p>
+                  <h1 className="text-xl font-semibold text-zinc-100 tracking-tight">Fleet Management</h1>
+                  <p className="text-[13px] text-zinc-500 mt-1">Monitor transponders and bus fleet status</p>
                 </div>
                 <button 
                   onClick={() => setIsBusModalOpen(true)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-[10px] px-5 py-3 rounded-xl shadow-lg shadow-orange-500/10 flex items-center gap-2 transition-all active:scale-95"
+                  className="bg-white text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
-                  <Plus size={14} /> Add Bus to Fleet
+                  <Plus size={14} /> Add Bus
                 </button>
               </div>
 
-              {/* Status metrics grid */}
+              {/* Grid Stats */}
               <div className="grid grid-cols-4 gap-4">
                 {[
-                  { label: "Active Fleet Size", count: buses.length, color: "text-orange-400" },
-                  { label: "Buses On Road", count: buses.filter(b => b.status === "Running").length, color: "text-emerald-400" },
-                  { label: "Scheduled (Depot)", count: buses.filter(b => b.status === "Scheduled" || b.status === "Arrived").length, color: "text-blue-400" },
-                  { label: "Inactive/Maintenance", count: buses.filter(b => b.status === "Maintenance").length, color: "text-red-400" },
+                  { label: "Total Fleet", count: buses.length },
+                  { label: "On Road", count: buses.filter(b => b.status === "Running").length },
+                  { label: "Depot/Standby", count: buses.filter(b => b.status === "Scheduled" || b.status === "Arrived").length },
+                  { label: "Maintenance", count: buses.filter(b => b.status === "Maintenance").length },
                 ].map((c, i) => (
-                  <div key={i} className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4 flex flex-col justify-center h-20 shadow-lg shadow-black/25">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">{c.label}</span>
-                    <span className={`text-xl font-black mt-1 ${c.color}`}>{c.count}</span>
+                  <div key={i} className="bg-[#111] border border-zinc-800/80 rounded-xl p-4 flex items-center justify-between">
+                    <span className="text-[12px] font-medium text-zinc-400">{c.label}</span>
+                    <span className="text-xl font-semibold text-zinc-200">{c.count}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Bus Registry Table */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-zinc-950 border-b border-zinc-800 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                        <th className="py-4 px-5">Bus Code</th>
-                        <th className="py-4 px-5">Reg Number</th>
-                        <th className="py-4 px-5">Route</th>
-                        <th className="py-4 px-5">Speed</th>
-                        <th className="py-4 px-5">GPS Status</th>
-                        <th className="py-4 px-5">Last Online</th>
-                        <th className="py-4 px-5 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-zinc-800/50 text-xs">
-                      {filteredBuses.map(bus => {
-                        const gpsOn = (bus as any).gps_enabled || (bus as any).gpsEnabled || false;
-                        const devStatus = (bus as any).device_status || (bus as any).deviceStatus || 'Offline';
-                        const lastSeen = (bus as any).last_seen || null;
-                        const lastSeenText = lastSeen
-                          ? (() => {
-                              const diff = Math.floor((Date.now() - new Date(lastSeen).getTime()) / 1000);
-                              if (diff < 60) return `${diff}s ago`;
-                              if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-                              return `${Math.floor(diff / 3600)}h ago`;
-                            })()
-                          : 'Never';
+              {/* Table */}
+              <div className="bg-[#111] border border-zinc-800/80 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
+                      <th className="py-3 px-5 font-medium">Bus Code</th>
+                      <th className="py-3 px-5 font-medium">Registration</th>
+                      <th className="py-3 px-5 font-medium">Status / Speed</th>
+                      <th className="py-3 px-5 font-medium">GPS Status</th>
+                      <th className="py-3 px-5 font-medium">Last Online</th>
+                      <th className="py-3 px-5 text-right font-medium">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800/50 text-[13px]">
+                    {filteredBuses.map(bus => {
+                      const gpsOn = (bus as any).gps_enabled || (bus as any).gpsEnabled || false;
+                      const devStatus = (bus as any).device_status || (bus as any).deviceStatus || 'Offline';
+                      const lastSeen = (bus as any).last_seen || null;
+                      const lastSeenText = lastSeen
+                        ? (() => {
+                            const diff = Math.floor((Date.now() - new Date(lastSeen).getTime()) / 1000);
+                            if (diff < 60) return `${diff}s ago`;
+                            if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+                            return `${Math.floor(diff / 3600)}h ago`;
+                          })()
+                        : 'Never';
 
-                        return (
-                        <tr key={bus._id} className="hover:bg-zinc-800/25 transition-colors">
-                          <td className="py-4 px-5 font-mono font-black text-orange-400 uppercase text-xs">{bus.busCode || 'BUS'}</td>
-                          <td className="py-4 px-5 font-bold text-white uppercase text-xs">{bus.busNumber}</td>
-                          <td className="py-4 px-5 text-zinc-300 font-semibold italic text-xs">{bus.routeId?.routeName || 'Depot Standby'}</td>
-                          <td className="py-4 px-5 text-xs">
-                            <span className={bus.status === 'Running' ? 'text-emerald-400 font-mono font-extrabold' : 'text-zinc-500'}>
-                              {bus.status === 'Running' ? `${bus.speed} km/h` : 'Stationary'}
+                      return (
+                      <tr key={bus._id} className="hover:bg-zinc-800/20 transition-colors">
+                        <td className="py-3 px-5 font-mono text-zinc-300">{bus.busCode || 'BUS'}</td>
+                        <td className="py-3 px-5 text-zinc-200">{bus.busNumber}</td>
+                        <td className="py-3 px-5">
+                          <span className={`inline-flex items-center gap-1.5 ${bus.status === 'Running' ? 'text-emerald-400' : 'text-zinc-400'}`}>
+                            {bus.status === 'Running' ? <><Gauge size={12}/> {bus.speed} km/h</> : 'Stationary'}
+                          </span>
+                        </td>
+                        <td className="py-3 px-5">
+                          <div className="flex items-center gap-3">
+                            <span className="flex items-center gap-1.5 w-16">
+                              <span className={`w-1.5 h-1.5 rounded-full ${devStatus === 'Online' ? 'bg-emerald-500 animate-pulse' : 'bg-zinc-600'}`} />
+                              <span className="text-[12px] text-zinc-400">{devStatus}</span>
                             </span>
-                          </td>
-                          {/* GPS Status */}
-                          <td className="py-4 px-5">
-                            <div className="flex flex-col gap-1">
-                              <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest w-fit ${
-                                devStatus === 'Online'
-                                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                                  : 'bg-zinc-800 text-zinc-500 border border-zinc-700'
-                              }`}>
-                                <span className={`w-1.5 h-1.5 rounded-full ${devStatus === 'Online' ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500'}`} />
-                                {devStatus}
-                              </span>
-                              <button
-                                onClick={async () => {
-                                  await fetch(`/api/buses/${bus._id}`, {
-                                    method: 'PATCH',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ gps_enabled: !gpsOn })
-                                  });
-                                  setBuses(prev => prev.map(b => b._id === bus._id ? { ...b, gps_enabled: !gpsOn } as any : b));
-                                }}
-                                className={`text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest transition-all w-fit cursor-pointer ${
-                                  gpsOn
-                                    ? 'bg-orange-500 text-white hover:bg-orange-600'
-                                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 border border-zinc-700'
-                                }`}
-                              >
-                                {gpsOn ? 'GPS On' : 'GPS Off'}
-                              </button>
-                            </div>
-                          </td>
-                          {/* Last Online */}
-                          <td className="py-4 px-5 text-[10px] text-zinc-500 font-bold">{lastSeenText}</td>
-                          {/* Actions */}
-                          <td className="py-4 px-5 text-right space-x-2">
                             <button
-                              onClick={() => handleRegenerateQR(bus._id)}
-                              className="px-3 py-1.5 bg-zinc-800 border border-zinc-700 hover:bg-zinc-700/80 hover:text-white rounded-lg text-zinc-400 text-[10px] font-black uppercase tracking-wider transition-colors inline-flex items-center gap-1"
+                              onClick={async () => {
+                                await fetch(`/api/buses/${bus._id}`, {
+                                  method: 'PATCH',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ gps_enabled: !gpsOn })
+                                });
+                                setBuses(prev => prev.map(b => b._id === bus._id ? { ...b, gps_enabled: !gpsOn } as any : b));
+                              }}
+                              className={`text-[10px] font-medium px-2 py-0.5 rounded transition-colors ${
+                                gpsOn ? 'bg-zinc-200 text-black hover:bg-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                              }`}
                             >
-                              QR
+                              {gpsOn ? 'GPS On' : 'GPS Off'}
                             </button>
-                            <button
-                              onClick={() => handleDeleteBus(bus._id)}
-                              className="p-1.5 bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white rounded-lg transition-all inline-flex"
-                              title="Delete bus"
-                            >
-                              <Trash2 size={12} />
-                            </button>
-                          </td>
-                        </tr>
-                        );
-                      })}
-                      {filteredBuses.length === 0 && (
-                        <tr>
-                          <td colSpan={7} className="py-8 text-center text-zinc-500 font-bold uppercase tracking-widest text-[10px]">No buses match search criteria</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-5 text-zinc-500 text-[12px]">{lastSeenText}</td>
+                        <td className="py-3 px-5 text-right space-x-2">
+                          <button
+                            onClick={() => handleRegenerateQR(bus._id)}
+                            className="p-1.5 rounded bg-zinc-800 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
+                            title="Regenerate QR"
+                          >
+                            <RefreshCw size={14} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteBus(bus._id)}
+                            className="p-1.5 rounded text-zinc-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                            title="Delete"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </td>
+                      </tr>
+                      );
+                    })}
+                    {filteredBuses.length === 0 && (
+                      <tr>
+                        <td colSpan={6} className="py-8 text-center text-zinc-500 text-[13px]">No buses found</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
 
           {/* ======================================================== */}
-          {/* TAB: CONDUCTOR MANAGEMENT                                */}
+          {/* TAB: CONDUCTORS                                          */}
           {/* ======================================================== */}
           {activeTab === "conductors" && (
-            <div className="space-y-6 animate-fade-in">
-              <div className="flex justify-between items-center">
+            <div className="space-y-6">
+              <div className="flex justify-between items-end">
                 <div>
-                  <h1 className="text-xl font-black uppercase tracking-tight">Conductor Assignment Matrix</h1>
-                  <p className="text-xs text-zinc-500 font-medium">Map Clerk authorization emails and assign active routes</p>
+                  <h1 className="text-xl font-semibold text-zinc-100 tracking-tight">Conductor Directory</h1>
+                  <p className="text-[13px] text-zinc-500 mt-1">Manage staff assignments and authentication</p>
                 </div>
                 <button 
                   onClick={() => setIsConductorModalOpen(true)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-[10px] px-5 py-3 rounded-xl shadow-lg shadow-orange-500/10 flex items-center gap-2 transition-all active:scale-95"
+                  className="bg-white text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Assign Conductor
                 </button>
               </div>
 
-              {/* Conductors Ledger Table */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-zinc-950 border-b border-zinc-800 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                        <th className="py-4 px-6">Employee ID</th>
-                        <th className="py-4 px-6">Conductor Name</th>
-                        <th className="py-4 px-6">Clerk Auth Email</th>
-                        <th className="py-4 px-6">Active Bus Assignment</th>
-                        <th className="py-4 px-6">Assigned Route</th>
-                        <th className="py-4 px-6">Security Token Status</th>
-                        <th className="py-4 px-6 text-right">Actions</th>
+              <div className="bg-[#111] border border-zinc-800/80 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
+                      <th className="py-3 px-5 font-medium">ID</th>
+                      <th className="py-3 px-5 font-medium">Name & Email</th>
+                      <th className="py-3 px-5 font-medium">Bus</th>
+                      <th className="py-3 px-5 font-medium">Route</th>
+                      <th className="py-3 px-5 font-medium">Status</th>
+                      <th className="py-3 px-5 text-right font-medium">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800/50 text-[13px]">
+                    {conductors.map(conductor => (
+                      <tr key={conductor.id} className="hover:bg-zinc-800/20 transition-colors">
+                        <td className="py-3 px-5 font-mono text-zinc-400">{conductor.employee_id}</td>
+                        <td className="py-3 px-5">
+                          <div className="font-medium text-zinc-200">{conductor.name}</div>
+                          <div className="text-[11px] text-zinc-500">{conductor.email}</div>
+                        </td>
+                        <td className="py-3 px-5 text-zinc-300">{conductor.assigned_bus || "—"}</td>
+                        <td className="py-3 px-5 text-zinc-400">{conductor.assigned_route || "—"}</td>
+                        <td className="py-3 px-5">
+                          <button
+                            onClick={() => handleUpdateConductorStatus(conductor.id, conductor.status)}
+                            className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
+                              conductor.status === "Active" 
+                                ? "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20" 
+                                : "bg-red-500/10 text-red-400 hover:bg-red-500/20"
+                            }`}
+                          >
+                            {conductor.status}
+                          </button>
+                        </td>
+                        <td className="py-3 px-5 text-right">
+                          <button 
+                            onClick={() => handleDeleteConductor(conductor.id)}
+                            className="p-1.5 rounded text-zinc-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody className="divide-y divide-zinc-800/50 text-xs">
-                      {conductors.map(conductor => (
-                        <tr key={conductor.id} className="hover:bg-zinc-800/25 transition-colors">
-                          <td className="py-4 px-6 font-mono font-black text-orange-400 uppercase">{conductor.employee_id}</td>
-                          <td className="py-4 px-6 font-bold text-white">{conductor.name}</td>
-                          <td className="py-4 px-6 font-semibold text-zinc-300">{conductor.email}</td>
-                          <td className="py-4 px-6 font-bold text-white uppercase">{conductor.assigned_bus || "Unassigned"}</td>
-                          <td className="py-4 px-6 text-zinc-400 font-semibold italic">{conductor.assigned_route || "Depot Standby"}</td>
-                          <td className="py-4 px-6">
-                            <button
-                              onClick={() => handleUpdateConductorStatus(conductor.id, conductor.status)}
-                              className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest transition-colors ${
-                                conductor.status === "Active" 
-                                  ? "bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white" 
-                                  : "bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500 hover:text-white"
-                              }`}
-                            >
-                              {conductor.status}
-                            </button>
-                          </td>
-                          <td className="py-4 px-6 text-right">
-                            <button 
-                              onClick={() => handleDeleteConductor(conductor.id)}
-                              className="p-2 bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white rounded-xl transition-all"
-                              title="Delete Assignment"
-                            >
-                              <Trash2 size={12} />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                      {conductors.length === 0 && (
-                        <tr>
-                          <td colSpan={7} className="py-8 text-center text-zinc-500 font-bold uppercase tracking-widest text-[10px]">No conductor assignments found. Click Assign Conductor to authorize one.</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                    {conductors.length === 0 && (
+                      <tr>
+                        <td colSpan={6} className="py-8 text-center text-zinc-500 text-[13px]">No conductors found</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
 
           {/* ======================================================== */}
-          {/* TAB: ROUTE & FARE ENGINE                                 */}
+          {/* TAB: ROUTES & FARES                                      */}
           {/* ======================================================== */}
           {activeTab === "routes" && (
-            <div className="space-y-6 animate-fade-in">
-              <div className="flex justify-between items-center">
+            <div className="space-y-6">
+              <div className="flex justify-between items-end">
                 <div>
-                  <h1 className="text-xl font-black uppercase tracking-tight">Transit Routing & Fare Matrix</h1>
-                  <p className="text-xs text-zinc-500 font-medium">Configure metropolitan route maps, base pricing parameters, and schedules</p>
+                  <h1 className="text-xl font-semibold text-zinc-100 tracking-tight">Routes & Fares</h1>
+                  <p className="text-[13px] text-zinc-500 mt-1">Configure transit lines and base pricing</p>
                 </div>
                 <button 
                   onClick={() => setIsRouteModalOpen(true)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-[10px] px-5 py-3 rounded-xl shadow-lg shadow-orange-500/10 flex items-center gap-2 transition-all active:scale-95"
+                  className="bg-white text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
-                  <Plus size={14} /> Add Route / Trip
+                  <Plus size={14} /> Create Route
                 </button>
               </div>
 
-              {/* Routes Matrix Table */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-zinc-950 border-b border-zinc-800 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                        <th className="py-4 px-6">Route ID</th>
-                        <th className="py-4 px-6">Route Paths</th>
-                        <th className="py-4 px-6">Origin Terminal</th>
-                        <th className="py-4 px-6">Destination Terminal</th>
-                        <th className="py-4 px-6">Base Fare</th>
-                        <th className="py-4 px-6">Scheduled Time</th>
-                        <th className="py-4 px-6 text-right">Operations & crowd</th>
+              <div className="bg-[#111] border border-zinc-800/80 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
+                      <th className="py-3 px-5 font-medium">Path</th>
+                      <th className="py-3 px-5 font-medium">Fare</th>
+                      <th className="py-3 px-5 font-medium">Schedule</th>
+                      <th className="py-3 px-5 text-right font-medium">Status / Load</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800/50 text-[13px]">
+                    {routes.map((route, i) => (
+                      <tr key={route.id || i} className="hover:bg-zinc-800/20 transition-colors">
+                        <td className="py-3 px-5 text-zinc-200">{route.origin} → {route.destination}</td>
+                        <td className="py-3 px-5 text-zinc-300 font-medium">₹{route.price}</td>
+                        <td className="py-3 px-5 text-zinc-400">{route.departure_time || "08:00 AM"}</td>
+                        <td className="py-3 px-5 text-right">
+                          <select 
+                            onChange={(e) => handleUpdateCrowdStatus(route.id, e.target.value)}
+                            value={route.status || "Scheduled"}
+                            className="bg-zinc-800 border border-zinc-700 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                          >
+                            <option value="Scheduled">Scheduled</option>
+                            <option value="Running">Active</option>
+                            <option value="High">High Load</option>
+                            <option value="Delayed">Delayed</option>
+                          </select>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody className="divide-y divide-zinc-800/50 text-xs">
-                      {routes.map((route, i) => (
-                        <tr key={route.id || i} className="hover:bg-zinc-800/25 transition-colors">
-                          <td className="py-4 px-6 font-mono font-black text-orange-400 uppercase">RT-00{i+1}</td>
-                          <td className="py-4 px-6 font-bold text-white uppercase italic">{route.origin} &rarr; {route.destination}</td>
-                          <td className="py-4 px-6 font-semibold text-zinc-300">{route.origin}</td>
-                          <td className="py-4 px-6 font-semibold text-zinc-300">{route.destination}</td>
-                          <td className="py-4 px-6 font-extrabold text-orange-400">₹{route.price}</td>
-                          <td className="py-4 px-6 font-medium text-zinc-400">{route.departure_time || "08:00 AM"}</td>
-                          <td className="py-4 px-6 text-right">
-                            <select 
-                              onChange={(e) => handleUpdateCrowdStatus(route.id, e.target.value)}
-                              value={route.status || "Scheduled"}
-                              className="bg-zinc-950 border border-zinc-800 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-lg px-2.5 py-1.5 outline-none cursor-pointer hover:border-zinc-700 transition-colors"
-                            >
-                              <option value="Scheduled">Scheduled (Low)</option>
-                              <option value="Running">Active (Medium)</option>
-                              <option value="High">Overloaded (High)</option>
-                              <option value="Delayed">Delayed</option>
-                            </select>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
 
           {/* ======================================================== */}
-          {/* TAB: LUGGAGE LOGISTICS                                   */}
+          {/* TAB: LUGGAGE                                             */}
           {/* ======================================================== */}
           {activeTab === "luggage" && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6">
               <div>
-                <h1 className="text-xl font-black uppercase tracking-tight">Luggage & Cargo Dispatch</h1>
-                <p className="text-xs text-zinc-500 font-medium">Monitor luggage tracking IDs and issue dispatch updates</p>
+                <h1 className="text-xl font-semibold text-zinc-100 tracking-tight">Luggage Logistics</h1>
+                <p className="text-[13px] text-zinc-500 mt-1">Monitor parcel and cargo dispatch</p>
               </div>
 
-              {/* Statistics overview */}
-              <div className="grid grid-cols-4 gap-4">
-                {[
-                  { label: "Total Parcels Booked", count: luggageBookings.length, color: "text-orange-400" },
-                  { label: "Awaiting Pick Up", count: luggageBookings.filter(l => l.status === "Booked").length, color: "text-amber-400" },
-                  { label: "Cargo In Transit", count: luggageBookings.filter(l => l.status === "In Transit").length, color: "text-blue-400" },
-                  { label: "Delivered To Consignee", count: luggageBookings.filter(l => l.status === "Delivered").length, color: "text-emerald-400" },
-                ].map((c, i) => (
-                  <div key={i} className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4 flex flex-col justify-center h-20 shadow-lg shadow-black/25">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">{c.label}</span>
-                    <span className={`text-xl font-black mt-1 ${c.color}`}>{c.count}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Luggage ledger */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-zinc-950 border-b border-zinc-800 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                        <th className="py-4 px-6">Tracking ID</th>
-                        <th className="py-4 px-6">Sender Details</th>
-                        <th className="py-4 px-6">Receiver Details</th>
-                        <th className="py-4 px-6">Category & Weight</th>
-                        <th className="py-4 px-6">Amount</th>
-                        <th className="py-4 px-6">Tracking Status</th>
-                        <th className="py-4 px-6 text-right">Update Status</th>
+              <div className="bg-[#111] border border-zinc-800/80 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
+                      <th className="py-3 px-5 font-medium">Tracking ID</th>
+                      <th className="py-3 px-5 font-medium">Sender</th>
+                      <th className="py-3 px-5 font-medium">Receiver</th>
+                      <th className="py-3 px-5 font-medium">Details</th>
+                      <th className="py-3 px-5 font-medium">Amount</th>
+                      <th className="py-3 px-5 text-right font-medium">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800/50 text-[13px]">
+                    {filteredLuggage.map(parcel => (
+                      <tr key={parcel.id} className="hover:bg-zinc-800/20 transition-colors">
+                        <td className="py-3 px-5 font-mono text-zinc-300">{parcel.tracking_id}</td>
+                        <td className="py-3 px-5">
+                          <div className="text-zinc-200">{parcel.sender_details?.name || "Sender"}</div>
+                          <div className="text-[11px] text-zinc-500">{parcel.sender_details?.phone || ""}</div>
+                        </td>
+                        <td className="py-3 px-5">
+                          <div className="text-zinc-200">{parcel.receiver_details?.name || "Receiver"}</div>
+                          <div className="text-[11px] text-zinc-500">{parcel.receiver_details?.phone || ""}</div>
+                        </td>
+                        <td className="py-3 px-5 text-zinc-400">
+                          {parcel.package_category || "General"} ({parcel.weight || "10"}kg)
+                        </td>
+                        <td className="py-3 px-5 font-medium text-zinc-200">₹{parcel.total_amount || parcel.amount}</td>
+                        <td className="py-3 px-5 text-right">
+                          <select 
+                            onChange={(e) => handleUpdateLuggageStatus(parcel.id, e.target.value)}
+                            value={parcel.status}
+                            className="bg-zinc-800 border border-zinc-700 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                          >
+                            <option value="Booked">Booked</option>
+                            <option value="Picked up">Picked up</option>
+                            <option value="In Transit">In Transit</option>
+                            <option value="Delivered">Delivered</option>
+                          </select>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody className="divide-y divide-zinc-800/50 text-xs">
-                      {filteredLuggage.map(parcel => (
-                        <tr key={parcel.id} className="hover:bg-zinc-800/25 transition-colors">
-                          <td className="py-4 px-6 font-mono font-black text-orange-400 uppercase">{parcel.tracking_id}</td>
-                          <td className="py-4 px-6">
-                            <div className="font-bold text-white">{parcel.sender_details?.name || "Sender"}</div>
-                            <div className="text-[9px] text-zinc-500 mt-0.5">{parcel.sender_details?.phone || ""}</div>
-                          </td>
-                          <td className="py-4 px-6">
-                            <div className="font-bold text-white">{parcel.receiver_details?.name || "Receiver"}</div>
-                            <div className="text-[9px] text-zinc-500 mt-0.5">{parcel.receiver_details?.phone || ""}</div>
-                          </td>
-                          <td className="py-4 px-6">
-                            <div className="font-semibold text-zinc-200">{parcel.package_category || "General"}</div>
-                            <div className="text-[9px] text-zinc-500 mt-0.5">{parcel.weight || "10"} kg</div>
-                          </td>
-                          <td className="py-4 px-6 font-extrabold text-white">₹{parcel.total_amount || parcel.amount}</td>
-                          <td className="py-4 px-6">
-                            <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
-                              parcel.status === 'Delivered' ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' :
-                              parcel.status === 'In Transit' ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400' :
-                              'bg-amber-500/10 border border-amber-500/20 text-amber-400'
-                            }`}>
-                              {parcel.status}
-                            </span>
-                          </td>
-                          <td className="py-4 px-6 text-right">
-                            <select 
-                              onChange={(e) => handleUpdateLuggageStatus(parcel.id, e.target.value)}
-                              value={parcel.status}
-                              className="bg-zinc-950 border border-zinc-800 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-lg px-2.5 py-1.5 outline-none cursor-pointer hover:border-zinc-700 transition-colors"
-                            >
-                              <option value="Booked">Booked</option>
-                              <option value="Picked up">Picked up</option>
-                              <option value="In Transit">In Transit</option>
-                              <option value="Reached Destination">Reached Destination</option>
-                              <option value="Delivered">Delivered</option>
-                            </select>
-                          </td>
-                        </tr>
-                      ))}
-                      {filteredLuggage.length === 0 && (
-                        <tr>
-                          <td colSpan={7} className="py-8 text-center text-zinc-500 font-bold uppercase tracking-widest text-[10px]">No luggage bookings match search query</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                    {filteredLuggage.length === 0 && (
+                      <tr>
+                        <td colSpan={6} className="py-8 text-center text-zinc-500 text-[13px]">No cargo records found</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
 
           {/* ======================================================== */}
-          {/* TAB: FINANCIALS & BOOKINGS                               */}
+          {/* TAB: FINANCIALS                                          */}
           {/* ======================================================== */}
           {activeTab === "financials" && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6">
               <div>
-                <h1 className="text-xl font-black uppercase tracking-tight">Financial Ledger & Bookings</h1>
-                <p className="text-xs text-zinc-500 font-medium">Verify transaction records, ticket sales, and process refunds</p>
+                <h1 className="text-xl font-semibold text-zinc-100 tracking-tight">Financial Ledger</h1>
+                <p className="text-[13px] text-zinc-500 mt-1">Verify transactions and process refunds</p>
               </div>
 
-              {/* Transactions list */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-zinc-950 border-b border-zinc-800 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                        <th className="py-4 px-6">Ticket ID</th>
-                        <th className="py-4 px-6">Passenger Details</th>
-                        <th className="py-4 px-6">Trip ID</th>
-                        <th className="py-4 px-6">Seats</th>
-                        <th className="py-4 px-6">Amount</th>
-                        <th className="py-4 px-6">Status</th>
-                        <th className="py-4 px-6">Booking Date</th>
-                        <th className="py-4 px-6 text-right">Controls</th>
+              <div className="bg-[#111] border border-zinc-800/80 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
+                      <th className="py-3 px-5 font-medium">Ticket ID</th>
+                      <th className="py-3 px-5 font-medium">User</th>
+                      <th className="py-3 px-5 font-medium">Trip/Seats</th>
+                      <th className="py-3 px-5 font-medium">Amount</th>
+                      <th className="py-3 px-5 font-medium">Status</th>
+                      <th className="py-3 px-5 text-right font-medium">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800/50 text-[13px]">
+                    {filteredBookings.map((b, idx) => (
+                      <tr key={b.id || idx} className="hover:bg-zinc-800/20 transition-colors">
+                        <td className="py-3 px-5 font-mono text-zinc-300">{b.ticketId}</td>
+                        <td className="py-3 px-5 text-zinc-400 text-[11px]">ID: {b.userId?.substring(0, 8)}...</td>
+                        <td className="py-3 px-5 text-zinc-300">
+                          {typeof b.tripId === "object" ? b.tripId?.bus_number : b.tripId?.substring(0, 8)} <span className="text-zinc-500 mx-1">/</span> {Array.isArray(b.seats) ? b.seats.join(", ") : b.seats || "1"}
+                        </td>
+                        <td className="py-3 px-5 font-medium text-zinc-200">₹{b.totalAmount}</td>
+                        <td className="py-3 px-5">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
+                            b.paymentStatus === 'Paid' || b.paymentStatus === 'Confirmed' 
+                              ? 'bg-emerald-500/10 text-emerald-400' 
+                              : 'bg-red-500/10 text-red-400'
+                          }`}>
+                            {b.paymentStatus || "Paid"}
+                          </span>
+                        </td>
+                        <td className="py-3 px-5 text-right">
+                          <button 
+                            onClick={() => handleTriggerRefund(b.ticketId, b.totalAmount)}
+                            className="px-2 py-1 rounded bg-zinc-800 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 transition-colors text-[11px] font-medium"
+                          >
+                            Refund
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody className="divide-y divide-zinc-800/50 text-xs">
-                      {filteredBookings.map((b, idx) => (
-                        <tr key={b.id || idx} className="hover:bg-zinc-800/25 transition-colors">
-                          <td className="py-4 px-6 font-mono font-black text-orange-400 uppercase">{b.ticketId}</td>
-                          <td className="py-4 px-6">
-                            <div className="font-bold text-white">Guest User</div>
-                            <div className="text-[9px] text-zinc-500 mt-0.5">ID: {b.userId?.substring(0, 12)}...</div>
-                          </td>
-                          <td className="py-4 px-6 font-mono font-semibold text-zinc-400">
-                            {typeof b.tripId === "object" ? b.tripId?.bus_number || "Trip" : b.tripId?.substring(0, 8)}
-                          </td>
-                          <td className="py-4 px-6 font-bold text-white">{Array.isArray(b.seats) ? b.seats.join(", ") : b.seats || "1"}</td>
-                          <td className="py-4 px-6 font-extrabold text-orange-400">₹{b.totalAmount}</td>
-                          <td className="py-4 px-6">
-                            <span className={`px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider ${
-                              b.paymentStatus === 'Paid' || b.paymentStatus === 'Confirmed' 
-                                ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' 
-                                : 'bg-red-500/10 border border-red-500/20 text-red-400'
-                            }`}>
-                              {b.paymentStatus || "Paid"}
-                            </span>
-                          </td>
-                          <td className="py-4 px-6 text-zinc-500 font-semibold">{b.bookingDate ? new Date(b.bookingDate).toLocaleDateString() : "Today"}</td>
-                          <td className="py-4 px-6 text-right">
-                            <button 
-                              onClick={() => handleTriggerRefund(b.ticketId, b.totalAmount)}
-                              className="px-2.5 py-1.5 bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
-                            >
-                              Refund
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                      {filteredBookings.length === 0 && (
-                        <tr>
-                          <td colSpan={8} className="py-8 text-center text-zinc-500 font-bold uppercase tracking-widest text-[10px]">No transaction ledger logs match search criteria</td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                    {filteredBookings.length === 0 && (
+                      <tr>
+                        <td colSpan={6} className="py-8 text-center text-zinc-500 text-[13px]">No transactions found</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
@@ -1317,252 +1204,120 @@ function EnterpriseAdminDashboardContent() {
       </main>
 
       {/* ======================================================== */}
-      {/* MODAL: ASSIGN CONDUCTOR                                  */}
+      {/* MODALS                                                     */}
       {/* ======================================================== */}
+      
+      {/* Conductor Modal */}
       {isConductorModalOpen && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 w-full max-w-md shadow-2xl relative space-y-6">
-            <button 
-              onClick={() => setIsConductorModalOpen(false)}
-              className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
-            >
-              <X size={18} />
+        <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
+          <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
+            <button onClick={() => setIsConductorModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
+              <X size={16} />
             </button>
-            <div className="space-y-1">
-              <h3 className="text-sm font-black uppercase tracking-wider text-white">Assign Conductor Authorization</h3>
-              <p className="text-[10px] text-zinc-500">Maps a Clerk-authorized email to an active transit transponder</p>
-            </div>
+            <h3 className="text-[15px] font-medium text-zinc-100 mb-1">Assign Conductor</h3>
+            <p className="text-[12px] text-zinc-500 mb-6">Provide clerk authentication and route assignment</p>
             
-            <form onSubmit={handleAddConductor} className="space-y-4 text-xs">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Full Name</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. John Doe"
-                  value={newConductor.name}
-                  onChange={(e) => setNewConductor(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                />
+            <form onSubmit={handleAddConductor} className="space-y-4">
+              <div>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Name</label>
+                <input type="text" required value={newConductor.name} onChange={(e) => setNewConductor(prev => ({ ...prev, name: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
-
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Clerk Auth Email Address</label>
-                <input 
-                  type="email" 
-                  required
-                  placeholder="e.g. johndoe@gmail.com"
-                  value={newConductor.email}
-                  onChange={(e) => setNewConductor(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                />
+              <div>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Email</label>
+                <input type="email" required value={newConductor.email} onChange={(e) => setNewConductor(prev => ({ ...prev, email: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
-
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Employee ID</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. EMP1004"
-                  value={newConductor.employee_id}
-                  onChange={(e) => setNewConductor(prev => ({ ...prev, employee_id: e.target.value }))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                />
+              <div>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Employee ID</label>
+                <input type="text" required value={newConductor.employee_id} onChange={(e) => setNewConductor(prev => ({ ...prev, employee_id: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
-
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Assigned Bus Number</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. TN-38-EO-2179"
-                    value={newConductor.assigned_bus}
-                    onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_bus: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors uppercase"
-                  />
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Bus</label>
+                  <input type="text" value={newConductor.assigned_bus} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_bus: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Assigned Route Path</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. Singanallur Route"
-                    value={newConductor.assigned_route}
-                    onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                  />
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Route</label>
+                  <input type="text" value={newConductor.assigned_route} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-
-              <button 
-                type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-[10px] py-4 rounded-xl shadow-lg shadow-orange-500/10 transition-colors"
-              >
-                Authorize & Assign Conductor
+              <button type="submit" className="w-full mt-2 bg-white hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
+                Authorize Conductor
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* ======================================================== */}
-      {/* MODAL: ADD BUS TO FLEET                                  */}
-      {/* ======================================================== */}
+      {/* Bus Modal */}
       {isBusModalOpen && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 w-full max-w-md shadow-2xl relative space-y-6">
-            <button 
-              onClick={() => setIsBusModalOpen(false)}
-              className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
-            >
-              <X size={18} />
+        <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
+          <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
+            <button onClick={() => setIsBusModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
+              <X size={16} />
             </button>
-            <div className="space-y-1">
-              <h3 className="text-sm font-black uppercase tracking-wider text-white">Register Telemetry Bus</h3>
-              <p className="text-[10px] text-zinc-500">Insert a new transponder bus in the active fleet registry</p>
-            </div>
+            <h3 className="text-[15px] font-medium text-zinc-100 mb-1">Add Fleet Vehicle</h3>
+            <p className="text-[12px] text-zinc-500 mb-6">Register a new transponder bus</p>
             
-            <form onSubmit={handleAddBus} className="space-y-4 text-xs">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Bus Registration Number</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. TN-38-EO-9999"
-                  value={newBus.bus_number}
-                  onChange={(e) => setNewBus(prev => ({ ...prev, bus_number: e.target.value }))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors uppercase"
-                />
+            <form onSubmit={handleAddBus} className="space-y-4">
+              <div>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Registration Number</label>
+                <input type="text" required value={newBus.bus_number} onChange={(e) => setNewBus(prev => ({ ...prev, bus_number: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
-
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Custom Bus Code (ID)</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. CBE008"
-                    value={newBus.bus_code}
-                    onChange={(e) => setNewBus(prev => ({ ...prev, bus_code: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors uppercase"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Bus Class Type</label>
-                  <select 
-                    value={newBus.type}
-                    onChange={(e) => setNewBus(prev => ({ ...prev, type: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                  >
-                    <option value="Regular">Regular Seater</option>
-                    <option value="AC Seater">Air Conditioned (AC)</option>
-                    <option value="Deluxe">Deluxe Coach</option>
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Type</label>
+                  <select value={newBus.type} onChange={(e) => setNewBus(prev => ({ ...prev, type: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600">
+                    <option>Regular</option>
+                    <option>Express</option>
+                    <option>AC Sleeper</option>
                   </select>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Total Seats Capacity</label>
-                  <input 
-                    type="number" 
-                    required
-                    value={newBus.available_seats}
-                    onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Default Ticket Fare (₹)</label>
-                  <input 
-                    type="number" 
-                    required
-                    value={newBus.price}
-                    onChange={(e) => setNewBus(prev => ({ ...prev, price: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                  />
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Seats</label>
+                  <input type="number" required value={newBus.available_seats} onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-
-              <button 
-                type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-[10px] py-4 rounded-xl shadow-lg shadow-orange-500/10 transition-colors"
-              >
-                Register & Bind Transponder
+              <button type="submit" className="w-full mt-2 bg-white hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
+                Register Vehicle
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* ======================================================== */}
-      {/* MODAL: ADD ROUTE / TRIP                                 */}
-      {/* ======================================================== */}
+      {/* Route Modal */}
       {isRouteModalOpen && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 w-full max-w-md shadow-2xl relative space-y-6">
-            <button 
-              onClick={() => setIsRouteModalOpen(false)}
-              className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
-            >
-              <X size={18} />
+        <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
+          <div className="bg-[#111] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
+            <button onClick={() => setIsRouteModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
+              <X size={16} />
             </button>
-            <div className="space-y-1">
-              <h3 className="text-sm font-black uppercase tracking-wider text-white">Create Transit Path</h3>
-              <p className="text-[10px] text-zinc-500">Insert new origin/destination coordinates and pricing schedule</p>
-            </div>
+            <h3 className="text-[15px] font-medium text-zinc-100 mb-1">Create Route</h3>
+            <p className="text-[12px] text-zinc-500 mb-6">Define a new transit path</p>
             
-            <form onSubmit={handleAddRoute} className="space-y-4 text-xs">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Origin Terminal Name</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. Gandhipuram Stand"
-                  value={newRoute.origin}
-                  onChange={(e) => setNewRoute(prev => ({ ...prev, origin: e.target.value }))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Destination Terminal Name</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. Walayar Stand"
-                  value={newRoute.destination}
-                  onChange={(e) => setNewRoute(prev => ({ ...prev, destination: e.target.value }))}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                />
-              </div>
-
+            <form onSubmit={handleAddRoute} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Default Ticket Fare (₹)</label>
-                  <input 
-                    type="number" 
-                    required
-                    value={newRoute.fare}
-                    onChange={(e) => setNewRoute(prev => ({ ...prev, fare: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                  />
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Origin</label>
+                  <input type="text" required value={newRoute.origin} onChange={(e) => setNewRoute(prev => ({ ...prev, origin: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-zinc-400">Maximum Capacity</label>
-                  <input 
-                    type="number" 
-                    required
-                    value={newRoute.total_seats}
-                    onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white outline-none focus:border-orange-500 transition-colors"
-                  />
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Destination</label>
+                  <input type="text" required value={newRoute.destination} onChange={(e) => setNewRoute(prev => ({ ...prev, destination: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-
-              <button 
-                type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-[10px] py-4 rounded-xl shadow-lg shadow-orange-500/10 transition-colors"
-              >
-                Create Routing Path
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Base Fare (₹)</label>
+                  <input type="number" required value={newRoute.fare} onChange={(e) => setNewRoute(prev => ({ ...prev, fare: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">Total Seats</label>
+                  <input type="number" required value={newRoute.total_seats} onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                </div>
+              </div>
+              <button type="submit" className="w-full mt-2 bg-white hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
+                Create Route
               </button>
             </form>
           </div>
@@ -1572,6 +1327,7 @@ function EnterpriseAdminDashboardContent() {
     </div>
   );
 }
+
 
 export default function EnterpriseAdminDashboard() {
   return (

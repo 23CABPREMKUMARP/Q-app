@@ -93,7 +93,7 @@ function AutoFit({ buses, livePositions, centerOn }: { buses: BusData[]; livePos
     } else if (points.length > 1) {
       map.fitBounds(points, { padding: [50, 50], animate: true, duration: 0.8, maxZoom: 15 });
     }
-  }, [centerOn, buses.length]);
+  }, [centerOn?.lat, centerOn?.lng, buses.length]);
 
   return null;
 }
