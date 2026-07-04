@@ -117,7 +117,7 @@ export default function GetTicketPage() {
       <WatermarkOverlay text={`SECURE TICKET ${phone}`} />
       
       {/* Native Mobile Top Bar */}
-      <div className="bg-white border-b border-slate-100 py-6 px-6 fixed top-0 left-0 right-0 z-40 shadow-sm flex items-center gap-3">
+      <div className="bg-[#ffffff] border-b border-slate-100 py-6 px-6 fixed top-0 left-0 right-0 z-40 shadow-sm flex items-center gap-3">
         <Link href="/" className="p-2 hover:bg-slate-100 rounded-xl transition-all">
           <ChevronRight className="rotate-180 text-slate-600" size={20} />
         </Link>
@@ -173,13 +173,13 @@ export default function GetTicketPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-Digit Mobile Number"
-              className="w-full bg-white border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#A4E5E0]/10 focus:border-[#A4E5E0] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              className="w-full bg-[#ffffff] border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#A4E5E0]/10 focus:border-[#A4E5E0] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-slate-950 hover:bg-[#A4E5E0] text-white px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-slate-950 hover:bg-[#A4E5E0] text-[#ffffff] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />
@@ -208,26 +208,26 @@ export default function GetTicketPage() {
                   placeholder="Search by ID, Bus, or Route..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white border border-slate-200 rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  className="w-full bg-[#ffffff] border border-slate-200 rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
                 />
               </div>
             </div>
             <div className="flex gap-2">
               <button 
                 onClick={() => setStatusFilter('ALL')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-slate-800 text-white border-slate-800' : 'bg-white text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-slate-800 text-[#ffffff] border-slate-800' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 All Passes
               </button>
               <button 
                 onClick={() => setStatusFilter('ACTIVE')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ACTIVE' ? 'bg-green-600 text-white border-green-600' : 'bg-white text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ACTIVE' ? 'bg-green-600 text-[#ffffff] border-green-600' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 Active
               </button>
               <button 
                 onClick={() => setStatusFilter('EXPIRED')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'EXPIRED' ? 'bg-red-600 text-white border-red-600' : 'bg-white text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'EXPIRED' ? 'bg-red-600 text-[#ffffff] border-red-600' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 Expired
               </button>
@@ -241,7 +241,7 @@ export default function GetTicketPage() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-12 bg-white rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
+              className="text-center py-12 bg-[#ffffff] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
             >
               <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-300">
                 <Ticket size={24} />
@@ -334,7 +334,7 @@ export default function GetTicketPage() {
             </div>
             <Link 
               href="/live-map" 
-              className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+              className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-[#ffffff] rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
             >
               Launch Live Map <ChevronRight size={14} />
             </Link>
@@ -356,7 +356,7 @@ export default function GetTicketPage() {
             <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
               <button 
                 onClick={() => setSelectedTicket(null)}
-                className="bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-md transition-colors"
+                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#ffffff] rounded-full p-2 backdrop-blur-md transition-colors"
               >
                 <X size={24} />
               </button>
@@ -376,7 +376,7 @@ export default function GetTicketPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 relative z-10 text-white text-xs font-bold uppercase tracking-widest opacity-70"
+              className="mt-6 relative z-10 text-[#ffffff] text-xs font-bold uppercase tracking-widest opacity-70"
             >
               Tap outside to close
             </motion.div>

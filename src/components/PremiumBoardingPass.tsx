@@ -192,7 +192,7 @@ export function PremiumBoardingPass({
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                       PhonePe TXN:
                     </span>
-                    <span className="font-mono font-bold text-[#000000] text-[11px] md:text-xs tracking-wider bg-white/30 px-2 py-0.5 rounded shadow-sm">{booking.phonepeTransactionId}</span>
+                    <span className="font-mono font-bold text-[#000000] text-[11px] md:text-xs tracking-wider bg-[#ffffff]/30 px-2 py-0.5 rounded shadow-sm">{booking.phonepeTransactionId}</span>
                   </div>
                 )}
               </div>
@@ -217,21 +217,21 @@ export function PremiumBoardingPass({
             <div className="relative z-10 flex flex-col items-center w-full">
               {isExpired && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center backdrop-blur-[1px]">
-                  <span className="bg-[#DC2626] text-white text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-red-400">EXPIRED</span>
+                  <span className="bg-[#DC2626] text-[#ffffff] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-red-400">EXPIRED</span>
                 </div>
               )}
               
               {/* Status / Timer with Border */}
-              <div className={`mb-2 text-center flex flex-col items-center gap-1 border-2 p-1.5 rounded-lg shadow-sm bg-white/40 ${!isExpired ? 'border-green-600' : 'border-red-600'}`}>
+              <div className={`mb-2 text-center flex flex-col items-center gap-1 border-2 p-1.5 rounded-lg shadow-sm bg-[#ffffff]/40 ${!isExpired ? 'border-green-600' : 'border-red-600'}`}>
                 {!isExpired && (
-                   <span className="bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-full uppercase shadow-sm">
+                   <span className="bg-green-600 text-[#ffffff] text-sm font-bold px-3 py-1 rounded-full uppercase shadow-sm">
                      Active 
                    </span>
                 )}
                 {!isExpired ? (
                   <span className="text-[11px] md:text-xs font-black text-green-700 uppercase tracking-widest whitespace-nowrap">{timeRemainingStr}</span>
                 ) : (
-                  <span className="text-[11px] md:text-xs font-black text-red-700 uppercase tracking-widest bg-white px-2 py-0.5 rounded whitespace-nowrap">Validity Ended</span>
+                  <span className="text-[11px] md:text-xs font-black text-red-700 uppercase tracking-widest bg-[#ffffff] px-2 py-0.5 rounded whitespace-nowrap">Validity Ended</span>
                 )}
               </div>
 

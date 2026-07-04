@@ -143,12 +143,12 @@ export default function TownBusSearchPage() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-black uppercase tracking-tighter text-white">Town Bus</h1>
-            <div className="bg-white/20 p-2 rounded-xl backdrop-blur-md">
-              <Bus size={24} className="text-white" />
+            <h1 className="text-3xl font-black uppercase tracking-tighter text-[#ffffff]">Town Bus</h1>
+            <div className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
+              <Bus size={24} className="text-[#ffffff]" />
             </div>
           </div>
-          <p className="text-white/80 font-medium text-sm tracking-wide">Premium City Transit & Express Routes</p>
+          <p className="text-[#ffffff]/80 font-medium text-sm tracking-wide">Premium City Transit & Express Routes</p>
         </div>
       </div>
 
@@ -157,7 +157,7 @@ export default function TownBusSearchPage() {
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white rounded-3xl p-6 shadow-xl shadow-black/20 text-slate-900 border border-slate-100"
+          className="bg-[#ffffff] rounded-3xl p-6 shadow-xl shadow-black/20 text-slate-900 border border-slate-100"
         >
           <form onSubmit={handleSearch} className="space-y-4">
             <div className="space-y-3 relative">
@@ -182,7 +182,7 @@ export default function TownBusSearchPage() {
                   </div>
                 </div>
                 {showFromSuggestions && from && fromSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#ffffff] rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
                     {fromSuggestions.map((stop, i) => (
                       <div 
                         key={i} 
@@ -214,7 +214,7 @@ export default function TownBusSearchPage() {
                   </div>
                 </div>
                 {showToSuggestions && to && toSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#ffffff] rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
                     {toSuggestions.map((stop, i) => (
                       <div 
                         key={i} 
@@ -232,10 +232,10 @@ export default function TownBusSearchPage() {
             <button 
               type="submit"
               disabled={isSearching}
-              className="w-full bg-[#A4E5E0] text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#A4E5E0]/20 active:scale-95 flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-[#A4E5E0] text-[#ffffff] py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors shadow-lg shadow-[#A4E5E0]/20 active:scale-95 flex items-center justify-center gap-2 mt-2"
             >
               {isSearching ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div>
               ) : (
                 <>Search Buses <Search size={18} /></>
               )}
@@ -275,7 +275,7 @@ export default function TownBusSearchPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white rounded-3xl p-5 mb-4 border border-zinc-100 relative overflow-hidden group hover:border-[#A4E5E0]/50 transition-colors cursor-pointer shadow-sm hover:shadow-md"
+              className="bg-[#ffffff] rounded-3xl p-5 mb-4 border border-zinc-100 relative overflow-hidden group hover:border-[#A4E5E0]/50 transition-colors cursor-pointer shadow-sm hover:shadow-md"
               onClick={() => router.push(`/town-bus/${trip._id}/seat-selection`)}
             >
 
@@ -309,7 +309,7 @@ export default function TownBusSearchPage() {
                       className="flex items-center gap-2 mt-1 bg-slate-50 p-1.5 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors"
                     >
                       {trip.busId.busCode && (
-                        <div className="bg-white p-1 rounded-md shadow-sm border border-slate-100">
+                        <div className="bg-[#ffffff] p-1 rounded-md shadow-sm border border-slate-100">
                           <QRCodeSVG 
                             value={`https://jeffben.org/bus/${trip.busId.busCode}`} 
                             size={32} 
@@ -336,7 +336,7 @@ export default function TownBusSearchPage() {
                     className="w-full mb-4 flex flex-col items-center justify-center bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-inner"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
+                    <div className="bg-[#ffffff] p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
                       <QRCodeSVG value={`https://jeffben.org/bus/${trip.busId.busCode}`} size={160} level="H" />
                     </div>
                     <p className="text-xl font-black text-slate-900 uppercase tracking-widest">{trip.busId.busCode}</p>
@@ -349,7 +349,7 @@ export default function TownBusSearchPage() {
                 <div className="absolute inset-y-0 left-0 w-1 bg-[#A4E5E0]" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Boarding</span>
-                  <span className="text-sm font-black text-white uppercase truncate max-w-[120px]">{from || "Start"}</span>
+                  <span className="text-sm font-black text-[#ffffff] uppercase truncate max-w-[120px]">{from || "Start"}</span>
                 </div>
                 <div className="flex-1 flex flex-col items-center px-4">
                   <div className="w-full h-[1px] bg-zinc-800 relative">
@@ -359,7 +359,7 @@ export default function TownBusSearchPage() {
                 </div>
                 <div className="flex flex-col gap-1 text-right">
                   <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Destination</span>
-                  <span className="text-sm font-black text-white uppercase truncate max-w-[120px]">{to || "End"}</span>
+                  <span className="text-sm font-black text-[#ffffff] uppercase truncate max-w-[120px]">{to || "End"}</span>
                 </div>
               </div>
 
@@ -368,7 +368,7 @@ export default function TownBusSearchPage() {
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                   <span className="text-xs font-bold text-zinc-600">{trip.availableSeats} Seats Left</span>
                 </div>
-                <button className="bg-[#A4E5E0] hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#A4E5E0]/20">
+                <button className="bg-[#A4E5E0] hover:bg-orange-600 text-[#ffffff] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#A4E5E0]/20">
                   Select Tickets <Navigation size={14} />
                 </button>
               </div>
@@ -379,7 +379,7 @@ export default function TownBusSearchPage() {
         {isSearching && (
           <div className="space-y-4">
             {[1, 2].map((i) => (
-              <div key={i} className="bg-white rounded-3xl p-5 border border-zinc-100 animate-pulse">
+              <div key={i} className="bg-[#ffffff] rounded-3xl p-5 border border-zinc-100 animate-pulse">
                 <div className="flex justify-between mb-4">
                   <div className="w-40 h-8 bg-zinc-100 rounded-lg"></div>
                   <div className="w-16 h-8 bg-zinc-100 rounded-lg"></div>

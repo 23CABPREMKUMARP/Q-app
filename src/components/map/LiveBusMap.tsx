@@ -33,12 +33,12 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
   const html = `
     <div class="relative flex flex-col items-center" style="transform: rotate(${heading}deg)">
       <div class="relative">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-white shadow-xl ring-2 ${ringClass} ring-offset-2 overflow-hidden" style="box-shadow: 0 4px 20px ${ringColor}40">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-[#ffffff] shadow-xl ring-2 ${ringClass} ring-offset-2 overflow-hidden" style="box-shadow: 0 4px 20px ${ringColor}40">
           <img src="/bus-marker-3d.png" alt="Bus" style="width:40px;height:40px;object-fit:contain;" />
         </div>
-        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-400 ring-2 ring-white ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-white z-10"></span>`}
+        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-400 ring-2 ring-[#ffffff] ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-[#ffffff] z-10"></span>`}
       </div>
-      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-zinc-900 text-white text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-white/10">
+      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-zinc-900 text-[#ffffff] text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-[#ffffff]/10">
         ${bus.busCode || bus.busNumber}${speed > 0 ? ` · ${speed}km/h` : ""}
       </div>
     </div>`;

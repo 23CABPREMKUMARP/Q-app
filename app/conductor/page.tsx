@@ -560,9 +560,9 @@ export default function EnterpriseConductorPortal() {
             <div className="text-center space-y-4 max-w-md w-full p-8 border border-zinc-800 rounded-3xl bg-zinc-900 shadow-2xl relative">
               <div className="absolute top-0 left-0 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none" />
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg shadow-orange-600/30">
-                <ShieldCheck className="text-white" size={32} />
+                <ShieldCheck className="text-[#ffffff]" size={32} />
               </div>
-              <h1 className="text-2xl font-black uppercase tracking-tight text-white">Transit Console</h1>
+              <h1 className="text-2xl font-black uppercase tracking-tight text-[#ffffff]">Transit Console</h1>
               
               {!isLoaded || isCheckingAssignment ? (
                 <div className="space-y-2 pt-4">
@@ -572,7 +572,7 @@ export default function EnterpriseConductorPortal() {
               ) : !isSignedIn ? (
                 <div className="space-y-4 pt-4">
                   <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Authentication Required</p>
-                  <button onClick={() => router.push("/sign-in?redirect_url=/conductor")} className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-black rounded-xl uppercase tracking-widest text-[10px]">
+                  <button onClick={() => router.push("/sign-in?redirect_url=/conductor")} className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-[#ffffff] font-black rounded-xl uppercase tracking-widest text-[10px]">
                     Sign In to Continue
                   </button>
                 </div>
@@ -584,7 +584,7 @@ export default function EnterpriseConductorPortal() {
                     Please contact the Operations Admin for clearance.
                   </p>
                   <div className="pt-4 space-y-3">
-                    <button onClick={() => router.push("/")} className="w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
+                    <button onClick={() => router.push("/")} className="w-full py-3 bg-zinc-800 hover:bg-zinc-700 text-[#ffffff] font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
                       Return to Passenger Dashboard
                     </button>
                     <button onClick={() => signOut()} className="w-full py-3 bg-red-600/10 text-red-500 hover:bg-red-600/20 font-bold rounded-xl text-xs uppercase tracking-wider transition-all border border-red-500/20">
@@ -635,7 +635,7 @@ export default function EnterpriseConductorPortal() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${isActive ? "bg-orange-600 text-white shadow-md shadow-orange-600/10" : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40"}`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${isActive ? "bg-orange-600 text-[#ffffff] shadow-md shadow-orange-600/10" : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40"}`}
                   >
                     <Icon size={16} />
                     <span>{tab.label}</span>
@@ -673,7 +673,7 @@ export default function EnterpriseConductorPortal() {
                   <Image src="/hero-logo.png" alt="JB" width={18} height={18} className="invert brightness-0" />
                 </div>
                 <div>
-                  <h2 className="text-[10px] font-black uppercase tracking-tight text-white leading-tight">Console</h2>
+                  <h2 className="text-[10px] font-black uppercase tracking-tight text-[#ffffff] leading-tight">Console</h2>
                   <div className="flex items-center gap-1">
                     <div className={`w-1 h-1 rounded-full ${isOffline ? "bg-red-500 animate-pulse" : "bg-green-500 animate-pulse"}`} />
                     <span className="text-[7.5px] font-bold text-zinc-400 uppercase tracking-widest leading-none">
@@ -729,9 +729,9 @@ export default function EnterpriseConductorPortal() {
                         <div className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center">
                           <Image src="/hero-logo.png" alt="JB" width={18} height={18} className="invert brightness-0" />
                         </div>
-                        <span className="font-black text-xs tracking-tight text-white uppercase">Transit Menu</span>
+                        <span className="font-black text-xs tracking-tight text-[#ffffff] uppercase">Transit Menu</span>
                       </div>
-                      <button onClick={() => setMobileMenuOpen(false)} className="text-zinc-500 hover:text-white p-1">
+                      <button onClick={() => setMobileMenuOpen(false)} className="text-zinc-500 hover:text-[#ffffff] p-1">
                         <X size={16} />
                       </button>
                     </div>
@@ -762,7 +762,7 @@ export default function EnterpriseConductorPortal() {
                             }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                               isActive 
-                                ? "bg-orange-600 text-white shadow-md" 
+                                ? "bg-orange-600 text-[#ffffff] shadow-md" 
                                 : "text-zinc-400 hover:text-zinc-200"
                             }`}
                           >
@@ -824,7 +824,7 @@ export default function EnterpriseConductorPortal() {
                         <span className="text-xs font-black uppercase text-orange-500 tracking-widest">Conductor</span>
                         <span className="text-[9px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">Shift Active</span>
                       </div>
-                      <h2 className="text-2xl font-black uppercase tracking-tight text-white">Rajesh Kumar</h2>
+                      <h2 className="text-2xl font-black uppercase tracking-tight text-[#ffffff]">Rajesh Kumar</h2>
                       <p className="text-xs text-zinc-500">Employee ID: <strong className="text-zinc-300">EMP-9824</strong> • Mobile: <strong className="text-zinc-300">9876543210</strong></p>
                     </div>
 
@@ -846,7 +846,7 @@ export default function EnterpriseConductorPortal() {
                           triggerTripBroadcast(nextStatus);
                           playBeep(true);
                         }}
-                        className="px-4 py-3 bg-orange-600 hover:bg-orange-700 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95 shadow-md shadow-orange-600/10 text-white"
+                        className="px-4 py-3 bg-orange-600 hover:bg-orange-700 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95 shadow-md shadow-orange-600/10 text-[#ffffff]"
                       >
                         <Bus size={12} />
                         Cycle Status
@@ -869,7 +869,7 @@ export default function EnterpriseConductorPortal() {
                             <span className="text-[9px] font-bold uppercase tracking-widest">{stat.title}</span>
                             <Icon size={14} className={stat.color} />
                           </div>
-                          <h3 className="text-2xl font-black tracking-tight text-white">{stat.val}</h3>
+                          <h3 className="text-2xl font-black tracking-tight text-[#ffffff]">{stat.val}</h3>
                           <p className="text-[10px] text-zinc-500 font-semibold">{stat.desc}</p>
                         </div>
                       );
@@ -934,12 +934,12 @@ export default function EnterpriseConductorPortal() {
                           </div>
                         </div>
                         <div className="space-y-1">
-                          <h2 className="text-xl font-black uppercase text-white tracking-tight">QR Scanner Engaged</h2>
+                          <h2 className="text-xl font-black uppercase text-[#ffffff] tracking-tight">QR Scanner Engaged</h2>
                           <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Supports native transit tickets and online digital passes</p>
                         </div>
                         <button 
                           onClick={() => setIsScanning(true)}
-                          className="w-full max-w-xs bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg shadow-orange-600/10 cursor-pointer"
+                          className="w-full max-w-xs bg-orange-600 hover:bg-orange-700 text-[#ffffff] py-4 rounded-xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg shadow-orange-600/10 cursor-pointer"
                         >
                           <Camera size={18} />
                           Launch Scanner Camera
@@ -1095,7 +1095,7 @@ export default function EnterpriseConductorPortal() {
                             input.value = "";
                           }
                         }}
-                        className="px-5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-[10px] font-black uppercase tracking-wider shadow-md shadow-orange-600/10"
+                        className="px-5 bg-orange-600 hover:bg-orange-700 text-[#ffffff] rounded-xl text-[10px] font-black uppercase tracking-wider shadow-md shadow-orange-600/10"
                       >
                         Verify
                       </button>
@@ -1162,7 +1162,7 @@ export default function EnterpriseConductorPortal() {
                             >
                               <Minus size={14} />
                             </button>
-                            <span className="text-sm font-black text-white">{obQuantity}</span>
+                            <span className="text-sm font-black text-[#ffffff]">{obQuantity}</span>
                             <button
                               type="button"
                               onClick={() => {
@@ -1196,13 +1196,13 @@ export default function EnterpriseConductorPortal() {
                         <div className="pt-2">
                           <div className="flex justify-between items-center bg-zinc-955 p-4 rounded-xl border border-zinc-800 mb-4">
                             <span className="text-[10px] font-black text-zinc-500 uppercase tracking-wider">Calculated Fare</span>
-                            <span className="text-xl font-black text-white">₹{ticketFare}</span>
+                            <span className="text-xl font-black text-[#ffffff]">₹{ticketFare}</span>
                           </div>
 
                           <button
                             type="submit"
                             disabled={obBoarding === obDestination}
-                            className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-orange-600/15 disabled:opacity-40 cursor-pointer"
+                            className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-[#ffffff] rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-orange-600/15 disabled:opacity-40 cursor-pointer"
                           >
                             Print & Issue Ticket
                           </button>
@@ -1252,7 +1252,7 @@ export default function EnterpriseConductorPortal() {
                             </div>
 
                             <div className="border-t-2 border-dashed border-zinc-800/20 pt-4 flex flex-col items-center gap-3">
-                              <div className="p-2 bg-white rounded-xl shadow-inner border border-yellow-300/40">
+                              <div className="p-2 bg-[#ffffff] rounded-xl shadow-inner border border-yellow-300/40">
                                 <QRCodeSVG 
                                   value={btoa(JSON.stringify({ t: obSuccessTicket.ticketId, b: "1024", q: obSuccessTicket.quantity, m: "JB-ONBOARD-TKT" }))}
                                   size={100}
@@ -1384,7 +1384,7 @@ export default function EnterpriseConductorPortal() {
                       </div>
                       
                       <div className="text-right">
-                        <span className="text-2xl font-black text-white">{occupancy}/50</span>
+                        <span className="text-2xl font-black text-[#ffffff]">{occupancy}/50</span>
                         <span className="text-[9px] text-zinc-500 uppercase font-bold block">Capacity</span>
                       </div>
                     </div>
@@ -1424,7 +1424,7 @@ export default function EnterpriseConductorPortal() {
                                 <button
                                   type="button"
                                   onClick={() => toggleSeat(idx)}
-                                  className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-white shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-800 text-zinc-700 hover:border-zinc-700"}`}
+                                  className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-[#ffffff] shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-800 text-zinc-700 hover:border-zinc-700"}`}
                                 >
                                   S{seatNum}
                                 </button>
@@ -1437,7 +1437,7 @@ export default function EnterpriseConductorPortal() {
                               key={idx}
                               type="button"
                               onClick={() => toggleSeat(idx)}
-                              className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-white shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-800 text-zinc-700 hover:border-zinc-700"}`}
+                              className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-[#ffffff] shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-800 text-zinc-700 hover:border-zinc-700"}`}
                             >
                               S{seatNum}
                             </button>
@@ -1459,7 +1459,7 @@ export default function EnterpriseConductorPortal() {
                       <div className="flex items-center gap-3">
                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
                           gpsState.status === 'broadcasting'
-                            ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                            ? 'bg-emerald-500 text-[#ffffff] shadow-lg shadow-emerald-500/30'
                             : gpsState.status === 'no_permission'
                             ? 'bg-red-500/10 border border-red-500/20 text-red-400'
                             : 'bg-zinc-800 text-zinc-500 border border-zinc-700'
@@ -1496,8 +1496,8 @@ export default function EnterpriseConductorPortal() {
                         disabled={!busDbId}
                         className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-40 ${
                           gpsEnabled
-                            ? 'bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/30'
-                            : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/30'
+                            ? 'bg-red-500 hover:bg-red-600 text-[#ffffff] shadow-lg shadow-red-500/30'
+                            : 'bg-emerald-500 hover:bg-emerald-600 text-[#ffffff] shadow-lg shadow-emerald-500/30'
                         }`}
                       >
                         {gpsEnabled ? 'End Trip' : 'Start Trip'}
@@ -1533,17 +1533,17 @@ export default function EnterpriseConductorPortal() {
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
                       <Gauge size={18} className="text-[#A4E5E0] mx-auto mb-2" />
-                      <p className="text-2xl font-black text-white">{gpsState.speed || speed}</p>
+                      <p className="text-2xl font-black text-[#ffffff]">{gpsState.speed || speed}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">km/h</p>
                     </div>
                     <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
                       <Radio size={18} className="text-emerald-400 mx-auto mb-2" />
-                      <p className="text-2xl font-black text-white">{gpsState.updateCount}</p>
+                      <p className="text-2xl font-black text-[#ffffff]">{gpsState.updateCount}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Updates</p>
                     </div>
                     <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-center">
                       <Signal size={18} className="text-blue-400 mx-auto mb-2" />
-                      <p className="text-[11px] font-black text-white">{gpsState.accuracy ? `${Math.round(gpsState.accuracy)}m` : '—'}</p>
+                      <p className="text-[11px] font-black text-[#ffffff]">{gpsState.accuracy ? `${Math.round(gpsState.accuracy)}m` : '—'}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Accuracy</p>
                     </div>
                   </div>
@@ -1581,7 +1581,7 @@ export default function EnterpriseConductorPortal() {
                             key={s.name}
                             onClick={() => { setTripStatus(s.name); triggerTripBroadcast(s.name); playBeep(true); }}
                             className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all text-center gap-1.5 cursor-pointer ${
-                              isActive ? 'bg-orange-600 border-orange-500 text-white shadow-md' : 'bg-zinc-950 border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                              isActive ? 'bg-orange-600 border-orange-500 text-[#ffffff] shadow-md' : 'bg-zinc-950 border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
                             }`}
                           >
                             <Icon size={16} />
@@ -1625,7 +1625,7 @@ export default function EnterpriseConductorPortal() {
                         alert("Shift details locked successfully. Receipts exported to terminal database.");
                         handleLogout();
                       }}
-                      className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 cursor-pointer"
+                      className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-[#ffffff] rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 cursor-pointer"
                     >
                       Lock Ledger & End Shift
                     </button>
@@ -1659,7 +1659,7 @@ export default function EnterpriseConductorPortal() {
                           setIsOffline(!isOffline);
                           playBeep(true);
                         }}
-                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${isOffline ? "bg-green-600 text-white" : "bg-red-500/10 border border-red-500/20 text-red-500"}`}
+                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${isOffline ? "bg-green-600 text-[#ffffff]" : "bg-red-500/10 border border-red-500/20 text-red-500"}`}
                       >
                         {isOffline ? "Go Online" : "Go Offline"}
                       </button>
@@ -1690,7 +1690,7 @@ export default function EnterpriseConductorPortal() {
                         <button
                           onClick={handleSyncData}
                           disabled={isOffline || validating}
-                          className="w-full py-4 mt-4 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 disabled:opacity-40 cursor-pointer"
+                          className="w-full py-4 mt-4 bg-orange-600 hover:bg-orange-700 text-[#ffffff] rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 disabled:opacity-40 cursor-pointer"
                         >
                           {validating ? "Syncing..." : "Sync Offline Queue Now"}
                         </button>
@@ -1756,7 +1756,7 @@ export default function EnterpriseConductorPortal() {
 
                       <button
                         type="submit"
-                        className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-black uppercase tracking-widest text-[9px] shadow-lg shadow-orange-600/15 cursor-pointer"
+                        className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-[#ffffff] rounded-xl font-black uppercase tracking-widest text-[9px] shadow-lg shadow-orange-600/15 cursor-pointer"
                       >
                         Dispatch Report to Control Room
                       </button>
@@ -1851,7 +1851,7 @@ export default function EnterpriseConductorPortal() {
               >
                  <button 
                    onClick={() => setShowQR(false)}
-                   className="absolute top-8 right-8 w-12 h-12 bg-zinc-800 hover:bg-zinc-700 rounded-full flex items-center justify-center text-white border border-zinc-750"
+                   className="absolute top-8 right-8 w-12 h-12 bg-zinc-800 hover:bg-zinc-700 rounded-full flex items-center justify-center text-[#ffffff] border border-zinc-750"
                  >
                    <X size={20} />
                  </button>

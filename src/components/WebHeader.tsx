@@ -57,7 +57,7 @@ export function WebHeader() {
   return (
     <header 
       className={`fixed top-0 z-[900] w-full transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
+        scrolled ? "bg-[#ffffff]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
@@ -115,7 +115,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-zinc-950 text-white hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-zinc-950 text-[#ffffff] hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -130,7 +130,7 @@ export function WebHeader() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
@@ -146,7 +146,7 @@ export function WebHeader() {
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-zinc-950 text-white hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-zinc-950 text-[#ffffff] hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

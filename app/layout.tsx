@@ -77,7 +77,7 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-white">
+      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-[#ffffff]">
         <head>
           <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
           <script

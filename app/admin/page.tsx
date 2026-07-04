@@ -543,13 +543,13 @@ function EnterpriseAdminDashboardContent() {
             <ShieldAlert className="text-orange-500" size={32} />
           </div>
           <div className="space-y-2">
-            <h1 className="text-2xl font-black text-white uppercase tracking-tight">Enterprise Console</h1>
+            <h1 className="text-2xl font-black text-[#ffffff] uppercase tracking-tight">Enterprise Console</h1>
             <p className="text-zinc-500 text-sm">Please sign in with your administrative credentials to access the telemetry matrix.</p>
           </div>
           <div className="pt-4">
             <button 
               onClick={() => router.push("/sign-in?redirect_url=/admin")}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black uppercase tracking-widest text-xs py-4 rounded-xl shadow-lg shadow-orange-500/20 transition-all active:scale-98"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-[#ffffff] font-black uppercase tracking-widest text-xs py-4 rounded-xl shadow-lg shadow-orange-500/20 transition-all active:scale-98"
             >
               Sign In to Console
             </button>
@@ -568,7 +568,7 @@ function EnterpriseAdminDashboardContent() {
           {/* Logo Brand */}
           <div className="h-14 flex items-center gap-3 px-4 border-b border-zinc-800/50">
             <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center shadow-lg shadow-orange-500/20">
-              <Sparkles size={12} className="text-white" />
+              <Sparkles size={12} className="text-[#ffffff]" />
             </div>
             <div className="font-semibold text-sm tracking-tight text-zinc-100">Smart Tamizha Admin</div>
           </div>
@@ -591,7 +591,7 @@ function EnterpriseAdminDashboardContent() {
                   onClick={() => changeTab(item.id)}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium transition-all ${
                     isActive 
-                      ? "bg-zinc-800/60 text-white" 
+                      ? "bg-zinc-800/60 text-[#ffffff]" 
                       : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
                   }`}
                 >
@@ -838,7 +838,7 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <button 
                   onClick={() => setIsBusModalOpen(true)}
-                  className="bg-white text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
+                  className="bg-[#ffffff] text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Add Bus
                 </button>
@@ -911,7 +911,7 @@ function EnterpriseAdminDashboardContent() {
                                 setBuses(prev => prev.map(b => b._id === bus._id ? { ...b, gps_enabled: !gpsOn } as any : b));
                               }}
                               className={`text-[10px] font-medium px-2 py-0.5 rounded transition-colors ${
-                                gpsOn ? 'bg-zinc-200 text-black hover:bg-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                                gpsOn ? 'bg-zinc-200 text-black hover:bg-[#ffffff]' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
                               }`}
                             >
                               {gpsOn ? 'GPS On' : 'GPS Off'}
@@ -961,7 +961,7 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <button 
                   onClick={() => setIsConductorModalOpen(true)}
-                  className="bg-white text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
+                  className="bg-[#ffffff] text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Assign Conductor
                 </button>
@@ -1034,7 +1034,7 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <button 
                   onClick={() => setIsRouteModalOpen(true)}
-                  className="bg-white text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
+                  className="bg-[#ffffff] text-black hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Create Route
                 </button>
@@ -1240,7 +1240,7 @@ function EnterpriseAdminDashboardContent() {
                   <input type="text" value={newConductor.assigned_route} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-              <button type="submit" className="w-full mt-2 bg-white hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
+              <button type="submit" className="w-full mt-2 bg-[#ffffff] hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
                 Authorize Conductor
               </button>
             </form>
@@ -1277,7 +1277,7 @@ function EnterpriseAdminDashboardContent() {
                   <input type="number" required value={newBus.available_seats} onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-              <button type="submit" className="w-full mt-2 bg-white hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
+              <button type="submit" className="w-full mt-2 bg-[#ffffff] hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
                 Register Vehicle
               </button>
             </form>
@@ -1316,7 +1316,7 @@ function EnterpriseAdminDashboardContent() {
                   <input type="number" required value={newRoute.total_seats} onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))} className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-              <button type="submit" className="w-full mt-2 bg-white hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
+              <button type="submit" className="w-full mt-2 bg-[#ffffff] hover:bg-zinc-200 text-black font-medium text-[13px] py-2.5 rounded-md transition-colors">
                 Create Route
               </button>
             </form>
@@ -1333,7 +1333,7 @@ export default function EnterpriseAdminDashboard() {
   return (
     <SecureView>
       <Suspense fallback={
-        <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white p-4">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-black text-[#ffffff] p-4">
           <div className="text-center space-y-4">
             <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
             <p className="text-xs uppercase tracking-widest font-black text-zinc-400">Loading Control Center...</p>

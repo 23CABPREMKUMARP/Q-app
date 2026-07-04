@@ -73,7 +73,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   transition={{ delay: 1.5, duration: 0.8 }}
                   className="text-5xl md:text-7xl font-black tracking-tighter uppercase font-heading"
                 >
-                  <span className="text-black">Digi Bus</span> <span className="text-white">Stand</span>
+                  <span className="text-black">Digi Bus</span> <span className="text-[#ffffff]">Stand</span>
                 </motion.h1>
                 <motion.div
                   initial={{ scaleX: 0 }}

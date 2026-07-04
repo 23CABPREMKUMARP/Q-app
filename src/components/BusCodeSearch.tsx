@@ -83,7 +83,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-white shadow-2xl border border-zinc-100/50"
+        className="relative overflow-hidden rounded-[32px] bg-[#ffffff] shadow-2xl border border-zinc-100/50"
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">
@@ -92,7 +92,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Instant Fleet Access</p>
             </div>
             <div className="w-12 h-12 bg-zinc-950 rounded-2xl flex items-center justify-center shadow-lg">
-              <Zap size={24} className="text-white fill-current" />
+              <Zap size={24} className="text-[#ffffff] fill-current" />
             </div>
           </div>
 
@@ -111,7 +111,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               <button
                 type="submit"
                 disabled={isLoading || !busCode}
-                className="h-full px-4 w-14 justify-center bg-zinc-950 text-white rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
+                className="h-full px-4 w-14 justify-center bg-zinc-950 text-[#ffffff] rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={18} />}
               </button>

@@ -24,7 +24,7 @@ export default function AboutPage() {
       className="min-h-screen bg-slate-50 text-slate-900 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom"
     >
       {/* Premium Header */}
-      <div className="bg-white border-b border-slate-100 py-6 px-6 sticky top-0 z-40 shadow-sm flex items-center gap-3">
+      <div className="bg-[#ffffff] border-b border-slate-100 py-6 px-6 sticky top-0 z-40 shadow-sm flex items-center gap-3">
         <Link href="/" className="p-2 hover:bg-slate-100 rounded-xl transition-all">
           <ChevronRight className="rotate-180 text-slate-600" size={20} />
         </Link>
@@ -36,15 +36,15 @@ export default function AboutPage() {
 
       <div className="px-5 space-y-6 mt-6 max-w-md mx-auto">
         {/* Core Profile Card */}
-        <div className="bg-gradient-to-br from-zinc-950 to-zinc-900 rounded-[32px] p-6 text-white shadow-xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-zinc-950 to-zinc-900 rounded-[32px] p-6 text-[#ffffff] shadow-xl relative overflow-hidden">
           <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#A4E5E0]/15 rounded-full blur-3xl" />
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10">
+              <div className="w-14 h-14 bg-[#ffffff]/10 rounded-2xl flex items-center justify-center border border-[#ffffff]/10">
                 <Image src="/hero-logo.png" alt="JeffBen" width={36} height={36} className="object-contain" />
               </div>
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-white">JeffBen Systems</h2>
+                <h2 className="text-xl font-bold tracking-tight text-[#ffffff]">JeffBen Systems</h2>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-ping" />
                   <span className="text-[10px] font-bold text-orange-400 uppercase tracking-widest">Active Infrastructure</span>
@@ -56,12 +56,12 @@ export default function AboutPage() {
               Pioneering industrial-grade automation, real-time fleet telemetry, and automated fare collection systems for public transit ecosystems across Tamil Nadu.
             </p>
 
-            <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/5 text-center">
-              <div className="bg-white/5 rounded-2xl p-3">
+            <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#ffffff]/5 text-center">
+              <div className="bg-[#ffffff]/5 rounded-2xl p-3">
                 <p className="text-2xl font-bold text-orange-500">100%</p>
                 <p className="text-[8px] font-bold text-zinc-400 uppercase tracking-wider mt-0.5">Telemetry Uptime</p>
               </div>
-              <div className="bg-white/5 rounded-2xl p-3">
+              <div className="bg-[#ffffff]/5 rounded-2xl p-3">
                 <p className="text-2xl font-bold text-orange-500">TN-Wide</p>
                 <p className="text-[8px] font-bold text-zinc-400 uppercase tracking-wider mt-0.5">Fleet Dispatch</p>
               </div>
@@ -70,7 +70,7 @@ export default function AboutPage() {
         </div>
 
         {/* Corporate Overview Paragraphs */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
+        <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Corporate Overview</h3>
           <p className="text-xs text-slate-600 leading-relaxed font-medium">
             JEFFBEN Systems is a premier technology enterprise dedicated to the modernization of public infrastructure through industrial-grade automation. We specialize in the development of sophisticated telemetry and the <strong>Unique Bus Code System</strong> for instant metropolitan transit access.
@@ -81,7 +81,7 @@ export default function AboutPage() {
         </div>
 
         {/* Dynamic Globe Section */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm overflow-hidden flex flex-col items-center">
+        <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm overflow-hidden flex flex-col items-center">
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 w-full text-left">Global Transit Footprint</h3>
           <div className="relative w-full h-[220px] bg-slate-50 rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100">
             <div className="absolute inset-0 bg-orange-500/5 rounded-full blur-[40px] scale-75" />
@@ -102,7 +102,7 @@ export default function AboutPage() {
         </div>
 
         {/* Founder Spotlights */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-5">
+        <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm space-y-5">
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Executive Leadership</h3>
           <div className="flex items-center gap-4">
             <div className="relative w-16 h-20 rounded-2xl overflow-hidden border-2 border-slate-100 shadow-sm shrink-0">
@@ -142,7 +142,7 @@ export default function AboutPage() {
               { title: "Fleet Telematics & Tracking", desc: "Advanced GPS telemetry for real-time asset monitoring, enabling passengers to track journeys seamlessly." },
               { title: "QR Smart-Boarding", desc: "Vehicle-specific QR integration allowing passengers to instantly scan and view schedules and validation." }
             ].map((sol, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex items-start gap-4">
+              <div key={idx} className="bg-[#ffffff] rounded-2xl p-5 border border-slate-100 shadow-sm flex items-start gap-4">
                 <div className="w-8 h-8 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                   {idx + 1}
                 </div>
@@ -156,7 +156,7 @@ export default function AboutPage() {
         </div>
 
         {/* Advantages & Capabilities */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
+        <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">The JeffBen Advantage</h3>
           <div className="grid grid-cols-1 gap-3">
             {[
@@ -175,7 +175,7 @@ export default function AboutPage() {
         </div>
 
         {/* Technology Overview */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
+        <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Technology Stack Matrix</h3>
           <div className="flex flex-wrap gap-2">
             {[
@@ -190,16 +190,16 @@ export default function AboutPage() {
         </div>
 
         {/* Institutional Contact Card */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm text-center space-y-4">
+        <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm text-center space-y-4">
           <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Strategic Partnerships</h3>
           <p className="text-xs text-slate-600 leading-relaxed font-semibold">
             We invite transit authorities, municipal government bodies, and state-level fleet operators to initiate high-level collaboration on regional infrastructure.
           </p>
           <div className="flex items-center justify-center gap-3">
-            <Link href="mailto:jeffbenofficial1@gmail.com" className="px-6 py-3 bg-zinc-950 text-white rounded-xl text-[10px] font-bold uppercase tracking-wider shadow-md hover:bg-orange-500 transition-all flex items-center gap-2">
+            <Link href="mailto:jeffbenofficial1@gmail.com" className="px-6 py-3 bg-zinc-950 text-[#ffffff] rounded-xl text-[10px] font-bold uppercase tracking-wider shadow-md hover:bg-orange-500 transition-all flex items-center gap-2">
               <Mail size={12} /> Contact Us
             </Link>
-            <Link href="/get-ticket" className="px-6 py-3 bg-orange-500 text-white rounded-xl text-[10px] font-bold uppercase tracking-wider shadow-md hover:bg-zinc-950 transition-all flex items-center gap-2">
+            <Link href="/get-ticket" className="px-6 py-3 bg-orange-500 text-[#ffffff] rounded-xl text-[10px] font-bold uppercase tracking-wider shadow-md hover:bg-zinc-950 transition-all flex items-center gap-2">
               <Ticket size={12} /> Get a Pass
             </Link>
           </div>

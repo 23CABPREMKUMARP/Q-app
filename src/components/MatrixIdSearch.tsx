@@ -43,10 +43,10 @@ export const MatrixIdSearch = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-white shadow-2xl border border-zinc-100"
+        className="relative overflow-hidden rounded-[32px] bg-[#ffffff] shadow-2xl border border-zinc-100"
       >
         {/* Background Accents like the poster */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-cyan-400/5 to-white pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-cyan-400/5 to-[#ffffff] pointer-events-none" />
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600" />
         
         <div className="relative p-8 flex flex-col items-center">
@@ -96,10 +96,10 @@ export const MatrixIdSearch = () => {
             <button
               type="submit"
               disabled={isLoading || !matrixId}
-              className="w-full bg-dark-saffron hover:bg-primary text-white rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
+              className="w-full bg-dark-saffron hover:bg-primary text-[#ffffff] rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
             >
               {isLoading ? (
-                <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-6 h-6 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin" />
               ) : (
                 <>
                   <span className="uppercase tracking-widest text-sm">Quick Book Matrix</span>
@@ -114,7 +114,7 @@ export const MatrixIdSearch = () => {
              <div className="flex items-center gap-4">
                 <button 
                   onClick={() => router.push('/live-map?action=scan')}
-                  className="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100 hover:bg-white hover:shadow-md transition-all group"
+                  className="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100 hover:bg-[#ffffff] hover:shadow-md transition-all group"
                 >
                   <QrCode size={14} className="text-zinc-400 group-hover:text-primary" />
                   <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Scan QR instead</span>

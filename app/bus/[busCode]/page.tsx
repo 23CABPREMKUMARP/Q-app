@@ -18,14 +18,14 @@ export default function BusQRRedirectPage() {
           
           {/* Top Floating Badge */}
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <div className="bg-[#FF8A00] text-white px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
+            <div className="bg-[#FF8A00] text-[#ffffff] px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
               <ShieldCheck size={14} />
               Verified Matrix Node
             </div>
           </div>
 
           {/* Main Card */}
-          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-12 pb-8 px-8 border border-zinc-100 flex flex-col items-center text-center">
+          <div className="bg-[#ffffff] rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-12 pb-8 px-8 border border-zinc-100 flex flex-col items-center text-center">
             
             {/* Bus Icon */}
             <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-6">
@@ -85,7 +85,7 @@ export default function BusQRRedirectPage() {
             <a 
               href="/api/download-app" 
               download="Smart-Tamizha-App.apk"
-              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-white font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
+              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-[#ffffff] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
               DOWNLOAD APP TO BOARD
             </a>

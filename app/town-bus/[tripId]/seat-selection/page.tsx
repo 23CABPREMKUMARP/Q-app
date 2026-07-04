@@ -342,7 +342,7 @@ export default function TicketCountSelectionPage() {
             <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
               <button 
                 onClick={() => setSelectedTicket(null)}
-                className="bg-white/20 hover:bg-white/40 text-white rounded-full p-2 backdrop-blur-md transition-colors"
+                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#ffffff] rounded-full p-2 backdrop-blur-md transition-colors"
               >
                 <X size={24} />
               </button>
@@ -362,7 +362,7 @@ export default function TicketCountSelectionPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 relative z-10 text-white text-xs font-bold uppercase tracking-widest opacity-70"
+              className="mt-6 relative z-10 text-[#ffffff] text-xs font-bold uppercase tracking-widest opacity-70"
             >
               Tap outside to close
             </motion.div>
@@ -449,7 +449,7 @@ export default function TicketCountSelectionPage() {
     <SecureView>
       <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-[320px]">
         {/* Header */}
-      <div className="bg-white px-6 py-6 border-b border-zinc-200 sticky top-0 z-50 flex items-center justify-between shadow-sm">
+      <div className="bg-[#ffffff] px-6 py-6 border-b border-zinc-200 sticky top-0 z-50 flex items-center justify-between shadow-sm">
         <button onClick={() => {
           if (step === 5 || step === 4) {
              router.push('/get-ticket');
@@ -474,7 +474,7 @@ export default function TicketCountSelectionPage() {
           <div className="absolute inset-y-0 left-0 w-1 bg-[#A4E5E0]" />
           <div className="flex flex-col gap-1">
             <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Total Journeys</span>
-            <span className="text-sm font-black text-white uppercase truncate max-w-[120px]">{passengers.length}</span>
+            <span className="text-sm font-black text-[#ffffff] uppercase truncate max-w-[120px]">{passengers.length}</span>
           </div>
           <div className="flex-1 flex flex-col items-center px-4">
             <div className="w-full h-[1px] bg-zinc-800 relative">
@@ -484,7 +484,7 @@ export default function TicketCountSelectionPage() {
           </div>
           <div className="flex flex-col gap-1 text-right">
             <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Combined Fare</span>
-            <span className="text-sm font-black text-white uppercase truncate max-w-[120px]">₹{totalAmount}</span>
+            <span className="text-sm font-black text-[#ffffff] uppercase truncate max-w-[120px]">₹{totalAmount}</span>
           </div>
         </div>
 
@@ -497,14 +497,14 @@ export default function TicketCountSelectionPage() {
               exit={{ opacity: 0, x: 20 }}
               className="space-y-8"
             >
-              <div className="bg-white border border-zinc-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
+              <div className="bg-[#ffffff] border border-zinc-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
                 <div className="flex justify-between items-start mb-8">
                   <div className="pr-4">
                     <h2 className="text-xl font-black uppercase tracking-widest text-zinc-900 mb-2">Build Your Journeys</h2>
                     <p className="text-slate-500 text-sm">Add multiple segments to book a combined ticket.</p>
                   </div>
                   <div className="flex flex-col items-center flex-shrink-0">
-                    <button onClick={() => setExpandedQR(true)} className="p-2 bg-white rounded-xl shadow-sm border border-zinc-200 hover:scale-105 transition-transform">
+                    <button onClick={() => setExpandedQR(true)} className="p-2 bg-[#ffffff] rounded-xl shadow-sm border border-zinc-200 hover:scale-105 transition-transform">
                       <QRCodeSVG value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`} size={64} level="H" />
                     </button>
                     <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-1 text-center">Boarding<br/>QR</p>
@@ -514,7 +514,7 @@ export default function TicketCountSelectionPage() {
                 <div className="mt-8 pt-4">
                   {passengers.map((passenger, index) => (
                     <div key={index} className="mb-6 bg-zinc-50 border border-zinc-200 rounded-2xl p-5 relative">
-                      <div className="absolute -top-3 left-4 bg-white px-2 py-0.5 text-[10px] font-black text-[#A4E5E0] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm flex items-center gap-2">
+                      <div className="absolute -top-3 left-4 bg-[#ffffff] px-2 py-0.5 text-[10px] font-black text-[#A4E5E0] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm flex items-center gap-2">
                         Journey {index + 1}
                         {passengers.length > 1 && (
                           <button onClick={() => {
@@ -540,7 +540,7 @@ export default function TicketCountSelectionPage() {
                               newP[index].fare = calculateFare(newP[index].boarding, newP[index].destination);
                               setPassengers(newP);
                             }} 
-                            className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#A4E5E0] transition-all cursor-pointer"
+                            className="w-full h-12 bg-[#ffffff] border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#A4E5E0] transition-all cursor-pointer"
                           >
                             <option value="">Choose Start</option>
                             {stops.map((s: any) => <option key={s._id} value={s.stopName}>{s.stopName}</option>)}
@@ -558,7 +558,7 @@ export default function TicketCountSelectionPage() {
                               newP[index].fare = calculateFare(newP[index].boarding, newP[index].destination);
                               setPassengers(newP);
                             }} 
-                            className="w-full h-12 bg-white border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#A4E5E0] transition-all cursor-pointer"
+                            className="w-full h-12 bg-[#ffffff] border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#A4E5E0] transition-all cursor-pointer"
                           >
                             <option value="">Choose End</option>
                             {stops
@@ -618,8 +618,8 @@ export default function TicketCountSelectionPage() {
                                 }}
                                 className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
                                   passenger.luggage === type 
-                                    ? 'bg-[#A4E5E0] text-white border-[#A4E5E0] shadow-md shadow-[#A4E5E0]/20' 
-                                    : 'bg-white text-slate-500 border-zinc-200 hover:border-zinc-300'
+                                    ? 'bg-[#A4E5E0] text-[#ffffff] border-[#A4E5E0] shadow-md shadow-[#A4E5E0]/20' 
+                                    : 'bg-[#ffffff] text-slate-500 border-zinc-200 hover:border-zinc-300'
                                 }`}
                               >
                                 {type} {type !== 'None' && <span className="block mt-0.5 opacity-75">+₹{LUGGAGE_PRICES[type]}</span>}
@@ -647,7 +647,7 @@ export default function TicketCountSelectionPage() {
                 <button 
                   onClick={() => setStep(3)}
                   disabled={passengers.some(p => !p.boarding || !p.destination)}
-                  className="w-full h-20 bg-[#A4E5E0] text-white rounded-[32px] font-black text-xl tracking-tighter hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#A4E5E0]/20"
+                  className="w-full h-20 bg-[#A4E5E0] text-[#ffffff] rounded-[32px] font-black text-xl tracking-tighter hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#A4E5E0]/20"
                 >
                   Proceed to Payment <ChevronRight size={24} />
                 </button>
@@ -663,7 +663,7 @@ export default function TicketCountSelectionPage() {
               exit={{ opacity: 0, x: -20 }}
               className="space-y-8"
             >
-              <div className="bg-white rounded-[40px] p-8 text-zinc-900 space-y-6 relative overflow-hidden group border border-zinc-200 shadow-sm">
+              <div className="bg-[#ffffff] rounded-[40px] p-8 text-zinc-900 space-y-6 relative overflow-hidden group border border-zinc-200 shadow-sm">
                 <div className="absolute top-0 right-0 p-6 opacity-5 text-[#A4E5E0]">
                   <CreditCard size={120} />
                 </div>
@@ -699,10 +699,10 @@ export default function TicketCountSelectionPage() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-[32px] p-8 border border-zinc-200 shadow-sm mt-6">
+              <div className="bg-[#ffffff] rounded-[32px] p-8 border border-zinc-200 shadow-sm mt-6">
                 {paymentState === 'processing' ? (
                   <div className="w-full h-20 bg-[#A4E5E0] rounded-[32px] flex items-center justify-center">
-                    <motion.div className="flex items-center gap-3 text-white">
+                    <motion.div className="flex items-center gap-3 text-[#ffffff]">
                       <RefreshCw size={24} className="animate-spin" />
                       <span className="uppercase tracking-widest text-sm font-black">Processing via PhonePe...</span>
                     </motion.div>
@@ -717,7 +717,7 @@ export default function TicketCountSelectionPage() {
                     </button>
                     <button 
                       onClick={() => handlePayment()}
-                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#A4E5E0] text-white hover:bg-[#e07b1a] transition-colors shadow-lg shadow-[#A4E5E0]/20"
+                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#A4E5E0] text-[#ffffff] hover:bg-[#e07b1a] transition-colors shadow-lg shadow-[#A4E5E0]/20"
                     >
                       Pay ₹{totalAmount}
                     </button>
@@ -848,7 +848,7 @@ export default function TicketCountSelectionPage() {
               >
                  <button 
                    onClick={() => router.push(`/live-map?busId=${tripId}`)}
-                   className="col-span-2 md:col-span-1 h-16 bg-[#0F6B5C] text-white rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#059669] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#0F6B5C]/20 border border-[#0F6B5C]"
+                   className="col-span-2 md:col-span-1 h-16 bg-[#0F6B5C] text-[#ffffff] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#059669] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#0F6B5C]/20 border border-[#0F6B5C]"
                  >
                    <MapPin size={16} />
                    Track Bus
@@ -856,7 +856,7 @@ export default function TicketCountSelectionPage() {
 
                  <button 
                    onClick={() => router.push('/town-bus')}
-                   className="col-span-2 md:col-span-1 h-16 bg-[#A4E5E0] text-white rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#A4E5E0]/20 border border-[#A4E5E0]"
+                   className="col-span-2 md:col-span-1 h-16 bg-[#A4E5E0] text-[#ffffff] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#A4E5E0]/20 border border-[#A4E5E0]"
                  >
                    <Bus size={16} />
                    Return to Bus List
@@ -864,14 +864,14 @@ export default function TicketCountSelectionPage() {
                  
                  <button 
                    onClick={() => router.push('/history')}
-                   className="col-span-1 h-16 bg-white text-zinc-800 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-zinc-50 transition-all flex items-center justify-center gap-2 active:scale-95 border border-zinc-200"
+                   className="col-span-1 h-16 bg-[#ffffff] text-zinc-800 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-zinc-50 transition-all flex items-center justify-center gap-2 active:scale-95 border border-zinc-200"
                  >
                    My Bookings
                  </button>
 
                  <button 
                    onClick={() => router.push('/')}
-                   className="col-span-1 h-16 bg-slate-800 text-white rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 active:scale-95"
+                   className="col-span-1 h-16 bg-slate-800 text-[#ffffff] rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 active:scale-95"
                  >
                    Home
                  </button>
@@ -903,7 +903,7 @@ export default function TicketCountSelectionPage() {
               <div className="w-full max-w-sm space-y-4">
                 <button 
                   onClick={() => handlePayment()}
-                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-white bg-[#A4E5E0] hover:bg-[#e07b1a] transition-all active:scale-[0.98] shadow-xl shadow-[#A4E5E0]/20"
+                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[#ffffff] bg-[#A4E5E0] hover:bg-[#e07b1a] transition-all active:scale-[0.98] shadow-xl shadow-[#A4E5E0]/20"
                 >
                   Retry Payment
                 </button>
@@ -957,10 +957,10 @@ export default function TicketCountSelectionPage() {
           >
             <button 
               onClick={handleProceed}
-              className="w-full bg-zinc-950 text-white h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
+              className="w-full bg-zinc-950 text-[#ffffff] h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
             >
               <div className="flex flex-col items-start">
-                <span className="text-white">Proceed to Pay</span>
+                <span className="text-[#ffffff]">Proceed to Pay</span>
                 <span className="text-[10px] text-zinc-400 mt-0.5">
                   {ticketCount} {ticketCount === 1 ? 'Seat' : 'Seats'} {passengers.some(p => p.luggage !== 'None') && `(+ Luggage)`}
                 </span>
@@ -990,7 +990,7 @@ export default function TicketCountSelectionPage() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-3xl p-8 max-w-sm w-full flex flex-col items-center shadow-2xl relative"
+              className="bg-[#ffffff] rounded-3xl p-8 max-w-sm w-full flex flex-col items-center shadow-2xl relative"
             >
               <button 
                 onClick={() => setExpandedQR(false)}

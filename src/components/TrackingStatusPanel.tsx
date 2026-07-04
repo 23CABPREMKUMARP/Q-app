@@ -83,7 +83,7 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
       dragConstraints={{ top: 0 }}
       dragElastic={0.2}
       onDragEnd={(_, info) => { if (info.offset.y > 150) onMinimize(); }}
-      className="fixed inset-x-0 bottom-0 z-[1000] bg-white rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
+      className="fixed inset-x-0 bottom-0 z-[1000] bg-[#ffffff] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
     >
       {/* Drag handle */}
       <div className="w-full flex justify-center py-3 cursor-grab active:cursor-grabbing flex-shrink-0">
@@ -125,12 +125,12 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
           <div className="flex items-center gap-4 pl-3">
             <div className="flex-1 min-w-0">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">From</p>
-              <p className="text-sm font-black text-white uppercase truncate">{from}</p>
+              <p className="text-sm font-black text-[#ffffff] uppercase truncate">{from}</p>
             </div>
             <ArrowRight size={16} className="text-[#A4E5E0] flex-shrink-0" />
             <div className="flex-1 min-w-0 text-right">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">To</p>
-              <p className="text-sm font-black text-white uppercase truncate">{to}</p>
+              <p className="text-sm font-black text-[#ffffff] uppercase truncate">{to}</p>
             </div>
           </div>
         </div>

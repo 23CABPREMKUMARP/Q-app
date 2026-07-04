@@ -35,22 +35,22 @@ export default function LuggageTrackingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-white pb-24">
+    <div className="min-h-screen bg-slate-950 font-sans text-[#ffffff] pb-24">
       <div className="bg-[#A4E5E0] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-black uppercase tracking-tighter">Track</h1>
-            <p className="text-white/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
+            <p className="text-[#ffffff]/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
           </div>
-          <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md">
-            <Search size={32} className="text-white" />
+          <div className="bg-[#ffffff]/20 p-3 rounded-2xl backdrop-blur-md">
+            <Search size={32} className="text-[#ffffff]" />
           </div>
         </div>
       </div>
 
       <div className="px-6 -mt-8 relative z-20">
-        <form onSubmit={handleSearch} className="bg-white rounded-3xl p-4 shadow-xl shadow-black/20 flex gap-3">
+        <form onSubmit={handleSearch} className="bg-[#ffffff] rounded-3xl p-4 shadow-xl shadow-black/20 flex gap-3">
           <input 
             type="text" 
             placeholder="Enter Tracking ID (e.g. TRK-...)" 
@@ -61,9 +61,9 @@ export default function LuggageTrackingPage() {
           <button 
             type="submit"
             disabled={isSearching || !trackingId}
-            className="bg-[#A4E5E0] text-white p-3 rounded-2xl shadow-lg shadow-[#A4E5E0]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
+            className="bg-[#A4E5E0] text-[#ffffff] p-3 rounded-2xl shadow-lg shadow-[#A4E5E0]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
           >
-            {isSearching ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : <Search size={20} />}
+            {isSearching ? <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div> : <Search size={20} />}
           </button>
         </form>
 
@@ -88,12 +88,12 @@ export default function LuggageTrackingPage() {
                 <div className="flex items-center justify-between border-t border-slate-800 pt-4">
                   <div>
                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">From</div>
-                    <div className="text-sm font-black text-white">{trackingData.origin}</div>
+                    <div className="text-sm font-black text-[#ffffff]">{trackingData.origin}</div>
                   </div>
                   <div className="px-4 text-slate-700"><ArrowRight size={16} /></div>
                   <div className="text-right">
                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">To</div>
-                    <div className="text-sm font-black text-white">{trackingData.destination}</div>
+                    <div className="text-sm font-black text-[#ffffff]">{trackingData.destination}</div>
                   </div>
                 </div>
               </div>
@@ -111,13 +111,13 @@ export default function LuggageTrackingPage() {
                         step.active ? 'bg-[#A4E5E0] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
                         step.completed ? 'bg-emerald-500' : 'bg-slate-800'
                       }`}>
-                        {step.completed && !step.active ? <CheckCircle size={14} className="text-white" /> : 
-                         step.active ? <Truck size={14} className="text-white" /> : 
+                        {step.completed && !step.active ? <CheckCircle size={14} className="text-[#ffffff]" /> : 
+                         step.active ? <Truck size={14} className="text-[#ffffff]" /> : 
                          <div className="w-2 h-2 rounded-full bg-slate-600"></div>}
                       </div>
                       
                       <div className="pt-1.5 flex-1 pb-4 border-b border-slate-800/50">
-                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#A4E5E0]' : step.completed ? 'text-white' : 'text-slate-500'}`}>
+                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#A4E5E0]' : step.completed ? 'text-[#ffffff]' : 'text-slate-500'}`}>
                           {step.status}
                         </div>
                         <div className="text-[10px] font-bold text-slate-500 mt-1 flex items-center gap-1">

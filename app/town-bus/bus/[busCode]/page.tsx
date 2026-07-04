@@ -47,25 +47,25 @@ export default function BusCodeDetailsPage() {
       <div className="bg-[#A4E5E0] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
-          <button onClick={() => router.back()} className="bg-white/20 p-2 rounded-xl backdrop-blur-md">
-            <ArrowRight size={24} className="text-white rotate-180" />
+          <button onClick={() => router.back()} className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
+            <ArrowRight size={24} className="text-[#ffffff] rotate-180" />
           </button>
-          <div className="bg-white/20 p-2 rounded-xl backdrop-blur-md px-4 flex items-center gap-2">
-            <Bus size={18} className="text-white" />
-            <span className="text-white font-black tracking-widest">{busCode}</span>
+          <div className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md px-4 flex items-center gap-2">
+            <Bus size={18} className="text-[#ffffff]" />
+            <span className="text-[#ffffff] font-black tracking-widest">{busCode}</span>
           </div>
         </div>
       </div>
 
       <div className="px-6 -mt-16 relative z-20 max-w-md mx-auto">
         {error ? (
-          <div className="bg-white p-8 rounded-3xl shadow-xl text-center space-y-4">
+          <div className="bg-[#ffffff] p-8 rounded-3xl shadow-xl text-center space-y-4">
             <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto">
               <Info size={32} />
             </div>
             <h2 className="text-xl font-black text-slate-800 uppercase">Bus Not Active</h2>
             <p className="text-sm font-bold text-slate-400">{error}</p>
-            <button onClick={() => router.push('/')} className="mt-4 px-6 py-3 bg-slate-900 text-white rounded-xl font-black uppercase text-xs tracking-widest w-full">Back to Home</button>
+            <button onClick={() => router.push('/')} className="mt-4 px-6 py-3 bg-slate-900 text-[#ffffff] rounded-xl font-black uppercase text-xs tracking-widest w-full">Back to Home</button>
           </div>
         ) : (
           <motion.div 
@@ -74,7 +74,7 @@ export default function BusCodeDetailsPage() {
             className="space-y-4"
           >
             {/* Bus Info Card */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-slate-100 relative overflow-hidden">
+            <div className="bg-[#ffffff] rounded-3xl p-6 shadow-xl border border-slate-100 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                 <Bus size={120} />
               </div>
@@ -109,9 +109,9 @@ export default function BusCodeDetailsPage() {
             <div className="grid grid-cols-2 gap-4">
               <Link 
                 href={`/town-bus/${trip._id}/seat-selection`}
-                className="bg-slate-900 text-white p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
+                className="bg-slate-900 text-[#ffffff] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-[#ffffff]/10 flex items-center justify-center">
                   <Bus size={20} className="text-[#A4E5E0]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>
@@ -119,7 +119,7 @@ export default function BusCodeDetailsPage() {
               
               <Link 
                 href={`/live-map?busId=${trip.busId}`}
-                className="bg-white border border-slate-200 text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-50 active:scale-95 transition-all shadow-sm"
+                className="bg-[#ffffff] border border-slate-200 text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-50 active:scale-95 transition-all shadow-sm"
               >
                 <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
                   <MapPin size={20} className="text-emerald-500" />
