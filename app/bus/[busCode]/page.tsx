@@ -83,9 +83,8 @@ export default function BusQRRedirectPage() {
 
             {/* Buttons */}
             <a 
-              href="https://play.google.com/store/apps/details?id=com.jeffben.app" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              href="/DigiBus-App.apk" 
+              download="DigiBus-App.apk"
               className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-white font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
               DOWNLOAD APP TO BOARD
