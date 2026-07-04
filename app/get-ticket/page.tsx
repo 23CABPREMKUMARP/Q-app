@@ -134,7 +134,7 @@ export default function GetTicketPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#A4E5E0]/10 border border-[#A4E5E0]/20 text-[#A4E5E0] text-[9px] font-black uppercase tracking-wider"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#18D2C7]/10 border border-[#18D2C7]/20 text-[#18D2C7] text-[9px] font-black uppercase tracking-wider"
           >
             <ShieldCheck size={12} /> Secure Encryption Node
           </motion.div>
@@ -173,13 +173,13 @@ export default function GetTicketPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-Digit Mobile Number"
-              className="w-full bg-[#ffffff] border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#A4E5E0]/10 focus:border-[#A4E5E0] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              className="w-full bg-[#ffffff] border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#18D2C7]/10 focus:border-[#18D2C7] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-[#A4E5E0] text-black px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-[#18D2C7] text-black px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />

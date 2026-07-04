@@ -45,7 +45,7 @@ export default function LuggageBookingPage() {
   const renderStep1 = () => (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
       <h2 className="text-xl font-black uppercase tracking-widest text-black mb-6 flex items-center gap-2">
-        <MapPin className="text-[#A4E5E0]" /> Route Details
+        <MapPin className="text-[#18D2C7]" /> Route Details
       </h2>
       
       <div className="space-y-4">
@@ -56,7 +56,7 @@ export default function LuggageBookingPage() {
             placeholder="E.g. Gandhipuram Terminus"
             value={formData.pickupPoint}
             onChange={(e) => setFormData({...formData, pickupPoint: e.target.value})}
-            className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0] transition-colors"
+            className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7] transition-colors"
           />
         </div>
         <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black p-4 rounded-2xl border border-slate-300">
@@ -66,7 +66,7 @@ export default function LuggageBookingPage() {
             placeholder="E.g. Ukkadam Stand"
             value={formData.dropPoint}
             onChange={(e) => setFormData({...formData, dropPoint: e.target.value})}
-            className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0] transition-colors"
+            className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7] transition-colors"
           />
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function LuggageBookingPage() {
       <button 
         onClick={handleNext}
         disabled={!formData.pickupPoint || !formData.dropPoint}
-        className="w-full mt-8 bg-[#A4E5E0] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+        className="w-full mt-8 bg-[#18D2C7] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
       >
         Next Step <ArrowRight size={16} />
       </button>
@@ -84,7 +84,7 @@ export default function LuggageBookingPage() {
   const renderStep2 = () => (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
       <h2 className="text-xl font-black uppercase tracking-widest text-black mb-6 flex items-center gap-2">
-        <Package className="text-[#A4E5E0]" /> Package Details
+        <Package className="text-[#18D2C7]" /> Package Details
       </h2>
       
       <div className="space-y-4">
@@ -96,7 +96,7 @@ export default function LuggageBookingPage() {
                 key={cat}
                 onClick={() => setFormData({...formData, category: cat})}
                 className={`py-3 rounded-xl text-xs font-black uppercase tracking-widest border transition-colors ${
-                  formData.category === cat ? 'bg-[#A4E5E0] text-black border-[#A4E5E0]' : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-slate-600 border-slate-300'
+                  formData.category === cat ? 'bg-[#18D2C7] text-black border-[#18D2C7]' : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-slate-600 border-slate-300'
                 }`}
               >
                 {cat}
@@ -113,15 +113,15 @@ export default function LuggageBookingPage() {
               placeholder="0.0"
               value={formData.weight}
               onChange={(e) => setFormData({...formData, weight: e.target.value})}
-              className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0] transition-colors"
+              className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7] transition-colors"
             />
           </div>
           <div className="flex-[2] bg-[#ffffff] border border-slate-200 shadow-sm text-black p-4 rounded-2xl border border-slate-300">
             <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-2 flex items-center gap-1"><Box size={12}/> L x W x H (cm)</label>
             <div className="flex gap-2">
-              <input type="number" placeholder="L" className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" value={formData.length} onChange={e=>setFormData({...formData, length: e.target.value})} />
-              <input type="number" placeholder="W" className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" value={formData.width} onChange={e=>setFormData({...formData, width: e.target.value})} />
-              <input type="number" placeholder="H" className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" value={formData.height} onChange={e=>setFormData({...formData, height: e.target.value})} />
+              <input type="number" placeholder="L" className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" value={formData.length} onChange={e=>setFormData({...formData, length: e.target.value})} />
+              <input type="number" placeholder="W" className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" value={formData.width} onChange={e=>setFormData({...formData, width: e.target.value})} />
+              <input type="number" placeholder="H" className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" value={formData.height} onChange={e=>setFormData({...formData, height: e.target.value})} />
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ export default function LuggageBookingPage() {
         <button 
           onClick={handleNext}
           disabled={!formData.weight || !formData.length}
-          className="flex-1 bg-[#A4E5E0] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50"
+          className="flex-1 bg-[#18D2C7] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50"
         >
           Next Step
         </button>
@@ -143,31 +143,31 @@ export default function LuggageBookingPage() {
   const renderStep3 = () => (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
       <h2 className="text-xl font-black uppercase tracking-widest text-black mb-6 flex items-center gap-2">
-        <User className="text-[#A4E5E0]" /> Contact Details
+        <User className="text-[#18D2C7]" /> Contact Details
       </h2>
       
       <div className="space-y-6">
         <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black p-5 rounded-3xl border border-slate-300">
           <h3 className="text-xs font-black text-slate-700 uppercase tracking-widest mb-4">Sender</h3>
           <div className="space-y-3">
-            <input type="text" placeholder="Name" value={formData.senderName} onChange={e=>setFormData({...formData, senderName: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" />
-            <input type="tel" placeholder="Phone" value={formData.senderPhone} onChange={e=>setFormData({...formData, senderPhone: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" />
+            <input type="text" placeholder="Name" value={formData.senderName} onChange={e=>setFormData({...formData, senderName: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" />
+            <input type="tel" placeholder="Phone" value={formData.senderPhone} onChange={e=>setFormData({...formData, senderPhone: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" />
           </div>
         </div>
 
         <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black p-5 rounded-3xl border border-slate-300">
           <h3 className="text-xs font-black text-slate-700 uppercase tracking-widest mb-4">Receiver</h3>
           <div className="space-y-3">
-            <input type="text" placeholder="Name" value={formData.receiverName} onChange={e=>setFormData({...formData, receiverName: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" />
-            <input type="tel" placeholder="Phone" value={formData.receiverPhone} onChange={e=>setFormData({...formData, receiverPhone: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#A4E5E0]" />
+            <input type="text" placeholder="Name" value={formData.receiverName} onChange={e=>setFormData({...formData, receiverName: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" />
+            <input type="tel" placeholder="Phone" value={formData.receiverPhone} onChange={e=>setFormData({...formData, receiverPhone: e.target.value})} className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-3 rounded-xl outline-none border border-slate-300 focus:border-[#18D2C7]" />
           </div>
         </div>
       </div>
 
-      <div className="mt-8 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-[#A4E5E0]/30 p-5 rounded-3xl flex justify-between items-center">
+      <div className="mt-8 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-[#18D2C7]/30 p-5 rounded-3xl flex justify-between items-center">
         <div>
           <div className="text-[10px] font-black uppercase tracking-widest text-slate-600">Total Fare</div>
-          <div className="text-2xl font-black text-[#A4E5E0]">₹{calculateFare()}</div>
+          <div className="text-2xl font-black text-[#18D2C7]">₹{calculateFare()}</div>
         </div>
       </div>
 
@@ -176,7 +176,7 @@ export default function LuggageBookingPage() {
         <button 
           onClick={handleSubmit}
           disabled={!formData.senderName || !formData.receiverName || isProcessing}
-          className="flex-1 bg-[#A4E5E0] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+          className="flex-1 bg-[#18D2C7] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
         >
           {isProcessing ? <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div> : 'Pay & Book'}
         </button>
@@ -198,11 +198,11 @@ export default function LuggageBookingPage() {
         
         <div className="flex justify-between items-center border-t border-slate-300 pt-4">
           <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Delivery OTP</div>
-          <div className="text-lg font-black tracking-widest text-[#A4E5E0]">4829</div>
+          <div className="text-lg font-black tracking-widest text-[#18D2C7]">4829</div>
         </div>
       </div>
 
-      <button onClick={() => router.push('/track/luggage')} className="w-full bg-[#A4E5E0] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors">
+      <button onClick={() => router.push('/track/luggage')} className="w-full bg-[#18D2C7] text-black py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors">
         Track Luggage
       </button>
     </motion.div>
@@ -212,7 +212,7 @@ export default function LuggageBookingPage() {
     <SecureView>
       <div className="min-h-screen bg-[#ffffff] border border-slate-200 shadow-sm text-black font-sans text-black pb-12">
       {/* Header */}
-      <div className="bg-[#A4E5E0] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#18D2C7] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <div>
@@ -232,7 +232,7 @@ export default function LuggageBookingPage() {
           {step < 4 && (
             <div className="flex gap-2 mb-8">
               {[1, 2, 3].map(s => (
-                <div key={s} className={`h-1.5 flex-1 rounded-full ${step >= s ? 'bg-[#A4E5E0]' : 'bg-[#ffffff] border border-slate-200 text-black'}`}></div>
+                <div key={s} className={`h-1.5 flex-1 rounded-full ${step >= s ? 'bg-[#18D2C7]' : 'bg-[#ffffff] border border-slate-200 text-black'}`}></div>
               ))}
             </div>
           )}
