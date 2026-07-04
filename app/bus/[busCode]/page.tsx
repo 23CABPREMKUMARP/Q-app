@@ -83,7 +83,7 @@ export default function BusQRRedirectPage() {
 
             {/* Buttons */}
             <a 
-              href="/DigiBus-App.apk" 
+              href="/api/download-app" 
               download="DigiBus-App.apk"
               className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-white font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
