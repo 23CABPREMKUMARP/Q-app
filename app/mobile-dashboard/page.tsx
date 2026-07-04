@@ -143,7 +143,7 @@ export default function MobileDashboard() {
                 onClick={() => setShowAddressModal(true)}
                 className="flex flex-col text-left bg-transparent border-none outline-none cursor-pointer focus:outline-none"
               >
-                <p className="text-[10px] font-bold text-[#ffffff]/70 uppercase tracking-wider">My Address</p>
+                <p className="text-[10px] font-bold text-black/70 uppercase tracking-wider">My Address</p>
                 <div className="flex items-center gap-1 text-sm font-black text-black">
                   <span className="truncate max-w-[140px]">{address}</span>
                   <ChevronRight size={14} className="opacity-80 shrink-0" />

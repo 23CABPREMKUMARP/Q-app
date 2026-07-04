@@ -148,7 +148,7 @@ export default function TownBusSearchPage() {
               <Bus size={24} className="text-black" />
             </div>
           </div>
-          <p className="text-[#ffffff]/80 font-medium text-sm tracking-wide">Premium City Transit & Express Routes</p>
+          <p className="text-black/80 font-medium text-sm tracking-wide">Premium City Transit & Express Routes</p>
         </div>
       </div>
 

@@ -133,7 +133,7 @@ export default function HistoryPage() {
           </Link>
           <div>
             <h1 className="text-xl font-bold tracking-tight text-black uppercase">Transaction History</h1>
-            <p className="text-[10px] font-bold text-[#ffffff]/80 uppercase tracking-wider">Metropolitan Transit Passbook & Ledgers</p>
+            <p className="text-[10px] font-bold text-black/80 uppercase tracking-wider">Metropolitan Transit Passbook & Ledgers</p>
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@ export default function HistoryPage() {
             </div>
           )}
           
-          <History className="absolute right-[-20px] bottom-[-20px] text-[#ffffff]/5" size={140} />
+          <History className="absolute right-[-20px] bottom-[-20px] text-black/5" size={140} />
         </div>
 
         {/* Input Search Form */}

@@ -21,19 +21,19 @@ export const Footer = React.memo(function Footer() {
           {/* Brand Column */}
           <div className="space-y-8 col-span-1 md:col-span-2">
             <Link href="/" className="flex flex-col gap-2">
-              <span className="text-[9px] font-bold text-[#ffffff]/80 uppercase tracking-widest leading-none">
+              <span className="text-[9px] font-bold text-black/80 uppercase tracking-widest leading-none">
                 Powered By
               </span>
               <div className="flex flex-col">
                 <span className="text-2xl font-bold tracking-tight leading-none">
                   <span className="text-black">JEFF</span><span className="text-black">BEN</span>
                 </span>
-                <span className="text-[10px] font-bold text-[#ffffff]/80 uppercase tracking-wider leading-none">
+                <span className="text-[10px] font-bold text-black/80 uppercase tracking-wider leading-none">
                   Systems
                 </span>
               </div>
             </Link>
-            <p className="text-[#ffffff]/90 text-lg leading-relaxed max-w-md font-bold">
+            <p className="text-black/90 text-lg leading-relaxed max-w-md font-bold">
               Pioneering industrial-grade automation and real-time telemetry for metropolitan public transit ecosystems. Advancing regional connectivity through intelligent infrastructure.
             </p>
             <div className="flex items-center gap-4">
@@ -60,7 +60,7 @@ export const Footer = React.memo(function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#ffffff]/80">Platform</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-black/80">Platform</h4>
             <nav className="flex flex-col gap-4">
               {[
                 { label: "Live Tracking", href: "/live-map" },
@@ -70,7 +70,7 @@ export const Footer = React.memo(function Footer() {
                   key={link.href} 
                   href={link.href}
                   aria-label={link.label}
-                  className="text-[#ffffff]/90 hover:text-black transition-all flex items-center justify-between group"
+                  className="text-black/90 hover:text-black transition-all flex items-center justify-between group"
                 >
                   <span className="text-base font-bold">{link.label}</span>
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0" />
@@ -81,27 +81,27 @@ export const Footer = React.memo(function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#ffffff]/80">Intelligence Hub</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-black/80">Intelligence Hub</h4>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-black"><MapPin size={20} /></div>
                 <div className="flex flex-col">
                   <span className="text-black font-bold">Regional Headquarters</span>
-                  <span className="text-[#ffffff]/90 text-sm font-bold">Tamil Nadu, India</span>
+                  <span className="text-black/90 text-sm font-bold">Tamil Nadu, India</span>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-black"><Mail size={20} /></div>
                 <div className="flex flex-col">
                   <span className="text-black font-bold">Inquiries</span>
-                  <span className="text-[#ffffff]/90 text-sm font-bold underline underline-offset-4">jeffbenofficial1@gmail.com</span>
+                  <span className="text-black/90 text-sm font-bold underline underline-offset-4">jeffbenofficial1@gmail.com</span>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="mt-1 text-black"><Phone size={20} /></div>
                 <div className="flex flex-col">
                   <span className="text-black font-bold">Support Line</span>
-                  <span className="text-[#ffffff]/90 text-sm font-bold">Industrial Telemetry Div.</span>
+                  <span className="text-black/90 text-sm font-bold">Industrial Telemetry Div.</span>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ export const Footer = React.memo(function Footer() {
         </div>
 
         <div className="mt-24 pt-8 border-t border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-[#ffffff]/70 text-sm font-bold uppercase tracking-widest">
+          <p className="text-black/70 text-sm font-bold uppercase tracking-widest">
             © {currentYear} JeffBen Systems. All Rights Reserved.
           </p>
           <div className="flex items-center gap-8">

@@ -178,7 +178,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
           <img src="/logo2.png" alt="Digi Bus" className="w-8 h-8 object-contain" />
           <div className="flex flex-col">
             <span className="text-[10px] font-black text-black leading-none tracking-tight">DIGI <span className="text-[#A4E5E0]">BUS</span></span>
-            <span className="text-[8px] font-bold text-[#ffffff]/70 tracking-widest uppercase">Scanner</span>
+            <span className="text-[8px] font-bold text-black/70 tracking-widest uppercase">Scanner</span>
           </div>
         </div>
         
@@ -205,7 +205,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
                 type="text"
                 autoFocus
                 placeholder="ENTER BUS CODE (e.g. 1024)"
-                className="w-full bg-slate-50 border border-slate-200 text-black border border-slate-300 rounded-xl px-4 py-3 text-black font-black text-sm uppercase tracking-widest placeholder:text-[#ffffff]/40 focus:outline-none focus:border-[#A4E5E0] transition-colors"
+                className="w-full bg-slate-50 border border-slate-200 text-black border border-slate-300 rounded-xl px-4 py-3 text-black font-black text-sm uppercase tracking-widest placeholder:text-black/40 focus:outline-none focus:border-[#A4E5E0] transition-colors"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     const val = (e.target as HTMLInputElement).value;

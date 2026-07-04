@@ -217,7 +217,7 @@ export default function LuggageBookingPage() {
         <div className="relative z-10 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-black uppercase tracking-tighter">Luggage</h1>
-            <p className="text-[#ffffff]/80 font-medium text-sm tracking-wide">Fast & Secure Parcels</p>
+            <p className="text-black/80 font-medium text-sm tracking-wide">Fast & Secure Parcels</p>
           </div>
           <div className="bg-[#ffffff]/20 p-3 rounded-2xl backdrop-blur-md">
             <Truck size={32} className="text-black" />

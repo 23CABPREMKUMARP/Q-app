@@ -211,7 +211,7 @@ export default function ProductPage() {
         <ContainerScroll
           titleComponent={
             <div className="flex items-center justify-center flex-col gpu-accelerated">
-              <h2 className="text-2xl sm:text-4xl font-semibold text-[#ffffff]/90 text-center">
+              <h2 className="text-2xl sm:text-4xl font-semibold text-black/90 text-center">
                 Experience the Future of <br />
                 <span className="text-3xl sm:text-4xl md:text-[6rem] font-bold mt-2 leading-none text-black tracking-tight font-heading">
                   Automated Mobility
@@ -313,7 +313,7 @@ export default function ProductPage() {
                   <p className="text-lg md:text-xl lg:text-2xl text-black leading-relaxed font-medium">
                     JEFFBEN Systems is a premier technology enterprise dedicated to the modernization of public infrastructure through industrial-grade automation. We specialize in the development of sophisticated telemetry and real-time information architectures for metropolitan transit.
                   </p>
-                  <p className="text-lg md:text-xl lg:text-2xl text-[#ffffff]/90 leading-relaxed font-medium">
+                  <p className="text-lg md:text-xl lg:text-2xl text-black/90 leading-relaxed font-medium">
                     Our unified ecosystem facilitates a seamless interface between regulatory bodies and the public. By harnessing advanced cloud computation, cross-platform mobility applications, and integrated IoT networks, we ensure high-integrity data accessibility across the transit lifecycle.
                   </p>
                 </div>
@@ -500,7 +500,7 @@ export default function ProductPage() {
       <section className="relative py-12 md:py-24 bg-primary text-zinc-950 border-y border-primary/20 overflow-hidden text-center gpu-accelerated">
         <div className="container mx-auto px-6 max-w-4xl">
           <h2 className="text-3xl md:text-6xl font-bold mb-8 text-black tracking-tighter">Next-Gen Infrastructure</h2>
-          <p className="text-lg md:text-2xl text-[#ffffff]/90 mb-12 font-bold leading-relaxed">
+          <p className="text-lg md:text-2xl text-black/90 mb-12 font-bold leading-relaxed">
             JEFFBEN Systems leverages a military-grade technology stack to ensure unmatched reliability, performance, and scalability across large-scale public transit networks:
           </p>
 

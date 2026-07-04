@@ -41,7 +41,7 @@ export default function LuggageTrackingPage() {
         <div className="relative z-10 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-black uppercase tracking-tighter">Track</h1>
-            <p className="text-[#ffffff]/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
+            <p className="text-black/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
           </div>
           <div className="bg-[#ffffff]/20 p-3 rounded-2xl backdrop-blur-md">
             <Search size={32} className="text-black" />
