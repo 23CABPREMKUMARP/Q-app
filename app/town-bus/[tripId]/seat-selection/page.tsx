@@ -64,14 +64,40 @@ export default function TicketCountSelectionPage() {
 
   const [isProcessingRedirect, setIsProcessingRedirect] = useState(false);
 
+  // Continuous state preservation for Step 1 memory
+  useEffect(() => {
+    if (typeof window !== 'undefined' && passengers.length > 0) {
+      // Only save if it's not the initial mount default state (to avoid overwriting valid cached state)
+      // We check if hasLoadedBookingState logic ran, or if they have actively modified it.
+      // Easiest is to just save it. The restore effect runs first and sets passengers.
+      const currentStored = localStorage.getItem('townBusBookingState');
+      let shouldSave = true;
+      if (currentStored) {
+          try {
+              const parsed = JSON.parse(currentStored);
+              // Avoid saving empty defaults over populated stored data before restore finishes
+              if (parsed.passengers && parsed.passengers.length > 1 && passengers.length === 1 && !passengers[0].phone) {
+                  shouldSave = false;
+              }
+          } catch(e) {}
+      }
+      
+      if (shouldSave) {
+          localStorage.setItem('townBusBookingState', JSON.stringify({
+            ticketCount,
+            passengers,
+            busNumber: trip?.busNumber || trip?.busCode || '',
+            busCode: trip?.busCode || ''
+          }));
+      }
+    }
+  }, [passengers, ticketCount, trip]);
+
   // Check URL params for post-payment redirect
   useEffect(() => {
     const paymentStatus = searchParams.get('payment');
     
-    // Clear state on fresh booking entry to prevent autofill from previous purchases
-    if (!paymentStatus && typeof window !== 'undefined') {
-      localStorage.removeItem('townBusBookingState');
-    }
+    // Memory retained intentionally as per user request.
 
     // Restore state if available
     let hasLoadedBookingState = false;
@@ -164,6 +190,7 @@ export default function TicketCountSelectionPage() {
               luggageType: b.luggage_type || b.passengers?.[0]?.luggage || freshPassengers[0]?.luggage || 'None',
               passengers: b.passengers || freshPassengers,
               busNumber: freshBusNumber,
+              busCode: b.bus_code || b.passengers?.[0]?.busCode || freshState.busCode || 'N/A',
               seats: b.seats || Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: b.qr_token || '',
               bookingDate: b.booking_date || b.created_at || new Date().toISOString(),
@@ -210,6 +237,7 @@ export default function TicketCountSelectionPage() {
               destination: (freshPassengers.length > 1 ? 'Multi-Stop' : freshPassengers[0]?.destination) || 'Destination',
               luggageType: freshPassengers[0]?.luggage || 'None',
               busNumber: freshBusNumber,
+              busCode: freshState.busCode || 'N/A',
               seats: Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: ticketIdParam || '',
               bookingDate: new Date().toISOString(),
@@ -260,6 +288,7 @@ export default function TicketCountSelectionPage() {
               destination: (freshPassengers.length > 1 ? 'Multi-Stop' : freshPassengers[0]?.destination) || 'Destination',
               luggageType: freshPassengers[0]?.luggage || 'None',
               busNumber: freshBusNumber,
+              busCode: freshState.busCode || 'N/A',
               seats: Array.from({ length: freshCount }, (_, i) => `S-${i + 1}`),
               qrToken: '',
               bookingDate: new Date().toISOString(),
@@ -371,7 +400,8 @@ export default function TicketCountSelectionPage() {
       localStorage.setItem('townBusBookingState', JSON.stringify({
         ticketCount,
         passengers,
-        busNumber: trip?.busNumber || trip?.busCode || ''
+        busNumber: trip?.busNumber || trip?.busCode || '',
+        busCode: trip?.busCode || ''
       }));
     }
     
@@ -387,6 +417,7 @@ export default function TicketCountSelectionPage() {
           boardingPoint: passengers.length > 1 ? 'Combined Journey' : passengers[0]?.boarding || '',
           destination: passengers.length > 1 ? 'Multi-Stop' : passengers[0]?.destination || '',
           busNumber: trip?.busNumber || trip?.busCode || '',
+          busCode: trip?.busCode || '',
           passengers: passengers.map(p => ({
             phone: p.phone || "9999999999",
             luggage: p.luggage,
@@ -421,8 +452,8 @@ export default function TicketCountSelectionPage() {
         <button onClick={() => {
           if (step === 5 || step === 4) {
              router.push('/get-ticket');
-          } else if (step > 1 && step < 3) {
-             setStep(step - 1);
+          } else if (step > 1) {
+             setStep(1);
           } else {
              router.back();
           }
@@ -466,14 +497,18 @@ export default function TicketCountSelectionPage() {
               className="space-y-8"
             >
               <div className="bg-white border border-zinc-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-6">
-                  <div className="w-16 h-16 bg-[#FF9933]/10 rounded-full flex items-center justify-center">
-                    <MapPin size={32} className="text-[#FF9933]" />
+                <div className="flex justify-between items-start mb-8">
+                  <div className="pr-4">
+                    <h2 className="text-xl font-black uppercase tracking-widest text-zinc-900 mb-2">Build Your Journeys</h2>
+                    <p className="text-slate-500 text-sm">Add multiple segments to book a combined ticket.</p>
+                  </div>
+                  <div className="flex flex-col items-center flex-shrink-0">
+                    <button onClick={() => setExpandedQR(true)} className="p-2 bg-white rounded-xl shadow-sm border border-zinc-200 hover:scale-105 transition-transform">
+                      <QRCodeSVG value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`} size={64} level="H" />
+                    </button>
+                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-1 text-center">Boarding<br/>QR</p>
                   </div>
                 </div>
-                
-                <h2 className="text-xl font-black uppercase tracking-widest text-zinc-900 mb-2">Build Your Journeys</h2>
-                <p className="text-slate-500 text-sm mb-8">Add multiple segments to book a combined ticket.</p>
 
                 <div className="mt-8 pt-4">
                   {passengers.map((passenger, index) => (
@@ -674,7 +709,7 @@ export default function TicketCountSelectionPage() {
                 ) : (
                   <div className="flex gap-4">
                     <button 
-                      onClick={() => setStep(2)}
+                      onClick={() => setStep(1)}
                       className="flex-1 py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-zinc-100 text-zinc-500 hover:bg-zinc-200 transition-colors border border-zinc-200"
                     >
                       Back
@@ -938,6 +973,46 @@ export default function TicketCountSelectionPage() {
         )}
       </AnimatePresence>
       </div>
+    
+      {/* Expanded QR Modal */}
+      <AnimatePresence>
+        {expandedQR && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setExpandedQR(false)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-6"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl p-8 max-w-sm w-full flex flex-col items-center shadow-2xl relative"
+            >
+              <button 
+                onClick={() => setExpandedQR(false)}
+                className="absolute top-4 right-4 p-2 bg-zinc-100 rounded-full text-zinc-500 hover:bg-zinc-200"
+              >
+                <X size={20} />
+              </button>
+              
+              <h3 className="text-xl font-black text-zinc-900 uppercase tracking-widest mb-6">Boarding QR</h3>
+              
+              <div className="p-4 bg-zinc-50 border border-zinc-200 rounded-2xl mb-6">
+                <QRCodeSVG value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`} size={200} level="H" />
+              </div>
+              
+              <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">Bus Code</p>
+              <p className="text-3xl font-black text-[#FF9933] uppercase tracking-widest">
+                {trip?.busCode || trip?.busNumber || tripId}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </SecureView>
   );
 }
