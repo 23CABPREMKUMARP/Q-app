@@ -123,6 +123,13 @@ export default function BusQRRedirectPage() {
           Download App to Board
         </button>
 
+        <div className="mt-6 text-center w-full">
+          <p className="text-xs text-slate-500 font-medium mb-2">App not installed?</p>
+          <Link href={`/boarding/${busCode}`} className="inline-block text-sm font-black text-[#FF9933] uppercase tracking-widest hover:underline py-2">
+            Continue in Web
+          </Link>
+        </div>
+
       </main>
       
       <footer className="mt-auto py-8 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
