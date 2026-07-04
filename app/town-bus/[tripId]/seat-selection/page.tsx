@@ -101,15 +101,16 @@ export default function TicketCountSelectionPage() {
 
     // Restore state if available
     let hasLoadedBookingState = false;
-    if (paymentStatus && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       const savedState = localStorage.getItem('townBusBookingState');
       if (savedState) {
         try {
           const parsed = JSON.parse(savedState);
-          if (parsed.ticketCount) setTicketCount(parsed.ticketCount);
-          if (parsed.passengers) setPassengers(parsed.passengers);
-          if (parsed.boardingPoint) {
-            setBoardingPoint(parsed.boardingPoint);
+          // Only restore if valid data is present
+          if (parsed.passengers && parsed.passengers.length > 0 && parsed.passengers[0].boarding) {
+            if (parsed.ticketCount) setTicketCount(parsed.ticketCount);
+            setPassengers(parsed.passengers);
+            if (parsed.boardingPoint) setBoardingPoint(parsed.boardingPoint);
             hasLoadedBookingState = true;
           }
         } catch(e) {}
