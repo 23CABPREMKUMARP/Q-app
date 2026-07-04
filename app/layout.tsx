@@ -34,8 +34,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Smart Tamizha by JeffBen Systems | Metropolitan Transit Intelligence",
   description: "Smart Tamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
-  keywords: ["Smart Tamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
+  keywords: ["Smart Tamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit", "Coimbatore Town Bus", "Live Bus Tracking"],
   metadataBase: new URL('https://jeffben.org'),
+  alternates: {
+    canonical: 'https://jeffben.org',
+  },
+  authors: [{ name: 'JeffBen Systems' }],
+  creator: 'JeffBen Systems',
+  publisher: 'JeffBen Systems',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -43,9 +54,24 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Smart Tamizha by JeffBen Systems - Future of Automated Mobility",
+    description: "Official platform for advanced transit telemetry and smart city infrastructure integration by JeffBen Systems.",
+    url: 'https://jeffben.org',
+    siteName: 'Smart Tamizha',
+    images: [
+      {
+        url: '/hero-logo.png',
+        width: 800,
+        height: 600,
+      }
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Smart Tamizha by JeffBen Systems",
     description: "Official platform for advanced transit telemetry and smart city infrastructure integration.",
     images: ['/hero-logo.png'],
-    type: 'website',
   },
   icons: {
     icon: '/hero-logo.png',
