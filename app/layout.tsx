@@ -32,9 +32,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Smart Tamizha | Metropolitan Transit Intelligence",
-  description: "Pioneering industrial-grade automation and real-time telemetry for metropolitan public transit ecosystems across Tamil Nadu.",
-  keywords: ["Smart Tamizha", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
+  title: "Smart Tamizha by JeffBen Systems | Metropolitan Transit Intelligence",
+  description: "Smart Tamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
+  keywords: ["Smart Tamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
   metadataBase: new URL('https://jeffben.org'),
   appleWebApp: {
     capable: true,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Smart Tamizha",
   },
   openGraph: {
-    title: "Smart Tamizha - Future of Automated Mobility",
+    title: "Smart Tamizha by JeffBen Systems - Future of Automated Mobility",
     description: "Official platform for advanced transit telemetry and smart city infrastructure integration.",
     images: ['/hero-logo.png'],
     type: 'website',
