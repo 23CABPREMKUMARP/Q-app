@@ -1,3 +1,5 @@
+import { Capacitor } from '@capacitor/core';
+import { Geolocation } from '@capacitor/geolocation';
 import { useEffect, useRef, useCallback, useState } from "react";
 
 const MIN_DISTANCE_METERS = 20; // Only send update if moved > 20m
@@ -155,18 +157,37 @@ export function useGPS({
       return;
     }
 
-    if (!("geolocation" in navigator)) {
-      setGpsState((prev) => ({ ...prev, status: "error", errorMessage: "Geolocation not supported" }));
-      onError?.("Geolocation not supported by this device.");
-      return;
-    }
+    const startWatching = async () => {
+      try {
+        if (Capacitor.isNativePlatform()) {
+          const perm = await Geolocation.checkPermissions();
+          if (perm.location !== 'granted') {
+            const req = await Geolocation.requestPermissions();
+            if (req.location !== 'granted') {
+              handleError({ code: 1, message: 'Permission denied', PERMISSION_DENIED: 1, POSITION_UNAVAILABLE: 2, TIMEOUT: 3 } as any);
+              return;
+            }
+          }
+        }
+      } catch (e) {
+        console.warn("Capacitor Geolocation check failed, falling back to HTML5", e);
+      }
 
-    // Start watching position
-    watchIdRef.current = navigator.geolocation.watchPosition(handlePosition, handleError, {
-      enableHighAccuracy: true,
-      timeout: GPS_TIMEOUT_MS,
-      maximumAge: GPS_MAX_AGE_MS,
-    });
+      if (!("geolocation" in navigator)) {
+        setGpsState((prev) => ({ ...prev, status: "error", errorMessage: "Geolocation not supported" }));
+        onError?.("Geolocation not supported by this device.");
+        return;
+      }
+
+      // Start watching position
+      watchIdRef.current = navigator.geolocation.watchPosition(handlePosition, handleError, {
+        enableHighAccuracy: true,
+        timeout: GPS_TIMEOUT_MS,
+        maximumAge: GPS_MAX_AGE_MS,
+      });
+    };
+    
+    startWatching();
 
     onStatusChange?.("broadcasting");
 
