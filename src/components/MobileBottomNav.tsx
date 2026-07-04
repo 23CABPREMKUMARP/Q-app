@@ -55,10 +55,10 @@ export function MobileBottomNav() {
               <div key={item.href} className="relative -top-6 flex flex-col items-center">
                 <Link 
                   href={item.href}
-                  className="w-[60px] h-[60px] bg-gradient-to-tr from-amber-500 to-[#A4E5E0] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(255,153,51,0.4)] border-[4px] border-[#ffffff] active:scale-95 hover:brightness-110 transition-all group relative overflow-hidden"
+                  className="w-[60px] h-[60px] bg-gradient-to-tr from-amber-500 to-[#FFD700] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(255,153,51,0.4)] border-[4px] border-[#ffffff] active:scale-95 hover:brightness-110 transition-all group relative overflow-hidden"
                   aria-label="Scan Ticket"
                 >
-                  <Icon className="text-black" size={26} strokeWidth={2.5} />
+                  <Icon className="text-[#FFFFFF]" size={26} strokeWidth={2.5} />
                 </Link>
                 <span className="text-[10px] font-bold text-slate-800 mt-1 uppercase tracking-wider scale-90">
                   {item.label}
@@ -78,21 +78,21 @@ export function MobileBottomNav() {
                   size={24} 
                   className={cn(
                     "transition-all duration-300", 
-                    isActive ? "text-[#A4E5E0] scale-110" : "text-slate-500 hover:text-[#A4E5E0]/70"
+                    isActive ? "text-[#FFD700] scale-110" : "text-slate-500 hover:text-[#FFD700]/70"
                   )} 
                   strokeWidth={isActive ? 2.5 : 2} 
                 />
               </div>
               <span className={cn(
                 "text-[10px] uppercase tracking-wider font-bold transition-all duration-300 scale-90",
-                isActive ? "text-[#A4E5E0]" : "text-slate-500"
+                isActive ? "text-[#FFD700]" : "text-slate-500"
               )}>
                 {item.label}
               </span>
               {isActive && (
                 <motion.div 
                   layoutId="activeTabIndicator"
-                  className="absolute bottom-1 w-1.5 h-1.5 bg-[#A4E5E0] rounded-full shadow-[0_0_8px_#A4E5E0]"
+                  className="absolute bottom-1 w-1.5 h-1.5 bg-[#FFD700] rounded-full shadow-[0_0_8px_#A4E5E0]"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}

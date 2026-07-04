@@ -93,21 +93,18 @@ export function WebHeader() {
         </a>
         
         {/* Middle: Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden md:flex items-center gap-4 absolute left-1/2 -translate-x-1/2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
               <a 
                 key={link.href} 
                 href={link.href}
-                className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
-                  isActive ? "text-[#A4E5E0]" : "text-zinc-600 hover:text-zinc-900"
+                className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 px-5 rounded-full ${
+                  isActive ? "bg-[#FFD700] text-[#FFFFFF] shadow-md" : "text-black hover:bg-[#FFD700]/10 hover:text-[#FFD700]"
                 }`}
               >
                 {link.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#A4E5E0] rounded-full"></span>
-                )}
               </a>
             );
           })}
@@ -115,7 +112,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#FFD700] text-[#FFFFFF] hover:brightness-110 text-[14px] font-black uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -139,14 +136,14 @@ export function WebHeader() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xs font-black uppercase tracking-widest p-4 rounded-xl transition-colors ${
-                  isActive ? "bg-[#A4E5E0]/10 text-[#A4E5E0]" : "text-zinc-500 hover:bg-zinc-50"
+                  isActive ? "bg-[#FFD700] text-[#FFFFFF]" : "text-zinc-500 hover:bg-zinc-50"
                 }`}
               >
                 {link.label}
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#FFD700] text-[#FFFFFF] hover:brightness-110 text-xs font-black uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2 shadow-md">
             Book Now <ChevronRight size={16} />
           </a>
         </div>
