@@ -128,7 +128,7 @@ export default function LuggageBookingPage() {
       </div>
 
       <div className="flex gap-4 mt-8">
-        <button onClick={handleBack} className="w-1/3 bg-slate-50 border border-slate-200 text-black text-black py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
+        <button onClick={handleBack} className="w-1/3 bg-[#ffffff] border border-slate-200 text-black text-black py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
         <button 
           onClick={handleNext}
           disabled={!formData.weight || !formData.length}
@@ -172,7 +172,7 @@ export default function LuggageBookingPage() {
       </div>
 
       <div className="flex gap-4 mt-6">
-        <button onClick={handleBack} className="w-1/3 bg-slate-50 border border-slate-200 text-black text-black py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
+        <button onClick={handleBack} className="w-1/3 bg-[#ffffff] border border-slate-200 text-black text-black py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
         <button 
           onClick={handleSubmit}
           disabled={!formData.senderName || !formData.receiverName || isProcessing}
@@ -232,7 +232,7 @@ export default function LuggageBookingPage() {
           {step < 4 && (
             <div className="flex gap-2 mb-8">
               {[1, 2, 3].map(s => (
-                <div key={s} className={`h-1.5 flex-1 rounded-full ${step >= s ? 'bg-[#A4E5E0]' : 'bg-slate-50 border border-slate-200 text-black'}`}></div>
+                <div key={s} className={`h-1.5 flex-1 rounded-full ${step >= s ? 'bg-[#A4E5E0]' : 'bg-[#ffffff] border border-slate-200 text-black'}`}></div>
               ))}
             </div>
           )}

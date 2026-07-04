@@ -113,7 +113,7 @@ export default function GetTicketPage() {
 
   return (
     <SecureView>
-      <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom secure-content">
+      <main className="min-h-screen bg-[#ffffff] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom secure-content">
       <WatermarkOverlay text={`SECURE TICKET ${phone}`} />
       
       {/* Native Mobile Top Bar */}
@@ -215,7 +215,7 @@ export default function GetTicketPage() {
             <div className="flex gap-2">
               <button 
                 onClick={() => setStatusFilter('ALL')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-slate-50 border border-slate-200 text-black text-black border-slate-300' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-[#ffffff] border border-slate-200 text-black text-black border-slate-300' : 'bg-[#ffffff] text-slate-600 border-slate-200'}`}
               >
                 All Passes
               </button>
@@ -243,7 +243,7 @@ export default function GetTicketPage() {
               animate={{ opacity: 1 }}
               className="text-center py-12 bg-[#ffffff] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
             >
-              <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-700">
+              <div className="w-14 h-14 bg-[#ffffff] rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-700">
                 <Ticket size={24} />
               </div>
               <div className="space-y-1">
@@ -277,7 +277,7 @@ export default function GetTicketPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
                         onClick={() => setSelectedTicket(booking)}
-                        className={`w-full border ${isExpired ? 'bg-slate-50 border-slate-200' : 'bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40'} rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden`}
+                        className={`w-full border ${isExpired ? 'bg-[#ffffff] border-slate-200' : 'bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40'} rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden`}
                   >
                     {/* Left Accent Bar */}
                     {isExpired && <div className="absolute left-0 top-0 bottom-0 w-1 bg-slate-300"></div>}

@@ -584,7 +584,7 @@ export default function EnterpriseConductorPortal() {
                     Please contact the Operations Admin for clearance.
                   </p>
                   <div className="pt-4 space-y-3">
-                    <button onClick={() => router.push("/")} className="w-full py-3 bg-slate-50 border border-slate-200 shadow-sm text-black hover:bg-zinc-700 text-black font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
+                    <button onClick={() => router.push("/")} className="w-full py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 text-black font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
                       Return to Passenger Dashboard
                     </button>
                     <button onClick={() => signOut()} className="w-full py-3 bg-red-600/10 text-red-500 hover:bg-red-600/20 font-bold rounded-xl text-xs uppercase tracking-wider transition-all border border-red-500/20">
@@ -613,7 +613,7 @@ export default function EnterpriseConductorPortal() {
               </div>
             </div>
 
-            <div className="h-px bg-slate-50 border border-slate-200 shadow-sm text-black" />
+            <div className="h-px bg-[#ffffff] border border-slate-200 shadow-sm text-black" />
 
             {/* Sidebar Tabs */}
             <nav className="flex-1 space-y-1.5 overflow-y-auto">
@@ -652,7 +652,7 @@ export default function EnterpriseConductorPortal() {
               </div>
               <button 
                 onClick={handleLogout}
-                className="w-full py-3 bg-slate-50 border border-slate-200 shadow-sm text-black hover:bg-zinc-755 border border-zinc-300 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all active:scale-95"
+                className="w-full py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-755 border border-zinc-300 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all active:scale-95"
               >
                 Logout Shift
               </button>
@@ -664,7 +664,7 @@ export default function EnterpriseConductorPortal() {
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-1.5 bg-slate-50 border border-slate-200 shadow-sm text-black hover:bg-zinc-750 border border-zinc-300 rounded-lg text-zinc-300 mr-0.5"
+                className="p-1.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-750 border border-zinc-300 rounded-lg text-zinc-300 mr-0.5"
               >
                 <Menu size={16} />
               </button>
@@ -695,7 +695,7 @@ export default function EnterpriseConductorPortal() {
               )}
               <button 
                 onClick={handleLogout}
-                className="p-2 bg-slate-50 border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-xl text-zinc-405 transition-colors"
+                className="p-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-xl text-zinc-405 transition-colors"
               >
                 <LogIn size={14} className="rotate-180 text-orange-500" />
               </button>
@@ -736,7 +736,7 @@ export default function EnterpriseConductorPortal() {
                       </button>
                     </div>
 
-                    <div className="h-px bg-slate-50 border border-slate-200 shadow-sm text-black" />
+                    <div className="h-px bg-[#ffffff] border border-slate-200 shadow-sm text-black" />
 
                     <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-200px)] pr-1 no-scrollbar animate-none">
                       {[
@@ -780,7 +780,7 @@ export default function EnterpriseConductorPortal() {
                         handleLogout();
                         setMobileMenuOpen(false);
                       }}
-                      className="w-full py-2.5 bg-slate-50 border border-slate-200 shadow-sm text-black hover:bg-zinc-700 text-zinc-350 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all"
+                      className="w-full py-2.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 text-zinc-350 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all"
                     >
                       Logout Shift
                     </button>
@@ -805,7 +805,7 @@ export default function EnterpriseConductorPortal() {
               <div className="flex items-center gap-4 text-xs font-bold text-zinc-600">
                 <span className="hidden sm:inline">Route: <strong className="text-zinc-200 uppercase">Coimbatore EXP-1024</strong></span>
                 <span>Bus: <strong className="text-zinc-200">1024</strong></span>
-                <span className="text-[10px] bg-slate-50 border border-slate-200 shadow-sm text-black border border-zinc-300 px-2 py-0.5 rounded text-orange-400 font-mono">
+                <span className="text-[10px] bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 px-2 py-0.5 rounded text-orange-400 font-mono">
                   {tripStatus}
                 </span>
               </div>
@@ -822,7 +822,7 @@ export default function EnterpriseConductorPortal() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-black uppercase text-orange-500 tracking-widest">Conductor</span>
-                        <span className="text-[9px] bg-slate-50 border border-slate-200 shadow-sm text-black text-zinc-600 px-2 py-0.5 rounded font-mono">Shift Active</span>
+                        <span className="text-[9px] bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600 px-2 py-0.5 rounded font-mono">Shift Active</span>
                       </div>
                       <h2 className="text-2xl font-black uppercase tracking-tight text-black">Rajesh Kumar</h2>
                       <p className="text-xs text-zinc-500">Employee ID: <strong className="text-zinc-300">EMP-9824</strong> • Mobile: <strong className="text-zinc-300">9876543210</strong></p>
@@ -831,7 +831,7 @@ export default function EnterpriseConductorPortal() {
                     <div className="flex flex-wrap gap-2 pt-2 md:pt-0">
                       <button 
                         onClick={() => setShowQR(true)}
-                        className="px-4 py-3 bg-slate-50 border border-slate-200 shadow-sm text-black hover:bg-zinc-700 border border-zinc-300 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95"
+                        className="px-4 py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 border border-zinc-300 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95"
                       >
                         <Share2 size={12} className="text-orange-500" />
                         Show Matrix QR
@@ -1406,7 +1406,7 @@ export default function EnterpriseConductorPortal() {
                       {/* Driver Steering wheel mockup */}
                       <div className="flex justify-between items-center border-b border-zinc-300 pb-4 mb-6">
                         <div className="w-8 h-8 rounded-full border-4 border-dashed border-zinc-300 flex items-center justify-center">
-                          <div className="w-3 h-3 bg-slate-50 border border-slate-200 shadow-sm text-black rounded-full" />
+                          <div className="w-3 h-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-full" />
                         </div>
                         <span className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">FRONT ENTRANCE</span>
                       </div>
@@ -1462,7 +1462,7 @@ export default function EnterpriseConductorPortal() {
                             ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/30'
                             : gpsState.status === 'no_permission'
                             ? 'bg-red-500/10 border border-red-500/20 text-red-400'
-                            : 'bg-slate-50 border border-slate-200 shadow-sm text-black text-zinc-500 border border-zinc-300'
+                            : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-500 border border-zinc-300'
                         }`}>
                           {gpsState.status === 'broadcasting'
                             ? <Radio size={22} className="animate-pulse" />
@@ -1558,7 +1558,7 @@ export default function EnterpriseConductorPortal() {
                     <div className={`text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest ${
                       tripStatus === 'Trip Started' || tripStatus === 'Boarding'
                         ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        : 'bg-slate-50 border border-slate-200 shadow-sm text-black text-zinc-600'
+                        : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600'
                     }`}>{tripStatus}</div>
                   </div>
 
@@ -1609,7 +1609,7 @@ export default function EnterpriseConductorPortal() {
                         <span className="text-zinc-500">UPI / QR Digital Ledger:</span>
                         <span className="font-bold text-zinc-200">₹{onlineCollection}</span>
                       </div>
-                      <div className="h-px bg-slate-50 border border-slate-200 shadow-sm text-black" />
+                      <div className="h-px bg-[#ffffff] border border-slate-200 shadow-sm text-black" />
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-zinc-600 font-bold">Total Revenue Ledger:</span>
                         <span className="font-black text-orange-500 text-lg">₹{totalRevenue}</span>
@@ -1670,7 +1670,7 @@ export default function EnterpriseConductorPortal() {
                   <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <div className="flex justify-between items-center border-b border-zinc-300 pb-3">
                       <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Offline Queue Cache</h3>
-                      <span className="text-[10px] bg-slate-50 border border-slate-200 shadow-sm text-black border border-zinc-300 px-2 py-0.5 rounded font-mono text-zinc-600">
+                      <span className="text-[10px] bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 px-2 py-0.5 rounded font-mono text-zinc-600">
                         {offlineQueue.length} pending actions
                       </span>
                     </div>
@@ -1851,7 +1851,7 @@ export default function EnterpriseConductorPortal() {
               >
                  <button 
                    onClick={() => setShowQR(false)}
-                   className="absolute top-8 right-8 w-12 h-12 bg-slate-50 border border-slate-200 shadow-sm text-black hover:bg-zinc-700 rounded-full flex items-center justify-center text-black border border-zinc-750"
+                   className="absolute top-8 right-8 w-12 h-12 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 rounded-full flex items-center justify-center text-black border border-zinc-750"
                  >
                    <X size={20} />
                  </button>

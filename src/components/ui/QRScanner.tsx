@@ -205,7 +205,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
                 type="text"
                 autoFocus
                 placeholder="ENTER BUS CODE (e.g. 1024)"
-                className="w-full bg-slate-50 border border-slate-200 text-black border border-slate-300 rounded-xl px-4 py-3 text-black font-black text-sm uppercase tracking-widest placeholder:text-black/40 focus:outline-none focus:border-[#A4E5E0] transition-colors"
+                className="w-full bg-[#ffffff] border border-slate-200 text-black border border-slate-300 rounded-xl px-4 py-3 text-black font-black text-sm uppercase tracking-widest placeholder:text-black/40 focus:outline-none focus:border-[#A4E5E0] transition-colors"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     const val = (e.target as HTMLInputElement).value;
@@ -221,7 +221,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       {/* Bottom Controls */}
       <div className="absolute bottom-16 z-20 w-full px-16 flex justify-between items-center max-w-sm mx-auto">
         <div className="flex flex-col items-center gap-3">
-          <label className="w-16 h-16 bg-slate-50 border border-slate-200 text-black hover:bg-[#ffffff]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all cursor-pointer border border-slate-200">
+          <label className="w-16 h-16 bg-[#ffffff] border border-slate-200 text-black hover:bg-[#ffffff]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all cursor-pointer border border-slate-200">
             <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
             <ImageIcon size={24} className="text-black" />
           </label>
@@ -231,7 +231,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={toggleTorch}
-            className={`w-16 h-16 \${torchOn ? 'bg-[#ffffff] text-black' : 'bg-slate-50 border border-slate-200 text-black text-black'} hover:bg-[#ffffff]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all border border-slate-200`}
+            className={`w-16 h-16 \${torchOn ? 'bg-[#ffffff] text-black' : 'bg-[#ffffff] border border-slate-200 text-black text-black'} hover:bg-[#ffffff]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all border border-slate-200`}
           >
             <Flashlight size={24} />
           </button>

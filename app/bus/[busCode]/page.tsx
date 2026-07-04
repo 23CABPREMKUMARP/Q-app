@@ -28,7 +28,7 @@ export default function BusQRRedirectPage() {
           <div className="bg-[#ffffff] rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-12 pb-8 px-8 border border-zinc-100 flex flex-col items-center text-center">
             
             {/* Bus Icon */}
-            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-6">
+            <div className="w-16 h-16 bg-[#ffffff] rounded-full flex items-center justify-center mb-6">
               <Bus size={28} className="text-slate-600" />
             </div>
 
@@ -36,7 +36,7 @@ export default function BusQRRedirectPage() {
             <p className="text-[13px] text-slate-500 mb-6">You have scanned the QR code for:</p>
             
             {/* Bus Code Pill */}
-            <div className="bg-slate-50 px-8 py-3 rounded-xl border border-slate-100 mb-8 w-full max-w-[200px]">
+            <div className="bg-[#ffffff] px-8 py-3 rounded-xl border border-slate-100 mb-8 w-full max-w-[200px]">
               <span className="text-xl font-black tracking-widest text-[#FF8A00] uppercase">
                 {codeStr}
               </span>

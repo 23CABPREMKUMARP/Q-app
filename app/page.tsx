@@ -435,7 +435,7 @@ export default function ProductPage() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -6, backgroundColor: "#fff", color: "#000" }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-4 rounded-2xl text-black transition-all shadow-xl flex items-center justify-center bg-slate-50 border border-slate-200 text-black border border-slate-300 backdrop-blur-xl gpu-accelerated"
+                    className="p-4 rounded-2xl text-black transition-all shadow-xl flex items-center justify-center bg-[#ffffff] border border-slate-200 text-black border border-slate-300 backdrop-blur-xl gpu-accelerated"
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -509,7 +509,7 @@ export default function ProductPage() {
               <motion.div 
                 key={i} 
                 whileHover={{ scale: 1.05, y: -4 }}
-                className="px-8 py-4 rounded-full bg-slate-50 border border-slate-200 text-black backdrop-blur-md border border-slate-300 text-black font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
+                className="px-8 py-4 rounded-full bg-[#ffffff] border border-slate-200 text-black backdrop-blur-md border border-slate-300 text-black font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
               >
                 {tech}
               </motion.div>

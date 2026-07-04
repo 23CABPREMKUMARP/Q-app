@@ -123,7 +123,7 @@ export default function HistoryPage() {
 
   return (
     <SecureView>
-      <main className="min-h-screen bg-slate-50 text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
+      <main className="min-h-screen bg-[#ffffff] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
       
       {/* Saffron Gradient PhonePe Header */}
       <div className="bg-[#A4E5E0] text-black fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
@@ -143,7 +143,7 @@ export default function HistoryPage() {
         {/* Intro Info Banner */}
         <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-black rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="space-y-2 relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-black border border-slate-300 text-slate-700 text-[9px] font-black uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffffff] border border-slate-200 text-black border border-slate-300 text-slate-700 text-[9px] font-black uppercase tracking-wider">
               <ShieldCheck size={12} className="text-[#A4E5E0]" /> Live DB Sync Nodes Active
             </div>
             <h2 className="text-2xl font-black uppercase tracking-tight">Sync Wallet Ledgers</h2>
@@ -239,7 +239,7 @@ export default function HistoryPage() {
             <div className="space-y-3">
               {filteredHistory.length === 0 ? (
                 <div className="text-center py-12 bg-[#ffffff] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4">
-                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-700">
+                  <div className="w-12 h-12 bg-[#ffffff] rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-700">
                     <History size={20} />
                   </div>
                   <div className="space-y-1">

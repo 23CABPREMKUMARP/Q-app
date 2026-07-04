@@ -477,7 +477,7 @@ export default function TicketCountSelectionPage() {
             <span className="text-sm font-black text-black uppercase truncate max-w-[120px]">{passengers.length}</span>
           </div>
           <div className="flex-1 flex flex-col items-center px-4">
-            <div className="w-full h-[1px] bg-slate-50 border border-slate-200 shadow-sm text-black relative">
+            <div className="w-full h-[1px] bg-[#ffffff] border border-slate-200 shadow-sm text-black relative">
               <div className="absolute inset-0 bg-[#A4E5E0] animate-pulse" />
               <Bus size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#A4E5E0]" />
             </div>
@@ -871,7 +871,7 @@ export default function TicketCountSelectionPage() {
 
                  <button 
                    onClick={() => router.push('/')}
-                   className="col-span-1 h-16 bg-slate-50 border border-slate-200 text-black text-black rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 active:scale-95"
+                   className="col-span-1 h-16 bg-[#ffffff] border border-slate-200 text-black text-black rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 active:scale-95"
                  >
                    Home
                  </button>

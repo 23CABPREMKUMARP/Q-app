@@ -103,13 +103,13 @@ export default function LuggageTrackingPage() {
                 <h3 className="text-xs font-black uppercase tracking-widest text-slate-600 mb-6">Tracking Timeline</h3>
                 
                 <div className="space-y-6 relative">
-                  <div className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-slate-50 border border-slate-200 text-black"></div>
+                  <div className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-[#ffffff] border border-slate-200 text-black"></div>
                   
                   {trackingData.steps.map((step: any, idx: number) => (
                     <div key={idx} className="flex gap-4 relative z-10">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         step.active ? 'bg-[#A4E5E0] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
-                        step.completed ? 'bg-emerald-500' : 'bg-slate-50 border border-slate-200 text-black'
+                        step.completed ? 'bg-emerald-500' : 'bg-[#ffffff] border border-slate-200 text-black'
                       }`}>
                         {step.completed && !step.active ? <CheckCircle size={14} className="text-black" /> : 
                          step.active ? <Truck size={14} className="text-black" /> : 

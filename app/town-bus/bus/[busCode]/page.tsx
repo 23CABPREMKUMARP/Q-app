@@ -111,7 +111,7 @@ export default function BusCodeDetailsPage() {
                 href={`/town-bus/${trip._id}/seat-selection`}
                 className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
-                <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 text-black flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-[#ffffff] border border-slate-200 text-black flex items-center justify-center">
                   <Bus size={20} className="text-[#A4E5E0]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>
@@ -119,7 +119,7 @@ export default function BusCodeDetailsPage() {
               
               <Link 
                 href={`/live-map?busId=${trip.busId}`}
-                className="bg-[#ffffff] border border-slate-200 text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-50 active:scale-95 transition-all shadow-sm"
+                className="bg-[#ffffff] border border-slate-200 text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-[#ffffff] active:scale-95 transition-all shadow-sm"
               >
                 <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
                   <MapPin size={20} className="text-emerald-500" />

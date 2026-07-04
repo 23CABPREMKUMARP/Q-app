@@ -165,7 +165,7 @@ export default function TownBusSearchPage() {
               <div className="absolute left-6 top-10 bottom-10 w-0.5 bg-slate-200 border-l-2 border-dashed border-slate-300"></div>
               
               <div className="relative">
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#A4E5E0] transition-colors relative z-10">
+                <div className="flex items-center gap-4 bg-[#ffffff] p-4 rounded-2xl border border-slate-100 focus-within:border-[#A4E5E0] transition-colors relative z-10">
                   <MapPin size={20} className="text-emerald-500" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-1">Boarding Point</label>
@@ -187,7 +187,7 @@ export default function TownBusSearchPage() {
                       <div 
                         key={i} 
                         onClick={() => { handleLocationChange('from', stop); setShowFromSuggestions(false); }}
-                        className="px-4 py-3 hover:bg-slate-50 cursor-pointer text-sm font-bold text-slate-700 border-b border-slate-50 last:border-0"
+                        className="px-4 py-3 hover:bg-[#ffffff] cursor-pointer text-sm font-bold text-slate-700 border-b border-slate-50 last:border-0"
                       >
                         {stop}
                       </div>
@@ -197,7 +197,7 @@ export default function TownBusSearchPage() {
               </div>
 
               <div className="relative">
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 focus-within:border-[#A4E5E0] transition-colors relative z-10">
+                <div className="flex items-center gap-4 bg-[#ffffff] p-4 rounded-2xl border border-slate-100 focus-within:border-[#A4E5E0] transition-colors relative z-10">
                   <Navigation size={20} className="text-red-500" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-1">Drop Point</label>
@@ -219,7 +219,7 @@ export default function TownBusSearchPage() {
                       <div 
                         key={i} 
                         onClick={() => { handleLocationChange('to', stop); setShowToSuggestions(false); }}
-                        className="px-4 py-3 hover:bg-slate-50 cursor-pointer text-sm font-bold text-slate-700 border-b border-slate-50 last:border-0"
+                        className="px-4 py-3 hover:bg-[#ffffff] cursor-pointer text-sm font-bold text-slate-700 border-b border-slate-50 last:border-0"
                       >
                         {stop}
                       </div>
@@ -306,7 +306,7 @@ export default function TownBusSearchPage() {
                   {(trip.busId?.busCode || trip.busId?.qrCodeUrl) && (
                     <div 
                       onClick={(e) => { e.stopPropagation(); setExpandedQR(expandedQR === trip._id ? null : trip._id); }}
-                      className="flex items-center gap-2 mt-1 bg-slate-50 p-1.5 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors"
+                      className="flex items-center gap-2 mt-1 bg-[#ffffff] p-1.5 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors"
                     >
                       {trip.busId.busCode && (
                         <div className="bg-[#ffffff] p-1 rounded-md shadow-sm border border-slate-100">
@@ -333,7 +333,7 @@ export default function TownBusSearchPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="w-full mb-4 flex flex-col items-center justify-center bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-inner"
+                    className="w-full mb-4 flex flex-col items-center justify-center bg-[#ffffff] p-6 rounded-2xl border border-slate-200 shadow-inner"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="bg-[#ffffff] p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
@@ -352,7 +352,7 @@ export default function TownBusSearchPage() {
                   <span className="text-sm font-black text-black uppercase truncate max-w-[120px]">{from || "Start"}</span>
                 </div>
                 <div className="flex-1 flex flex-col items-center px-4">
-                  <div className="w-full h-[1px] bg-slate-50 border border-slate-200 shadow-sm text-black relative">
+                  <div className="w-full h-[1px] bg-[#ffffff] border border-slate-200 shadow-sm text-black relative">
                     <div className="absolute inset-0 bg-[#A4E5E0] animate-pulse" />
                     <ArrowRight size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#A4E5E0]" />
                   </div>

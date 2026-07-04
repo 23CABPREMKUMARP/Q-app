@@ -624,7 +624,7 @@ function EnterpriseAdminDashboardContent() {
             <h2 className="text-[13px] font-medium text-zinc-300 capitalize">
               {activeTab.replace("-", " ")}
             </h2>
-            <div className="h-4 w-px bg-slate-50 border border-slate-200 shadow-sm text-black"></div>
+            <div className="h-4 w-px bg-[#ffffff] border border-slate-200 shadow-sm text-black"></div>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="text-[11px] font-medium text-zinc-500">System Normal</span>
@@ -661,7 +661,7 @@ function EnterpriseAdminDashboardContent() {
               <RefreshCw size={14} className={isLoading ? "animate-spin text-orange-500" : ""} />
             </button>
 
-            <div className="h-4 w-px bg-slate-50 border border-slate-200 shadow-sm text-black"></div>
+            <div className="h-4 w-px bg-[#ffffff] border border-slate-200 shadow-sm text-black"></div>
             <UserButton appearance={{ elements: { avatarBox: "w-7 h-7 rounded-md" } }} />
           </div>
         </header>
@@ -786,7 +786,7 @@ function EnterpriseAdminDashboardContent() {
                   <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-800/80 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-[13px] font-medium text-zinc-200">System Alerts</h3>
-                      <span className="px-2 py-0.5 bg-slate-50 border border-slate-200 shadow-sm text-black rounded text-[10px] font-medium text-zinc-600">
+                      <span className="px-2 py-0.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded text-[10px] font-medium text-zinc-600">
                         {activeAlerts.length}
                       </span>
                     </div>
@@ -911,7 +911,7 @@ function EnterpriseAdminDashboardContent() {
                                 setBuses(prev => prev.map(b => b._id === bus._id ? { ...b, gps_enabled: !gpsOn } as any : b));
                               }}
                               className={`text-[10px] font-medium px-2 py-0.5 rounded transition-colors ${
-                                gpsOn ? 'bg-zinc-200 text-black hover:bg-[#ffffff]' : 'bg-slate-50 border border-slate-200 shadow-sm text-black text-zinc-600 hover:bg-zinc-700'
+                                gpsOn ? 'bg-zinc-200 text-black hover:bg-[#ffffff]' : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600 hover:bg-zinc-700'
                               }`}
                             >
                               {gpsOn ? 'GPS On' : 'GPS Off'}
@@ -922,7 +922,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right space-x-2">
                           <button
                             onClick={() => handleRegenerateQR(bus._id)}
-                            className="p-1.5 rounded bg-slate-50 border border-slate-200 shadow-sm text-black text-zinc-600 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
+                            className="p-1.5 rounded bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
                             title="Regenerate QR"
                           >
                             <RefreshCw size={14} />
@@ -1060,7 +1060,7 @@ function EnterpriseAdminDashboardContent() {
                           <select 
                             onChange={(e) => handleUpdateCrowdStatus(route.id, e.target.value)}
                             value={route.status || "Scheduled"}
-                            className="bg-slate-50 border border-slate-200 shadow-sm text-black border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                            className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
                           >
                             <option value="Scheduled">Scheduled</option>
                             <option value="Running">Active</option>
@@ -1118,7 +1118,7 @@ function EnterpriseAdminDashboardContent() {
                           <select 
                             onChange={(e) => handleUpdateLuggageStatus(parcel.id, e.target.value)}
                             value={parcel.status}
-                            className="bg-slate-50 border border-slate-200 shadow-sm text-black border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                            className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
                           >
                             <option value="Booked">Booked</option>
                             <option value="Picked up">Picked up</option>
@@ -1182,7 +1182,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right">
                           <button 
                             onClick={() => handleTriggerRefund(b.ticketId, b.totalAmount)}
-                            className="px-2 py-1 rounded bg-slate-50 border border-slate-200 shadow-sm text-black text-zinc-600 hover:text-red-400 hover:bg-red-500/10 transition-colors text-[11px] font-medium"
+                            className="px-2 py-1 rounded bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600 hover:text-red-400 hover:bg-red-500/10 transition-colors text-[11px] font-medium"
                           >
                             Refund
                           </button>

@@ -21,7 +21,7 @@ export default function AboutPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-slate-50 text-slate-900 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom"
+      className="min-h-screen bg-[#ffffff] text-slate-900 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom"
     >
       {/* Premium Header */}
       <div className="bg-[#ffffff] border-b border-slate-100 py-6 px-6 sticky top-0 z-40 shadow-sm flex items-center gap-3">
@@ -40,7 +40,7 @@ export default function AboutPage() {
           <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#A4E5E0]/15 rounded-full blur-3xl" />
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-slate-50 border border-slate-200 text-black rounded-2xl flex items-center justify-center border border-slate-200">
+              <div className="w-14 h-14 bg-[#ffffff] border border-slate-200 text-black rounded-2xl flex items-center justify-center border border-slate-200">
                 <Image src="/hero-logo.png" alt="JeffBen" width={36} height={36} className="object-contain" />
               </div>
               <div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
         {/* Dynamic Globe Section */}
         <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm overflow-hidden flex flex-col items-center">
           <h3 className="text-sm font-bold text-slate-600 uppercase tracking-wider mb-4 w-full text-left">Global Transit Footprint</h3>
-          <div className="relative w-full h-[220px] bg-slate-50 rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100">
+          <div className="relative w-full h-[220px] bg-[#ffffff] rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100">
             <div className="absolute inset-0 bg-orange-500/5 rounded-full blur-[40px] scale-75" />
             <Globe className="relative z-10 w-full h-full scale-105" />
           </div>
@@ -117,10 +117,10 @@ export default function AboutPage() {
               <h4 className="text-sm font-bold text-slate-900">JeffBen</h4>
               <p className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider">Founder & Chief Executive Officer</p>
               <div className="flex gap-2 mt-2">
-                <a href="https://youtube.com/@jeffbenofficial" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-lg text-slate-600 transition-all">
+                <a href="https://youtube.com/@jeffbenofficial" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-[#ffffff] hover:bg-slate-100 border border-slate-100 rounded-lg text-slate-600 transition-all">
                   <Youtube size={14} />
                 </a>
-                <a href="mailto:jeffbenofficial1@gmail.com" className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-lg text-slate-600 transition-all">
+                <a href="mailto:jeffbenofficial1@gmail.com" className="p-1.5 bg-[#ffffff] hover:bg-slate-100 border border-slate-100 rounded-lg text-slate-600 transition-all">
                   <Mail size={14} />
                 </a>
               </div>
@@ -182,7 +182,7 @@ export default function AboutPage() {
               "Web & Mobile Apps", "GPS-based telemetry", "Cloud Data Systems", 
               "Secure QR Cryptography", "Real-Time Dispatching Engines"
             ].map((tech, idx) => (
-              <span key={idx} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-full text-[9px] font-bold text-slate-600 uppercase tracking-wide">
+              <span key={idx} className="px-3 py-1.5 bg-[#ffffff] border border-slate-100 rounded-full text-[9px] font-bold text-slate-600 uppercase tracking-wide">
                 {tech}
               </span>
             ))}
