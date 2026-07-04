@@ -6,38 +6,38 @@
 :root {
   --background: #FAF6F0; 
   --foreground: #333333; 
-  --dark-saffron: #8B1E2E;
+  --dark-saffron: #A4E5E0;
   --radius: 1rem;
   --card: #ffffff;
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #111827;
-  --primary: #8B1E2E; 
-  --primary-foreground: #ffffff;
+  --primary: #A4E5E0; 
+  --primary-foreground: #0f172a;
 
   --secondary: #f3f4f6;
   --secondary-foreground: #111827;
   --muted: #f3f4f6;
   --muted-foreground: #6b7280;
   --accent: #fff7ed; 
-  --accent-foreground: #8B1E2E;
+  --accent-foreground: #A4E5E0;
   --destructive: #ef4444;
   --border: #e5e7eb;
   --input: #e5e7eb;
   --ring: #D4A017;
-  --chart-1: #8B1E2E;
+  --chart-1: #A4E5E0;
   --chart-2: #0F6B5C;
   --chart-3: #0F6B5C;
   --chart-4: #f59e0b;
   --chart-5: #6366f1;
   --sidebar: #ffffff;
   --sidebar-foreground: #111827;
-  --sidebar-primary: #8B1E2E;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary: #A4E5E0;
+  --sidebar-primary-foreground: #0f172a;
   --sidebar-accent: #f3f4f6;
   --sidebar-accent-foreground: #111827;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: #8B1E2E;
+  --sidebar-ring: #A4E5E0;
 }
 
 @theme inline {
@@ -47,7 +47,7 @@
   --color-orange-200: #e79da9;
   --color-orange-300: #da6a7e;
   --color-orange-400: #c63f58;
-  --color-orange-500: #8B1E2E; /* Primary Maroon */
+  --color-orange-500: #A4E5E0; /* Primary Maroon */
   --color-orange-600: #7a1826;
   --color-orange-700: #65121e;
   --color-orange-800: #54101a;
