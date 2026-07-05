@@ -141,13 +141,13 @@ export default function HistoryPage() {
       <div className="max-w-xl md:max-w-4xl mx-auto px-5 pt-8 space-y-6">
         
         {/* Intro Info Banner */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-[#111827] rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="space-y-2 relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] text-[#6B7280] text-[9px] font-black uppercase tracking-wider">
               <ShieldCheck size={12} className="text-[#F28500]" /> Live DB Sync Nodes Active
             </div>
-            <h2 className="text-2xl font-black uppercase tracking-tight">Sync Wallet Ledgers</h2>
-            <p className="text-[#6B7280] text-xs font-semibold leading-relaxed max-w-sm">
+            <h2 className="text-2xl font-black uppercase tracking-tight text-white">Sync Wallet Ledgers</h2>
+            <p className="text-white text-xs font-semibold leading-relaxed max-w-sm">
               Verify your registered transit number to fetch actual trip bookings, spend distributions, and active travel passes.
             </p>
           </div>
