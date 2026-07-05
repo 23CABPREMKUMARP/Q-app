@@ -55,8 +55,8 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
 function createUserIcon(): L.DivIcon {
   const html = `
     <div class="relative flex items-center justify-center">
-      <div class="w-5 h-5 rounded-full bg-blue-500 ring-4 ring-blue-300/60 shadow-lg"></div>
-      <div class="absolute w-12 h-12 rounded-full bg-blue-400/20 animate-ping"></div>
+      <div class="w-5 h-5 rounded-full bg-[#F59E0B] ring-4 ring-blue-300/60 shadow-lg"></div>
+      <div class="absolute w-12 h-12 rounded-full bg-[#F59E0B]/20 animate-ping"></div>
     </div>`;
   return L.divIcon({ html, className: "", iconSize: [24, 24], iconAnchor: [12, 12] });
 }

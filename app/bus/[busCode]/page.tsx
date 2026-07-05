@@ -32,7 +32,7 @@ export default function BusQRRedirectPage() {
               <Bus size={28} className="text-[#6B7280]" />
             </div>
 
-            <h1 className="text-2xl font-black text-[#0f172a] tracking-tight mb-2">BUS FOUND</h1>
+            <h1 className="text-2xl font-black text-[#10B981] tracking-tight mb-2">BUS FOUND</h1>
             <p className="text-[13px] text-slate-500 mb-6">You have scanned the QR code for:</p>
             
             {/* Bus Code Pill */}
@@ -44,16 +44,16 @@ export default function BusQRRedirectPage() {
 
             <div className="w-full h-px bg-slate-100 mb-8"></div>
 
-            <h2 className="text-[11px] font-bold text-[#0f172a] tracking-[0.2em] mb-6">HOW TO BOARD</h2>
+            <h2 className="text-[11px] font-bold text-[#10B981] tracking-[0.2em] mb-6">HOW TO BOARD</h2>
 
             <div className="space-y-6 w-full text-left mb-10">
               {/* Step 1 */}
               <div className="flex gap-4">
                 <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                  <Grid size={14} className="text-blue-500" />
+                  <Grid size={14} className="text-[#F59E0B]" />
                 </div>
                 <div>
-                  <h3 className="text-[13px] font-bold text-[#0f172a]">1. Open the JeffBen App</h3>
+                  <h3 className="text-[13px] font-bold text-[#10B981]">1. Open the JeffBen App</h3>
                   <p className="text-[11px] text-slate-500 mt-0.5">Don't have it? Download it below.</p>
                 </div>
               </div>
@@ -64,7 +64,7 @@ export default function BusQRRedirectPage() {
                   <QrCode size={14} className="text-orange-500" />
                 </div>
                 <div>
-                  <h3 className="text-[13px] font-bold text-[#0f172a]">2. Tap "Scan QR"</h3>
+                  <h3 className="text-[13px] font-bold text-[#10B981]">2. Tap "Scan QR"</h3>
                   <p className="text-[11px] text-slate-500 mt-0.5">Scan this matrix code using the app.</p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function BusQRRedirectPage() {
                   <MapPin size={14} className="text-emerald-500" />
                 </div>
                 <div>
-                  <h3 className="text-[13px] font-bold text-[#0f172a]">3. Select Seat & Pay</h3>
+                  <h3 className="text-[13px] font-bold text-[#10B981]">3. Select Seat & Pay</h3>
                   <p className="text-[11px] text-slate-500 mt-0.5">Get your digital ticket instantly.</p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function BusQRRedirectPage() {
             <a 
               href="/api/download-app" 
               download="Smart-Tamizha-App.apk"
-              className="w-full bg-[#0f172a] hover:bg-[#0F172A] text-[#111827] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
+              className="w-full bg-[#10B981] hover:bg-[#10B981] text-[#111827] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
               DOWNLOAD APP TO BOARD
             </a>

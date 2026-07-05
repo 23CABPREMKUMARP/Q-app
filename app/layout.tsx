@@ -64,7 +64,7 @@ export default function RootLayout({
         variables: {
           colorPrimary: "#F28500",
           colorBackground: "#ffffff",
-          colorText: "#0f172a",
+          colorText: "#10B981",
           borderRadius: "1rem",
           fontFamily: "Inter, Manrope, system-ui, sans-serif",
         },

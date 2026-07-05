@@ -19,7 +19,7 @@ const LeafletBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), {
 const MapSkeleton = () => (
   <div className="flex items-center justify-center h-full w-full bg-[#e8eaed]">
     <div className="flex flex-col items-center gap-4">
-      <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+      <div className="w-16 h-16 border-4 border-gray-300 border-t-[#F59E0B] rounded-full animate-spin" />
       <p className="text-gray-500 text-sm font-medium">Loading map…</p>
     </div>
   </div>
@@ -156,7 +156,7 @@ function LiveMapContent() {
         <div className="flex items-center gap-2 md:gap-3 pointer-events-auto max-w-xl mx-auto md:mx-0">
 
           {/* Search box */}
-          <div className={`flex-1 bg-[#F8FAFC] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-blue-400 shadow-xl" : ""}`}
+          <div className={`flex-1 bg-[#F8FAFC] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#F59E0B] shadow-xl" : ""}`}
             style={{ height: 48 }}>
             {searchFocused ? (
               <button onClick={() => { setSearchFocused(false); setSearchQuery(""); }} className="text-gray-500">
@@ -231,7 +231,7 @@ function LiveMapContent() {
                     className="w-full flex items-center justify-between py-2 text-sm font-semibold text-gray-700"
                   >
                     {item.label}
-                    <div className={`w-10 h-5 rounded-full transition-colors relative ${item.value ? "bg-blue-500" : "bg-gray-200"}`}>
+                    <div className={`w-10 h-5 rounded-full transition-colors relative ${item.value ? "bg-[#F59E0B]" : "bg-gray-200"}`}>
                       <div className={`absolute top-0.5 w-4 h-4 bg-[#F8FAFC] rounded-full shadow transition-all ${item.value ? "left-5" : "left-0.5"}`} />
                     </div>
                   </button>
@@ -245,10 +245,10 @@ function LiveMapContent() {
         <button
           onClick={requestLocation}
           disabled={locating}
-          className={`w-12 h-12 bg-[#F8FAFC] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-blue-500"}`}
+          className={`w-12 h-12 bg-[#F8FAFC] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-[#F59E0B]"}`}
         >
           {locating ? (
-            <div className="w-5 h-5 border-2 border-blue-300 border-t-blue-500 rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-blue-300 border-t-[#F59E0B] rounded-full animate-spin" />
           ) : (
             <Locate size={20} />
           )}
@@ -286,7 +286,7 @@ function LiveMapContent() {
               <div className="flex items-start gap-4">
                 {/* Bus icon */}
                 <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 border border-blue-100">
-                  <Bus size={26} className="text-blue-500" />
+                  <Bus size={26} className="text-[#F59E0B]" />
                 </div>
 
                 <div className="flex-1 min-w-0">
@@ -322,7 +322,7 @@ function LiveMapContent() {
                   const Icon = stat.icon;
                   return (
                     <div key={stat.label} className="bg-gray-50 rounded-2xl p-3 text-center">
-                      <Icon size={16} className="text-blue-500 mx-auto mb-1" />
+                      <Icon size={16} className="text-[#F59E0B] mx-auto mb-1" />
                       <p className="text-xs font-black text-gray-800">{stat.value}</p>
                       <p className="text-[9px] text-gray-400 font-semibold mt-0.5">{stat.label}</p>
                     </div>
@@ -333,7 +333,7 @@ function LiveMapContent() {
               {/* Expand indicator */}
               <button
                 onClick={() => setDrawerState(drawerState === "peek" ? "full" : "peek")}
-                className="w-full mt-3 py-2 flex items-center justify-center gap-1 text-xs font-bold text-blue-500"
+                className="w-full mt-3 py-2 flex items-center justify-center gap-1 text-xs font-bold text-[#F59E0B]"
               >
                 {drawerState === "peek" ? "More info" : "Less info"}
                 {drawerState === "peek" ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -389,7 +389,7 @@ function LiveMapContent() {
                     </div>
                     {nextStop && (
                       <div className="bg-blue-50 rounded-2xl p-4">
-                        <div className="flex items-center gap-1.5 text-[9px] font-black text-blue-400 uppercase tracking-widest mb-1"><MapPin size={10} /> Next Stop</div>
+                        <div className="flex items-center gap-1.5 text-[9px] font-black text-[#F59E0B] uppercase tracking-widest mb-1"><MapPin size={10} /> Next Stop</div>
                         <p className="text-sm font-black text-gray-900 leading-tight">{nextStop.stopName}</p>
                       </div>
                     )}

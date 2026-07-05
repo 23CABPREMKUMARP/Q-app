@@ -686,7 +686,7 @@ function EnterpriseAdminDashboardContent() {
               {/* SaaS KPI Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 {[
-                  { label: "Total Bookings", val: stats.totalBookings, trend: "+14.8%", color: "bg-blue-500", icon: Ticket },
+                  { label: "Total Bookings", val: stats.totalBookings, trend: "+14.8%", color: "bg-[#F59E0B]", icon: Ticket },
                   { label: "Revenue (Today)", val: `₹${stats.totalRevenue.toLocaleString()}`, trend: "+18.2%", color: "bg-emerald-500", icon: DollarSign },
                   { label: "Active Fleet", val: stats.activeBuses, trend: "Stable", color: "bg-orange-500", icon: Bus },
                   { label: "Active Staff", val: stats.activeConductors, trend: "Optimal", color: "bg-purple-500", icon: Users },
@@ -813,7 +813,7 @@ function EnterpriseAdminDashboardContent() {
                         <div key={log.id} className="flex gap-3 items-start text-[12px]">
                           <span className="text-zinc-600 font-mono text-[10px] mt-0.5 w-12">{log.time.substring(0, 5)}</span>
                           <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                            log.type === 'success' ? 'bg-emerald-500' : log.type === 'warn' ? 'bg-[#EF4444]' : 'bg-blue-500'
+                            log.type === 'success' ? 'bg-emerald-500' : log.type === 'warn' ? 'bg-[#EF4444]' : 'bg-[#F59E0B]'
                           }`}></span>
                           <span className="text-zinc-600 leading-snug flex-1">{log.text}</span>
                         </div>

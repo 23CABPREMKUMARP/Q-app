@@ -208,7 +208,7 @@ export default function GetTicketPage() {
                   placeholder="Search by ID, Bus, or Route..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none"
+                  className="w-full bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-[#F59E0B] outline-none"
                 />
               </div>
             </div>

@@ -406,7 +406,7 @@ export default function MobileDashboard() {
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
                 <div className="w-12 h-12 bg-[#F8FAFC] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
-                  <CreditCard size={20} className="text-blue-500" />
+                  <CreditCard size={20} className="text-[#F59E0B]" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Payment<br/>Methods</span>
               </Link>
