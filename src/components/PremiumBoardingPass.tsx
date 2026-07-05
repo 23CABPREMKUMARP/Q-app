@@ -217,12 +217,12 @@ export function PremiumBoardingPass({
             <div className="relative z-10 flex flex-col items-center w-full">
               {isExpired && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center backdrop-blur-[1px]">
-                  <span className="bg-[#DC2626] text-[#111827] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-[#EF4444]">EXPIRED</span>
+                  <span className="bg-[#111827] text-[#F28500] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-[#F28500]">EXPIRED</span>
                 </div>
               )}
               
               {/* Status / Timer with Border */}
-              <div className={`mb-2 text-center flex flex-col items-center gap-1 border-2 p-1.5 rounded-lg shadow-sm bg-[#F8FAFC]/40 ${!isExpired ? 'border-green-600' : 'border-red-600'}`}>
+              <div className={`mb-2 text-center flex flex-col items-center gap-1 border-2 p-1.5 rounded-lg shadow-sm bg-[#F8FAFC]/40 ${!isExpired ? 'border-[#22C55E]' : 'border-[#F28500]'}`}>
                 {!isExpired && (
                    <span className="bg-green-600 text-[#111827] text-sm font-bold px-3 py-1 rounded-full uppercase shadow-sm">
                      Active 
@@ -231,7 +231,7 @@ export function PremiumBoardingPass({
                 {!isExpired ? (
                   <span className="text-[11px] md:text-xs font-black text-green-700 uppercase tracking-widest whitespace-nowrap">{timeRemainingStr}</span>
                 ) : (
-                  <span className="text-[11px] md:text-xs font-black text-red-700 uppercase tracking-widest bg-[#F8FAFC] px-2 py-0.5 rounded whitespace-nowrap">Validity Ended</span>
+                  <span className="text-[11px] md:text-xs font-black text-[#F28500] uppercase tracking-widest bg-[#F8FAFC] px-2 py-0.5 rounded whitespace-nowrap">Validity Ended</span>
                 )}
               </div>
 

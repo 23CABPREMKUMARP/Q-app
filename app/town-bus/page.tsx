@@ -198,7 +198,7 @@ export default function TownBusSearchPage() {
 
               <div className="relative">
                 <div className="flex items-center gap-4 bg-[#F8FAFC] p-4 rounded-2xl border border-slate-100 focus-within:border-[#F28500] transition-colors relative z-10">
-                  <Navigation size={20} className="text-[#EF4444]" />
+                  <Navigation size={20} className="text-[#111827]" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-1">Drop Point</label>
                     <input 
@@ -290,9 +290,9 @@ export default function TownBusSearchPage() {
                       {trip.busId?.busNumber || "TBA"}
                     </span>
                     <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md flex items-center gap-1 ${
-                      trip.crowdStatus === 'Low' ? 'text-[#F28500] bg-emerald-50 border border-emerald-100' :
+                      trip.crowdStatus === 'Low' ? 'text-[#22C55E] bg-green-50 border border-green-100' :
                       trip.crowdStatus === 'Medium' ? 'text-yellow-600 bg-yellow-50 border border-yellow-100' :
-                      'text-red-600 bg-red-50 border border-red-100'
+                      'text-[#F28500] bg-orange-50 border border-orange-100'
                     }`}>
                       <Users size={12} /> {trip.crowdStatus} Crowd
                     </span>
