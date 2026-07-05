@@ -8,7 +8,6 @@ import Splash from "./Splash";
 export function AppBootSplash({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { isLoaded, userId } = useAuth();
-  const [minTimePassed, setMinTimePassed] = useState(false);
 
   // Track page path changes globally
   useEffect(() => {
@@ -41,14 +40,7 @@ export function AppBootSplash({ children }: { children: React.ReactNode }) {
     }
   }, [isLoaded, userId]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMinTimePassed(true);
-    }, 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!isLoaded || !minTimePassed) {
+  if (!isLoaded) {
     return <Splash />;
   }
 
