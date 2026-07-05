@@ -73,7 +73,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   transition={{ delay: 1.5, duration: 0.8 }}
                   className="text-5xl md:text-7xl font-black tracking-tighter uppercase font-heading"
                 >
-                  <span className="text-[#111827]">Digi Bus</span> <span className="text-[#111827]">Stand</span>
+                  <span className="text-[#ffffff]">Digi Bus</span> <span className="text-[#ffffff]">Stand</span>
                 </motion.h1>
                 <motion.div
                   initial={{ scaleX: 0 }}
@@ -86,9 +86,9 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.8 }}
                   transition={{ delay: 2.6 }}
-                  className="text-[#111827] font-bold uppercase tracking-widest text-[9px]"
+                  className="text-[#ffffff] font-bold uppercase tracking-widest text-[9px]"
                 >
-                  Powered by <span className="text-[#111827]">JeffBen</span>
+                  Powered by <span className="text-[#ffffff]">JeffBen</span>
                 </motion.p>
               </div>
 

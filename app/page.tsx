@@ -63,7 +63,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             transition={{ delay: 1.5 }}
             className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic font-heading"
           >
-            <span className="text-zinc-950">Digi Bus</span> <span className="text-[#111827]">Stand</span>
+            <span className="text-[#ffffff]">Digi Bus</span> <span className="text-[#ffffff]">Stand</span>
           </motion.h2>
           <motion.div 
             initial={{ width: 0 }}
@@ -75,7 +75,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
             transition={{ delay: 2.2 }}
-            className="text-zinc-950 font-bold uppercase tracking-widest text-[10px]"
+            className="text-[#ffffff] font-bold uppercase tracking-widest text-[10px]"
           >
             Powered By JeffBen Systems
           </motion.p>
