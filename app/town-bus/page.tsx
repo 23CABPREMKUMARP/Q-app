@@ -232,7 +232,7 @@ export default function TownBusSearchPage() {
             <button 
               type="submit"
               disabled={isSearching}
-              className="w-full bg-[#F28500] text-[#111827] py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#F59E0B] transition-colors shadow-lg shadow-[#F28500]/20 active:scale-95 active:bg-[#F59E0B] flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-[#F28500] text-[#111827] py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#EF4444] transition-colors shadow-lg shadow-[#F28500]/20 active:scale-95 active:bg-[#EF4444] flex items-center justify-center gap-2 mt-2"
             >
               {isSearching ? (
                 <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div>
@@ -368,7 +368,7 @@ export default function TownBusSearchPage() {
                   <div className="w-2 h-2 rounded-full bg-[#F28500] animate-pulse"></div>
                   <span className="text-xs font-bold text-zinc-600">{trip.availableSeats} Seats Left</span>
                 </div>
-                <button className="bg-[#F28500] hover:bg-orange-600 text-[#111827] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-[#F28500]/20">
+                <button className="bg-[#F28500] hover:bg-[#EF4444] active:bg-[#EF4444] active:scale-95 text-[#111827] px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 shadow-lg shadow-[#F28500]/20">
                   Select Tickets <Navigation size={14} />
                 </button>
               </div>

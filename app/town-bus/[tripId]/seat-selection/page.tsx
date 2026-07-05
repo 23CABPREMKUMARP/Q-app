@@ -647,7 +647,7 @@ export default function TicketCountSelectionPage() {
                 <button 
                   onClick={() => setStep(3)}
                   disabled={passengers.some(p => !p.boarding || !p.destination)}
-                  className="w-full h-20 bg-[#F28500] text-[#111827] rounded-[32px] font-black text-xl tracking-tighter hover:bg-orange-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#F28500]/20"
+                  className="w-full h-20 bg-[#F28500] text-[#111827] rounded-[32px] font-black text-xl tracking-tighter hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#F28500]/20"
                 >
                   Proceed to Payment <ChevronRight size={24} />
                 </button>
@@ -717,7 +717,7 @@ export default function TicketCountSelectionPage() {
                     </button>
                     <button 
                       onClick={() => handlePayment()}
-                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#F28500] text-[#111827] hover:bg-[#e07b1a] transition-colors shadow-lg shadow-[#F28500]/20"
+                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#F28500] text-[#111827] hover:bg-[#EF4444] active:bg-[#EF4444] transition-colors shadow-lg shadow-[#F28500]/20"
                     >
                       Pay ₹{totalAmount}
                     </button>
@@ -856,7 +856,7 @@ export default function TicketCountSelectionPage() {
 
                  <button 
                    onClick={() => router.push('/town-bus')}
-                   className="col-span-2 md:col-span-1 h-16 bg-[#F28500] text-[#111827] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#F28500]/20 border border-[#F28500]"
+                   className="col-span-2 md:col-span-1 h-16 bg-[#F28500] text-[#111827] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#F28500]/20 border border-[#F28500]"
                  >
                    <Bus size={16} />
                    Return to Bus List
@@ -903,7 +903,7 @@ export default function TicketCountSelectionPage() {
               <div className="w-full max-w-sm space-y-4">
                 <button 
                   onClick={() => handlePayment()}
-                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[#111827] bg-[#F28500] hover:bg-[#e07b1a] transition-all active:scale-[0.98] shadow-xl shadow-[#F28500]/20"
+                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[#111827] bg-[#F28500] hover:bg-[#EF4444] active:bg-[#EF4444] transition-all active:scale-[0.98] shadow-xl shadow-[#F28500]/20"
                 >
                   Retry Payment
                 </button>
