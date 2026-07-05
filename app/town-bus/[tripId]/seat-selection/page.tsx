@@ -328,47 +328,7 @@ export default function TicketCountSelectionPage() {
       <SecureView>
         <Splash />
       
-      {/* FULL TICKET MODAL */}
-      <AnimatePresence>
-        {selectedTicket && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center p-4"
-          >
-            <div className="absolute inset-0" onClick={() => setSelectedTicket(null)}></div>
-            
-            <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
-              <button 
-                onClick={() => setSelectedTicket(null)}
-                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#111827] rounded-full p-2 backdrop-blur-md transition-colors"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              className="w-[750px] md:w-max flex justify-center items-center relative z-10 transform rotate-90 md:rotate-0 origin-center scale-[0.95] sm:scale-[1] md:scale-100 transition-transform"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <PremiumBoardingPass booking={selectedTicket} currentTime={currentTime} />
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="mt-6 relative z-10 text-[#111827] text-xs font-bold uppercase tracking-widest opacity-70"
-            >
-              Tap outside to close
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
 
     </SecureView>
     );
@@ -742,14 +702,14 @@ export default function TicketCountSelectionPage() {
                   transition={{ type: "spring", damping: 12, stiffness: 200 }}
                   className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border-2 border-emerald-100"
                 >
-                  <CheckCircle2 size={32} className="text-[#F28500]" />
+                  <CheckCircle2 size={32} className="text-[#22C55E]" />
                 </motion.div>
                 <div className="space-y-1">
                   <motion.h4 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="text-2xl font-bold text-zinc-900 tracking-tight uppercase"
+                    className="text-2xl font-bold text-[#22C55E] tracking-tight uppercase"
                   >
                     Payment Verified
                   </motion.h4>
@@ -1009,6 +969,48 @@ export default function TicketCountSelectionPage() {
               <p className="text-3xl font-black text-[#F28500] uppercase tracking-widest">
                 {trip?.busCode || trip?.busNumber || tripId}
               </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* FULL TICKET MODAL */}
+      <AnimatePresence>
+        {selectedTicket && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center p-4"
+          >
+            <div className="absolute inset-0" onClick={() => setSelectedTicket(null)}></div>
+            
+            <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
+              <button 
+                onClick={() => setSelectedTicket(null)}
+                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#111827] rounded-full p-2 backdrop-blur-md transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="w-[750px] md:w-max flex justify-center items-center relative z-10 transform rotate-90 md:rotate-0 origin-center scale-[0.95] sm:scale-[1] md:scale-100 transition-transform"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <PremiumBoardingPass booking={selectedTicket} currentTime={currentTime} />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="mt-6 relative z-10 text-[#111827] text-xs font-bold uppercase tracking-widest opacity-70"
+            >
+              Tap outside to close
             </motion.div>
           </motion.div>
         )}

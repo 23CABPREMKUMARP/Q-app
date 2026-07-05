@@ -109,7 +109,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
                 initial={{ opacity: 0, y: 15, scale: 1.5 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: "spring", damping: 15, stiffness: 400 }}
-                className={`text-2xl font-black transition-colors duration-500 font-ui ${isValid ? "text-[#F28500]" : "text-dark-saffron"}`}
+                className={`text-2xl font-black transition-colors duration-500 font-ui ${isValid ? "text-[#22C55E]" : "text-dark-saffron"}`}
               >
                 {digit}
               </motion.span>
@@ -134,7 +134,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
                  key="valid"
                  initial={{ scale: 0, rotate: -45 }}
                  animate={{ scale: 1, rotate: 0 }}
-                 className="text-[#F28500]"
+                 className="text-[#22C55E]"
                >
                  <CheckCircle2 size={24} strokeWidth={3} />
                </motion.div>
