@@ -1459,7 +1459,7 @@ export default function EnterpriseConductorPortal() {
                       <div className="flex items-center gap-3">
                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
                           gpsState.status === 'broadcasting'
-                            ? 'bg-emerald-500 text-[#111827] shadow-lg shadow-emerald-500/30'
+                            ? 'bg-[#F28500] text-[#111827] shadow-lg shadow-[#F28500]/30'
                             : gpsState.status === 'no_permission'
                             ? 'bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#EF4444]'
                             : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-500 border border-zinc-300'
@@ -1471,7 +1471,7 @@ export default function EnterpriseConductorPortal() {
                         <div>
                           <h3 className="text-sm font-black text-zinc-900">GPS Tracker</h3>
                           <p className={`text-[9px] font-bold uppercase tracking-widest ${
-                            gpsState.status === 'broadcasting' ? 'text-emerald-400' :
+                            gpsState.status === 'broadcasting' ? 'text-[#F28500]' :
                             gpsState.status === 'error' ? 'text-[#EF4444]' :
                             gpsState.status === 'no_permission' ? 'text-amber-400' :
                             'text-zinc-500'
@@ -1497,7 +1497,7 @@ export default function EnterpriseConductorPortal() {
                         className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-40 ${
                           gpsEnabled
                             ? 'bg-[#EF4444] hover:bg-red-600 text-[#111827] shadow-lg shadow-[#EF4444]/30'
-                            : 'bg-emerald-500 hover:bg-emerald-600 text-[#111827] shadow-lg shadow-emerald-500/30'
+                            : 'bg-[#F28500] hover:bg-[#F28500] text-[#111827] shadow-lg shadow-[#F28500]/30'
                         }`}
                       >
                         {gpsEnabled ? 'End Trip' : 'Start Trip'}
@@ -1537,7 +1537,7 @@ export default function EnterpriseConductorPortal() {
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">km/h</p>
                     </div>
                     <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 text-center">
-                      <Radio size={18} className="text-emerald-400 mx-auto mb-2" />
+                      <Radio size={18} className="text-[#F28500] mx-auto mb-2" />
                       <p className="text-2xl font-black text-[#111827]">{gpsState.updateCount}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Updates</p>
                     </div>
@@ -1557,7 +1557,7 @@ export default function EnterpriseConductorPortal() {
                     </div>
                     <div className={`text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest ${
                       tripStatus === 'Trip Started' || tripStatus === 'Boarding'
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                        ? 'bg-[#F28500]/10 text-[#F28500] border border-[#F28500]/20'
                         : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600'
                     }`}>{tripStatus}</div>
                   </div>

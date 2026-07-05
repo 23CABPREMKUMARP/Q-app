@@ -114,7 +114,7 @@ export const Navbar = React.memo(function Navbar() {
           <Link 
             href="/get-ticket"
             aria-label="Book Now"
-            className="hidden md:flex items-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-[#10B981] hover:text-[#FFFFFF] hover:border-[#10B981] transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
+            className="hidden md:flex items-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] transition-all hover:shadow-lg hover:shadow-primary/20 active:scale-95"
           >
             Book Now <ChevronRight size={16} />
           </Link>
@@ -162,7 +162,7 @@ export const Navbar = React.memo(function Navbar() {
               <div className="mt-4 pt-6 border-t border-zinc-100">
                 <Link 
                   href="/get-ticket"
-                  className="flex items-center justify-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] w-full py-4 rounded-2xl text-base font-black uppercase tracking-widest hover:bg-[#10B981] hover:text-[#FFFFFF] hover:border-[#10B981] transition-all"
+                  className="flex items-center justify-center gap-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] w-full py-4 rounded-2xl text-base font-black uppercase tracking-widest hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] transition-all"
                 >
                   Book Now <ChevronRight size={18} />
                 </Link>

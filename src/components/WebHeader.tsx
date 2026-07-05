@@ -115,7 +115,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#10B981] hover:text-[#FFFFFF] hover:border-[#10B981] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -146,7 +146,7 @@ export function WebHeader() {
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#10B981] hover:text-[#FFFFFF] hover:border-[#10B981] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

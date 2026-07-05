@@ -293,7 +293,7 @@ function LiveMapContent() {
                   <div className="flex items-center gap-2 mb-0.5">
                     <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">{selectedBus.busNumber}</h2>
                     {livePositions[selectedBus._id]?.deviceStatus === "Online" && (
-                      <span className="flex items-center gap-1 text-[9px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                      <span className="flex items-center gap-1 text-[9px] font-black text-[#F28500] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                         <Radio size={7} className="animate-pulse" /> LIVE
                       </span>
                     )}
@@ -428,8 +428,8 @@ function LiveMapContent() {
               {liveCount > 0 && (
                 <>
                   <span className="w-px h-3 bg-gray-200" />
-                  <span className="flex items-center gap-1 text-xs font-bold text-emerald-600">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+                  <span className="flex items-center gap-1 text-xs font-bold text-[#F28500]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F28500] animate-pulse inline-block" />
                     {liveCount} live
                   </span>
                 </>

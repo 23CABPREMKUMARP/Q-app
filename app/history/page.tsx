@@ -263,7 +263,7 @@ export default function HistoryPage() {
                       <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${
                         item.type === "booking" 
                           ? "bg-slate-100 text-[#6B7280]" 
-                          : "bg-emerald-50 text-emerald-600"
+                          : "bg-emerald-50 text-[#F28500]"
                       }`}>
                         {item.type === "booking" ? (
                           <ArrowDownLeft size={18} className="text-amber-600" />
@@ -282,13 +282,13 @@ export default function HistoryPage() {
 
                     <div className="text-right space-y-1">
                       <p className={`text-[13px] font-black leading-none ${
-                        item.type === "booking" ? "text-slate-900" : "text-emerald-600"
+                        item.type === "booking" ? "text-slate-900" : "text-[#F28500]"
                       }`}>
                         {item.type === "booking" ? "-" : "+"}₹{item.amount}
                       </p>
                       <span className={`inline-block text-[8px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md leading-none ${
                         item.status === "successful" 
-                          ? "bg-emerald-50 text-emerald-600 border border-emerald-100" 
+                          ? "bg-emerald-50 text-[#F28500] border border-emerald-100" 
                           : "bg-amber-50 text-amber-600 border border-amber-100"
                       }`}>
                         {item.status}

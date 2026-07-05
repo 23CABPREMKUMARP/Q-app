@@ -167,7 +167,7 @@ export default function AboutPage() {
               "Smart City integration ready"
             ].map((adv, idx) => (
               <div key={idx} className="flex items-center gap-3">
-                <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+                <CheckCircle2 size={16} className="text-[#F28500] shrink-0" />
                 <span className="text-xs text-[#6B7280] font-semibold leading-none">{adv}</span>
               </div>
             ))}

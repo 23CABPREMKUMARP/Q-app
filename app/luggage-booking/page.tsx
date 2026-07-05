@@ -186,8 +186,8 @@ export default function LuggageBookingPage() {
 
   const renderStep4 = () => (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
-      <div className="w-24 h-24 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-        <CheckCircle size={48} className="text-emerald-500" />
+      <div className="w-24 h-24 bg-[#F28500]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+        <CheckCircle size={48} className="text-[#F28500]" />
       </div>
       <h2 className="text-2xl font-black uppercase tracking-tighter text-[#111827] mb-2">Booking Confirmed</h2>
       <p className="text-[#6B7280] text-sm mb-8">Your luggage has been booked successfully.</p>

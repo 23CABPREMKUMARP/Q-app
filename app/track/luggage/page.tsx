@@ -109,7 +109,7 @@ export default function LuggageTrackingPage() {
                     <div key={idx} className="flex gap-4 relative z-10">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         step.active ? 'bg-[#F28500] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
-                        step.completed ? 'bg-emerald-500' : 'bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827]'
+                        step.completed ? 'bg-[#F28500]' : 'bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827]'
                       }`}>
                         {step.completed && !step.active ? <CheckCircle size={14} className="text-[#111827]" /> : 
                          step.active ? <Truck size={14} className="text-[#111827]" /> : 

@@ -322,7 +322,7 @@ export default function GetTicketPage() {
           <div className="border-t border-slate-100 pt-6 text-center">
             <p className="text-[9px] font-bold text-[#6B7280] uppercase tracking-widest mb-3">Bus stand Sync Node</p>
             <div className="inline-flex items-center gap-2 bg-slate-100/50 px-4 py-2 rounded-xl border border-slate-100">
-              <div className={`w-1.5 h-1.5 rounded-full ${diagnostics ? "bg-emerald-500 animate-pulse" : "bg-slate-300"}`} />
+              <div className={`w-1.5 h-1.5 rounded-full ${diagnostics ? "bg-[#F28500] animate-pulse" : "bg-slate-300"}`} />
               <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{diagnostics || "Ready for sync signal"}</span>
             </div>
           </div>

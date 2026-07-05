@@ -162,7 +162,7 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
 
           {etaMinutes !== null && (
             <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-[9px] font-black text-emerald-600 uppercase tracking-widest">
+              <div className="flex items-center gap-1.5 text-[9px] font-black text-[#F28500] uppercase tracking-widest">
                 <Clock size={11} /> ETA
               </div>
               <p className="text-2xl font-black text-zinc-900">{etaMinutes}<span className="text-sm font-bold text-zinc-600 ml-1">min</span></p>

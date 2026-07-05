@@ -46,10 +46,10 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
               initial={{ opacity: 0, x: 10, scale: 0.8 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 10, scale: 0.8 }}
-              className="flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20"
+              className="flex items-center gap-1.5 bg-[#F28500]/10 px-3 py-1 rounded-full border border-[#F28500]/20"
             >
-              <CheckCircle2 size={10} className="text-emerald-500" />
-              <span className="text-[8px] font-black text-emerald-600 uppercase tracking-widest">Verified Format</span>
+              <CheckCircle2 size={10} className="text-[#F28500]" />
+              <span className="text-[8px] font-black text-[#F28500] uppercase tracking-widest">Verified Format</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -60,13 +60,13 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
         onClick={handleContainerClick}
         className={`relative h-20 rounded-[28px] bg-[#F8FAFC] border-2 transition-all duration-500 flex items-center px-6 cursor-text overflow-hidden ${
           isValid 
-            ? "border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.15)]" 
+            ? "border-[#F28500] shadow-[0_0_30px_rgba(16,185,129,0.15)]" 
             : isFocused 
               ? "border-primary shadow-[0_0_25px_rgba(241,135,1,0.1)]" 
               : "border-zinc-100"
         }`}
       >
-        <Phone size={20} className={`mr-4 transition-colors duration-500 ${isValid ? "text-emerald-500" : isFocused ? "text-primary" : "text-zinc-300"}`} />
+        <Phone size={20} className={`mr-4 transition-colors duration-500 ${isValid ? "text-[#F28500]" : isFocused ? "text-primary" : "text-zinc-300"}`} />
         
         <div className="relative flex-1 flex items-center h-full">
           {/* Invisible Real Input */}
@@ -109,7 +109,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
                 initial={{ opacity: 0, y: 15, scale: 1.5 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: "spring", damping: 15, stiffness: 400 }}
-                className={`text-2xl font-black transition-colors duration-500 font-ui ${isValid ? "text-emerald-600" : "text-dark-saffron"}`}
+                className={`text-2xl font-black transition-colors duration-500 font-ui ${isValid ? "text-[#F28500]" : "text-dark-saffron"}`}
               >
                 {digit}
               </motion.span>
@@ -134,7 +134,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
                  key="valid"
                  initial={{ scale: 0, rotate: -45 }}
                  animate={{ scale: 1, rotate: 0 }}
-                 className="text-emerald-500"
+                 className="text-[#F28500]"
                >
                  <CheckCircle2 size={24} strokeWidth={3} />
                </motion.div>

@@ -202,7 +202,7 @@ export default function MobileDashboard() {
               <div className="relative z-10 flex items-center justify-between">
                 <div className="space-y-1 text-left">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                    <span className="w-2 h-2 bg-[#F28500] rounded-full animate-ping" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-[#FFD700]">Live Trip Active</span>
                   </div>
                   <h3 className="text-base font-bold tracking-tight text-[#111827] group-hover:text-[#FFD700] transition-colors">
@@ -378,15 +378,15 @@ export default function MobileDashboard() {
                 className="flex items-center gap-3 p-3 bg-[#F8FAFC] rounded-xl active:bg-slate-100 transition-colors cursor-pointer"
               >
                 <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                  <Bus size={20} className="text-emerald-600" />
+                  <Bus size={20} className="text-[#F28500]" />
                 </div>
                 <div className="flex-1">
                   <h4 className="text-sm font-bold text-slate-900">JB-{buses[0]?.busCode || "1024"}</h4>
                   <p className="text-xs text-slate-500 mt-0.5">{buses[0]?.routeId?.routeName || "Route 102"}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-bold text-emerald-600 flex items-center gap-1 justify-end">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" /> Active
+                  <p className="text-xs font-bold text-[#F28500] flex items-center gap-1 justify-end">
+                    <span className="w-2 h-2 bg-[#F28500] rounded-full animate-pulse" /> Active
                   </p>
                   <p className="text-[10px] text-[#6B7280] mt-1">TN-38-EF-2025</p>
                 </div>

@@ -742,7 +742,7 @@ export default function TicketCountSelectionPage() {
                   transition={{ type: "spring", damping: 12, stiffness: 200 }}
                   className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border-2 border-emerald-100"
                 >
-                  <CheckCircle2 size={32} className="text-emerald-500" />
+                  <CheckCircle2 size={32} className="text-[#F28500]" />
                 </motion.div>
                 <div className="space-y-1">
                   <motion.h4 
@@ -757,7 +757,7 @@ export default function TicketCountSelectionPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest"
+                    className="text-[10px] font-bold text-[#F28500] uppercase tracking-widest"
                   >
                     Ticket Generated Successfully
                   </motion.p>

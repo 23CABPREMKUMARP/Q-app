@@ -87,7 +87,7 @@ export default function BusCodeDetailsPage() {
                 <div className="space-y-4 border-t border-slate-100 pt-4">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center"><Clock size={16} /></div>
+                      <div className="w-8 h-8 bg-emerald-50 text-[#F28500] rounded-lg flex items-center justify-center"><Clock size={16} /></div>
                       <div>
                         <p className="text-[9px] font-black text-[#6B7280] uppercase tracking-widest">Departure</p>
                         <p className="font-bold text-slate-800">{trip.departureTime}</p>
@@ -122,7 +122,7 @@ export default function BusCodeDetailsPage() {
                 className="bg-[#F8FAFC] border border-[#E5E7EB] text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-[#F8FAFC] active:scale-95 transition-all shadow-sm"
               >
                 <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
-                  <MapPin size={20} className="text-emerald-500" />
+                  <MapPin size={20} className="text-[#F28500]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Track GPS</span>
               </Link>
