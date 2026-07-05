@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <StatusBar barStyle="light-content" backgroundColor="#F28500" />
       <WebView 
         ref={webViewRef}
         source={{ uri: 'https://app-woad-beta.vercel.app?_vercel_share=xGhhMqD6mX0rHCmw2Yqvj3G608s6LC5M' }} 
@@ -72,7 +72,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#F28500',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   webview: {
