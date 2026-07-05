@@ -144,21 +144,21 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
         {/* Transparent Scan Area with massive shadow for overlay */}
         <div className="relative w-[280px] h-[280px] shadow-[0_0_0_9999px_rgba(0,0,0,0.65)] rounded-[32px]">
           {/* Saffron Corners */}
-          <div className="absolute top-0 left-0 w-12 h-12 border-t-[6px] border-l-[6px] border-[#E8622C] rounded-tl-[32px]" />
-          <div className="absolute top-0 right-0 w-12 h-12 border-t-[6px] border-r-[6px] border-[#E8622C] rounded-tr-[32px]" />
-          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-[6px] border-l-[6px] border-[#E8622C] rounded-bl-[32px]" />
-          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-[6px] border-r-[6px] border-[#E8622C] rounded-br-[32px]" />
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-[6px] border-l-[6px] border-[#F28500] rounded-tl-[32px]" />
+          <div className="absolute top-0 right-0 w-12 h-12 border-t-[6px] border-r-[6px] border-[#F28500] rounded-tr-[32px]" />
+          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-[6px] border-l-[6px] border-[#F28500] rounded-bl-[32px]" />
+          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-[6px] border-r-[6px] border-[#F28500] rounded-br-[32px]" />
           
           {/* Animated Scanning Line */}
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-[#E8622C] shadow-[0_0_20px_rgba(255,153,51,0.8)] animate-[scan_3s_ease-in-out_infinite]" />
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-[#F28500] shadow-[0_0_20px_rgba(255,153,51,0.8)] animate-[scan_3s_ease-in-out_infinite]" />
         </div>
       </div>
 
       {error && (
         <div className="absolute z-20 flex flex-col items-center justify-center bg-[#F8FAFC]/90 backdrop-blur-md backdrop-blur-md rounded-2xl p-6 text-center gap-4 m-8">
-          <Camera size={32} className="text-[#E8622C]" />
+          <Camera size={32} className="text-[#F28500]" />
           <p className="text-sm font-bold text-[#111827] max-w-[200px]">{error}</p>
-          <button onClick={onClose} className="px-6 py-2 bg-[#E8622C] text-[#111827] rounded-full font-black text-xs uppercase tracking-widest">Close</button>
+          <button onClick={onClose} className="px-6 py-2 bg-[#F28500] text-[#111827] rounded-full font-black text-xs uppercase tracking-widest">Close</button>
         </div>
       )}
 
@@ -177,7 +177,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
         <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-[#E5E7EB]">
           <img src="/logo2.png" alt="Digi Bus" className="w-8 h-8 object-contain" />
           <div className="flex flex-col">
-            <span className="text-[10px] font-black text-[#111827] leading-none tracking-tight">DIGI <span className="text-[#E8622C]">BUS</span></span>
+            <span className="text-[10px] font-black text-[#111827] leading-none tracking-tight">DIGI <span className="text-[#F28500]">BUS</span></span>
             <span className="text-[8px] font-bold text-[#111827]/70 tracking-widest uppercase">Scanner</span>
           </div>
         </div>
@@ -205,7 +205,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
                 type="text"
                 autoFocus
                 placeholder="ENTER BUS CODE (e.g. 1024)"
-                className="w-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#111827] font-black text-sm uppercase tracking-widest placeholder:text-[#111827]/40 focus:outline-none focus:border-[#E8622C] transition-colors"
+                className="w-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#111827] font-black text-sm uppercase tracking-widest placeholder:text-[#111827]/40 focus:outline-none focus:border-[#F28500] transition-colors"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     const val = (e.target as HTMLInputElement).value;

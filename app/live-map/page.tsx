@@ -181,7 +181,7 @@ function LiveMapContent() {
           </div>
 
           {/* Profile avatar circle */}
-          <div className="w-10 h-10 rounded-full bg-[#E8622C] flex items-center justify-center shadow-md flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-[#F28500] flex items-center justify-center shadow-md flex-shrink-0">
             <Bus size={18} className="text-[#111827]" />
           </div>
         </div>
@@ -245,7 +245,7 @@ function LiveMapContent() {
         <button
           onClick={requestLocation}
           disabled={locating}
-          className={`w-12 h-12 bg-[#F8FAFC] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-red-400" : "text-blue-500"}`}
+          className={`w-12 h-12 bg-[#F8FAFC] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-blue-500"}`}
         >
           {locating ? (
             <div className="w-5 h-5 border-2 border-blue-300 border-t-blue-500 rounded-full animate-spin" />
@@ -374,7 +374,7 @@ function LiveMapContent() {
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">From</p>
                       <p className="text-sm font-black text-[#111827] truncate">{from}</p>
                     </div>
-                    <Navigation size={16} className="text-[#E8622C] flex-shrink-0" />
+                    <Navigation size={16} className="text-[#F28500] flex-shrink-0" />
                     <div className="flex-1 min-w-0 text-right">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">To</p>
                       <p className="text-sm font-black text-[#111827] truncate">{to}</p>
@@ -423,7 +423,7 @@ function LiveMapContent() {
           >
             {/* Left: bus count pill */}
             <div className="bg-[#F8FAFC] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
-              <Bus size={14} className="text-[#E8622C]" />
+              <Bus size={14} className="text-[#F28500]" />
               <span className="text-xs font-bold text-gray-700">Digi Bus Stand</span>
               {liveCount > 0 && (
                 <>

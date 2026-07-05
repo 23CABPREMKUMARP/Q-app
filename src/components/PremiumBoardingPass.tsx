@@ -217,7 +217,7 @@ export function PremiumBoardingPass({
             <div className="relative z-10 flex flex-col items-center w-full">
               {isExpired && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center backdrop-blur-[1px]">
-                  <span className="bg-[#DC2626] text-[#111827] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-red-400">EXPIRED</span>
+                  <span className="bg-[#DC2626] text-[#111827] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-[#EF4444]">EXPIRED</span>
                 </div>
               )}
               

@@ -36,7 +36,7 @@ export default function BusCodeDetailsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#E8622C]" size={48} />
+        <Loader2 className="animate-spin text-[#F28500]" size={48} />
       </div>
     );
   }
@@ -44,7 +44,7 @@ export default function BusCodeDetailsPage() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans pb-24">
       {/* Header */}
-      <div className="bg-[#E8622C] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#F28500] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <button onClick={() => router.back()} className="bg-[#F8FAFC]/20 p-2 rounded-xl backdrop-blur-md">
@@ -60,7 +60,7 @@ export default function BusCodeDetailsPage() {
       <div className="px-6 -mt-16 relative z-20 max-w-md mx-auto">
         {error ? (
           <div className="bg-[#F8FAFC] p-8 rounded-3xl shadow-xl text-center space-y-4">
-            <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 bg-red-50 text-[#EF4444] rounded-full flex items-center justify-center mx-auto">
               <Info size={32} />
             </div>
             <h2 className="text-xl font-black text-slate-800 uppercase">Bus Not Active</h2>
@@ -112,7 +112,7 @@ export default function BusCodeDetailsPage() {
                 className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
                 <div className="w-10 h-10 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] flex items-center justify-center">
-                  <Bus size={20} className="text-[#E8622C]" />
+                  <Bus size={20} className="text-[#F28500]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>
               </Link>

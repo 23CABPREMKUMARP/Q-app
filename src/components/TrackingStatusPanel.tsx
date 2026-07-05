@@ -121,13 +121,13 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
 
         {/* Route card */}
         <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-5 mb-4 relative overflow-hidden">
-          <div className="absolute inset-y-0 left-0 w-1 bg-[#E8622C] rounded-l-2xl" />
+          <div className="absolute inset-y-0 left-0 w-1 bg-[#F28500] rounded-l-2xl" />
           <div className="flex items-center gap-4 pl-3">
             <div className="flex-1 min-w-0">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">From</p>
               <p className="text-sm font-black text-[#111827] uppercase truncate">{from}</p>
             </div>
-            <ArrowRight size={16} className="text-[#E8622C] flex-shrink-0" />
+            <ArrowRight size={16} className="text-[#F28500] flex-shrink-0" />
             <div className="flex-1 min-w-0 text-right">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">To</p>
               <p className="text-sm font-black text-[#111827] uppercase truncate">{to}</p>
@@ -152,8 +152,8 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
           </div>
 
           {nextStop && (
-            <div className="bg-[#FFF8F0] border border-[#E8622C]/20 rounded-2xl p-4 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-[9px] font-black text-[#E8622C] uppercase tracking-widest">
+            <div className="bg-[#FFF8F0] border border-[#F28500]/20 rounded-2xl p-4 flex flex-col gap-1">
+              <div className="flex items-center gap-1.5 text-[9px] font-black text-[#F28500] uppercase tracking-widest">
                 <MapPin size={11} /> Next Stop
               </div>
               <p className="text-sm font-black text-zinc-900 leading-tight">{nextStop.stopName}</p>

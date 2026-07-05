@@ -15,7 +15,7 @@ export const Footer = React.memo(function Footer() {
   }
 
   return (
-    <footer className="bg-[#E8622C] text-[#111827] pt-24 pb-12 border-t border-[#E5E7EB]">
+    <footer className="bg-[#F28500] text-[#111827] pt-24 pb-12 border-t border-[#E5E7EB]">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {/* Brand Column */}

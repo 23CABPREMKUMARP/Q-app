@@ -123,7 +123,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="absolute -bottom-6 left-0 right-0 text-[10px] font-black text-red-500 uppercase tracking-widest text-center"
+                  className="absolute -bottom-6 left-0 right-0 text-[10px] font-black text-[#EF4444] uppercase tracking-widest text-center"
                 >
                   {error}
                 </motion.p>

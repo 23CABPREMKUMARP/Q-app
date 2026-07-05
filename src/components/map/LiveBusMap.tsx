@@ -28,7 +28,7 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
 
   const pulseClass = isRunning ? "animate-ping" : "";
   const ringColor = isSelected ? "#D4A017" : isRunning ? "#0F6B5C" : "#94a3b8";
-  const ringClass = isSelected ? "ring-orange-500 shadow-orange-400/50" : isRunning ? "ring-green-400 shadow-green-400/40" : "ring-slate-300";
+  const ringClass = isSelected ? "ring-orange-500 shadow-orange-400/50" : isRunning ? "ring-[#22C55E] shadow-[#22C55E]/40" : "ring-slate-300";
 
   const html = `
     <div class="relative flex flex-col items-center" style="transform: rotate(${heading}deg)">
@@ -36,7 +36,7 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
         <div class="w-12 h-12 rounded-full flex items-center justify-center bg-[#F8FAFC] shadow-xl ring-2 ${ringClass} ring-offset-2 overflow-hidden" style="box-shadow: 0 4px 20px ${ringColor}40">
           <img src="/bus-marker-3d.png" alt="Bus" style="width:40px;height:40px;object-fit:contain;" />
         </div>
-        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-400 ring-2 ring-[#ffffff] ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-[#ffffff] z-10"></span>`}
+        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#22C55E] ring-2 ring-[#ffffff] ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-[#ffffff] z-10"></span>`}
       </div>
       <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-[#E5E7EB]">
         ${bus.busCode || bus.busNumber}${speed > 0 ? ` · ${speed}km/h` : ""}

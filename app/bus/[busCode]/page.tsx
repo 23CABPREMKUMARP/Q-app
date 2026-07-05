@@ -85,7 +85,7 @@ export default function BusQRRedirectPage() {
             <a 
               href="/api/download-app" 
               download="Smart-Tamizha-App.apk"
-              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-[#111827] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
+              className="w-full bg-[#0f172a] hover:bg-[#0F172A] text-[#111827] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
               DOWNLOAD APP TO BOARD
             </a>

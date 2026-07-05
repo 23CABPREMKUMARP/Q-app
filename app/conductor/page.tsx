@@ -571,14 +571,14 @@ export default function EnterpriseConductorPortal() {
                 </div>
               ) : !isSignedIn ? (
                 <div className="space-y-4 pt-4">
-                  <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Authentication Required</p>
+                  <p className="text-xs font-bold text-[#EF4444] uppercase tracking-widest">Authentication Required</p>
                   <button onClick={() => router.push("/sign-in?redirect_url=/conductor")} className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-[#111827] font-black rounded-xl uppercase tracking-widest text-[10px]">
                     Sign In to Continue
                   </button>
                 </div>
               ) : !isAssigned ? (
                 <div className="space-y-4 pt-4">
-                  <p className="text-sm font-bold text-red-500">ACCESS DENIED</p>
+                  <p className="text-sm font-bold text-[#EF4444]">ACCESS DENIED</p>
                   <p className="text-xs text-zinc-600 leading-relaxed">
                     Your email <b>{user?.primaryEmailAddress?.emailAddress}</b> is not assigned to any conductor role. 
                     Please contact the Operations Admin for clearance.
@@ -587,7 +587,7 @@ export default function EnterpriseConductorPortal() {
                     <button onClick={() => router.push("/")} className="w-full py-3 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-700 text-[#111827] font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
                       Return to Passenger Dashboard
                     </button>
-                    <button onClick={() => signOut()} className="w-full py-3 bg-red-600/10 text-red-500 hover:bg-red-600/20 font-bold rounded-xl text-xs uppercase tracking-wider transition-all border border-red-500/20">
+                    <button onClick={() => signOut()} className="w-full py-3 bg-red-600/10 text-[#EF4444] hover:bg-red-600/20 font-bold rounded-xl text-xs uppercase tracking-wider transition-all border border-[#EF4444]/20">
                       Sign Out
                     </button>
                   </div>
@@ -609,7 +609,7 @@ export default function EnterpriseConductorPortal() {
               </div>
               <div>
                 <h2 className="text-xs font-black uppercase tracking-tight">Transit Console</h2>
-                <p className="text-[9px] text-green-500 font-bold uppercase tracking-wider">Sync Engaged</p>
+                <p className="text-[9px] text-[#22C55E] font-bold uppercase tracking-wider">Sync Engaged</p>
               </div>
             </div>
 
@@ -675,7 +675,7 @@ export default function EnterpriseConductorPortal() {
                 <div>
                   <h2 className="text-[10px] font-black uppercase tracking-tight text-[#111827] leading-tight">Console</h2>
                   <div className="flex items-center gap-1">
-                    <div className={`w-1 h-1 rounded-full ${isOffline ? "bg-red-500 animate-pulse" : "bg-green-500 animate-pulse"}`} />
+                    <div className={`w-1 h-1 rounded-full ${isOffline ? "bg-[#EF4444] animate-pulse" : "bg-[#22C55E] animate-pulse"}`} />
                     <span className="text-[7.5px] font-bold text-zinc-600 uppercase tracking-widest leading-none">
                       {isOffline ? "Offline" : "Live"}
                     </span>
@@ -796,7 +796,7 @@ export default function EnterpriseConductorPortal() {
             {/* Top Stat Bar */}
             <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-b border-zinc-300 p-4 px-6 flex flex-wrap gap-4 items-center justify-between relative">
               <div className="flex items-center gap-3">
-                <Wifi size={14} className={isOffline ? "text-zinc-600" : "text-green-500"} />
+                <Wifi size={14} className={isOffline ? "text-zinc-600" : "text-[#22C55E]"} />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">
                   {isOffline ? "Console Offline" : "Telemetry Engaged"}
                 </span>
@@ -858,7 +858,7 @@ export default function EnterpriseConductorPortal() {
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     {[
                       { title: "Tickets Sold Today", val: ticketsSold, desc: "Total issuances", color: "text-orange-500", icon: FileText },
-                      { title: "Passengers Boarded", val: passengersBoarded, desc: "QR codes scanned", color: "text-green-500", icon: ShieldCheck },
+                      { title: "Passengers Boarded", val: passengersBoarded, desc: "QR codes scanned", color: "text-[#22C55E]", icon: ShieldCheck },
                       { title: "Bus Occupancy", val: `${occupancy}/50`, desc: `Occupied: ${Math.round((occupancy/50)*100)}%`, color: "text-blue-500", icon: Bus },
                       { title: "Revenue Collection", val: `₹${totalRevenue}`, desc: `Cash: ₹${cashCollection} | UPI: ₹${onlineCollection}`, color: "text-purple-500", icon: DollarSign }
                     ].map((stat, i) => {
@@ -973,28 +973,28 @@ export default function EnterpriseConductorPortal() {
                         animate={{ opacity: 1, y: 0 }}
                         className={`rounded-[32px] p-6 border-2 transition-all ${
                           scanResult.success 
-                            ? "bg-green-950/20 border-green-500/50 shadow-[0_0_30px_rgba(34,197,94,0.05)]" 
+                            ? "bg-green-950/20 border-[#22C55E]/50 shadow-[0_0_30px_rgba(34,197,94,0.05)]" 
                             : scanResult.message?.includes("Used")
                               ? "bg-amber-950/20 border-amber-500/50 shadow-[0_0_30px_rgba(245,158,11,0.05)]"
                               : scanResult.message?.includes("Expired")
                                 ? "bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-zinc-300 shadow-[0_0_30px_rgba(100,116,139,0.05)]"
-                                : "bg-red-950/20 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.05)]"
+                                : "bg-red-950/20 border-[#EF4444]/50 shadow-[0_0_30px_rgba(239,68,68,0.05)]"
                         }`}
                       >
                         <div className="flex flex-col items-center gap-6">
                           <div className="flex items-center gap-3">
                             {scanResult.success ? (
-                               <CheckCircle2 size={40} className="text-green-500" />
+                               <CheckCircle2 size={40} className="text-[#22C55E]" />
                             ) : scanResult.message?.includes("Used") ? (
                               <AlertTriangle size={40} className="text-amber-500" />
                             ) : scanResult.message?.includes("Expired") ? (
                               <Clock size={40} className="text-zinc-500" />
                             ) : (
-                              <XCircle size={40} className="text-red-500" />
+                              <XCircle size={40} className="text-[#EF4444]" />
                             )}
                             <div className="space-y-1 text-left">
                               <h3 className={`text-xl font-black uppercase tracking-tight ${
-                                scanResult.success ? "text-green-500" : scanResult.message?.includes("Used") ? "text-amber-500" : scanResult.message?.includes("Expired") ? "text-zinc-600" : "text-red-500"
+                                scanResult.success ? "text-[#22C55E]" : scanResult.message?.includes("Used") ? "text-amber-500" : scanResult.message?.includes("Expired") ? "text-zinc-600" : "text-[#EF4444]"
                               }`}>
                                 {scanResult.success ? "🟢 Valid Ticket" : scanResult.message?.includes("Used") ? "🟡 Already Used" : scanResult.message?.includes("Expired") ? "⚪ Expired Ticket" : "🔴 Invalid Ticket"}
                               </h3>
@@ -1144,7 +1144,7 @@ export default function EnterpriseConductorPortal() {
                             ))}
                           </select>
                           {obBoarding === obDestination && (
-                            <p className="text-red-500 text-[8px] font-bold uppercase tracking-wider pl-1 pt-1">Boarding & destination cannot match</p>
+                            <p className="text-[#EF4444] text-[8px] font-bold uppercase tracking-wider pl-1 pt-1">Boarding & destination cannot match</p>
                           )}
                         </div>
 
@@ -1354,7 +1354,7 @@ export default function EnterpriseConductorPortal() {
                                         playBeep(true);
                                       }
                                     }}
-                                    className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-wider border transition-all cursor-pointer ${p.status === "Boarded" ? "bg-green-500/10 border-green-500/30 text-green-500" : "bg-zinc-955 border-zinc-300 text-zinc-500 hover:border-zinc-700"}`}
+                                    className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-wider border transition-all cursor-pointer ${p.status === "Boarded" ? "bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]" : "bg-zinc-955 border-zinc-300 text-zinc-500 hover:border-zinc-700"}`}
                                   >
                                     {p.status}
                                   </button>
@@ -1461,7 +1461,7 @@ export default function EnterpriseConductorPortal() {
                           gpsState.status === 'broadcasting'
                             ? 'bg-emerald-500 text-[#111827] shadow-lg shadow-emerald-500/30'
                             : gpsState.status === 'no_permission'
-                            ? 'bg-red-500/10 border border-red-500/20 text-red-400'
+                            ? 'bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#EF4444]'
                             : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-500 border border-zinc-300'
                         }`}>
                           {gpsState.status === 'broadcasting'
@@ -1472,7 +1472,7 @@ export default function EnterpriseConductorPortal() {
                           <h3 className="text-sm font-black text-zinc-900">GPS Tracker</h3>
                           <p className={`text-[9px] font-bold uppercase tracking-widest ${
                             gpsState.status === 'broadcasting' ? 'text-emerald-400' :
-                            gpsState.status === 'error' ? 'text-red-400' :
+                            gpsState.status === 'error' ? 'text-[#EF4444]' :
                             gpsState.status === 'no_permission' ? 'text-amber-400' :
                             'text-zinc-500'
                           }`}>
@@ -1496,7 +1496,7 @@ export default function EnterpriseConductorPortal() {
                         disabled={!busDbId}
                         className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-40 ${
                           gpsEnabled
-                            ? 'bg-red-500 hover:bg-red-600 text-[#111827] shadow-lg shadow-red-500/30'
+                            ? 'bg-[#EF4444] hover:bg-red-600 text-[#111827] shadow-lg shadow-[#EF4444]/30'
                             : 'bg-emerald-500 hover:bg-emerald-600 text-[#111827] shadow-lg shadow-emerald-500/30'
                         }`}
                       >
@@ -1506,7 +1506,7 @@ export default function EnterpriseConductorPortal() {
 
                     {/* Error message */}
                     {gpsState.errorMessage && (
-                      <div className="flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-[10px] font-bold mb-4">
+                      <div className="flex items-start gap-2 p-3 bg-[#EF4444]/10 border border-[#EF4444]/20 rounded-xl text-[#EF4444] text-[10px] font-bold mb-4">
                         <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
                         {gpsState.errorMessage}
                       </div>
@@ -1532,7 +1532,7 @@ export default function EnterpriseConductorPortal() {
                   {/* Live Stats */}
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 text-center">
-                      <Gauge size={18} className="text-[#E8622C] mx-auto mb-2" />
+                      <Gauge size={18} className="text-[#F28500] mx-auto mb-2" />
                       <p className="text-2xl font-black text-[#111827]">{gpsState.speed || speed}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">km/h</p>
                     </div>
@@ -1550,7 +1550,7 @@ export default function EnterpriseConductorPortal() {
 
                   {/* Current Route */}
                   <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 flex items-center gap-3">
-                    <Bus size={20} className="text-[#E8622C] flex-shrink-0" />
+                    <Bus size={20} className="text-[#F28500] flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Current Route</p>
                       <p className="text-sm font-black text-zinc-900 truncate">{assignedRouteName || 'Not Assigned'}</p>
@@ -1642,9 +1642,9 @@ export default function EnterpriseConductorPortal() {
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
                         {isOffline ? (
-                          <div className="w-10 h-10 bg-red-500/10 border border-red-500/20 text-red-500 rounded-2xl flex items-center justify-center"><WifiOff size={20} /></div>
+                          <div className="w-10 h-10 bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#EF4444] rounded-2xl flex items-center justify-center"><WifiOff size={20} /></div>
                         ) : (
-                          <div className="w-10 h-10 bg-green-500/10 border border-green-500/20 text-green-500 rounded-2xl flex items-center justify-center"><Wifi size={20} /></div>
+                          <div className="w-10 h-10 bg-[#22C55E]/10 border border-[#22C55E]/20 text-[#22C55E] rounded-2xl flex items-center justify-center"><Wifi size={20} /></div>
                         )}
                         <div>
                           <h3 className="text-sm font-bold text-zinc-200">Offline Transit Mode</h3>
@@ -1659,7 +1659,7 @@ export default function EnterpriseConductorPortal() {
                           setIsOffline(!isOffline);
                           playBeep(true);
                         }}
-                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${isOffline ? "bg-green-600 text-[#111827]" : "bg-red-500/10 border border-red-500/20 text-red-500"}`}
+                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${isOffline ? "bg-green-600 text-[#111827]" : "bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#EF4444]"}`}
                       >
                         {isOffline ? "Go Online" : "Go Offline"}
                       </button>
@@ -1694,7 +1694,7 @@ export default function EnterpriseConductorPortal() {
                         >
                           {validating ? "Syncing..." : "Sync Offline Queue Now"}
                         </button>
-                        {isOffline && <p className="text-center text-[9px] text-red-500 font-bold uppercase tracking-wider">Cannot sync while offline mode is active.</p>}
+                        {isOffline && <p className="text-center text-[9px] text-[#EF4444] font-bold uppercase tracking-wider">Cannot sync while offline mode is active.</p>}
                       </div>
                     ) : (
                       <div className="text-center py-8 text-zinc-600 uppercase tracking-widest font-black text-[10px] space-y-2">
@@ -1735,7 +1735,7 @@ export default function EnterpriseConductorPortal() {
                               key={s}
                               type="button"
                               onClick={() => setIssueSeverity(s)}
-                              className={`py-3 text-[10px] font-black uppercase tracking-wider rounded-xl border transition-all ${issueSeverity === s ? "bg-red-650/10 border-red-500 text-red-500" : "bg-zinc-955 border-zinc-300 text-zinc-500"}`}
+                              className={`py-3 text-[10px] font-black uppercase tracking-wider rounded-xl border transition-all ${issueSeverity === s ? "bg-red-650/10 border-[#EF4444] text-[#EF4444]" : "bg-zinc-955 border-zinc-300 text-zinc-500"}`}
                             >
                               {s}
                             </button>
@@ -1762,7 +1762,7 @@ export default function EnterpriseConductorPortal() {
                       </button>
 
                       {issueSuccess && (
-                        <p className="text-green-500 text-[9px] font-black uppercase tracking-wider text-center pt-2">Report dispatched successfully to Admin terminal!</p>
+                        <p className="text-[#22C55E] text-[9px] font-black uppercase tracking-wider text-center pt-2">Report dispatched successfully to Admin terminal!</p>
                       )}
 
                     </form>
@@ -1827,7 +1827,7 @@ export default function EnterpriseConductorPortal() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 pointer-events-none ring-[12px] md:ring-[20px] ring-green-500/20 z-[1100]"
+                className="fixed inset-0 pointer-events-none ring-[12px] md:ring-[20px] ring-[#22C55E]/20 z-[1100]"
               />
             )}
             {scanResult && !scanResult.success && (
@@ -1835,7 +1835,7 @@ export default function EnterpriseConductorPortal() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 pointer-events-none ring-[12px] md:ring-[20px] ring-red-500/20 z-[1100]"
+                className="fixed inset-0 pointer-events-none ring-[12px] md:ring-[20px] ring-[#EF4444]/20 z-[1100]"
               />
             )}
           </AnimatePresence>

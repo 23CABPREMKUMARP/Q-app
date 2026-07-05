@@ -793,7 +793,7 @@ function EnterpriseAdminDashboardContent() {
                     <div className="space-y-2">
                       {activeAlerts.map(alert => (
                         <div key={alert.id} className="p-3 bg-[#161616] border border-zinc-800/80 rounded-lg flex gap-3 items-start">
-                          <div className={`mt-0.5 ${alert.severity === 'critical' ? 'text-red-400' : 'text-orange-400'}`}>
+                          <div className={`mt-0.5 ${alert.severity === 'critical' ? 'text-[#EF4444]' : 'text-orange-400'}`}>
                             <AlertTriangle size={14} />
                           </div>
                           <div>
@@ -813,7 +813,7 @@ function EnterpriseAdminDashboardContent() {
                         <div key={log.id} className="flex gap-3 items-start text-[12px]">
                           <span className="text-zinc-600 font-mono text-[10px] mt-0.5 w-12">{log.time.substring(0, 5)}</span>
                           <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                            log.type === 'success' ? 'bg-emerald-500' : log.type === 'warn' ? 'bg-red-500' : 'bg-blue-500'
+                            log.type === 'success' ? 'bg-emerald-500' : log.type === 'warn' ? 'bg-[#EF4444]' : 'bg-blue-500'
                           }`}></span>
                           <span className="text-zinc-600 leading-snug flex-1">{log.text}</span>
                         </div>
@@ -929,7 +929,7 @@ function EnterpriseAdminDashboardContent() {
                           </button>
                           <button
                             onClick={() => handleDeleteBus(bus._id)}
-                            className="p-1.5 rounded text-zinc-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                            className="p-1.5 rounded text-zinc-500 hover:bg-[#EF4444]/10 hover:text-[#EF4444] transition-colors"
                             title="Delete"
                           >
                             <Trash2 size={14} />
@@ -995,7 +995,7 @@ function EnterpriseAdminDashboardContent() {
                             className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
                               conductor.status === "Active" 
                                 ? "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20" 
-                                : "bg-red-500/10 text-red-400 hover:bg-red-500/20"
+                                : "bg-[#EF4444]/10 text-[#EF4444] hover:bg-[#EF4444]/20"
                             }`}
                           >
                             {conductor.status}
@@ -1004,7 +1004,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right">
                           <button 
                             onClick={() => handleDeleteConductor(conductor.id)}
-                            className="p-1.5 rounded text-zinc-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                            className="p-1.5 rounded text-zinc-500 hover:bg-[#EF4444]/10 hover:text-[#EF4444] transition-colors"
                           >
                             <Trash2 size={14} />
                           </button>
@@ -1174,7 +1174,7 @@ function EnterpriseAdminDashboardContent() {
                           <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
                             b.paymentStatus === 'Paid' || b.paymentStatus === 'Confirmed' 
                               ? 'bg-emerald-500/10 text-emerald-400' 
-                              : 'bg-red-500/10 text-red-400'
+                              : 'bg-[#EF4444]/10 text-[#EF4444]'
                           }`}>
                             {b.paymentStatus || "Paid"}
                           </span>
@@ -1182,7 +1182,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right">
                           <button 
                             onClick={() => handleTriggerRefund(b.ticketId, b.totalAmount)}
-                            className="px-2 py-1 rounded bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:text-red-400 hover:bg-red-500/10 transition-colors text-[11px] font-medium"
+                            className="px-2 py-1 rounded bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors text-[11px] font-medium"
                           >
                             Refund
                           </button>
