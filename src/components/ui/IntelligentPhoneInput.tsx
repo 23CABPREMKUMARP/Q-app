@@ -46,10 +46,10 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
               initial={{ opacity: 0, x: 10, scale: 0.8 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 10, scale: 0.8 }}
-              className="flex items-center gap-1.5 bg-[#F28500]/10 px-3 py-1 rounded-full border border-[#F28500]/20"
+              className="flex items-center gap-1.5 bg-[#22C55E]/10 px-3 py-1 rounded-full border border-[#22C55E]/20"
             >
-              <CheckCircle2 size={10} className="text-[#F28500]" />
-              <span className="text-[8px] font-black text-[#F28500] uppercase tracking-widest">Verified Format</span>
+              <CheckCircle2 size={10} className="text-[#22C55E]" />
+              <span className="text-[8px] font-black text-[#22C55E] uppercase tracking-widest">Verified Format</span>
             </motion.div>
           )}
         </AnimatePresence>
