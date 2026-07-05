@@ -33,7 +33,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] bg-[#18D2C7] flex flex-col items-center justify-center p-6"
+            className="fixed inset-0 z-[9999] bg-[#E8622C] flex flex-col items-center justify-center p-6"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -73,22 +73,22 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   transition={{ delay: 1.5, duration: 0.8 }}
                   className="text-5xl md:text-7xl font-black tracking-tighter uppercase font-heading"
                 >
-                  <span className="text-black">Digi Bus</span> <span className="text-black">Stand</span>
+                  <span className="text-[#111827]">Digi Bus</span> <span className="text-[#111827]">Stand</span>
                 </motion.h1>
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 2.2, duration: 2.5, ease: "linear" }}
                   style={{ transformOrigin: "left center", willChange: "transform" }}
-                  className="h-1.5 w-full bg-[#ffffff] border border-slate-200 text-black rounded-full mx-auto"
+                  className="h-1.5 w-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] rounded-full mx-auto"
                 />
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.8 }}
                   transition={{ delay: 2.6 }}
-                  className="text-black font-bold uppercase tracking-widest text-[9px]"
+                  className="text-[#111827] font-bold uppercase tracking-widest text-[9px]"
                 >
-                  Powered by <span className="text-black">JeffBen</span>
+                  Powered by <span className="text-[#111827]">JeffBen</span>
                 </motion.p>
               </div>
 

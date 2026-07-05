@@ -23,7 +23,7 @@ const manrope = Manrope({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#18D2C7",
+  themeColor: "#E8622C",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -62,7 +62,7 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         variables: {
-          colorPrimary: "#18D2C7",
+          colorPrimary: "#E8622C",
           colorBackground: "#ffffff",
           colorText: "#0f172a",
           borderRadius: "1rem",
@@ -71,9 +71,9 @@ export default function RootLayout({
         elements: {
           card: "shadow-none border border-slate-100",
           headerTitle: "font-black tracking-tight uppercase",
-          headerSubtitle: "text-slate-600 text-xs",
-          formButtonPrimary: "bg-[#18D2C7] hover:bg-[#8bd9d3] text-slate-900 font-black uppercase tracking-widest rounded-xl h-12",
-          footerActionLink: "text-[#18D2C7] font-bold",
+          headerSubtitle: "text-[#6B7280] text-xs",
+          formButtonPrimary: "bg-[#E8622C] hover:bg-[#8bd9d3] text-slate-900 font-black uppercase tracking-widest rounded-xl h-12",
+          footerActionLink: "text-[#E8622C] font-bold",
         },
       }}
     >
@@ -99,7 +99,7 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${inter.variable} ${manrope.variable} antialiased bg-[#ffffff] text-black min-h-full flex flex-col`}
+          className={`${inter.variable} ${manrope.variable} antialiased bg-[#ffffff] text-[#111827] min-h-full flex flex-col`}
         >
           <CapacitorDeepLink />
           <WebHeader />

@@ -546,7 +546,7 @@ export default function EnterpriseConductorPortal() {
 
   return (
     <SecureView>
-      <div className="min-h-screen bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-900 font-sans antialiased overflow-x-hidden flex flex-col md:flex-row">
+      <div className="min-h-screen bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-900 font-sans antialiased overflow-x-hidden flex flex-col md:flex-row">
       
       {/* 1. AUTHENTICATION MODULE (CLERK REPLACEMENT) */}
       <AnimatePresence>
@@ -555,14 +555,14 @@ export default function EnterpriseConductorPortal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] bg-[#ffffff] border border-slate-200 shadow-sm text-black flex flex-col items-center justify-center p-6 text-zinc-200 overflow-y-auto"
+            className="fixed inset-0 z-[1000] bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] flex flex-col items-center justify-center p-6 text-zinc-200 overflow-y-auto"
           >
-            <div className="text-center space-y-4 max-w-md w-full p-8 border border-zinc-300 rounded-3xl bg-[#ffffff] border border-slate-200 shadow-sm text-black shadow-2xl relative">
+            <div className="text-center space-y-4 max-w-md w-full p-8 border border-zinc-300 rounded-3xl bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] shadow-2xl relative">
               <div className="absolute top-0 left-0 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none" />
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg shadow-orange-600/30">
-                <ShieldCheck className="text-black" size={32} />
+                <ShieldCheck className="text-[#111827]" size={32} />
               </div>
-              <h1 className="text-2xl font-black uppercase tracking-tight text-black">Transit Console</h1>
+              <h1 className="text-2xl font-black uppercase tracking-tight text-[#111827]">Transit Console</h1>
               
               {!isLoaded || isCheckingAssignment ? (
                 <div className="space-y-2 pt-4">
@@ -572,7 +572,7 @@ export default function EnterpriseConductorPortal() {
               ) : !isSignedIn ? (
                 <div className="space-y-4 pt-4">
                   <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Authentication Required</p>
-                  <button onClick={() => router.push("/sign-in?redirect_url=/conductor")} className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-black font-black rounded-xl uppercase tracking-widest text-[10px]">
+                  <button onClick={() => router.push("/sign-in?redirect_url=/conductor")} className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-[#111827] font-black rounded-xl uppercase tracking-widest text-[10px]">
                     Sign In to Continue
                   </button>
                 </div>
@@ -584,7 +584,7 @@ export default function EnterpriseConductorPortal() {
                     Please contact the Operations Admin for clearance.
                   </p>
                   <div className="pt-4 space-y-3">
-                    <button onClick={() => router.push("/")} className="w-full py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 text-black font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
+                    <button onClick={() => router.push("/")} className="w-full py-3 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-700 text-[#111827] font-bold rounded-xl text-xs uppercase tracking-wider transition-all">
                       Return to Passenger Dashboard
                     </button>
                     <button onClick={() => signOut()} className="w-full py-3 bg-red-600/10 text-red-500 hover:bg-red-600/20 font-bold rounded-xl text-xs uppercase tracking-wider transition-all border border-red-500/20">
@@ -602,7 +602,7 @@ export default function EnterpriseConductorPortal() {
       {isAuthenticated && (
         <>
           {/* SIDEBAR FOR DESKTOP */}
-          <aside className="hidden md:flex flex-col w-72 bg-[#ffffff] border border-slate-200 shadow-sm text-black border-r border-zinc-300 p-6 space-y-6 shrink-0">
+          <aside className="hidden md:flex flex-col w-72 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-r border-zinc-300 p-6 space-y-6 shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-600/30">
                 <Image src="/hero-logo.png" alt="JB" width={22} height={22} className="invert brightness-0" />
@@ -613,7 +613,7 @@ export default function EnterpriseConductorPortal() {
               </div>
             </div>
 
-            <div className="h-px bg-[#ffffff] border border-slate-200 shadow-sm text-black" />
+            <div className="h-px bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827]" />
 
             {/* Sidebar Tabs */}
             <nav className="flex-1 space-y-1.5 overflow-y-auto">
@@ -635,7 +635,7 @@ export default function EnterpriseConductorPortal() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${isActive ? "bg-orange-600 text-black shadow-md shadow-orange-600/10" : "text-zinc-600 hover:text-zinc-200 hover:bg-zinc-800/40"}`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${isActive ? "bg-orange-600 text-[#111827] shadow-md shadow-orange-600/10" : "text-zinc-600 hover:text-zinc-200 hover:bg-zinc-800/40"}`}
                   >
                     <Icon size={16} />
                     <span>{tab.label}</span>
@@ -645,14 +645,14 @@ export default function EnterpriseConductorPortal() {
             </nav>
 
             <div className="pt-4 border-t border-zinc-300 space-y-3">
-              <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black p-3.5 rounded-xl border border-zinc-300 text-[10px] space-y-1">
+              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] p-3.5 rounded-xl border border-zinc-300 text-[10px] space-y-1">
                 <span className="text-zinc-500 font-bold uppercase block tracking-wider">Conductor ID</span>
                 <span className="text-zinc-200 font-black uppercase block">{employeeId || "EMP-9824"}</span>
                 <span className="text-zinc-600 block pt-1">Conductor</span>
               </div>
               <button 
                 onClick={handleLogout}
-                className="w-full py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-755 border border-zinc-300 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all active:scale-95"
+                className="w-full py-3 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-755 border border-zinc-300 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all active:scale-95"
               >
                 Logout Shift
               </button>
@@ -660,11 +660,11 @@ export default function EnterpriseConductorPortal() {
           </aside>
 
           {/* MOBILE HEADER */}
-          <header className="md:hidden flex items-center justify-between px-5 py-4 bg-[#ffffff] border border-slate-200 shadow-sm text-black border-b border-zinc-300 sticky top-0 z-50 shadow-md">
+          <header className="md:hidden flex items-center justify-between px-5 py-4 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-b border-zinc-300 sticky top-0 z-50 shadow-md">
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-1.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-750 border border-zinc-300 rounded-lg text-zinc-300 mr-0.5"
+                className="p-1.5 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-750 border border-zinc-300 rounded-lg text-zinc-300 mr-0.5"
               >
                 <Menu size={16} />
               </button>
@@ -673,7 +673,7 @@ export default function EnterpriseConductorPortal() {
                   <Image src="/hero-logo.png" alt="JB" width={18} height={18} className="invert brightness-0" />
                 </div>
                 <div>
-                  <h2 className="text-[10px] font-black uppercase tracking-tight text-black leading-tight">Console</h2>
+                  <h2 className="text-[10px] font-black uppercase tracking-tight text-[#111827] leading-tight">Console</h2>
                   <div className="flex items-center gap-1">
                     <div className={`w-1 h-1 rounded-full ${isOffline ? "bg-red-500 animate-pulse" : "bg-green-500 animate-pulse"}`} />
                     <span className="text-[7.5px] font-bold text-zinc-600 uppercase tracking-widest leading-none">
@@ -695,7 +695,7 @@ export default function EnterpriseConductorPortal() {
               )}
               <button 
                 onClick={handleLogout}
-                className="p-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-xl text-zinc-405 transition-colors"
+                className="p-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-xl text-zinc-405 transition-colors"
               >
                 <LogIn size={14} className="rotate-180 text-orange-500" />
               </button>
@@ -712,7 +712,7 @@ export default function EnterpriseConductorPortal() {
                   animate={{ opacity: 0.5 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="absolute inset-0 bg-[#ffffff]/90 backdrop-blur-md backdrop-blur-sm"
+                  className="absolute inset-0 bg-[#F8FAFC]/90 backdrop-blur-md backdrop-blur-sm"
                 />
                 
                 {/* Drawer Panel */}
@@ -721,7 +721,7 @@ export default function EnterpriseConductorPortal() {
                   animate={{ x: 0 }}
                   exit={{ x: "-100%" }}
                   transition={{ type: "tween", duration: 0.25 }}
-                  className="absolute left-0 top-0 bottom-0 w-64 bg-[#ffffff] border border-slate-200 shadow-sm text-black border-r border-zinc-300 p-6 flex flex-col justify-between"
+                  className="absolute left-0 top-0 bottom-0 w-64 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-r border-zinc-300 p-6 flex flex-col justify-between"
                 >
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
@@ -729,14 +729,14 @@ export default function EnterpriseConductorPortal() {
                         <div className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center">
                           <Image src="/hero-logo.png" alt="JB" width={18} height={18} className="invert brightness-0" />
                         </div>
-                        <span className="font-black text-xs tracking-tight text-black uppercase">Transit Menu</span>
+                        <span className="font-black text-xs tracking-tight text-[#111827] uppercase">Transit Menu</span>
                       </div>
                       <button onClick={() => setMobileMenuOpen(false)} className="text-zinc-500 hover:text-[#ffffff] p-1">
                         <X size={16} />
                       </button>
                     </div>
 
-                    <div className="h-px bg-[#ffffff] border border-slate-200 shadow-sm text-black" />
+                    <div className="h-px bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827]" />
 
                     <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-200px)] pr-1 no-scrollbar animate-none">
                       {[
@@ -762,7 +762,7 @@ export default function EnterpriseConductorPortal() {
                             }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                               isActive 
-                                ? "bg-orange-600 text-black shadow-md" 
+                                ? "bg-orange-600 text-[#111827] shadow-md" 
                                 : "text-zinc-600 hover:text-zinc-200"
                             }`}
                           >
@@ -780,7 +780,7 @@ export default function EnterpriseConductorPortal() {
                         handleLogout();
                         setMobileMenuOpen(false);
                       }}
-                      className="w-full py-2.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 text-zinc-350 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all"
+                      className="w-full py-2.5 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-700 text-zinc-350 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all"
                     >
                       Logout Shift
                     </button>
@@ -791,10 +791,10 @@ export default function EnterpriseConductorPortal() {
           </AnimatePresence>
 
           {/* MAIN CONTENT AREA */}
-          <div className="flex-1 flex flex-col min-h-screen overflow-y-auto bg-[#ffffff] border border-slate-200 shadow-sm text-black pb-20 md:pb-6">
+          <div className="flex-1 flex flex-col min-h-screen overflow-y-auto bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] pb-20 md:pb-6">
             
             {/* Top Stat Bar */}
-            <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border-b border-zinc-300 p-4 px-6 flex flex-wrap gap-4 items-center justify-between relative">
+            <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-b border-zinc-300 p-4 px-6 flex flex-wrap gap-4 items-center justify-between relative">
               <div className="flex items-center gap-3">
                 <Wifi size={14} className={isOffline ? "text-zinc-600" : "text-green-500"} />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600">
@@ -805,7 +805,7 @@ export default function EnterpriseConductorPortal() {
               <div className="flex items-center gap-4 text-xs font-bold text-zinc-600">
                 <span className="hidden sm:inline">Route: <strong className="text-zinc-200 uppercase">Coimbatore EXP-1024</strong></span>
                 <span>Bus: <strong className="text-zinc-200">1024</strong></span>
-                <span className="text-[10px] bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 px-2 py-0.5 rounded text-orange-400 font-mono">
+                <span className="text-[10px] bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 px-2 py-0.5 rounded text-orange-400 font-mono">
                   {tripStatus}
                 </span>
               </div>
@@ -818,20 +818,20 @@ export default function EnterpriseConductorPortal() {
               {activeTab === "dashboard" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                   {/* Conductor Profile Welcome */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-black uppercase text-orange-500 tracking-widest">Conductor</span>
-                        <span className="text-[9px] bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600 px-2 py-0.5 rounded font-mono">Shift Active</span>
+                        <span className="text-[9px] bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 px-2 py-0.5 rounded font-mono">Shift Active</span>
                       </div>
-                      <h2 className="text-2xl font-black uppercase tracking-tight text-black">Rajesh Kumar</h2>
+                      <h2 className="text-2xl font-black uppercase tracking-tight text-[#111827]">Rajesh Kumar</h2>
                       <p className="text-xs text-zinc-500">Employee ID: <strong className="text-zinc-300">EMP-9824</strong> • Mobile: <strong className="text-zinc-300">9876543210</strong></p>
                     </div>
 
                     <div className="flex flex-wrap gap-2 pt-2 md:pt-0">
                       <button 
                         onClick={() => setShowQR(true)}
-                        className="px-4 py-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 border border-zinc-300 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95"
+                        className="px-4 py-3 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-700 border border-zinc-300 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95"
                       >
                         <Share2 size={12} className="text-orange-500" />
                         Show Matrix QR
@@ -846,7 +846,7 @@ export default function EnterpriseConductorPortal() {
                           triggerTripBroadcast(nextStatus);
                           playBeep(true);
                         }}
-                        className="px-4 py-3 bg-orange-600 hover:bg-orange-700 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95 shadow-md shadow-orange-600/10 text-black"
+                        className="px-4 py-3 bg-orange-600 hover:bg-orange-700 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all active:scale-95 shadow-md shadow-orange-600/10 text-[#111827]"
                       >
                         <Bus size={12} />
                         Cycle Status
@@ -864,12 +864,12 @@ export default function EnterpriseConductorPortal() {
                     ].map((stat, i) => {
                       const Icon = stat.icon;
                       return (
-                        <div key={i} className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 p-5 rounded-2xl space-y-2 shadow-md">
+                        <div key={i} className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 p-5 rounded-2xl space-y-2 shadow-md">
                           <div className="flex justify-between items-center text-zinc-500">
                             <span className="text-[9px] font-bold uppercase tracking-widest">{stat.title}</span>
                             <Icon size={14} className={stat.color} />
                           </div>
-                          <h3 className="text-2xl font-black tracking-tight text-black">{stat.val}</h3>
+                          <h3 className="text-2xl font-black tracking-tight text-[#111827]">{stat.val}</h3>
                           <p className="text-[10px] text-zinc-500 font-semibold">{stat.desc}</p>
                         </div>
                       );
@@ -879,7 +879,7 @@ export default function EnterpriseConductorPortal() {
                   {/* Operational Timeline / Announcements Quick Section */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Shift Logs */}
-                    <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                       <div className="flex justify-between items-center">
                         <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Shift Activity Log</h3>
                         <span className="text-[9px] text-zinc-500 font-mono">Latest 3 actions</span>
@@ -898,7 +898,7 @@ export default function EnterpriseConductorPortal() {
                     </div>
 
                     {/* Announcement Cards */}
-                    <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                       <div className="flex justify-between items-center">
                         <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Control Broadcasts</h3>
                         <span className="text-[9px] text-orange-500 font-black animate-pulse">LIVE</span>
@@ -922,7 +922,7 @@ export default function EnterpriseConductorPortal() {
               {/* TAB CONTENT: 2. QR PASS SCANNER */}
               {activeTab === "scan" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 text-center space-y-6 relative overflow-hidden">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 text-center space-y-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-24 h-24 bg-orange-600/10 rounded-full blur-2xl pointer-events-none" />
                     
                     {!isScanning ? (
@@ -934,12 +934,12 @@ export default function EnterpriseConductorPortal() {
                           </div>
                         </div>
                         <div className="space-y-1">
-                          <h2 className="text-xl font-black uppercase text-black tracking-tight">QR Scanner Engaged</h2>
+                          <h2 className="text-xl font-black uppercase text-[#111827] tracking-tight">QR Scanner Engaged</h2>
                           <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Supports native transit tickets and online digital passes</p>
                         </div>
                         <button 
                           onClick={() => setIsScanning(true)}
-                          className="w-full max-w-xs bg-orange-600 hover:bg-orange-700 text-black py-4 rounded-xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg shadow-orange-600/10 cursor-pointer"
+                          className="w-full max-w-xs bg-orange-600 hover:bg-orange-700 text-[#111827] py-4 rounded-xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg shadow-orange-600/10 cursor-pointer"
                         >
                           <Camera size={18} />
                           Launch Scanner Camera
@@ -947,10 +947,10 @@ export default function EnterpriseConductorPortal() {
                       </div>
                     ) : (
                       <div className="space-y-4 max-w-sm mx-auto">
-                        <div id="reader" className="overflow-hidden rounded-2xl border-4 border-orange-600 shadow-inner bg-[#ffffff] border border-slate-200 text-black" />
+                        <div id="reader" className="overflow-hidden rounded-2xl border-4 border-orange-600 shadow-inner bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827]" />
                         <button 
                           onClick={() => setIsScanning(false)}
-                          className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-800 border border-zinc-300 text-zinc-600 py-3 rounded-xl font-bold uppercase tracking-widest text-[9px]"
+                          className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-800 border border-zinc-300 text-zinc-600 py-3 rounded-xl font-bold uppercase tracking-widest text-[9px]"
                         >
                           Cancel Scanner
                         </button>
@@ -961,7 +961,7 @@ export default function EnterpriseConductorPortal() {
                   {/* Validation results status indicators */}
                   <AnimatePresence mode="wait">
                     {validating && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-8 text-center space-y-4">
+                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-8 text-center space-y-4">
                         <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto" />
                         <p className="text-orange-500 font-black uppercase tracking-widest text-[10px]">Validating Digital Ticket...</p>
                       </motion.div>
@@ -977,7 +977,7 @@ export default function EnterpriseConductorPortal() {
                             : scanResult.message?.includes("Used")
                               ? "bg-amber-950/20 border-amber-500/50 shadow-[0_0_30px_rgba(245,158,11,0.05)]"
                               : scanResult.message?.includes("Expired")
-                                ? "bg-[#ffffff] border border-slate-200 shadow-sm text-black border-zinc-300 shadow-[0_0_30px_rgba(100,116,139,0.05)]"
+                                ? "bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-zinc-300 shadow-[0_0_30px_rgba(100,116,139,0.05)]"
                                 : "bg-red-950/20 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.05)]"
                         }`}
                       >
@@ -1032,11 +1032,11 @@ export default function EnterpriseConductorPortal() {
                           )}
 
                           {scanResult.booking?.passengers && scanResult.booking.passengers.length > 0 && (scanResult.booking.boarding_point === "Combined Journey" || scanResult.booking.boardingPoint === "Combined Journey") ? (
-                            <div className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-xl p-4 mt-2">
+                            <div className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-xl p-4 mt-2">
                               <h4 className="text-[9px] font-bold uppercase text-zinc-500 tracking-wider mb-3">Journey Segments</h4>
                               <div className="space-y-3">
                                 {scanResult.booking.passengers.map((p: any, idx: number) => (
-                                  <div key={idx} className="text-xs bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-lg p-3">
+                                  <div key={idx} className="text-xs bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-lg p-3">
                                     <div className="flex justify-between items-center mb-2">
                                       <span className="text-zinc-300 font-medium">Journey {idx + 1} {p.luggage && p.luggage !== 'None' ? `(+${p.luggage})` : ''}</span>
                                       <span className="text-orange-500 font-bold">₹{p.fare || 20}</span>
@@ -1052,7 +1052,7 @@ export default function EnterpriseConductorPortal() {
                             </div>
                           ) : (
                             scanResult.booking?.passengers && scanResult.booking.passengers.length > 0 && scanResult.booking.destination === "Multi-Stop" && (
-                              <div className="w-full bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-xl p-4 mt-2">
+                              <div className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-xl p-4 mt-2">
                                 <h4 className="text-[9px] font-bold uppercase text-zinc-500 tracking-wider mb-3">Passenger Destinations</h4>
                                 <div className="space-y-2">
                                   {scanResult.booking.passengers.map((p: any, idx: number) => (
@@ -1078,14 +1078,14 @@ export default function EnterpriseConductorPortal() {
                   </AnimatePresence>
 
                   {/* Manual Input Entry validation */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Manual Ticket ID Entry</h3>
                     <div className="flex gap-2">
                       <input 
                         type="text" 
                         placeholder="E.g. TB-601090"
                         id="manualTicketInput"
-                        className="flex-1 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-1 focus:ring-orange-500 text-sm text-zinc-900 placeholder:text-zinc-750 font-mono"
+                        className="flex-1 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-1 focus:ring-orange-500 text-sm text-zinc-900 placeholder:text-zinc-750 font-mono"
                       />
                       <button
                         onClick={() => {
@@ -1095,7 +1095,7 @@ export default function EnterpriseConductorPortal() {
                             input.value = "";
                           }
                         }}
-                        className="px-5 bg-orange-600 hover:bg-orange-700 text-black rounded-xl text-[10px] font-black uppercase tracking-wider shadow-md shadow-orange-600/10"
+                        className="px-5 bg-orange-600 hover:bg-orange-700 text-[#111827] rounded-xl text-[10px] font-black uppercase tracking-wider shadow-md shadow-orange-600/10"
                       >
                         Verify
                       </button>
@@ -1109,7 +1109,7 @@ export default function EnterpriseConductorPortal() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* form card */}
-                    <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-5 text-left">
+                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-5 text-left">
                       <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600 border-b border-zinc-300 pb-3">New Passenger Ticket</h3>
                       <form onSubmit={handleIssueTicket} className="space-y-4">
                         
@@ -1158,18 +1158,18 @@ export default function EnterpriseConductorPortal() {
                                 setObQuantity(q => Math.max(1, q - 1));
                                 setObSuccessTicket(null);
                               }}
-                              className="w-9 h-9 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 text-zinc-300 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
+                              className="w-9 h-9 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 text-zinc-300 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
                             >
                               <Minus size={14} />
                             </button>
-                            <span className="text-sm font-black text-black">{obQuantity}</span>
+                            <span className="text-sm font-black text-[#111827]">{obQuantity}</span>
                             <button
                               type="button"
                               onClick={() => {
                                 setObQuantity(q => Math.min(10, q + 1));
                                 setObSuccessTicket(null);
                               }}
-                              className="w-9 h-9 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 text-zinc-300 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
+                              className="w-9 h-9 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 text-zinc-300 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
                             >
                               <Plus size={14} />
                             </button>
@@ -1196,13 +1196,13 @@ export default function EnterpriseConductorPortal() {
                         <div className="pt-2">
                           <div className="flex justify-between items-center bg-zinc-955 p-4 rounded-xl border border-zinc-300 mb-4">
                             <span className="text-[10px] font-black text-zinc-500 uppercase tracking-wider">Calculated Fare</span>
-                            <span className="text-xl font-black text-black">₹{ticketFare}</span>
+                            <span className="text-xl font-black text-[#111827]">₹{ticketFare}</span>
                           </div>
 
                           <button
                             type="submit"
                             disabled={obBoarding === obDestination}
-                            className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-black rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-orange-600/15 disabled:opacity-40 cursor-pointer"
+                            className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-[#111827] rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-orange-600/15 disabled:opacity-40 cursor-pointer"
                           >
                             Print & Issue Ticket
                           </button>
@@ -1252,7 +1252,7 @@ export default function EnterpriseConductorPortal() {
                             </div>
 
                             <div className="border-t-2 border-dashed border-zinc-800/20 pt-4 flex flex-col items-center gap-3">
-                              <div className="p-2 bg-[#ffffff] rounded-xl shadow-inner border border-yellow-300/40">
+                              <div className="p-2 bg-[#F8FAFC] rounded-xl shadow-inner border border-yellow-300/40">
                                 <QRCodeSVG 
                                   value={btoa(JSON.stringify({ t: obSuccessTicket.ticketId, b: "1024", q: obSuccessTicket.quantity, m: "JB-ONBOARD-TKT" }))}
                                   size={100}
@@ -1284,7 +1284,7 @@ export default function EnterpriseConductorPortal() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
                   
                   {/* Search and Filters */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-5 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-5 space-y-4">
                     <div className="flex gap-2">
                       <div className="relative flex-1">
                         <Search size={16} className="absolute left-4 top-3.5 text-zinc-600" />
@@ -1312,10 +1312,10 @@ export default function EnterpriseConductorPortal() {
                   </div>
 
                   {/* Passenger Table/List */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl overflow-hidden shadow-md">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl overflow-hidden shadow-md">
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border-b border-zinc-300 text-[9px] font-black uppercase text-zinc-500 tracking-wider">
+                        <thead className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-b border-zinc-300 text-[9px] font-black uppercase text-zinc-500 tracking-wider">
                           <tr>
                             <th className="p-4 px-6">Ticket ID</th>
                             <th className="p-4">Passenger Name</th>
@@ -1376,7 +1376,7 @@ export default function EnterpriseConductorPortal() {
               {/* TAB CONTENT: 5. OCCUPANCY MONITOR */}
               {activeTab === "occupancy" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <div className="flex justify-between items-center border-b border-zinc-300 pb-3">
                       <div>
                         <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Live Occupancy Monitor</h3>
@@ -1384,7 +1384,7 @@ export default function EnterpriseConductorPortal() {
                       </div>
                       
                       <div className="text-right">
-                        <span className="text-2xl font-black text-black">{occupancy}/50</span>
+                        <span className="text-2xl font-black text-[#111827]">{occupancy}/50</span>
                         <span className="text-[9px] text-zinc-500 uppercase font-bold block">Capacity</span>
                       </div>
                     </div>
@@ -1396,7 +1396,7 @@ export default function EnterpriseConductorPortal() {
                         <span>Occupied ({occupancy})</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <div className="w-3.5 h-3.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded" />
+                        <div className="w-3.5 h-3.5 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded" />
                         <span>Available ({50 - occupancy})</span>
                       </div>
                     </div>
@@ -1406,7 +1406,7 @@ export default function EnterpriseConductorPortal() {
                       {/* Driver Steering wheel mockup */}
                       <div className="flex justify-between items-center border-b border-zinc-300 pb-4 mb-6">
                         <div className="w-8 h-8 rounded-full border-4 border-dashed border-zinc-300 flex items-center justify-center">
-                          <div className="w-3 h-3 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-full" />
+                          <div className="w-3 h-3 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-full" />
                         </div>
                         <span className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">FRONT ENTRANCE</span>
                       </div>
@@ -1424,7 +1424,7 @@ export default function EnterpriseConductorPortal() {
                                 <button
                                   type="button"
                                   onClick={() => toggleSeat(idx)}
-                                  className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-black shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-300 text-zinc-700 hover:border-zinc-700"}`}
+                                  className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-[#111827] shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-300 text-zinc-700 hover:border-zinc-700"}`}
                                 >
                                   S{seatNum}
                                 </button>
@@ -1437,7 +1437,7 @@ export default function EnterpriseConductorPortal() {
                               key={idx}
                               type="button"
                               onClick={() => toggleSeat(idx)}
-                              className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-black shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-300 text-zinc-700 hover:border-zinc-700"}`}
+                              className={`h-9 rounded-xl border text-[9px] font-bold flex items-center justify-center transition-all active:scale-90 cursor-pointer ${isOccupied ? "bg-orange-600 border-orange-500 text-[#111827] shadow-md shadow-orange-600/10" : "bg-zinc-955 border-zinc-300 text-zinc-700 hover:border-zinc-700"}`}
                             >
                               S{seatNum}
                             </button>
@@ -1454,15 +1454,15 @@ export default function EnterpriseConductorPortal() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-5 text-left">
 
                   {/* GPS Status Header Card */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6">
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-3">
                         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
                           gpsState.status === 'broadcasting'
-                            ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/30'
+                            ? 'bg-emerald-500 text-[#111827] shadow-lg shadow-emerald-500/30'
                             : gpsState.status === 'no_permission'
                             ? 'bg-red-500/10 border border-red-500/20 text-red-400'
-                            : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-500 border border-zinc-300'
+                            : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-500 border border-zinc-300'
                         }`}>
                           {gpsState.status === 'broadcasting'
                             ? <Radio size={22} className="animate-pulse" />
@@ -1496,8 +1496,8 @@ export default function EnterpriseConductorPortal() {
                         disabled={!busDbId}
                         className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 disabled:opacity-40 ${
                           gpsEnabled
-                            ? 'bg-red-500 hover:bg-red-600 text-black shadow-lg shadow-red-500/30'
-                            : 'bg-emerald-500 hover:bg-emerald-600 text-black shadow-lg shadow-emerald-500/30'
+                            ? 'bg-red-500 hover:bg-red-600 text-[#111827] shadow-lg shadow-red-500/30'
+                            : 'bg-emerald-500 hover:bg-emerald-600 text-[#111827] shadow-lg shadow-emerald-500/30'
                         }`}
                       >
                         {gpsEnabled ? 'End Trip' : 'Start Trip'}
@@ -1514,13 +1514,13 @@ export default function EnterpriseConductorPortal() {
 
                     {/* Coordinate Readout */}
                     <div className="grid grid-cols-2 gap-3 font-mono">
-                      <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-xl p-3 border border-zinc-300">
+                      <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-xl p-3 border border-zinc-300">
                         <span className="text-[8px] font-bold text-zinc-500 block uppercase tracking-wider mb-1">Latitude</span>
                         <span className="text-sm font-bold text-zinc-200">
                           {gpsState.lat !== null ? gpsState.lat.toFixed(6) : (lat !== 0 ? lat.toFixed(6) : '—')}
                         </span>
                       </div>
-                      <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-xl p-3 border border-zinc-300">
+                      <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-xl p-3 border border-zinc-300">
                         <span className="text-[8px] font-bold text-zinc-500 block uppercase tracking-wider mb-1">Longitude</span>
                         <span className="text-sm font-bold text-zinc-200">
                           {gpsState.lng !== null ? gpsState.lng.toFixed(6) : (lng !== 0 ? lng.toFixed(6) : '—')}
@@ -1531,26 +1531,26 @@ export default function EnterpriseConductorPortal() {
 
                   {/* Live Stats */}
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-2xl p-4 text-center">
-                      <Gauge size={18} className="text-[#18D2C7] mx-auto mb-2" />
-                      <p className="text-2xl font-black text-black">{gpsState.speed || speed}</p>
+                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 text-center">
+                      <Gauge size={18} className="text-[#E8622C] mx-auto mb-2" />
+                      <p className="text-2xl font-black text-[#111827]">{gpsState.speed || speed}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">km/h</p>
                     </div>
-                    <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-2xl p-4 text-center">
+                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 text-center">
                       <Radio size={18} className="text-emerald-400 mx-auto mb-2" />
-                      <p className="text-2xl font-black text-black">{gpsState.updateCount}</p>
+                      <p className="text-2xl font-black text-[#111827]">{gpsState.updateCount}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Updates</p>
                     </div>
-                    <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-2xl p-4 text-center">
+                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 text-center">
                       <Signal size={18} className="text-blue-400 mx-auto mb-2" />
-                      <p className="text-[11px] font-black text-black">{gpsState.accuracy ? `${Math.round(gpsState.accuracy)}m` : '—'}</p>
+                      <p className="text-[11px] font-black text-[#111827]">{gpsState.accuracy ? `${Math.round(gpsState.accuracy)}m` : '—'}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Accuracy</p>
                     </div>
                   </div>
 
                   {/* Current Route */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-2xl p-4 flex items-center gap-3">
-                    <Bus size={20} className="text-[#18D2C7] flex-shrink-0" />
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 flex items-center gap-3">
+                    <Bus size={20} className="text-[#E8622C] flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Current Route</p>
                       <p className="text-sm font-black text-zinc-900 truncate">{assignedRouteName || 'Not Assigned'}</p>
@@ -1558,12 +1558,12 @@ export default function EnterpriseConductorPortal() {
                     <div className={`text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest ${
                       tripStatus === 'Trip Started' || tripStatus === 'Boarding'
                         ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black text-zinc-600'
+                        : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600'
                     }`}>{tripStatus}</div>
                   </div>
 
                   {/* Trip Status Controls */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-2xl p-5 space-y-3">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-5 space-y-3">
                     <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-600">Update Trip Status</h3>
                     <div className="grid grid-cols-3 gap-2">
                       {[
@@ -1581,7 +1581,7 @@ export default function EnterpriseConductorPortal() {
                             key={s.name}
                             onClick={() => { setTripStatus(s.name); triggerTripBroadcast(s.name); playBeep(true); }}
                             className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all text-center gap-1.5 cursor-pointer ${
-                              isActive ? 'bg-orange-600 border-orange-500 text-black shadow-md' : 'bg-[#ffffff] border border-slate-200 shadow-sm text-black border-zinc-300 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                              isActive ? 'bg-orange-600 border-orange-500 text-[#111827] shadow-md' : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-zinc-300 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
                             }`}
                           >
                             <Icon size={16} />
@@ -1597,7 +1597,7 @@ export default function EnterpriseConductorPortal() {
               {/* TAB CONTENT: 7. REVENUE LEDGER */}
               {activeTab === "collections" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600 border-b border-zinc-300 pb-3">Collection Summary</h3>
                     
                     <div className="space-y-4 pt-2">
@@ -1609,7 +1609,7 @@ export default function EnterpriseConductorPortal() {
                         <span className="text-zinc-500">UPI / QR Digital Ledger:</span>
                         <span className="font-bold text-zinc-200">₹{onlineCollection}</span>
                       </div>
-                      <div className="h-px bg-[#ffffff] border border-slate-200 shadow-sm text-black" />
+                      <div className="h-px bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827]" />
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-zinc-600 font-bold">Total Revenue Ledger:</span>
                         <span className="font-black text-orange-500 text-lg">₹{totalRevenue}</span>
@@ -1617,7 +1617,7 @@ export default function EnterpriseConductorPortal() {
                     </div>
                   </div>
 
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Shift Handover Operations</h3>
                     <p className="text-[10px] text-zinc-500 leading-relaxed uppercase tracking-wider font-bold">Tap below to close the current shift tally, save collections report, and transfer transit controls to the next supervisor node.</p>
                     <button
@@ -1625,7 +1625,7 @@ export default function EnterpriseConductorPortal() {
                         alert("Shift details locked successfully. Receipts exported to terminal database.");
                         handleLogout();
                       }}
-                      className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-black rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 cursor-pointer"
+                      className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-[#111827] rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 cursor-pointer"
                     >
                       Lock Ledger & End Shift
                     </button>
@@ -1638,7 +1638,7 @@ export default function EnterpriseConductorPortal() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
                   
                   {/* Offline Settings Status */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
                         {isOffline ? (
@@ -1659,7 +1659,7 @@ export default function EnterpriseConductorPortal() {
                           setIsOffline(!isOffline);
                           playBeep(true);
                         }}
-                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${isOffline ? "bg-green-600 text-black" : "bg-red-500/10 border border-red-500/20 text-red-500"}`}
+                        className={`px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all cursor-pointer ${isOffline ? "bg-green-600 text-[#111827]" : "bg-red-500/10 border border-red-500/20 text-red-500"}`}
                       >
                         {isOffline ? "Go Online" : "Go Offline"}
                       </button>
@@ -1667,10 +1667,10 @@ export default function EnterpriseConductorPortal() {
                   </div>
 
                   {/* Sync Queue */}
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <div className="flex justify-between items-center border-b border-zinc-300 pb-3">
                       <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600">Offline Queue Cache</h3>
-                      <span className="text-[10px] bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 px-2 py-0.5 rounded font-mono text-zinc-600">
+                      <span className="text-[10px] bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 px-2 py-0.5 rounded font-mono text-zinc-600">
                         {offlineQueue.length} pending actions
                       </span>
                     </div>
@@ -1690,7 +1690,7 @@ export default function EnterpriseConductorPortal() {
                         <button
                           onClick={handleSyncData}
                           disabled={isOffline || validating}
-                          className="w-full py-4 mt-4 bg-orange-600 hover:bg-orange-700 text-black rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 disabled:opacity-40 cursor-pointer"
+                          className="w-full py-4 mt-4 bg-orange-600 hover:bg-orange-700 text-[#111827] rounded-xl font-black uppercase tracking-widest text-[9px] active:scale-95 shadow-md shadow-orange-600/10 disabled:opacity-40 cursor-pointer"
                         >
                           {validating ? "Syncing..." : "Sync Offline Queue Now"}
                         </button>
@@ -1709,7 +1709,7 @@ export default function EnterpriseConductorPortal() {
               {/* TAB CONTENT: 9. REPORT ISSUE */}
               {activeTab === "issues" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600 border-b border-zinc-300 pb-3">Report Transit Incident</h3>
                     
                     <form onSubmit={handleReportIssue} className="space-y-4">
@@ -1756,7 +1756,7 @@ export default function EnterpriseConductorPortal() {
 
                       <button
                         type="submit"
-                        className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-black rounded-xl font-black uppercase tracking-widest text-[9px] shadow-lg shadow-orange-600/15 cursor-pointer"
+                        className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-[#111827] rounded-xl font-black uppercase tracking-widest text-[9px] shadow-lg shadow-orange-600/15 cursor-pointer"
                       >
                         Dispatch Report to Control Room
                       </button>
@@ -1773,7 +1773,7 @@ export default function EnterpriseConductorPortal() {
               {/* TAB CONTENT: 10. ANNOUNCEMENTS */}
               {activeTab === "notifications" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6 text-left">
-                  <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-zinc-300 rounded-3xl p-6 space-y-4">
+                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-6 space-y-4">
                     <h3 className="text-xs font-black uppercase tracking-widest text-zinc-600 border-b border-zinc-300 pb-3">Announcements Inbox</h3>
                     
                     <div className="space-y-3">
@@ -1797,7 +1797,7 @@ export default function EnterpriseConductorPortal() {
           </div>
 
           {/* MOBILE BOTTOM NAVIGATION BAR */}
-          <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#ffffff] border border-slate-200 shadow-sm text-black border-t border-zinc-300 px-6 py-3.5 flex items-center justify-between z-50 safe-bottom shadow-lg">
+          <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border-t border-zinc-300 px-6 py-3.5 flex items-center justify-between z-50 safe-bottom shadow-lg">
              {[
                { id: "dashboard", label: "Home", icon: LayoutDashboard },
                { id: "scan", label: "Scanner", icon: QrCode },
@@ -1851,7 +1851,7 @@ export default function EnterpriseConductorPortal() {
               >
                  <button 
                    onClick={() => setShowQR(false)}
-                   className="absolute top-8 right-8 w-12 h-12 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-zinc-700 rounded-full flex items-center justify-center text-black border border-zinc-750"
+                   className="absolute top-8 right-8 w-12 h-12 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-zinc-700 rounded-full flex items-center justify-center text-[#111827] border border-zinc-750"
                  >
                    <X size={20} />
                  </button>

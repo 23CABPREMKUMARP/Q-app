@@ -23,7 +23,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1, ease: "easeInOut" }}
-      className="fixed inset-0 z-[1000] bg-[#18D2C7] flex flex-col items-center justify-center p-6"
+      className="fixed inset-0 z-[1000] bg-[#E8622C] flex flex-col items-center justify-center p-6"
     >
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -63,13 +63,13 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             transition={{ delay: 1.5 }}
             className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic font-heading"
           >
-            <span className="text-zinc-950">Digi Bus</span> <span className="text-black">Stand</span>
+            <span className="text-zinc-950">Digi Bus</span> <span className="text-[#111827]">Stand</span>
           </motion.h2>
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ delay: 1.8, duration: 3.5, ease: "linear" }}
-            className="h-1.5 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-full mx-auto"
+            className="h-1.5 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-full mx-auto"
           />
           <motion.p 
             initial={{ opacity: 0 }}
@@ -144,7 +144,7 @@ export default function ProductPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-orange-50/20 via-transparent to-orange-50 pointer-events-none" />
         </div>
 
-        <div className="bg-transparent text-black h-full w-full gpu-accelerated relative z-10">
+        <div className="bg-transparent text-[#111827] h-full w-full gpu-accelerated relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +195,7 @@ export default function ProductPage() {
                   whileTap={{ scale: 0.95 }}
                   aria-label="Explore Solutions"
                   onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-full bg-[#ffffff] border border-slate-200 text-black px-10 py-4 text-black text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] cursor-pointer gpu-accelerated"
+                  className="rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] px-10 py-4 text-[#111827] text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] cursor-pointer gpu-accelerated"
                 >
                   Explore Solutions
                 </motion.button>
@@ -211,9 +211,9 @@ export default function ProductPage() {
         <ContainerScroll
           titleComponent={
             <div className="flex items-center justify-center flex-col gpu-accelerated">
-              <h2 className="text-2xl sm:text-4xl font-semibold text-black/90 text-center">
+              <h2 className="text-2xl sm:text-4xl font-semibold text-[#111827]/90 text-center">
                 Experience the Future of <br />
-                <span className="text-3xl sm:text-4xl md:text-[6rem] font-bold mt-2 leading-none text-black tracking-tight font-heading">
+                <span className="text-3xl sm:text-4xl md:text-[6rem] font-bold mt-2 leading-none text-[#111827] tracking-tight font-heading">
                   Automated Mobility
                 </span>
               </h2>
@@ -221,7 +221,7 @@ export default function ProductPage() {
           }
         >
           <div 
-            className="mx-auto rounded-2xl object-cover h-full w-full shadow-2xl bg-[#ffffff] border border-slate-200 shadow-sm text-black overflow-hidden relative"
+            className="mx-auto rounded-2xl object-cover h-full w-full shadow-2xl bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] overflow-hidden relative"
           >
             <video
               ref={videoRef}
@@ -244,14 +244,14 @@ export default function ProductPage() {
           viewport={{ once: true }}
           className="container mx-auto px-6 max-w-4xl text-center pb-20 -mt-10 md:-mt-64 relative z-10"
         >
-          <p className="text-base md:text-xl text-black font-medium leading-relaxed">
+          <p className="text-base md:text-xl text-[#111827] font-medium leading-relaxed">
             JEFFBEN Systems is spearheading the digital transformation of urban mobility across Tamil Nadu. Through our proprietary Digi Bus Stand framework, we deploy advanced automated fare collection and mission-critical fleet intelligence systems. Our mission is to provide transport authorities with robust, data-driven operational control while delivering a premier, frictionless experience for every commuter.
           </p>
         </motion.div>
       </section>
 
       {/* ================= WHAT WE DO SECTION ================= */}
-      <section className="relative py-12 md:py-24 bg-background text-black border-y border-zinc-200 overflow-hidden gpu-accelerated">
+      <section className="relative py-12 md:py-24 bg-background text-[#111827] border-y border-zinc-200 overflow-hidden gpu-accelerated">
         <div className="container mx-auto px-6 max-w-5xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -296,7 +296,7 @@ export default function ProductPage() {
       </section>
 
       {/* ================= ABOUT US PAGE CONTENT ================= */}
-      <section className="relative py-12 md:py-24 bg-primary text-black border-y border-primary/20 overflow-hidden gpu-accelerated">
+      <section className="relative py-12 md:py-24 bg-primary text-[#111827] border-y border-primary/20 overflow-hidden gpu-accelerated">
         <div className="container mx-auto px-6 max-w-screen-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
             {/* Left Column: All Text Content */}
@@ -308,12 +308,12 @@ export default function ProductPage() {
               className="space-y-8 text-left"
             >
               <div>
-                <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-black leading-tight tracking-tight">Corporate Overview</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-[#111827] leading-tight tracking-tight">Corporate Overview</h2>
                 <div className="space-y-6">
-                  <p className="text-lg md:text-xl lg:text-2xl text-black leading-relaxed font-medium">
+                  <p className="text-lg md:text-xl lg:text-2xl text-[#111827] leading-relaxed font-medium">
                     JEFFBEN Systems is a premier technology enterprise dedicated to the modernization of public infrastructure through industrial-grade automation. We specialize in the development of sophisticated telemetry and real-time information architectures for metropolitan transit.
                   </p>
-                  <p className="text-lg md:text-xl lg:text-2xl text-black/90 leading-relaxed font-medium">
+                  <p className="text-lg md:text-xl lg:text-2xl text-[#111827]/90 leading-relaxed font-medium">
                     Our unified ecosystem facilitates a seamless interface between regulatory bodies and the public. By harnessing advanced cloud computation, cross-platform mobility applications, and integrated IoT networks, we ensure high-integrity data accessibility across the transit lifecycle.
                   </p>
                 </div>
@@ -338,15 +338,15 @@ export default function ProductPage() {
                         viewport={{ once: true }}
                         className="flex items-start gap-3 md:gap-4 group cursor-default"
                       >
-                        <div className="h-2 w-2 md:h-3 md:w-3 rounded-full bg-[#ffffff] shrink-0 mt-1.5 group-hover:scale-150 transition-transform duration-300" />
-                        <span className="text-sm sm:text-base md:text-lg lg:text-xl text-black font-medium leading-tight group-hover:translate-x-1 transition-transform duration-300">{item}</span>
+                        <div className="h-2 w-2 md:h-3 md:w-3 rounded-full bg-[#F8FAFC] shrink-0 mt-1.5 group-hover:scale-150 transition-transform duration-300" />
+                        <span className="text-sm sm:text-base md:text-lg lg:text-xl text-[#111827] font-medium leading-tight group-hover:translate-x-1 transition-transform duration-300">{item}</span>
                       </motion.div>
                     ))}
                   </div>
 
                   {/* Mobile-only globe positioned beside the list, scaled down to fit */}
                   <div className="lg:hidden relative h-[140px] sm:h-[300px] w-full flex items-center justify-center translate-x-4">
-                    <div className="absolute inset-0 bg-[#ffffff]/20 rounded-full blur-[40px] sm:blur-[60px] scale-125" />
+                    <div className="absolute inset-0 bg-[#F8FAFC]/20 rounded-full blur-[40px] sm:blur-[60px] scale-125" />
                     <Globe className="relative z-10 w-full h-full gpu-accelerated" />
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export default function ProductPage() {
               transition={{ duration: 1, type: "spring", damping: 20 }}
               className="hidden lg:flex relative aspect-square w-full lg:h-[800px] xl:h-[900px] items-center justify-center gpu-accelerated"
             >
-              <div className="absolute inset-0 bg-[#ffffff]/20 rounded-full blur-[150px] xl:blur-[200px] scale-110" />
+              <div className="absolute inset-0 bg-[#F8FAFC]/20 rounded-full blur-[150px] xl:blur-[200px] scale-110" />
               <Globe className="relative z-10 w-full h-full" />
             </motion.div>
           </div>
@@ -368,7 +368,7 @@ export default function ProductPage() {
       </section>
 
       {/* ================= OUR VISION SECTION ================= */}
-      <section className="relative py-12 md:py-24 bg-background text-black overflow-hidden gpu-accelerated">
+      <section className="relative py-12 md:py-24 bg-background text-[#111827] overflow-hidden gpu-accelerated">
         <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -397,7 +397,7 @@ export default function ProductPage() {
               className="relative w-full max-w-[380px] mx-auto md:mx-0 group gpu-accelerated"
             >
               <div className="absolute -inset-4 bg-gradient-to-tr from-orange-500 to-orange-400 opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-700" />
-              <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden border-8 border-slate-300 shadow-2xl shadow-black/20">
+              <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden border-8 border-[#E5E7EB] shadow-2xl shadow-black/20">
                 <Image
                   src="/founder.jpg"
                   alt="Founder (JeffBen)"
@@ -415,10 +415,10 @@ export default function ProductPage() {
               viewport={{ once: true }}
               className="gpu-accelerated"
             >
-              <h2 className="text-3xl md:text-5xl font-bold mb-2 text-black">Executive Leadership</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-2 text-[#111827]">Executive Leadership</h2>
               <p className="text-xl text-zinc-900 font-medium uppercase tracking-wider mb-6 opacity-80">JeffBen — Founder & CEO</p>
 
-              <p className="text-lg text-black leading-relaxed mb-6 font-medium">
+              <p className="text-lg text-[#111827] leading-relaxed mb-6 font-medium">
                 A distinguished technologist and entrepreneur focused on addressing complex infrastructure challenges through innovation. With expertise in systems engineering and a strategic vision for urban advancement, JeffBen established JEFFBEN Systems to redefine public accessibility and operational efficiency in modern transit.
               </p>
 
@@ -435,7 +435,7 @@ export default function ProductPage() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -6, backgroundColor: "#fff", color: "#000" }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-4 rounded-2xl text-black transition-all shadow-xl flex items-center justify-center bg-[#ffffff] border border-slate-200 text-black border border-slate-300 backdrop-blur-xl gpu-accelerated"
+                    className="p-4 rounded-2xl text-[#111827] transition-all shadow-xl flex items-center justify-center bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] backdrop-blur-xl gpu-accelerated"
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -448,7 +448,7 @@ export default function ProductPage() {
       </section>
 
       {/* ================= SERVICES PAGE CONTENT ================= */}
-      <section id="solutions" className="relative py-12 md:py-24 bg-background text-black overflow-hidden gpu-accelerated">
+      <section id="solutions" className="relative py-12 md:py-24 bg-background text-[#111827] overflow-hidden gpu-accelerated">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-6xl font-bold tracking-tight">Solutions Portfolio</h2>
@@ -481,7 +481,7 @@ export default function ProductPage() {
                 transition={{ delay: i * 0.1, type: "spring", damping: 20 }}
                 whileHover={{ y: -12 }}
                 viewport={{ once: true }}
-                className="p-8 md:p-10 rounded-[40px] bg-zinc-50 border border-zinc-100 flex flex-col items-start gap-6 transition-all duration-500 shadow-sm hover:shadow-2xl hover:bg-[#ffffff] gpu-accelerated group cursor-pointer"
+                className="p-8 md:p-10 rounded-[40px] bg-zinc-50 border border-zinc-100 flex flex-col items-start gap-6 transition-all duration-500 shadow-sm hover:shadow-2xl hover:bg-[#F8FAFC] gpu-accelerated group cursor-pointer"
               >
                 <div className="h-14 w-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 font-semibold text-xl group-hover:bg-orange-500 group-hover:text-[#ffffff] transition-all duration-500">
                   {i + 1}
@@ -499,8 +499,8 @@ export default function ProductPage() {
       {/* ================= TECHNOLOGY OVERVIEW SECTION ================= */}
       <section className="relative py-12 md:py-24 bg-primary text-zinc-950 border-y border-primary/20 overflow-hidden text-center gpu-accelerated">
         <div className="container mx-auto px-6 max-w-4xl">
-          <h2 className="text-3xl md:text-6xl font-bold mb-8 text-black tracking-tighter">Next-Gen Infrastructure</h2>
-          <p className="text-lg md:text-2xl text-black/90 mb-12 font-bold leading-relaxed">
+          <h2 className="text-3xl md:text-6xl font-bold mb-8 text-[#111827] tracking-tighter">Next-Gen Infrastructure</h2>
+          <p className="text-lg md:text-2xl text-[#111827]/90 mb-12 font-bold leading-relaxed">
             JEFFBEN Systems leverages a military-grade technology stack to ensure unmatched reliability, performance, and scalability across large-scale public transit networks:
           </p>
 
@@ -509,7 +509,7 @@ export default function ProductPage() {
               <motion.div 
                 key={i} 
                 whileHover={{ scale: 1.05, y: -4 }}
-                className="px-8 py-4 rounded-full bg-[#ffffff] border border-slate-200 text-black backdrop-blur-md border border-slate-300 text-black font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
+                className="px-8 py-4 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] backdrop-blur-md border border-[#E5E7EB] text-[#111827] font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
               >
                 {tech}
               </motion.div>
@@ -519,7 +519,7 @@ export default function ProductPage() {
       </section>
 
       {/* ================= CONTACT US PAGE CONTENT ================= */}
-      <section className="flex flex-col items-center justify-center py-20 md:py-40 text-center px-6 bg-background text-black gpu-accelerated">
+      <section className="flex flex-col items-center justify-center py-20 md:py-40 text-center px-6 bg-background text-[#111827] gpu-accelerated">
         <motion.h3 
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -556,7 +556,7 @@ export default function ProductPage() {
 
 
 
-        <p className="mt-24 text-4xl md:text-6xl font-bold text-black tracking-tight select-none">
+        <p className="mt-24 text-4xl md:text-6xl font-bold text-[#111827] tracking-tight select-none">
           &quot;Advancing Transit, Enhancing Lives.&quot;
         </p>
       </section>

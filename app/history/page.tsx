@@ -123,17 +123,17 @@ export default function HistoryPage() {
 
   return (
     <SecureView>
-      <main className="min-h-screen bg-[#ffffff] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
+      <main className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
       
       {/* Saffron Gradient PhonePe Header */}
-      <div className="bg-[#18D2C7] text-black fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
+      <div className="bg-[#E8622C] text-[#111827] fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
         <div className="py-6 px-6 flex items-center gap-3">
-          <Link href="/" className="p-2 hover:bg-[#ffffff]/10 rounded-xl transition-all">
-            <ChevronRight className="rotate-180 text-black" size={20} />
+          <Link href="/" className="p-2 hover:bg-[#F8FAFC]/10 rounded-xl transition-all">
+            <ChevronRight className="rotate-180 text-[#111827]" size={20} />
           </Link>
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-black uppercase">Transaction History</h1>
-            <p className="text-[10px] font-bold text-black/80 uppercase tracking-wider">Metropolitan Transit Passbook & Ledgers</p>
+            <h1 className="text-xl font-bold tracking-tight text-[#111827] uppercase">Transaction History</h1>
+            <p className="text-[10px] font-bold text-[#111827]/80 uppercase tracking-wider">Metropolitan Transit Passbook & Ledgers</p>
           </div>
         </div>
       </div>
@@ -141,13 +141,13 @@ export default function HistoryPage() {
       <div className="max-w-xl md:max-w-4xl mx-auto px-5 pt-8 space-y-6">
         
         {/* Intro Info Banner */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-black rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-[#111827] rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="space-y-2 relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffffff] border border-slate-200 text-black border border-slate-300 text-slate-700 text-[9px] font-black uppercase tracking-wider">
-              <ShieldCheck size={12} className="text-[#18D2C7]" /> Live DB Sync Nodes Active
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] text-[#6B7280] text-[9px] font-black uppercase tracking-wider">
+              <ShieldCheck size={12} className="text-[#E8622C]" /> Live DB Sync Nodes Active
             </div>
             <h2 className="text-2xl font-black uppercase tracking-tight">Sync Wallet Ledgers</h2>
-            <p className="text-slate-600 text-xs font-semibold leading-relaxed max-w-sm">
+            <p className="text-[#6B7280] text-xs font-semibold leading-relaxed max-w-sm">
               Verify your registered transit number to fetch actual trip bookings, spend distributions, and active travel passes.
             </p>
           </div>
@@ -155,18 +155,18 @@ export default function HistoryPage() {
           {/* Quick Metrics display */}
           {searched && (
             <div className="grid grid-cols-2 gap-4 w-full md:w-auto relative z-10">
-              <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-slate-200 rounded-2xl p-4 min-w-[120px]">
-                <span className="text-[8px] font-bold text-slate-600 uppercase tracking-widest block mb-1">Total Spends</span>
-                <p className="text-lg font-black text-[#18D2C7]">₹{totalSpent}</p>
+              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-2xl p-4 min-w-[120px]">
+                <span className="text-[8px] font-bold text-[#6B7280] uppercase tracking-widest block mb-1">Total Spends</span>
+                <p className="text-lg font-black text-[#E8622C]">₹{totalSpent}</p>
               </div>
-              <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-slate-200 rounded-2xl p-4 min-w-[120px]">
-                <span className="text-[8px] font-bold text-slate-600 uppercase tracking-widest block mb-1">Active Passes</span>
-                <p className="text-lg font-black text-black">{bookings.length}</p>
+              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-2xl p-4 min-w-[120px]">
+                <span className="text-[8px] font-bold text-[#6B7280] uppercase tracking-widest block mb-1">Active Passes</span>
+                <p className="text-lg font-black text-[#111827]">{bookings.length}</p>
               </div>
             </div>
           )}
           
-          <History className="absolute right-[-20px] bottom-[-20px] text-black/5" size={140} />
+          <History className="absolute right-[-20px] bottom-[-20px] text-[#111827]/5" size={140} />
         </div>
 
         {/* Input Search Form */}
@@ -177,7 +177,7 @@ export default function HistoryPage() {
           className="w-full relative"
         >
           <div className="relative">
-            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-600">
+            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-[#6B7280]">
               <Phone size={18} />
             </div>
             <input
@@ -185,13 +185,13 @@ export default function HistoryPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-Digit Mobile Number"
-              className="w-full bg-[#ffffff] border border-slate-200 rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#18D2C7]/10 focus:border-[#18D2C7] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              className="w-full bg-[#F8FAFC] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#E8622C]/10 focus:border-[#E8622C] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-[#18D2C7] text-black px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#E8622C] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />
@@ -210,8 +210,8 @@ export default function HistoryPage() {
           <div className="space-y-4">
             
             {/* Filtering tab controls */}
-            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest flex items-center gap-1.5">
+            <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-2">
+              <span className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest flex items-center gap-1.5">
                 <Filter size={10} /> Filters
               </span>
               <div className="flex items-center gap-2">
@@ -225,8 +225,8 @@ export default function HistoryPage() {
                     onClick={() => setFilterType(tab.id as any)}
                     className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all border ${
                       filterType === tab.id 
-                        ? "bg-[#18D2C7] text-black border-[#18D2C7] shadow-sm" 
-                        : "bg-[#ffffff] text-slate-500 border-slate-200 hover:bg-slate-100"
+                        ? "bg-[#E8622C] text-[#111827] border-[#E8622C] shadow-sm" 
+                        : "bg-[#F8FAFC] text-slate-500 border-[#E5E7EB] hover:bg-slate-100"
                     }`}
                   >
                     {tab.label}
@@ -238,13 +238,13 @@ export default function HistoryPage() {
             {/* List entries */}
             <div className="space-y-3">
               {filteredHistory.length === 0 ? (
-                <div className="text-center py-12 bg-[#ffffff] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4">
-                  <div className="w-12 h-12 bg-[#ffffff] rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-slate-700">
+                <div className="text-center py-12 bg-[#F8FAFC] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4">
+                  <div className="w-12 h-12 bg-[#F8FAFC] rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-[#6B7280]">
                     <History size={20} />
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-sm font-bold text-slate-800 uppercase tracking-tight">No Transactions</h3>
-                    <p className="text-slate-600 text-[10px] font-semibold max-w-[200px] mx-auto leading-relaxed">No ledger activity fits the selected query criteria.</p>
+                    <p className="text-[#6B7280] text-[10px] font-semibold max-w-[200px] mx-auto leading-relaxed">No ledger activity fits the selected query criteria.</p>
                   </div>
                 </div>
               ) : (
@@ -256,13 +256,13 @@ export default function HistoryPage() {
                         setSelectedBooking(item.rawBooking);
                       }
                     }}
-                    className={`bg-[#ffffff] rounded-2xl p-4 border border-slate-100 hover:border-[#18D2C7] shadow-sm flex items-center justify-between gap-4 transition-all duration-300 ${item.type === "booking" ? "cursor-pointer" : "cursor-default"}`}
+                    className={`bg-[#F8FAFC] rounded-2xl p-4 border border-slate-100 hover:border-[#E8622C] shadow-sm flex items-center justify-between gap-4 transition-all duration-300 ${item.type === "booking" ? "cursor-pointer" : "cursor-default"}`}
                   >
                     <div className="flex items-center gap-3">
                       {/* Left circular icon status */}
                       <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${
                         item.type === "booking" 
-                          ? "bg-slate-100 text-slate-700" 
+                          ? "bg-slate-100 text-[#6B7280]" 
                           : "bg-emerald-50 text-emerald-600"
                       }`}>
                         {item.type === "booking" ? (
@@ -273,8 +273,8 @@ export default function HistoryPage() {
                       </div>
                       <div className="text-left space-y-0.5 max-w-[180px] md:max-w-md">
                         <h4 className="text-[12px] font-black text-slate-900 tracking-tight leading-tight uppercase truncate">{item.title}</h4>
-                        <p className="text-[9px] font-semibold text-slate-600 leading-none">{item.subtitle}</p>
-                        <span className="text-[8px] font-bold text-slate-700 block uppercase tracking-wider pt-0.5">
+                        <p className="text-[9px] font-semibold text-[#6B7280] leading-none">{item.subtitle}</p>
+                        <span className="text-[8px] font-bold text-[#6B7280] block uppercase tracking-wider pt-0.5">
                           {new Date(item.date).toLocaleString()}
                         </span>
                       </div>
@@ -326,13 +326,13 @@ export default function HistoryPage() {
                 <div className="w-full flex gap-3 mt-4 print:hidden">
                   <button 
                     onClick={handlePrint}
-                    className="flex-[2] py-4 bg-[#ffffff] border border-slate-200 shadow-sm text-black hover:bg-[#18D2C7] text-black rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="flex-[2] py-4 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#E8622C] text-[#111827] rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <Printer size={14} /> Print Pass
                   </button>
                   <Link href={`/live-map?busId=${selectedBooking.tripId}`} className="flex-[3]">
                     <button 
-                      className="w-full h-full py-4 bg-[#0F6B5C] hover:bg-[#059669] text-black rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+                      className="w-full h-full py-4 bg-[#0F6B5C] hover:bg-[#059669] text-[#111827] rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
                     >
                       <MapPin size={14} /> Track Bus
                     </button>
@@ -342,7 +342,7 @@ export default function HistoryPage() {
                 {/* Close Button */}
                 <button 
                   onClick={() => setSelectedBooking(null)}
-                  className="absolute top-4 right-4 bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black p-2.5 rounded-full hover:bg-[#18D2C7] transition-all shadow-md"
+                  className="absolute top-4 right-4 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] p-2.5 rounded-full hover:bg-[#E8622C] transition-all shadow-md"
                 >
                   <ChevronRight className="rotate-90" size={16} />
                 </button>

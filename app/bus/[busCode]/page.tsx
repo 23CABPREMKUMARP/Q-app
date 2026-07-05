@@ -18,25 +18,25 @@ export default function BusQRRedirectPage() {
           
           {/* Top Floating Badge */}
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <div className="bg-[#FF8A00] text-black px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
+            <div className="bg-[#FF8A00] text-[#111827] px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
               <ShieldCheck size={14} />
               Verified Matrix Node
             </div>
           </div>
 
           {/* Main Card */}
-          <div className="bg-[#ffffff] rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-12 pb-8 px-8 border border-zinc-100 flex flex-col items-center text-center">
+          <div className="bg-[#F8FAFC] rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-12 pb-8 px-8 border border-zinc-100 flex flex-col items-center text-center">
             
             {/* Bus Icon */}
-            <div className="w-16 h-16 bg-[#ffffff] rounded-full flex items-center justify-center mb-6">
-              <Bus size={28} className="text-slate-600" />
+            <div className="w-16 h-16 bg-[#F8FAFC] rounded-full flex items-center justify-center mb-6">
+              <Bus size={28} className="text-[#6B7280]" />
             </div>
 
             <h1 className="text-2xl font-black text-[#0f172a] tracking-tight mb-2">BUS FOUND</h1>
             <p className="text-[13px] text-slate-500 mb-6">You have scanned the QR code for:</p>
             
             {/* Bus Code Pill */}
-            <div className="bg-[#ffffff] px-8 py-3 rounded-xl border border-slate-100 mb-8 w-full max-w-[200px]">
+            <div className="bg-[#F8FAFC] px-8 py-3 rounded-xl border border-slate-100 mb-8 w-full max-w-[200px]">
               <span className="text-xl font-black tracking-widest text-[#FF8A00] uppercase">
                 {codeStr}
               </span>
@@ -85,13 +85,13 @@ export default function BusQRRedirectPage() {
             <a 
               href="/api/download-app" 
               download="Smart-Tamizha-App.apk"
-              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-black font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
+              className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-[#111827] font-bold text-[12px] py-4 rounded-xl mb-6 transition-colors tracking-widest shadow-lg shadow-slate-900/10 block"
             >
               DOWNLOAD APP TO BOARD
             </a>
 
             <div className="space-y-2">
-              <p className="text-[11px] text-slate-600">App not installed?</p>
+              <p className="text-[11px] text-[#6B7280]">App not installed?</p>
               <Link 
                 href={`/town-bus/bus/${codeStr}`}
                 className="block text-[12px] font-bold text-[#FF8A00] hover:text-[#e67a00] transition-colors tracking-widest"

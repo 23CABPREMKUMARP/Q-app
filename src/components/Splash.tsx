@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Splash() {
   return (
-    <div className="fixed inset-0 z-[200] bg-[#18D2C7] flex flex-col items-center justify-center p-6">
+    <div className="fixed inset-0 z-[200] bg-[#E8622C] flex flex-col items-center justify-center p-6">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -35,16 +35,16 @@ export default function Splash() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-0 bottom-0 w-1/2 bg-[#ffffff] border border-slate-200 text-black rounded-full"
+            className="absolute top-0 bottom-0 w-1/2 bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] rounded-full"
           />
         </div>
         
-        <p className="mt-8 text-black font-bold uppercase tracking-[0.3em] text-[10px] text-center">
+        <p className="mt-8 text-[#111827] font-bold uppercase tracking-[0.3em] text-[10px] text-center">
           <motion.span 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="text-black"
+            className="text-[#111827]"
           >
             Welcome to DIGI BUS STAND
           </motion.span> 

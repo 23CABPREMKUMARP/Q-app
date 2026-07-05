@@ -83,7 +83,7 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
       dragConstraints={{ top: 0 }}
       dragElastic={0.2}
       onDragEnd={(_, info) => { if (info.offset.y > 150) onMinimize(); }}
-      className="fixed inset-x-0 bottom-0 z-[1000] bg-[#ffffff] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
+      className="fixed inset-x-0 bottom-0 z-[1000] bg-[#F8FAFC] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
     >
       {/* Drag handle */}
       <div className="w-full flex justify-center py-3 cursor-grab active:cursor-grabbing flex-shrink-0">
@@ -120,17 +120,17 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
         </div>
 
         {/* Route card */}
-        <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl p-5 mb-4 relative overflow-hidden">
-          <div className="absolute inset-y-0 left-0 w-1 bg-[#18D2C7] rounded-l-2xl" />
+        <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-5 mb-4 relative overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-1 bg-[#E8622C] rounded-l-2xl" />
           <div className="flex items-center gap-4 pl-3">
             <div className="flex-1 min-w-0">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">From</p>
-              <p className="text-sm font-black text-black uppercase truncate">{from}</p>
+              <p className="text-sm font-black text-[#111827] uppercase truncate">{from}</p>
             </div>
-            <ArrowRight size={16} className="text-[#18D2C7] flex-shrink-0" />
+            <ArrowRight size={16} className="text-[#E8622C] flex-shrink-0" />
             <div className="flex-1 min-w-0 text-right">
               <p className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">To</p>
-              <p className="text-sm font-black text-black uppercase truncate">{to}</p>
+              <p className="text-sm font-black text-[#111827] uppercase truncate">{to}</p>
             </div>
           </div>
         </div>
@@ -152,8 +152,8 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
           </div>
 
           {nextStop && (
-            <div className="bg-[#FFF8F0] border border-[#18D2C7]/20 rounded-2xl p-4 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-[9px] font-black text-[#18D2C7] uppercase tracking-widest">
+            <div className="bg-[#FFF8F0] border border-[#E8622C]/20 rounded-2xl p-4 flex flex-col gap-1">
+              <div className="flex items-center gap-1.5 text-[9px] font-black text-[#E8622C] uppercase tracking-widest">
                 <MapPin size={11} /> Next Stop
               </div>
               <p className="text-sm font-black text-zinc-900 leading-tight">{nextStop.stopName}</p>

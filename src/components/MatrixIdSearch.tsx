@@ -43,7 +43,7 @@ export const MatrixIdSearch = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#ffffff] shadow-2xl border border-zinc-100"
+        className="relative overflow-hidden rounded-[32px] bg-[#F8FAFC] shadow-2xl border border-zinc-100"
       >
         {/* Background Accents like the poster */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-cyan-400/5 to-[#ffffff] pointer-events-none" />
@@ -96,7 +96,7 @@ export const MatrixIdSearch = () => {
             <button
               type="submit"
               disabled={isLoading || !matrixId}
-              className="w-full bg-dark-saffron hover:bg-primary text-black rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
+              className="w-full bg-dark-saffron hover:bg-primary text-[#111827] rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
             >
               {isLoading ? (
                 <div className="w-6 h-6 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin" />
@@ -114,7 +114,7 @@ export const MatrixIdSearch = () => {
              <div className="flex items-center gap-4">
                 <button 
                   onClick={() => router.push('/live-map?action=scan')}
-                  className="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100 hover:bg-[#ffffff] hover:shadow-md transition-all group"
+                  className="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100 hover:bg-[#F8FAFC] hover:shadow-md transition-all group"
                 >
                   <QrCode size={14} className="text-zinc-600 group-hover:text-primary" />
                   <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Scan QR instead</span>

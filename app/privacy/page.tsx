@@ -2,7 +2,7 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen p-8 max-w-4xl mx-auto">
       <h1 className="text-3xl font-black mb-6">Privacy Policy</h1>
-      <p className="text-slate-600 mb-4">
+      <p className="text-[#6B7280] mb-4">
         Your privacy is important to JeffBen Systems. This policy explains how we handle your data.
       </p>
       <div className="space-y-4 text-sm text-slate-500">

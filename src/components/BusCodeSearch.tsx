@@ -83,7 +83,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#ffffff] shadow-2xl border border-zinc-100/50"
+        className="relative overflow-hidden rounded-[32px] bg-[#F8FAFC] shadow-2xl border border-zinc-100/50"
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">
@@ -91,8 +91,8 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               <h2 className="text-xl md:text-2xl font-black text-zinc-950 tracking-tight leading-none">Bus Quick-Code</h2>
               <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-2">Instant Fleet Access</p>
             </div>
-            <div className="w-12 h-12 bg-[#ffffff] border border-slate-200 shadow-sm text-black rounded-2xl flex items-center justify-center shadow-lg">
-              <Zap size={24} className="text-black fill-current" />
+            <div className="w-12 h-12 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl flex items-center justify-center shadow-lg">
+              <Zap size={24} className="text-[#111827] fill-current" />
             </div>
           </div>
 
@@ -105,13 +105,13 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               value={busCode}
               onChange={(e) => setBusCode(e.target.value.toUpperCase())}
               placeholder="ENTER BUS CODE (e.g. 1024)"
-              className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-black placeholder:text-zinc-500 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/10 transition-all uppercase"
+              className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-[#111827] placeholder:text-zinc-500 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/10 transition-all uppercase"
             />
             <div className="absolute inset-y-2 right-2 flex items-center">
               <button
                 type="submit"
                 disabled={isLoading || !busCode}
-                className="h-full px-4 w-14 justify-center bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
+                className="h-full px-4 w-14 justify-center bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={18} />}
               </button>

@@ -6,13 +6,13 @@
 :root {
   --background: #FAF6F0; 
   --foreground: #333333; 
-  --dark-saffron: #18D2C7;
+  --dark-saffron: #E8622C;
   --radius: 1rem;
   --card: #ffffff;
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #111827;
-  --primary: #18D2C7; 
+  --primary: #E8622C; 
   --primary-foreground: #0f172a;
 
   --secondary: #f3f4f6;
@@ -20,24 +20,24 @@
   --muted: #f3f4f6;
   --muted-foreground: #6b7280;
   --accent: #fff7ed; 
-  --accent-foreground: #18D2C7;
+  --accent-foreground: #E8622C;
   --destructive: #ef4444;
   --border: #e5e7eb;
   --input: #e5e7eb;
   --ring: #D4A017;
-  --chart-1: #18D2C7;
+  --chart-1: #E8622C;
   --chart-2: #0F6B5C;
   --chart-3: #0F6B5C;
   --chart-4: #f59e0b;
   --chart-5: #6366f1;
   --sidebar: #ffffff;
   --sidebar-foreground: #111827;
-  --sidebar-primary: #18D2C7;
+  --sidebar-primary: #E8622C;
   --sidebar-primary-foreground: #0f172a;
   --sidebar-accent: #f3f4f6;
   --sidebar-accent-foreground: #111827;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: #18D2C7;
+  --sidebar-ring: #E8622C;
 }
 
 @theme inline {
@@ -47,7 +47,7 @@
   --color-orange-200: #e79da9;
   --color-orange-300: #da6a7e;
   --color-orange-400: #c63f58;
-  --color-orange-500: #18D2C7; /* Primary Maroon */
+  --color-orange-500: #E8622C; /* Primary Maroon */
   --color-orange-600: #7a1826;
   --color-orange-700: #65121e;
   --color-orange-800: #54101a;

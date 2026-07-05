@@ -19,7 +19,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative aspect-[3/4] rounded-3xl overflow-hidden border-[12px] border-blue-600 bg-[#ffffff] shadow-2xl flex flex-col items-center"
+        className="relative aspect-[3/4] rounded-3xl overflow-hidden border-[12px] border-blue-600 bg-[#F8FAFC] shadow-2xl flex flex-col items-center"
       >
         {/* Background Gradient Ornaments */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-cyan-50 to-cyan-100 opacity-50" />
@@ -41,7 +41,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
 
         {/* QR Code Section */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full px-8">
-          <div className="p-4 bg-[#ffffff] rounded-[40px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
+          <div className="p-4 bg-[#F8FAFC] rounded-[40px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
             <QRCodeSVG 
               value={bookingUrl}
               size={200}
@@ -52,8 +52,8 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
           </div>
           <div className="mt-4 flex flex-col items-center gap-2">
             <p className="text-[7px] font-black text-blue-900/40 uppercase tracking-[0.4em]">Matrix ID</p>
-            <div className="px-10 py-4 bg-blue-600 rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.4)] border-4 border-slate-300 transform hover:scale-105 transition-transform">
-               <span className="text-black font-black text-2xl tracking-[0.2em]">{busCode}</span>
+            <div className="px-10 py-4 bg-blue-600 rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.4)] border-4 border-[#E5E7EB] transform hover:scale-105 transition-transform">
+               <span className="text-[#111827] font-black text-2xl tracking-[0.2em]">{busCode}</span>
             </div>
           </div>
         </div>

@@ -35,22 +35,22 @@ export default function LuggageTrackingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#ffffff] border border-slate-200 shadow-sm text-black font-sans text-black pb-24">
-      <div className="bg-[#18D2C7] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] font-sans text-[#111827] pb-24">
+      <div className="bg-[#E8622C] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-black uppercase tracking-tighter">Track</h1>
-            <p className="text-black/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
+            <p className="text-[#111827]/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
           </div>
-          <div className="bg-[#ffffff]/20 p-3 rounded-2xl backdrop-blur-md">
-            <Search size={32} className="text-black" />
+          <div className="bg-[#F8FAFC]/20 p-3 rounded-2xl backdrop-blur-md">
+            <Search size={32} className="text-[#111827]" />
           </div>
         </div>
       </div>
 
       <div className="px-6 -mt-8 relative z-20">
-        <form onSubmit={handleSearch} className="bg-[#ffffff] rounded-3xl p-4 shadow-xl shadow-black/20 flex gap-3">
+        <form onSubmit={handleSearch} className="bg-[#F8FAFC] rounded-3xl p-4 shadow-xl shadow-black/20 flex gap-3">
           <input 
             type="text" 
             placeholder="Enter Tracking ID (e.g. TRK-...)" 
@@ -61,7 +61,7 @@ export default function LuggageTrackingPage() {
           <button 
             type="submit"
             disabled={isSearching || !trackingId}
-            className="bg-[#18D2C7] text-black p-3 rounded-2xl shadow-lg shadow-[#18D2C7]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
+            className="bg-[#E8622C] text-[#111827] p-3 rounded-2xl shadow-lg shadow-[#E8622C]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
           >
             {isSearching ? <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div> : <Search size={20} />}
           </button>
@@ -75,49 +75,49 @@ export default function LuggageTrackingPage() {
               className="mt-8 space-y-6"
             >
               {/* Status Card */}
-              <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-slate-300 rounded-3xl p-6 relative overflow-hidden">
+              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-3xl p-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4">
-                  <div className="w-16 h-16 bg-[#18D2C7]/10 rounded-full flex items-center justify-center">
-                    <Truck size={32} className="text-[#18D2C7]" />
+                  <div className="w-16 h-16 bg-[#E8622C]/10 rounded-full flex items-center justify-center">
+                    <Truck size={32} className="text-[#E8622C]" />
                   </div>
                 </div>
                 
                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Current Status</div>
-                <div className="text-3xl font-black tracking-tighter text-[#18D2C7] mb-6">{trackingData.status}</div>
+                <div className="text-3xl font-black tracking-tighter text-[#E8622C] mb-6">{trackingData.status}</div>
                 
-                <div className="flex items-center justify-between border-t border-slate-300 pt-4">
+                <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-4">
                   <div>
                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">From</div>
-                    <div className="text-sm font-black text-black">{trackingData.origin}</div>
+                    <div className="text-sm font-black text-[#111827]">{trackingData.origin}</div>
                   </div>
-                  <div className="px-4 text-slate-700"><ArrowRight size={16} /></div>
+                  <div className="px-4 text-[#6B7280]"><ArrowRight size={16} /></div>
                   <div className="text-right">
                     <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">To</div>
-                    <div className="text-sm font-black text-black">{trackingData.destination}</div>
+                    <div className="text-sm font-black text-[#111827]">{trackingData.destination}</div>
                   </div>
                 </div>
               </div>
 
               {/* Timeline */}
-              <div className="bg-[#ffffff] border border-slate-200 shadow-sm text-black border border-slate-300 rounded-3xl p-6">
-                <h3 className="text-xs font-black uppercase tracking-widest text-slate-600 mb-6">Tracking Timeline</h3>
+              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-3xl p-6">
+                <h3 className="text-xs font-black uppercase tracking-widest text-[#6B7280] mb-6">Tracking Timeline</h3>
                 
                 <div className="space-y-6 relative">
-                  <div className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-[#ffffff] border border-slate-200 text-black"></div>
+                  <div className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827]"></div>
                   
                   {trackingData.steps.map((step: any, idx: number) => (
                     <div key={idx} className="flex gap-4 relative z-10">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        step.active ? 'bg-[#18D2C7] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
-                        step.completed ? 'bg-emerald-500' : 'bg-[#ffffff] border border-slate-200 text-black'
+                        step.active ? 'bg-[#E8622C] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
+                        step.completed ? 'bg-emerald-500' : 'bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827]'
                       }`}>
-                        {step.completed && !step.active ? <CheckCircle size={14} className="text-black" /> : 
-                         step.active ? <Truck size={14} className="text-black" /> : 
+                        {step.completed && !step.active ? <CheckCircle size={14} className="text-[#111827]" /> : 
+                         step.active ? <Truck size={14} className="text-[#111827]" /> : 
                          <div className="w-2 h-2 rounded-full bg-slate-600"></div>}
                       </div>
                       
                       <div className="pt-1.5 flex-1 pb-4 border-b border-slate-800/50">
-                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#18D2C7]' : step.completed ? 'text-black' : 'text-slate-500'}`}>
+                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#E8622C]' : step.completed ? 'text-[#111827]' : 'text-slate-500'}`}>
                           {step.status}
                         </div>
                         <div className="text-[10px] font-bold text-slate-500 mt-1 flex items-center gap-1">

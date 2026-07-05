@@ -57,7 +57,7 @@ export function WebHeader() {
   return (
     <header 
       className={`fixed top-0 z-[900] w-full transition-all duration-300 ${
-        scrolled ? "bg-[#ffffff]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
+        scrolled ? "bg-[#F8FAFC]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
@@ -68,7 +68,7 @@ export function WebHeader() {
           
           <div className="flex flex-col justify-center">
             <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
-              DIGI <span className="text-[#18D2C7]">BUS</span>
+              DIGI <span className="text-[#E8622C]">BUS</span>
             </span>
             <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
               STAND
@@ -83,7 +83,7 @@ export function WebHeader() {
             </span>
             <div className="flex flex-col leading-none">
               <span className="text-[12px] md:text-[18px] font-black tracking-tight leading-none">
-                <span className="text-zinc-900">JEFF</span><span className="text-[#18D2C7]">BEN</span>
+                <span className="text-zinc-900">JEFF</span><span className="text-[#E8622C]">BEN</span>
               </span>
               <span className="text-[6px] md:text-[8px] font-bold text-zinc-600 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
                 Systems
@@ -101,12 +101,12 @@ export function WebHeader() {
                 key={link.href} 
                 href={link.href}
                 className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
-                  isActive ? "text-[#18D2C7]" : "text-zinc-600 hover:text-zinc-900"
+                  isActive ? "text-[#E8622C]" : "text-zinc-600 hover:text-zinc-900"
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#18D2C7] rounded-full"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8622C] rounded-full"></span>
                 )}
               </a>
             );
@@ -115,7 +115,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-zinc-800 text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -130,7 +130,7 @@ export function WebHeader() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#F8FAFC] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
@@ -139,14 +139,14 @@ export function WebHeader() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xs font-black uppercase tracking-widest p-4 rounded-xl transition-colors ${
-                  isActive ? "bg-[#18D2C7]/10 text-[#18D2C7]" : "text-zinc-500 hover:bg-zinc-50"
+                  isActive ? "bg-[#E8622C]/10 text-[#E8622C]" : "text-zinc-500 hover:bg-zinc-50"
                 }`}
               >
                 {link.label}
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-[#ffffff] border border-slate-200 shadow-sm text-black text-black hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-black text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SignUpPage() {
   return (
-    <main className="min-h-screen bg-[#ffffff] flex flex-col items-center justify-center p-5 relative overflow-hidden">
+    <main className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-5 relative overflow-hidden">
       
       {/* Background decorative glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -26,7 +26,7 @@ export default function SignUpPage() {
           </div>
           <div className="space-y-1">
             <h1 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Create Account</h1>
-            <p className="text-slate-600 text-xs font-semibold uppercase tracking-widest">
+            <p className="text-[#6B7280] text-xs font-semibold uppercase tracking-widest">
               Join the Metropolitan Transit Network
             </p>
           </div>
@@ -36,7 +36,7 @@ export default function SignUpPage() {
         <SignUp />
 
         {/* Footer note */}
-        <p className="text-center text-[10px] text-slate-700 font-medium uppercase tracking-widest">
+        <p className="text-center text-[10px] text-[#6B7280] font-medium uppercase tracking-widest">
           Secured by Clerk · PhonePe 256-bit encrypted
         </p>
       </div>
