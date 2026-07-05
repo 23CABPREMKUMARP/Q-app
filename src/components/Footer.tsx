@@ -50,7 +50,7 @@ export const Footer = React.memo(function Footer() {
                   aria-label={`Visit our ${social.href.includes('mail') ? 'Email' : social.href.includes('youtube') ? 'Youtube' : 'Facebook'}`}
                   whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-2xl bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] flex items-center justify-center text-[#111827] hover:bg-[#F8FAFC]/10 transition-all"
+                  className="w-12 h-12 rounded-2xl bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] flex items-center justify-center text-[#111827] hover:bg-[#ffffff]/10 transition-all"
                 >
                   {social.icon}
                 </motion.a>

@@ -156,7 +156,7 @@ function LiveMapContent() {
         <div className="flex items-center gap-2 md:gap-3 pointer-events-auto max-w-xl mx-auto md:mx-0">
 
           {/* Search box */}
-          <div className={`flex-1 bg-[#F8FAFC] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#F59E0B] shadow-xl" : ""}`}
+          <div className={`flex-1 bg-[#ffffff] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#F59E0B] shadow-xl" : ""}`}
             style={{ height: 48 }}>
             {searchFocused ? (
               <button onClick={() => { setSearchFocused(false); setSearchQuery(""); }} className="text-gray-500">
@@ -189,11 +189,11 @@ function LiveMapContent() {
         {/* Realtime status chip — below search */}
         <div className="flex justify-center md:justify-start max-w-xl mx-auto md:mx-0 mt-2 pointer-events-none">
           {isConnected ? (
-            <span className="flex items-center gap-1.5 bg-[#F8FAFC]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-emerald-700 shadow">
+            <span className="flex items-center gap-1.5 bg-[#ffffff]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-emerald-700 shadow">
               <Radio size={9} className="animate-pulse" /> Realtime Connected
             </span>
           ) : (
-            <span className="flex items-center gap-1.5 bg-[#F8FAFC]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-gray-500 shadow">
+            <span className="flex items-center gap-1.5 bg-[#ffffff]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-gray-500 shadow">
               <WifiOff size={9} /> Polling Mode
             </span>
           )}
@@ -207,7 +207,7 @@ function LiveMapContent() {
         <div className="relative">
           <button
             onClick={() => setShowLayers((v) => !v)}
-            className="w-12 h-12 bg-[#F8FAFC] rounded-2xl shadow-lg flex items-center justify-center text-gray-600 hover:shadow-xl transition-all active:scale-95"
+            className="w-12 h-12 bg-[#ffffff] rounded-2xl shadow-lg flex items-center justify-center text-gray-600 hover:shadow-xl transition-all active:scale-95"
           >
             <Layers size={20} />
           </button>
@@ -219,7 +219,7 @@ function LiveMapContent() {
                 initial={{ opacity: 0, scale: 0.9, x: 10 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.9, x: 10 }}
-                className="absolute right-14 top-0 bg-[#F8FAFC] rounded-2xl shadow-2xl p-4 w-44"
+                className="absolute right-14 top-0 bg-[#ffffff] rounded-2xl shadow-2xl p-4 w-44"
               >
                 <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Map Layers</p>
                 {[
@@ -232,7 +232,7 @@ function LiveMapContent() {
                   >
                     {item.label}
                     <div className={`w-10 h-5 rounded-full transition-colors relative ${item.value ? "bg-[#F59E0B]" : "bg-gray-200"}`}>
-                      <div className={`absolute top-0.5 w-4 h-4 bg-[#F8FAFC] rounded-full shadow transition-all ${item.value ? "left-5" : "left-0.5"}`} />
+                      <div className={`absolute top-0.5 w-4 h-4 bg-[#ffffff] rounded-full shadow transition-all ${item.value ? "left-5" : "left-0.5"}`} />
                     </div>
                   </button>
                 ))}
@@ -245,7 +245,7 @@ function LiveMapContent() {
         <button
           onClick={requestLocation}
           disabled={locating}
-          className={`w-12 h-12 bg-[#F8FAFC] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-[#F59E0B]"}`}
+          className={`w-12 h-12 bg-[#ffffff] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-[#F59E0B]"}`}
         >
           {locating ? (
             <div className="w-5 h-5 border-2 border-blue-300 border-t-[#F59E0B] rounded-full animate-spin" />
@@ -273,7 +273,7 @@ function LiveMapContent() {
                 setDrawerState("full");
               }
             }}
-            className="absolute inset-x-0 bottom-0 z-[600] bg-[#F8FAFC] rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.15)]"
+            className="absolute inset-x-0 bottom-0 z-[600] bg-[#ffffff] rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.15)]"
             style={{ maxHeight: "85vh", overflow: "hidden" }}
           >
             {/* Drag handle */}
@@ -321,7 +321,7 @@ function LiveMapContent() {
                 ].map((stat) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={stat.label} className="bg-gray-50 rounded-2xl p-3 text-center">
+                    <div key={stat.label} className="bg-white rounded-2xl p-3 text-center">
                       <Icon size={16} className="text-[#F59E0B] mx-auto mb-1" />
                       <p className="text-xs font-black text-gray-800">{stat.value}</p>
                       <p className="text-[9px] text-gray-400 font-semibold mt-0.5">{stat.label}</p>
@@ -383,7 +383,7 @@ function LiveMapContent() {
 
                   {/* Stats */}
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-gray-50 rounded-2xl p-4">
+                    <div className="bg-white rounded-2xl p-4">
                       <div className="flex items-center gap-1.5 text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><Gauge size={10} /> Speed</div>
                       <p className="text-2xl font-black text-gray-900">{speed}<span className="text-sm font-semibold text-gray-400 ml-1">km/h</span></p>
                     </div>
@@ -422,7 +422,7 @@ function LiveMapContent() {
             className="absolute bottom-6 inset-x-4 z-[500] flex items-center justify-between"
           >
             {/* Left: bus count pill */}
-            <div className="bg-[#F8FAFC] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
+            <div className="bg-[#ffffff] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
               <Bus size={14} className="text-[#F28500]" />
               <span className="text-xs font-bold text-gray-700">Digi Bus Stand</span>
               {liveCount > 0 && (
@@ -438,7 +438,7 @@ function LiveMapContent() {
 
             {/* Right: location error note */}
             {locationError && (
-              <div className="bg-[#F8FAFC] rounded-full shadow-lg px-3 py-2 flex items-center gap-1.5 text-xs font-semibold text-amber-600">
+              <div className="bg-[#ffffff] rounded-full shadow-lg px-3 py-2 flex items-center gap-1.5 text-xs font-semibold text-amber-600">
                 <MapPin size={12} />
                 Location unavailable
               </div>

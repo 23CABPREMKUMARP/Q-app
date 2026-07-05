@@ -43,7 +43,7 @@ export const MatrixIdSearch = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#F8FAFC] shadow-2xl border border-zinc-100"
+        className="relative overflow-hidden rounded-[32px] bg-[#ffffff] shadow-2xl border border-zinc-100"
       >
         {/* Background Accents like the poster */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 via-cyan-400/5 to-[#ffffff] pointer-events-none" />
@@ -77,7 +77,7 @@ export const MatrixIdSearch = () => {
                 value={matrixId}
                 onChange={(e) => setMatrixId(e.target.value.toUpperCase())}
                 placeholder="e.g. 1024"
-                className="w-full bg-zinc-50 border-2 border-zinc-100 rounded-2xl py-5 pl-14 pr-6 text-lg font-black tracking-widest text-dark-saffron placeholder:text-zinc-300 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all uppercase"
+                className="w-full bg-white border-2 border-zinc-100 rounded-2xl py-5 pl-14 pr-6 text-lg font-black tracking-widest text-dark-saffron placeholder:text-zinc-300 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all uppercase"
               />
               <AnimatePresence>
                 {error && (
@@ -114,7 +114,7 @@ export const MatrixIdSearch = () => {
              <div className="flex items-center gap-4">
                 <button 
                   onClick={() => router.push('/live-map?action=scan')}
-                  className="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded-full border border-zinc-100 hover:bg-[#F8FAFC] hover:shadow-md transition-all group"
+                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-zinc-100 hover:bg-[#ffffff] hover:shadow-md transition-all group"
                 >
                   <QrCode size={14} className="text-zinc-600 group-hover:text-primary" />
                   <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Scan QR instead</span>

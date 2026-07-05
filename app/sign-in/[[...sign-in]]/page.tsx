@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SignInPage() {
   return (
-    <main className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-5 relative overflow-hidden">
+    <main className="min-h-screen bg-[#ffffff] flex flex-col items-center justify-center p-5 relative overflow-hidden">
       
       {/* Background decorative glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

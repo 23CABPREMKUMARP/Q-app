@@ -80,7 +80,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 2.2, duration: 2.5, ease: "linear" }}
                   style={{ transformOrigin: "left center", willChange: "transform" }}
-                  className="h-1.5 w-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] rounded-full mx-auto"
+                  className="h-1.5 w-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] rounded-full mx-auto"
                 />
                 <motion.p
                   initial={{ opacity: 0 }}

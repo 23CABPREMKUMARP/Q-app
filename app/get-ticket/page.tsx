@@ -113,11 +113,11 @@ export default function GetTicketPage() {
 
   return (
     <SecureView>
-      <main className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom secure-content">
+      <main className="min-h-screen bg-[#ffffff] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom secure-content">
       <WatermarkOverlay text={`SECURE TICKET ${phone}`} />
       
       {/* Native Mobile Top Bar */}
-      <div className="bg-[#F8FAFC] border-b border-slate-100 py-6 px-6 fixed top-0 left-0 right-0 z-40 shadow-sm flex items-center gap-3">
+      <div className="bg-[#ffffff] border-b border-slate-100 py-6 px-6 fixed top-0 left-0 right-0 z-40 shadow-sm flex items-center gap-3">
         <Link href="/" className="p-2 hover:bg-slate-100 rounded-xl transition-all">
           <ChevronRight className="rotate-180 text-[#6B7280]" size={20} />
         </Link>
@@ -173,13 +173,13 @@ export default function GetTicketPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-Digit Mobile Number"
-              className="w-full bg-[#F8FAFC] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#F28500]/10 focus:border-[#F28500] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#F28500]/10 focus:border-[#F28500] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#F28500] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#F28500] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />
@@ -208,26 +208,26 @@ export default function GetTicketPage() {
                   placeholder="Search by ID, Bus, or Route..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-[#F59E0B] outline-none"
+                  className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-[#F59E0B] outline-none"
                 />
               </div>
             </div>
             <div className="flex gap-2">
               <button 
                 onClick={() => setStatusFilter('ALL')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] text-[#111827] border-[#E5E7EB]' : 'bg-[#F8FAFC] text-[#6B7280] border-[#E5E7EB]'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ALL' ? 'bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#111827] border-[#E5E7EB]' : 'bg-[#ffffff] text-[#6B7280] border-[#E5E7EB]'}`}
               >
                 All Passes
               </button>
               <button 
                 onClick={() => setStatusFilter('ACTIVE')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ACTIVE' ? 'bg-green-600 text-[#111827] border-green-600' : 'bg-[#F8FAFC] text-[#6B7280] border-[#E5E7EB]'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'ACTIVE' ? 'bg-green-600 text-[#111827] border-green-600' : 'bg-[#ffffff] text-[#6B7280] border-[#E5E7EB]'}`}
               >
                 Active
               </button>
               <button 
                 onClick={() => setStatusFilter('EXPIRED')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'EXPIRED' ? 'bg-red-600 text-[#111827] border-red-600' : 'bg-[#F8FAFC] text-[#6B7280] border-[#E5E7EB]'}`}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${statusFilter === 'EXPIRED' ? 'bg-red-600 text-[#111827] border-red-600' : 'bg-[#ffffff] text-[#6B7280] border-[#E5E7EB]'}`}
               >
                 Expired
               </button>
@@ -241,9 +241,9 @@ export default function GetTicketPage() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-12 bg-[#F8FAFC] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
+              className="text-center py-12 bg-[#ffffff] rounded-3xl border border-slate-100 shadow-sm max-w-sm mx-auto space-y-4"
             >
-              <div className="w-14 h-14 bg-[#F8FAFC] rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-[#6B7280]">
+              <div className="w-14 h-14 bg-[#ffffff] rounded-2xl flex items-center justify-center mx-auto border border-slate-100 text-[#6B7280]">
                 <Ticket size={24} />
               </div>
               <div className="space-y-1">
@@ -277,7 +277,7 @@ export default function GetTicketPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
                         onClick={() => setSelectedTicket(booking)}
-                        className={`w-full border ${isExpired ? 'bg-[#F8FAFC] border-[#E5E7EB]' : 'bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40'} rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden`}
+                        className={`w-full border ${isExpired ? 'bg-[#ffffff] border-[#E5E7EB]' : 'bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40'} rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden`}
                   >
                     {/* Left Accent Bar */}
                     {isExpired && <div className="absolute left-0 top-0 bottom-0 w-1 bg-slate-300"></div>}
@@ -356,7 +356,7 @@ export default function GetTicketPage() {
             <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
               <button 
                 onClick={() => setSelectedTicket(null)}
-                className="bg-[#F8FAFC]/20 hover:bg-[#F8FAFC]/40 text-[#111827] rounded-full p-2 backdrop-blur-md transition-colors"
+                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#111827] rounded-full p-2 backdrop-blur-md transition-colors"
               >
                 <X size={24} />
               </button>

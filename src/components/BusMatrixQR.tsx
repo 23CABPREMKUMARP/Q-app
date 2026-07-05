@@ -19,7 +19,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative aspect-[3/4] rounded-3xl overflow-hidden border-[12px] border-[#F59E0B] bg-[#F8FAFC] shadow-2xl flex flex-col items-center"
+        className="relative aspect-[3/4] rounded-3xl overflow-hidden border-[12px] border-[#F59E0B] bg-[#ffffff] shadow-2xl flex flex-col items-center"
       >
         {/* Background Gradient Ornaments */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-cyan-50 to-cyan-100 opacity-50" />
@@ -41,7 +41,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
 
         {/* QR Code Section */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full px-8">
-          <div className="p-4 bg-[#F8FAFC] rounded-[40px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
+          <div className="p-4 bg-[#ffffff] rounded-[40px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
             <QRCodeSVG 
               value={bookingUrl}
               size={200}

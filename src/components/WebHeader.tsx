@@ -57,7 +57,7 @@ export function WebHeader() {
   return (
     <header 
       className={`fixed top-0 z-[900] w-full transition-all duration-300 ${
-        scrolled ? "bg-[#F8FAFC]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
+        scrolled ? "bg-[#ffffff]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
@@ -115,7 +115,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -130,7 +130,7 @@ export function WebHeader() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#F8FAFC] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
@@ -139,14 +139,14 @@ export function WebHeader() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xs font-black uppercase tracking-widest p-4 rounded-xl transition-colors ${
-                  isActive ? "bg-[#F28500]/10 text-[#F28500]" : "text-zinc-500 hover:bg-zinc-50"
+                  isActive ? "bg-[#F28500]/10 text-[#F28500]" : "text-zinc-500 hover:bg-white"
                 }`}
               >
                 {link.label}
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

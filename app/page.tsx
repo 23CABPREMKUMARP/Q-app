@@ -69,7 +69,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ delay: 1.8, duration: 3.5, ease: "linear" }}
-            className="h-1.5 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-full mx-auto"
+            className="h-1.5 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-full mx-auto"
           />
           <motion.p 
             initial={{ opacity: 0 }}
@@ -195,7 +195,7 @@ export default function ProductPage() {
                   whileTap={{ scale: 0.95 }}
                   aria-label="Explore Solutions"
                   onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] px-10 py-4 text-[#111827] text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(16,185,129,0.3)] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] cursor-pointer gpu-accelerated"
+                  className="rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] px-10 py-4 text-[#111827] text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(16,185,129,0.3)] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] cursor-pointer gpu-accelerated"
                 >
                   Explore Solutions
                 </motion.button>
@@ -221,7 +221,7 @@ export default function ProductPage() {
           }
         >
           <div 
-            className="mx-auto rounded-2xl object-cover h-full w-full shadow-2xl bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] overflow-hidden relative"
+            className="mx-auto rounded-2xl object-cover h-full w-full shadow-2xl bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] overflow-hidden relative"
           >
             <video
               ref={videoRef}
@@ -280,7 +280,7 @@ export default function ProductPage() {
                   whileHover={{ y: -8, scale: 1.02, backgroundColor: "#fff" }}
                   whileTap={{ scale: 0.98 }}
                   viewport={{ once: true }}
-                  className="flex items-start gap-4 p-6 rounded-2xl bg-gray-50 border border-zinc-200 shadow-sm transition-all duration-500 cursor-pointer gpu-accelerated"
+                  className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm transition-all duration-500 cursor-pointer gpu-accelerated"
                 >
                   <div className="w-2 h-2 rounded-full bg-orange-500 mt-2.5 shrink-0" />
                   <span className="text-neutral-700 font-medium tracking-tight">{item}</span>
@@ -338,7 +338,7 @@ export default function ProductPage() {
                         viewport={{ once: true }}
                         className="flex items-start gap-3 md:gap-4 group cursor-default"
                       >
-                        <div className="h-2 w-2 md:h-3 md:w-3 rounded-full bg-[#F8FAFC] shrink-0 mt-1.5 group-hover:scale-150 transition-transform duration-300" />
+                        <div className="h-2 w-2 md:h-3 md:w-3 rounded-full bg-[#ffffff] shrink-0 mt-1.5 group-hover:scale-150 transition-transform duration-300" />
                         <span className="text-sm sm:text-base md:text-lg lg:text-xl text-[#111827] font-medium leading-tight group-hover:translate-x-1 transition-transform duration-300">{item}</span>
                       </motion.div>
                     ))}
@@ -346,7 +346,7 @@ export default function ProductPage() {
 
                   {/* Mobile-only globe positioned beside the list, scaled down to fit */}
                   <div className="lg:hidden relative h-[140px] sm:h-[300px] w-full flex items-center justify-center translate-x-4">
-                    <div className="absolute inset-0 bg-[#F8FAFC]/20 rounded-full blur-[40px] sm:blur-[60px] scale-125" />
+                    <div className="absolute inset-0 bg-[#ffffff]/20 rounded-full blur-[40px] sm:blur-[60px] scale-125" />
                     <Globe className="relative z-10 w-full h-full gpu-accelerated" />
                   </div>
                 </div>
@@ -360,7 +360,7 @@ export default function ProductPage() {
               transition={{ duration: 1, type: "spring", damping: 20 }}
               className="hidden lg:flex relative aspect-square w-full lg:h-[800px] xl:h-[900px] items-center justify-center gpu-accelerated"
             >
-              <div className="absolute inset-0 bg-[#F8FAFC]/20 rounded-full blur-[150px] xl:blur-[200px] scale-110" />
+              <div className="absolute inset-0 bg-[#ffffff]/20 rounded-full blur-[150px] xl:blur-[200px] scale-110" />
               <Globe className="relative z-10 w-full h-full" />
             </motion.div>
           </div>
@@ -435,7 +435,7 @@ export default function ProductPage() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15, y: -6, backgroundColor: "#fff", color: "#000" }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-4 rounded-2xl text-[#111827] transition-all shadow-xl flex items-center justify-center bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] backdrop-blur-xl gpu-accelerated"
+                    className="p-4 rounded-2xl text-[#111827] transition-all shadow-xl flex items-center justify-center bg-[#ffffff] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] backdrop-blur-xl gpu-accelerated"
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -481,7 +481,7 @@ export default function ProductPage() {
                 transition={{ delay: i * 0.1, type: "spring", damping: 20 }}
                 whileHover={{ y: -12 }}
                 viewport={{ once: true }}
-                className="p-8 md:p-10 rounded-[40px] bg-zinc-50 border border-zinc-100 flex flex-col items-start gap-6 transition-all duration-500 shadow-sm hover:shadow-2xl hover:bg-[#F8FAFC] gpu-accelerated group cursor-pointer"
+                className="p-8 md:p-10 rounded-[40px] bg-white border border-zinc-100 flex flex-col items-start gap-6 transition-all duration-500 shadow-sm hover:shadow-2xl hover:bg-[#ffffff] gpu-accelerated group cursor-pointer"
               >
                 <div className="h-14 w-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 font-semibold text-xl group-hover:bg-[#F28500] group-hover:text-[#ffffff] transition-all duration-500">
                   {i + 1}
@@ -509,7 +509,7 @@ export default function ProductPage() {
               <motion.div 
                 key={i} 
                 whileHover={{ scale: 1.05, y: -4 }}
-                className="px-8 py-4 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] backdrop-blur-md border border-[#E5E7EB] text-[#111827] font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
+                className="px-8 py-4 rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] backdrop-blur-md border border-[#E5E7EB] text-[#111827] font-medium uppercase tracking-wider text-xs shadow-xl gpu-accelerated"
               >
                 {tech}
               </motion.div>
@@ -532,27 +532,7 @@ export default function ProductPage() {
           We invite transit authorities, municipal government bodies, and state-level fleet operators to initiate high-level collaboration on the future of regional infrastructure.
         </p>
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 md:gap-6 px-4">
-          {[
-            { icon: <Youtube className="w-6 h-6" />, href: "https://youtube.com/@jeffbenofficial?si=46pT3R8BLOVA9AFP", label: "YouTube" },
-            { icon: <Mail className="w-6 h-6" />, href: "mailto:jeffbenofficial1@gmail.com", label: "Email" },
-            { icon: <span className="font-semibold text-xl px-1">f</span>, href: "https://www.facebook.com/share/1C7WBtFHeS/", label: "Facebook" }
-          ].map((social, i) => (
-            <motion.a
-              key={i}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -4, backgroundColor: "#fff", borderColor: "#EA580C" }}
-              whileTap={{ scale: 0.95 }}
-              className="p-5 rounded-[28px] bg-zinc-50 border-2 border-zinc-100 text-neutral-900 transition-all shadow-sm flex items-center gap-4 font-semibold uppercase tracking-tight text-sm md:text-base gpu-accelerated"
-              aria-label={social.label}
-            >
-              <div className="text-orange-600">{social.icon}</div>
-              <span>{social.label}</span>
-            </motion.a>
-          ))}
-        </div>
+
 
 
 

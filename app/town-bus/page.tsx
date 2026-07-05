@@ -137,14 +137,14 @@ export default function TownBusSearchPage() {
 
   return (
     <SecureView>
-      <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pb-24">
+      <div className="min-h-screen bg-white font-sans text-zinc-900 pb-24">
         {/* Header */}
       <div className="bg-[#F28500] px-6 pt-12 pb-8 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-3xl font-black uppercase tracking-tighter text-[#111827]">Town Bus</h1>
-            <div className="bg-[#F8FAFC]/20 p-2 rounded-xl backdrop-blur-md">
+            <div className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
               <Bus size={24} className="text-[#111827]" />
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function TownBusSearchPage() {
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-[#F8FAFC] rounded-3xl p-6 shadow-xl shadow-black/20 text-slate-900 border border-slate-100"
+          className="bg-[#ffffff] rounded-3xl p-6 shadow-xl shadow-black/20 text-slate-900 border border-slate-100"
         >
           <form onSubmit={handleSearch} className="space-y-4">
             <div className="space-y-3 relative">
@@ -165,7 +165,7 @@ export default function TownBusSearchPage() {
               <div className="absolute left-6 top-10 bottom-10 w-0.5 bg-slate-200 border-l-2 border-dashed border-[#E5E7EB]"></div>
               
               <div className="relative">
-                <div className="flex items-center gap-4 bg-[#F8FAFC] p-4 rounded-2xl border border-slate-100 focus-within:border-[#F28500] transition-colors relative z-10">
+                <div className="flex items-center gap-4 bg-[#ffffff] p-4 rounded-2xl border border-slate-100 focus-within:border-[#F28500] transition-colors relative z-10">
                   <MapPin size={20} className="text-[#F28500]" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-1">Boarding Point</label>
@@ -182,12 +182,12 @@ export default function TownBusSearchPage() {
                   </div>
                 </div>
                 {showFromSuggestions && from && fromSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#F8FAFC] rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#ffffff] rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
                     {fromSuggestions.map((stop, i) => (
                       <div 
                         key={i} 
                         onClick={() => { handleLocationChange('from', stop); setShowFromSuggestions(false); }}
-                        className="px-4 py-3 hover:bg-[#F8FAFC] cursor-pointer text-sm font-bold text-[#6B7280] border-b border-slate-50 last:border-0"
+                        className="px-4 py-3 hover:bg-[#ffffff] cursor-pointer text-sm font-bold text-[#6B7280] border-b border-slate-50 last:border-0"
                       >
                         {stop}
                       </div>
@@ -197,7 +197,7 @@ export default function TownBusSearchPage() {
               </div>
 
               <div className="relative">
-                <div className="flex items-center gap-4 bg-[#F8FAFC] p-4 rounded-2xl border border-slate-100 focus-within:border-[#F28500] transition-colors relative z-10">
+                <div className="flex items-center gap-4 bg-[#ffffff] p-4 rounded-2xl border border-slate-100 focus-within:border-[#F28500] transition-colors relative z-10">
                   <Navigation size={20} className="text-[#111827]" />
                   <div className="flex-1">
                     <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-1">Drop Point</label>
@@ -214,12 +214,12 @@ export default function TownBusSearchPage() {
                   </div>
                 </div>
                 {showToSuggestions && to && toSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#F8FAFC] rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-[#ffffff] rounded-2xl shadow-xl border border-slate-100 max-h-48 overflow-y-auto z-50">
                     {toSuggestions.map((stop, i) => (
                       <div 
                         key={i} 
                         onClick={() => { handleLocationChange('to', stop); setShowToSuggestions(false); }}
-                        className="px-4 py-3 hover:bg-[#F8FAFC] cursor-pointer text-sm font-bold text-[#6B7280] border-b border-slate-50 last:border-0"
+                        className="px-4 py-3 hover:bg-[#ffffff] cursor-pointer text-sm font-bold text-[#6B7280] border-b border-slate-50 last:border-0"
                       >
                         {stop}
                       </div>
@@ -275,7 +275,7 @@ export default function TownBusSearchPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-[#F8FAFC] rounded-3xl p-5 mb-4 border border-zinc-100 relative overflow-hidden group hover:border-[#F28500]/50 transition-colors cursor-pointer shadow-sm hover:shadow-md"
+              className="bg-[#ffffff] rounded-3xl p-5 mb-4 border border-zinc-100 relative overflow-hidden group hover:border-[#F28500]/50 transition-colors cursor-pointer shadow-sm hover:shadow-md"
               onClick={() => router.push(`/town-bus/${trip._id}/seat-selection`)}
             >
 
@@ -306,10 +306,10 @@ export default function TownBusSearchPage() {
                   {(trip.busId?.busCode || trip.busId?.qrCodeUrl) && (
                     <div 
                       onClick={(e) => { e.stopPropagation(); setExpandedQR(expandedQR === trip._id ? null : trip._id); }}
-                      className="flex items-center gap-2 mt-1 bg-[#F8FAFC] p-1.5 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors"
+                      className="flex items-center gap-2 mt-1 bg-[#ffffff] p-1.5 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors"
                     >
                       {trip.busId.busCode && (
-                        <div className="bg-[#F8FAFC] p-1 rounded-md shadow-sm border border-slate-100">
+                        <div className="bg-[#ffffff] p-1 rounded-md shadow-sm border border-slate-100">
                           <QRCodeSVG 
                             value={`https://jeffben.org/bus/${trip.busId.busCode}`} 
                             size={32} 
@@ -333,10 +333,10 @@ export default function TownBusSearchPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="w-full mb-4 flex flex-col items-center justify-center bg-[#F8FAFC] p-6 rounded-2xl border border-[#E5E7EB] shadow-inner"
+                    className="w-full mb-4 flex flex-col items-center justify-center bg-[#ffffff] p-6 rounded-2xl border border-[#E5E7EB] shadow-inner"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="bg-[#F8FAFC] p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
+                    <div className="bg-[#ffffff] p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
                       <QRCodeSVG value={`https://jeffben.org/bus/${trip.busId.busCode}`} size={160} level="H" />
                     </div>
                     <p className="text-xl font-black text-slate-900 uppercase tracking-widest">{trip.busId.busCode}</p>
@@ -345,14 +345,14 @@ export default function TownBusSearchPage() {
                 )}
               </AnimatePresence>
 
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-[24px] p-4 flex items-center justify-between relative overflow-hidden group mb-4">
+              <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-[24px] p-4 flex items-center justify-between relative overflow-hidden group mb-4">
                 <div className="absolute inset-y-0 left-0 w-1 bg-[#F28500]" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Boarding</span>
                   <span className="text-sm font-black text-[#111827] uppercase truncate max-w-[120px]">{from || "Start"}</span>
                 </div>
                 <div className="flex-1 flex flex-col items-center px-4">
-                  <div className="w-full h-[1px] bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] relative">
+                  <div className="w-full h-[1px] bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] relative">
                     <div className="absolute inset-0 bg-[#F28500] animate-pulse" />
                     <ArrowRight size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#F28500]" />
                   </div>
@@ -363,7 +363,7 @@ export default function TownBusSearchPage() {
                 </div>
               </div>
 
-              <div className="bg-zinc-50 rounded-2xl p-4 flex items-center justify-between border border-zinc-100">
+              <div className="bg-white rounded-2xl p-4 flex items-center justify-between border border-zinc-100">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#F28500] animate-pulse"></div>
                   <span className="text-xs font-bold text-zinc-600">{trip.availableSeats} Seats Left</span>
@@ -379,13 +379,13 @@ export default function TownBusSearchPage() {
         {isSearching && (
           <div className="space-y-4">
             {[1, 2].map((i) => (
-              <div key={i} className="bg-[#F8FAFC] rounded-3xl p-5 border border-zinc-100 animate-pulse">
+              <div key={i} className="bg-[#ffffff] rounded-3xl p-5 border border-zinc-100 animate-pulse">
                 <div className="flex justify-between mb-4">
                   <div className="w-40 h-8 bg-zinc-100 rounded-lg"></div>
                   <div className="w-16 h-8 bg-zinc-100 rounded-lg"></div>
                 </div>
                 <div className="w-full h-16 bg-zinc-100 rounded-2xl mb-4"></div>
-                <div className="w-full h-12 bg-zinc-50 rounded-2xl"></div>
+                <div className="w-full h-12 bg-white rounded-2xl"></div>
               </div>
             ))}
           </div>

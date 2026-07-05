@@ -526,7 +526,7 @@ function EnterpriseAdminDashboardContent() {
   // If user is not authenticated or not loaded, show standard gates
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] flex items-center justify-center text-zinc-600 font-sans">
+      <div className="min-h-screen bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] flex items-center justify-center text-zinc-600 font-sans">
         <div className="flex flex-col items-center gap-4 animate-pulse">
           <div className="w-12 h-12 border-4 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
           <p className="text-sm font-black uppercase tracking-widest text-zinc-600">Initializing Transit Hub...</p>
@@ -537,8 +537,8 @@ function EnterpriseAdminDashboardContent() {
 
   if (!isSignedIn) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] flex items-center justify-center p-6 font-sans">
-        <div className="max-w-md w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-8 shadow-2xl text-center space-y-6">
+      <div className="min-h-screen bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] flex items-center justify-center p-6 font-sans">
+        <div className="max-w-md w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-3xl p-8 shadow-2xl text-center space-y-6">
           <div className="mx-auto w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center border border-orange-500/25">
             <ShieldAlert className="text-orange-500" size={32} />
           </div>
@@ -624,7 +624,7 @@ function EnterpriseAdminDashboardContent() {
             <h2 className="text-[13px] font-medium text-zinc-300 capitalize">
               {activeTab.replace("-", " ")}
             </h2>
-            <div className="h-4 w-px bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827]"></div>
+            <div className="h-4 w-px bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827]"></div>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#F28500] animate-pulse"></span>
               <span className="text-[11px] font-medium text-zinc-500">System Normal</span>
@@ -661,7 +661,7 @@ function EnterpriseAdminDashboardContent() {
               <RefreshCw size={14} className={isLoading ? "animate-spin text-orange-500" : ""} />
             </button>
 
-            <div className="h-4 w-px bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827]"></div>
+            <div className="h-4 w-px bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827]"></div>
             <UserButton appearance={{ elements: { avatarBox: "w-7 h-7 rounded-md" } }} />
           </div>
         </header>
@@ -694,7 +694,7 @@ function EnterpriseAdminDashboardContent() {
                 ].map((stat, i) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={i} className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4 flex flex-col justify-between h-28 relative overflow-hidden group">
+                    <div key={i} className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4 flex flex-col justify-between h-28 relative overflow-hidden group">
                       <div className={`absolute left-0 top-0 bottom-0 w-1 ${stat.color} opacity-50`}></div>
                       <div className="flex items-center justify-between pl-2">
                         <span className="text-[12px] font-medium text-zinc-600">{stat.label}</span>
@@ -717,8 +717,8 @@ function EnterpriseAdminDashboardContent() {
                 
                 {/* Live Map */}
                 <div className="lg:col-span-2 space-y-6">
-                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden h-[450px] flex flex-col">
-                    <div className="px-4 py-3 border-b border-zinc-800/80 flex items-center justify-between bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] z-10">
+                  <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden h-[450px] flex flex-col">
+                    <div className="px-4 py-3 border-b border-zinc-800/80 flex items-center justify-between bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] z-10">
                       <h3 className="text-[13px] font-medium text-zinc-200">Live Operations Grid</h3>
                       <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-orange-500/10 border border-orange-500/20">
                         <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
@@ -739,7 +739,7 @@ function EnterpriseAdminDashboardContent() {
                   {/* Charts */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Chart 1 */}
-                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-5 space-y-4">
+                    <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-5 space-y-4">
                       <div>
                         <h3 className="text-[13px] font-medium text-zinc-200">Booking Volume</h3>
                         <p className="text-[11px] text-zinc-500 mt-0.5">Today's transactions by hour</p>
@@ -759,7 +759,7 @@ function EnterpriseAdminDashboardContent() {
                     </div>
 
                     {/* Chart 2 */}
-                    <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-5 space-y-4">
+                    <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-5 space-y-4">
                       <div>
                         <h3 className="text-[13px] font-medium text-zinc-200">Average Occupancy</h3>
                         <p className="text-[11px] text-zinc-500 mt-0.5">Load factor across active routes</p>
@@ -783,10 +783,10 @@ function EnterpriseAdminDashboardContent() {
                 {/* Right sidebar logic */}
                 <div className="space-y-6">
                   {/* Alerts */}
-                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4">
+                  <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-[13px] font-medium text-zinc-200">System Alerts</h3>
-                      <span className="px-2 py-0.5 bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded text-[10px] font-medium text-zinc-600">
+                      <span className="px-2 py-0.5 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded text-[10px] font-medium text-zinc-600">
                         {activeAlerts.length}
                       </span>
                     </div>
@@ -806,7 +806,7 @@ function EnterpriseAdminDashboardContent() {
                   </div>
 
                   {/* Ticker */}
-                  <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4 h-[350px] flex flex-col">
+                  <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4 h-[350px] flex flex-col">
                     <h3 className="text-[13px] font-medium text-zinc-200 mb-4">Activity Stream</h3>
                     <div className="flex-1 overflow-y-auto space-y-3 scrollbar-none">
                       {telemetryLogs.map(log => (
@@ -838,7 +838,7 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <button 
                   onClick={() => setIsBusModalOpen(true)}
-                  className="bg-[#F8FAFC] text-[#111827] hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
+                  className="bg-[#ffffff] text-[#111827] hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Add Bus
                 </button>
@@ -852,7 +852,7 @@ function EnterpriseAdminDashboardContent() {
                   { label: "Depot/Standby", count: buses.filter(b => b.status === "Scheduled" || b.status === "Arrived").length },
                   { label: "Maintenance", count: buses.filter(b => b.status === "Maintenance").length },
                 ].map((c, i) => (
-                  <div key={i} className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4 flex items-center justify-between">
+                  <div key={i} className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-4 flex items-center justify-between">
                     <span className="text-[12px] font-medium text-zinc-600">{c.label}</span>
                     <span className="text-xl font-semibold text-zinc-200">{c.count}</span>
                   </div>
@@ -860,7 +860,7 @@ function EnterpriseAdminDashboardContent() {
               </div>
 
               {/* Table */}
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
+              <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
@@ -911,7 +911,7 @@ function EnterpriseAdminDashboardContent() {
                                 setBuses(prev => prev.map(b => b._id === bus._id ? { ...b, gps_enabled: !gpsOn } as any : b));
                               }}
                               className={`text-[10px] font-medium px-2 py-0.5 rounded transition-colors ${
-                                gpsOn ? 'bg-zinc-200 text-[#111827] hover:bg-[#F8FAFC]' : 'bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:bg-zinc-700'
+                                gpsOn ? 'bg-zinc-200 text-[#111827] hover:bg-[#ffffff]' : 'bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:bg-zinc-700'
                               }`}
                             >
                               {gpsOn ? 'GPS On' : 'GPS Off'}
@@ -922,7 +922,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right space-x-2">
                           <button
                             onClick={() => handleRegenerateQR(bus._id)}
-                            className="p-1.5 rounded bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
+                            className="p-1.5 rounded bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
                             title="Regenerate QR"
                           >
                             <RefreshCw size={14} />
@@ -961,13 +961,13 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <button 
                   onClick={() => setIsConductorModalOpen(true)}
-                  className="bg-[#F8FAFC] text-[#111827] hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
+                  className="bg-[#ffffff] text-[#111827] hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Assign Conductor
                 </button>
               </div>
 
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
+              <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
@@ -1034,13 +1034,13 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <button 
                   onClick={() => setIsRouteModalOpen(true)}
-                  className="bg-[#F8FAFC] text-[#111827] hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
+                  className="bg-[#ffffff] text-[#111827] hover:bg-zinc-200 font-medium text-[12px] px-4 py-2 rounded-md shadow-sm flex items-center gap-2 transition-all"
                 >
                   <Plus size={14} /> Create Route
                 </button>
               </div>
 
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
+              <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
@@ -1060,7 +1060,7 @@ function EnterpriseAdminDashboardContent() {
                           <select 
                             onChange={(e) => handleUpdateCrowdStatus(route.id, e.target.value)}
                             value={route.status || "Scheduled"}
-                            className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                            className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
                           >
                             <option value="Scheduled">Scheduled</option>
                             <option value="Running">Active</option>
@@ -1086,7 +1086,7 @@ function EnterpriseAdminDashboardContent() {
                 <p className="text-[13px] text-zinc-500 mt-1">Monitor parcel and cargo dispatch</p>
               </div>
 
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
+              <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
@@ -1118,7 +1118,7 @@ function EnterpriseAdminDashboardContent() {
                           <select 
                             onChange={(e) => handleUpdateLuggageStatus(parcel.id, e.target.value)}
                             value={parcel.status}
-                            className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                            className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
                           >
                             <option value="Booked">Booked</option>
                             <option value="Picked up">Picked up</option>
@@ -1149,7 +1149,7 @@ function EnterpriseAdminDashboardContent() {
                 <p className="text-[13px] text-zinc-500 mt-1">Verify transactions and process refunds</p>
               </div>
 
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
+              <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl overflow-hidden">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b border-zinc-800/80 bg-zinc-900/30 text-[11px] font-medium text-zinc-500">
@@ -1182,7 +1182,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right">
                           <button 
                             onClick={() => handleTriggerRefund(b.ticketId, b.totalAmount)}
-                            className="px-2 py-1 rounded bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors text-[11px] font-medium"
+                            className="px-2 py-1 rounded bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-zinc-600 hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors text-[11px] font-medium"
                           >
                             Refund
                           </button>
@@ -1210,7 +1210,7 @@ function EnterpriseAdminDashboardContent() {
       {/* Conductor Modal */}
       {isConductorModalOpen && (
         <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
-          <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
+          <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
             <button onClick={() => setIsConductorModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
               <X size={16} />
             </button>
@@ -1220,27 +1220,27 @@ function EnterpriseAdminDashboardContent() {
             <form onSubmit={handleAddConductor} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Name</label>
-                <input type="text" required value={newConductor.name} onChange={(e) => setNewConductor(prev => ({ ...prev, name: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="text" required value={newConductor.name} onChange={(e) => setNewConductor(prev => ({ ...prev, name: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Email</label>
-                <input type="email" required value={newConductor.email} onChange={(e) => setNewConductor(prev => ({ ...prev, email: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="email" required value={newConductor.email} onChange={(e) => setNewConductor(prev => ({ ...prev, email: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Employee ID</label>
-                <input type="text" required value={newConductor.employee_id} onChange={(e) => setNewConductor(prev => ({ ...prev, employee_id: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="text" required value={newConductor.employee_id} onChange={(e) => setNewConductor(prev => ({ ...prev, employee_id: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Bus</label>
-                  <input type="text" value={newConductor.assigned_bus} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_bus: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" value={newConductor.assigned_bus} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_bus: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Route</label>
-                  <input type="text" value={newConductor.assigned_route} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" value={newConductor.assigned_route} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-              <button type="submit" className="w-full mt-2 bg-[#F8FAFC] hover:bg-zinc-200 text-[#111827] font-medium text-[13px] py-2.5 rounded-md transition-colors">
+              <button type="submit" className="w-full mt-2 bg-[#ffffff] hover:bg-zinc-200 text-[#111827] font-medium text-[13px] py-2.5 rounded-md transition-colors">
                 Authorize Conductor
               </button>
             </form>
@@ -1251,7 +1251,7 @@ function EnterpriseAdminDashboardContent() {
       {/* Bus Modal */}
       {isBusModalOpen && (
         <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
-          <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
+          <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
             <button onClick={() => setIsBusModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
               <X size={16} />
             </button>
@@ -1261,12 +1261,12 @@ function EnterpriseAdminDashboardContent() {
             <form onSubmit={handleAddBus} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Registration Number</label>
-                <input type="text" required value={newBus.bus_number} onChange={(e) => setNewBus(prev => ({ ...prev, bus_number: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="text" required value={newBus.bus_number} onChange={(e) => setNewBus(prev => ({ ...prev, bus_number: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Type</label>
-                  <select value={newBus.type} onChange={(e) => setNewBus(prev => ({ ...prev, type: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600">
+                  <select value={newBus.type} onChange={(e) => setNewBus(prev => ({ ...prev, type: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600">
                     <option>Regular</option>
                     <option>Express</option>
                     <option>AC Sleeper</option>
@@ -1274,10 +1274,10 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Seats</label>
-                  <input type="number" required value={newBus.available_seats} onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="number" required value={newBus.available_seats} onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-              <button type="submit" className="w-full mt-2 bg-[#F8FAFC] hover:bg-zinc-200 text-[#111827] font-medium text-[13px] py-2.5 rounded-md transition-colors">
+              <button type="submit" className="w-full mt-2 bg-[#ffffff] hover:bg-zinc-200 text-[#111827] font-medium text-[13px] py-2.5 rounded-md transition-colors">
                 Register Vehicle
               </button>
             </form>
@@ -1288,7 +1288,7 @@ function EnterpriseAdminDashboardContent() {
       {/* Route Modal */}
       {isRouteModalOpen && (
         <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
-          <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
+          <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
             <button onClick={() => setIsRouteModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
               <X size={16} />
             </button>
@@ -1299,24 +1299,24 @@ function EnterpriseAdminDashboardContent() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Origin</label>
-                  <input type="text" required value={newRoute.origin} onChange={(e) => setNewRoute(prev => ({ ...prev, origin: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" required value={newRoute.origin} onChange={(e) => setNewRoute(prev => ({ ...prev, origin: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Destination</label>
-                  <input type="text" required value={newRoute.destination} onChange={(e) => setNewRoute(prev => ({ ...prev, destination: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" required value={newRoute.destination} onChange={(e) => setNewRoute(prev => ({ ...prev, destination: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Base Fare (₹)</label>
-                  <input type="number" required value={newRoute.fare} onChange={(e) => setNewRoute(prev => ({ ...prev, fare: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="number" required value={newRoute.fare} onChange={(e) => setNewRoute(prev => ({ ...prev, fare: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Total Seats</label>
-                  <input type="number" required value={newRoute.total_seats} onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))} className="w-full bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="number" required value={newRoute.total_seats} onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))} className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
                 </div>
               </div>
-              <button type="submit" className="w-full mt-2 bg-[#F8FAFC] hover:bg-zinc-200 text-[#111827] font-medium text-[13px] py-2.5 rounded-md transition-colors">
+              <button type="submit" className="w-full mt-2 bg-[#ffffff] hover:bg-zinc-200 text-[#111827] font-medium text-[13px] py-2.5 rounded-md transition-colors">
                 Create Route
               </button>
             </form>
@@ -1333,7 +1333,7 @@ export default function EnterpriseAdminDashboard() {
   return (
     <SecureView>
       <Suspense fallback={
-        <div className="flex min-h-screen flex-col items-center justify-center bg-[#F8FAFC] border border-[#E5E7EB] text-[#111827] text-[#111827] p-4">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#111827] p-4">
           <div className="text-center space-y-4">
             <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
             <p className="text-xs uppercase tracking-widest font-black text-zinc-600">Loading Control Center...</p>

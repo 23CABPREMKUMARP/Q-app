@@ -83,7 +83,7 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
       dragConstraints={{ top: 0 }}
       dragElastic={0.2}
       onDragEnd={(_, info) => { if (info.offset.y > 150) onMinimize(); }}
-      className="fixed inset-x-0 bottom-0 z-[1000] bg-[#F8FAFC] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
+      className="fixed inset-x-0 bottom-0 z-[1000] bg-[#ffffff] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.15)] border-t border-slate-100 flex flex-col max-h-[85vh] overflow-hidden"
     >
       {/* Drag handle */}
       <div className="w-full flex justify-center py-3 cursor-grab active:cursor-grabbing flex-shrink-0">
@@ -120,7 +120,7 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
         </div>
 
         {/* Route card */}
-        <div className="bg-[#F8FAFC] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-5 mb-4 relative overflow-hidden">
+        <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-5 mb-4 relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-1 bg-[#F28500] rounded-l-2xl" />
           <div className="flex items-center gap-4 pl-3">
             <div className="flex-1 min-w-0">
@@ -137,14 +137,14 @@ export const TrackingStatusPanel: React.FC<TrackingStatusPanelProps> = ({
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
+          <div className="bg-white border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
             <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-600 uppercase tracking-widest">
               <Gauge size={11} /> Speed
             </div>
             <p className="text-2xl font-black text-zinc-900">{speed}<span className="text-sm font-bold text-zinc-600 ml-1">km/h</span></p>
           </div>
 
-          <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
+          <div className="bg-white border border-zinc-100 rounded-2xl p-4 flex flex-col gap-1">
             <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-600 uppercase tracking-widest">
               <Navigation size={11} /> Distance
             </div>
