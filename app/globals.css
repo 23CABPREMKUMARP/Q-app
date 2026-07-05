@@ -13,7 +13,7 @@
   --popover: #ffffff;
   --popover-foreground: #111827;
   --primary: #F28500; 
-  --primary-foreground: #10B981;
+  --primary-foreground: #0f172a;
 
   --secondary: #f3f4f6;
   --secondary-foreground: #111827;
@@ -33,7 +33,7 @@
   --sidebar: #ffffff;
   --sidebar-foreground: #111827;
   --sidebar-primary: #F28500;
-  --sidebar-primary-foreground: #10B981;
+  --sidebar-primary-foreground: #0f172a;
   --sidebar-accent: #f3f4f6;
   --sidebar-accent-foreground: #111827;
   --sidebar-border: #e5e7eb;
@@ -57,9 +57,9 @@
   --color-blue-100: #b8e4dc;
   --color-blue-200: #89cfc3;
   --color-blue-300: #5bb6a8;
-  --color-[#F59E0B]: #339d8d;
-  --color-[#F59E0B]: #0F6B5C; /* Supporting Teal */
-  --color-[#F59E0B]: #0c594c;
+  --color-blue-400: #339d8d;
+  --color-blue-500: #0F6B5C; /* Supporting Teal */
+  --color-blue-600: #0c594c;
   --color-blue-700: #09473d;
   --color-blue-800: #07372f;
   --color-blue-900: #052923;
