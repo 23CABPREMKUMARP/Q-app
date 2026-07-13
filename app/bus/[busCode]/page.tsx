@@ -18,7 +18,7 @@ export default function BusQRRedirectPage() {
           
           {/* Top Floating Badge */}
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-            <div className="bg-[#FF8A00] text-[#111827] px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
+            <div className="bg-[#FF5F1F] text-[#111827] px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg shadow-orange-500/20">
               <ShieldCheck size={14} />
               Verified Matrix Node
             </div>
@@ -37,7 +37,7 @@ export default function BusQRRedirectPage() {
             
             {/* Bus Code Pill */}
             <div className="bg-[#ffffff] px-8 py-3 rounded-xl border border-slate-100 mb-8 w-full max-w-[200px]">
-              <span className="text-xl font-black tracking-widest text-[#FF8A00] uppercase">
+              <span className="text-xl font-black tracking-widest text-[#FF5F1F] uppercase">
                 {codeStr}
               </span>
             </div>
@@ -94,7 +94,7 @@ export default function BusQRRedirectPage() {
               <p className="text-[11px] text-[#6B7280]">App not installed?</p>
               <Link 
                 href={`/town-bus/bus/${codeStr}`}
-                className="block text-[12px] font-bold text-[#FF8A00] hover:text-[#e67a00] transition-colors tracking-widest"
+                className="block text-[12px] font-bold text-[#FF5F1F] hover:text-[#e67a00] transition-colors tracking-widest"
               >
                 CONTINUE IN WEB
               </Link>

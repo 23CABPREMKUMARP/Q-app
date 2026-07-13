@@ -175,7 +175,7 @@ export default function ProductPage() {
                 className="text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-b from-black to-zinc-600 bg-clip-text text-transparent tracking-tight leading-tight"
               >
                 Welcome to <br className="hidden md:block" />
-                Smart <span className="text-[#EA580C]">Thamizha</span>
+                Smart <span className="text-[#FF5F1F]">Thamizha</span>
               </motion.h1>
 
               <motion.h2
