@@ -68,8 +68,7 @@ export const Navbar = React.memo(function Navbar() {
               />
             </motion.div>
             <span className="hidden sm:block text-sm md:text-base font-bold uppercase tracking-wide leading-tight">
-              <span className="text-zinc-950">Smart Thamizha</span><br/>
-              <span className="text-primary">Stand</span>
+              <span className="text-zinc-950">Smart Thamizha</span>
             </span>
           </Link>
 

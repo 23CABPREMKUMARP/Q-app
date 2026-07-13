@@ -68,10 +68,7 @@ export function WebHeader() {
           
           <div className="flex flex-col justify-center">
             <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
-              DIGI <span className="text-[#FF5F1F]">BUS</span>
-            </span>
-            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
-              STAND
+              SMART <span className="text-[#FF5F1F]">THAMIZHA</span>
             </span>
           </div>
 
