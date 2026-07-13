@@ -266,7 +266,7 @@ export default function HistoryPage() {
                           : "bg-emerald-50 text-[#FF5F1F]"
                       }`}>
                         {item.type === "booking" ? (
-                          <ArrowDownLeft size={18} className="text-amber-600" />
+                          <ArrowDownLeft size={18} className="text-[#FF5F1F]" />
                         ) : (
                           <ArrowUpRight size={18} />
                         )}
@@ -289,7 +289,7 @@ export default function HistoryPage() {
                       <span className={`inline-block text-[8px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md leading-none ${
                         item.status === "successful" 
                           ? "bg-emerald-50 text-[#FF5F1F] border border-emerald-100" 
-                          : "bg-amber-50 text-amber-600 border border-amber-100"
+                          : "bg-amber-50 text-[#FF5F1F] border border-[#FF5F1F]"
                       }`}>
                         {item.status}
                       </span>

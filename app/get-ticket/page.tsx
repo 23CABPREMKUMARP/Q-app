@@ -334,7 +334,7 @@ export default function GetTicketPage() {
             </div>
             <Link 
               href="/live-map" 
-              className="w-full h-14 bg-gradient-to-br from-orange-500 to-amber-500 text-[#111827] rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+              className="w-full h-14 bg-gradient-to-br from-orange-500 to-[#FF5F1F] text-[#111827] rounded-2xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
             >
               Launch Live Map <ChevronRight size={14} />
             </Link>

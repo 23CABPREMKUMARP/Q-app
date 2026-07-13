@@ -236,7 +236,7 @@ export default function MobileDashboard() {
                     <p className="text-[9px] text-[#6B7280] font-bold uppercase tracking-wider">Live Updates</p>
                   </div>
                 </div>
-                <span className="px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-100 rounded-full text-[9px] font-black uppercase tracking-wider animate-pulse shrink-0">
+                <span className="px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-[#FF5F1F] rounded-full text-[9px] font-black uppercase tracking-wider animate-pulse shrink-0">
                   Active alerts
                 </span>
               </div>
@@ -322,7 +322,7 @@ export default function MobileDashboard() {
                 onClick={() => setShowMembershipModal(true)}
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl flex items-center justify-center shadow-md text-[#111827] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] rounded-xl flex items-center justify-center shadow-md text-[#111827] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
                   <Crown size={18} className="drop-shadow-sm" />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">View<br/>Memberships</span>
@@ -400,7 +400,7 @@ export default function MobileDashboard() {
             <div className="grid grid-cols-3 gap-y-4 text-center">
               <Link href="/conductor" className="flex flex-col items-center gap-2">
                 <div className="w-12 h-12 bg-[#ffffff] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
-                  <ShieldAlert size={20} className="text-amber-500" />
+                  <ShieldAlert size={20} className="text-[#FF5F1F]" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Conductor<br/>Terminal</span>
               </Link>
@@ -551,12 +551,12 @@ export default function MobileDashboard() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-amber-400/20 rounded-xl flex items-center justify-center">
-                      <Sparkles size={20} className="text-amber-400" />
+                    <div className="w-10 h-10 bg-[#FF5F1F]/20 rounded-xl flex items-center justify-center">
+                      <Sparkles size={20} className="text-[#FF5F1F]" />
                     </div>
                     <div className="text-left">
                       <h3 className="text-base font-bold text-[#111827]">Jeffben Pass</h3>
-                      <p className="text-[10px] text-amber-400/80 font-bold uppercase tracking-wider">Premium Memberships</p>
+                      <p className="text-[10px] text-[#FF5F1F]/80 font-bold uppercase tracking-wider">Premium Memberships</p>
                     </div>
                   </div>
                   <button
@@ -591,9 +591,9 @@ export default function MobileDashboard() {
                     </div>
 
                     {/* Gold */}
-                    <div className="bg-gradient-to-br from-amber-200 to-amber-500 p-[1px] rounded-2xl">
+                    <div className="bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] p-[1px] rounded-2xl">
                       <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-4 h-full flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 flex items-center justify-center shadow-inner shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] flex items-center justify-center shadow-inner shrink-0">
                           <Sparkles size={24} className="text-amber-900" />
                         </div>
                         <div className="flex-1">
@@ -744,11 +744,11 @@ export default function MobileDashboard() {
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
                 className="w-full max-w-md bg-[#ffffff] rounded-[32px] p-6 shadow-2xl relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-bl-full -z-0"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5F1F]/10 rounded-bl-full -z-0"></div>
                 
                 <div className="flex justify-between items-start mb-6 relative z-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-md">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] rounded-2xl flex items-center justify-center shadow-md">
                       <Crown size={24} className="text-[#111827]" />
                     </div>
                     <div>
@@ -780,17 +780,17 @@ export default function MobileDashboard() {
                   </div>
 
                   {/* Gold Tier */}
-                  <div className="p-4 rounded-2xl border border-amber-100 bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl border border-[#FF5F1F] bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-amber-400 flex items-center justify-center shadow-sm">
+                      <div className="w-10 h-10 rounded-full bg-[#FF5F1F] flex items-center justify-center shadow-sm">
                         <Crown size={16} className="text-[#111827]" />
                       </div>
                       <div>
-                        <h4 className="font-black text-amber-600">Gold Pass</h4>
-                        <p className="text-[9px] font-bold text-amber-500/70 uppercase tracking-widest">Priority Seating</p>
+                        <h4 className="font-black text-[#FF5F1F]">Gold Pass</h4>
+                        <p className="text-[9px] font-bold text-[#FF5F1F]/70 uppercase tracking-widest">Priority Seating</p>
                       </div>
                     </div>
-                    <span className="text-[9px] font-black bg-amber-200 text-amber-700 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                    <span className="text-[9px] font-black bg-[#FF5F1F] text-amber-700 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
                   </div>
 
                   {/* Silver Tier */}

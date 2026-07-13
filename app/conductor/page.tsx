@@ -688,7 +688,7 @@ export default function EnterpriseConductorPortal() {
               {offlineQueue.length > 0 && (
                 <button 
                   onClick={() => setActiveTab("offline")} 
-                  className="bg-amber-500/20 text-amber-500 px-2 py-1 rounded-full text-[9px] font-black animate-pulse border border-amber-500/30"
+                  className="bg-[#FF5F1F]/20 text-[#FF5F1F] px-2 py-1 rounded-full text-[9px] font-black animate-pulse border border-[#FF5F1F]/30"
                 >
                   Sync ({offlineQueue.length})
                 </button>
@@ -975,7 +975,7 @@ export default function EnterpriseConductorPortal() {
                           scanResult.success 
                             ? "bg-green-950/20 border-[#22C55E]/50 shadow-[0_0_30px_rgba(34,197,94,0.05)]" 
                             : scanResult.message?.includes("Used")
-                              ? "bg-amber-950/20 border-amber-500/50 shadow-[0_0_30px_rgba(245,158,11,0.05)]"
+                              ? "bg-amber-950/20 border-[#FF5F1F]/50 shadow-[0_0_30px_rgba(245,158,11,0.05)]"
                               : scanResult.message?.includes("Expired")
                                 ? "bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border-zinc-300 shadow-[0_0_30px_rgba(100,116,139,0.05)]"
                                 : "bg-red-950/20 border-[#EF4444]/50 shadow-[0_0_30px_rgba(239,68,68,0.05)]"
@@ -986,7 +986,7 @@ export default function EnterpriseConductorPortal() {
                             {scanResult.success ? (
                                <CheckCircle2 size={40} className="text-[#22C55E]" />
                             ) : scanResult.message?.includes("Used") ? (
-                              <AlertTriangle size={40} className="text-amber-500" />
+                              <AlertTriangle size={40} className="text-[#FF5F1F]" />
                             ) : scanResult.message?.includes("Expired") ? (
                               <Clock size={40} className="text-zinc-500" />
                             ) : (
@@ -994,7 +994,7 @@ export default function EnterpriseConductorPortal() {
                             )}
                             <div className="space-y-1 text-left">
                               <h3 className={`text-xl font-black uppercase tracking-tight ${
-                                scanResult.success ? "text-[#22C55E]" : scanResult.message?.includes("Used") ? "text-amber-500" : scanResult.message?.includes("Expired") ? "text-zinc-600" : "text-[#EF4444]"
+                                scanResult.success ? "text-[#22C55E]" : scanResult.message?.includes("Used") ? "text-[#FF5F1F]" : scanResult.message?.includes("Expired") ? "text-zinc-600" : "text-[#EF4444]"
                               }`}>
                                 {scanResult.success ? "🟢 Valid Ticket" : scanResult.message?.includes("Used") ? "🟡 Already Used" : scanResult.message?.includes("Expired") ? "⚪ Expired Ticket" : "🔴 Invalid Ticket"}
                               </h3>
@@ -1473,7 +1473,7 @@ export default function EnterpriseConductorPortal() {
                           <p className={`text-[9px] font-bold uppercase tracking-widest ${
                             gpsState.status === 'broadcasting' ? 'text-[#FF5F1F]' :
                             gpsState.status === 'error' ? 'text-[#EF4444]' :
-                            gpsState.status === 'no_permission' ? 'text-amber-400' :
+                            gpsState.status === 'no_permission' ? 'text-[#FF5F1F]' :
                             'text-zinc-500'
                           }`}>
                             {gpsState.status === 'broadcasting' ? '● Broadcasting Live' :
