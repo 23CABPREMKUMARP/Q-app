@@ -424,7 +424,7 @@ function LiveMapContent() {
             {/* Left: bus count pill */}
             <div className="bg-[#ffffff] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
               <Bus size={14} className="text-[#FF5F1F]" />
-              <span className="text-xs font-bold text-gray-700">Digi Bus Stand</span>
+              <span className="text-xs font-bold text-gray-700">Smart Thamizha</span>
               {liveCount > 0 && (
                 <>
                   <span className="w-px h-3 bg-gray-200" />

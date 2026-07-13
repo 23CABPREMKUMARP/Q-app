@@ -31,12 +31,12 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
           <div className="w-20 h-20 relative mb-2">
              <Image 
                src="/hero-logo.png" 
-               alt="Digi Bus Logo" 
+               alt="Smart Thamizha Logo" 
                fill 
                className="object-contain"
              />
           </div>
-          <h2 className="text-[10px] font-black tracking-[0.2em] text-blue-900 uppercase">Digi Bus Stand</h2>
+          <h2 className="text-[10px] font-black tracking-[0.2em] text-blue-900 uppercase">Smart Thamizha</h2>
         </div>
 
         {/* QR Code Section */}
@@ -64,7 +64,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
             SCAN AND GET TICKET
           </h1>
           <p className="text-[10px] font-bold text-[#F59E0B] uppercase tracking-widest">
-            Download the Digi Bus Stand App
+            Download the Smart Thamizha App
           </p>
         </div>
 

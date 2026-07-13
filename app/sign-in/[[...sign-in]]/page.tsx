@@ -17,7 +17,7 @@ export default function SignInPage() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-4">
             <div className="relative w-12 h-12">
-              <Image src="/logo2.png" alt="Digi Bus" fill sizes="48px" className="object-contain" priority />
+              <Image src="/logo2.png" alt="Smart Thamizha" fill sizes="48px" className="object-contain" priority />
             </div>
             <div className="w-px h-8 bg-slate-200" />
             <div className="relative w-12 h-12">

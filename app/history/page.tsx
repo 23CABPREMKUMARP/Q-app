@@ -99,7 +99,7 @@ export default function HistoryPage() {
     items.push({
       id: "limit-allocation-init",
       type: "limit",
-      title: "Digi Bus Stand Ticket Purchases",
+      title: "Smart Thamizha Ticket Purchases",
       subtitle: "Amount used to purchase ticket",
       date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
       amount: 2000,

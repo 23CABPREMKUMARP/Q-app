@@ -38,7 +38,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             transition={{ delay: 0.5, duration: 1, type: "spring" }}
             className="relative w-32 h-32 md:w-48 md:h-48"
           >
-            <Image src="/logo2.png" alt="Digi Bus" fill sizes="200px" className="object-contain" priority />
+            <Image src="/logo2.png" alt="Smart Thamizha" fill sizes="200px" className="object-contain" priority />
           </motion.div>
           <motion.div 
             initial={{ scaleY: 0 }}
@@ -63,7 +63,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
             transition={{ delay: 1.5 }}
             className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic font-heading"
           >
-            <span className="text-[#ffffff]">Digi Bus</span> <span className="text-[#ffffff]">Stand</span>
+            <span className="text-[#ffffff]">Smart Thamizha</span>
           </motion.h2>
           <motion.div 
             initial={{ width: 0 }}
@@ -245,7 +245,7 @@ export default function ProductPage() {
           className="container mx-auto px-6 max-w-4xl text-center pb-20 -mt-10 md:-mt-64 relative z-10"
         >
           <p className="text-base md:text-xl text-[#111827] font-medium leading-relaxed">
-            JEFFBEN Systems is spearheading the digital transformation of urban mobility across Tamil Nadu. Through our proprietary Digi Bus Stand framework, we deploy advanced automated fare collection and mission-critical fleet intelligence systems. Our mission is to provide transport authorities with robust, data-driven operational control while delivering a premier, frictionless experience for every commuter.
+            JEFFBEN Systems is spearheading the digital transformation of urban mobility across Tamil Nadu. Through our proprietary Smart Thamizha framework, we deploy advanced automated fare collection and mission-critical fleet intelligence systems. Our mission is to provide transport authorities with robust, data-driven operational control while delivering a premier, frictionless experience for every commuter.
           </p>
         </motion.div>
       </section>

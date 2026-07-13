@@ -1224,7 +1224,7 @@ export default function EnterpriseConductorPortal() {
                             <div className="absolute top-0 left-0 right-0 h-1 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-800 to-transparent opacity-20" />
                             
                             <div className="text-center border-b-2 border-dashed border-zinc-800/20 pb-4">
-                              <h4 className="font-black tracking-widest uppercase text-[10px]">Digi Bus Ticket</h4>
+                              <h4 className="font-black tracking-widest uppercase text-[10px]">Smart Thamizha Ticket</h4>
                               <p className="text-[8px] text-zinc-600 uppercase">Onboard issuance • Local Node</p>
                             </div>
 

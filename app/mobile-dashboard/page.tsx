@@ -22,7 +22,7 @@ export default function MobileDashboard() {
   const [activeBookingsCount, setActiveBookingsCount] = useState(0);
   const [totalSpent, setTotalSpent] = useState(0);
   const [showNotification, setShowNotification] = useState(false);
-  const [notificationText, setNotificationText] = useState({ title: "Welcome to Digi Bus!", message: "Your journey begins here." });
+  const [notificationText, setNotificationText] = useState({ title: "Welcome to Smart Thamizha!", message: "Your journey begins here." });
   const [notifications, setNotifications] = useState<any[]>([]);
   const [showNotificationsModal, setShowNotificationsModal] = useState(false);
   const [liveTripTrack, setLiveTripTrack] = useState<any>(null);
@@ -337,7 +337,7 @@ export default function MobileDashboard() {
               <div className="flex-1 bg-[#ffffff] rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
                 <div className="flex items-center gap-2 text-[#6B7280] mb-2">
                   <WalletCards size={16} className="text-[#FFD700]" />
-                  <span className="text-[11px] font-semibold truncate">Digi Bus Stand App</span>
+                  <span className="text-[11px] font-semibold truncate">Smart Thamizha App</span>
                 </div>
                 <div>
                   <p className="text-lg font-bold text-slate-900 leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
@@ -569,7 +569,7 @@ export default function MobileDashboard() {
 
                 <div className="space-y-4">
                   <div className="text-center py-2">
-                    <p className="text-sm text-[#6B7280] font-medium">Coming soon. Unlock exclusive benefits, priority booking, and unlimited transit across the Digi Bus network.</p>
+                    <p className="text-sm text-[#6B7280] font-medium">Coming soon. Unlock exclusive benefits, priority booking, and unlimited transit across the Smart Thamizha network.</p>
                   </div>
                   
                   {/* Tiers */}

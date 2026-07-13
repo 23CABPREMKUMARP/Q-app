@@ -57,7 +57,7 @@ export const MatrixIdSearch = () => {
                <div className="absolute inset-0 bg-primary/10 rounded-2xl animate-pulse" />
                <Bus className="w-full h-full p-3 text-primary relative z-10" />
             </div>
-            <h3 className="text-sm font-black tracking-[0.3em] text-dark-saffron uppercase">Digi Bus Stand</h3>
+            <h3 className="text-sm font-black tracking-[0.3em] text-dark-saffron uppercase">Smart Thamizha</h3>
             <div className="h-px w-12 bg-primary/30" />
           </div>
 

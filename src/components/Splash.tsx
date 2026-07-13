@@ -18,7 +18,7 @@ export default function Splash() {
       >
         <div className="flex items-center gap-6 mb-12">
           <div className="relative w-48 h-48">
-            <Image src="/hero-logo.png" alt="Digi Bus" fill sizes="96px" className="object-contain" priority />
+            <Image src="/hero-logo.png" alt="Smart Thamizha" fill sizes="96px" className="object-contain" priority />
           </div>
           <div className="w-px h-32 bg-black/20" />
           <div className="relative w-48 h-48">
@@ -46,7 +46,7 @@ export default function Splash() {
             transition={{ delay: 1, duration: 0.5 }}
             className="text-[#111827]"
           >
-            Welcome to DIGI BUS STAND
+            Welcome to SMART THAMIZHA
           </motion.span> 
           <br/>
           <motion.span 

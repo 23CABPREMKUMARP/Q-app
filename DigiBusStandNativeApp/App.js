@@ -14,7 +14,7 @@ export default function App() {
             PermissionsAndroid.PERMISSIONS.CAMERA,
             {
               title: 'Camera Permission Needed',
-              message: 'Digi Bus Stand needs access to your camera to scan QR codes and tickets.',
+              message: 'Smart Thamizha needs access to your camera to scan QR codes and tickets.',
               buttonNeutral: 'Ask Me Later',
               buttonNegative: 'Cancel',
               buttonPositive: 'OK',

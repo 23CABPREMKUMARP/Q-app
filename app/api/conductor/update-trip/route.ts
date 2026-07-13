@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       notificationMessage = `Bus ${bus.bus_number} has arrived at a checkpoint nearby.`;
     } else if (status === "Completed") {
       notificationTitle = "Trip Completed Successfully 🏁";
-      notificationMessage = `Your journey with Digi Bus ${bus.bus_number} has concluded. Thank you for riding with us!`;
+      notificationMessage = `Your journey with Smart Thamizha ${bus.bus_number} has concluded. Thank you for riding with us!`;
     }
 
     if (notificationTitle && notificationMessage) {

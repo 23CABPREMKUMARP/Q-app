@@ -32,17 +32,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Smart Tamizha by JeffBen Systems | Metropolitan Transit Intelligence",
-  description: "Smart Tamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
-  keywords: ["Smart Tamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
+  title: "Smart Thamizha by JeffBen Systems | Metropolitan Transit Intelligence",
+  description: "Smart Thamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
+  keywords: ["Smart Thamizha", "JeffBen", "JeffBen Systems", "Transit Intelligence", "Public Transport Automation", "Bus Tracking", "Urban Mobility Solutions", "Tamil Nadu Transit"],
   metadataBase: new URL('https://jeffben.org'),
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Smart Tamizha",
+    title: "Smart Thamizha",
   },
   openGraph: {
-    title: "Smart Tamizha by JeffBen Systems - Future of Automated Mobility",
+    title: "Smart Thamizha by JeffBen Systems - Future of Automated Mobility",
     description: "Official platform for advanced transit telemetry and smart city infrastructure integration.",
     images: ['/hero-logo.png'],
     type: 'website',
@@ -86,11 +86,11 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "Smart Tamizha",
+                "name": "Smart Thamizha",
                 "alternateName": "JeffBen Systems",
                 "url": "https://jeffben.org",
                 "logo": "https://jeffben.org/hero-logo.png",
-                "description": "Smart Tamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
+                "description": "Smart Thamizha is the pioneering industrial-grade automation and real-time telemetry platform for metropolitan public transit ecosystems across Tamil Nadu, developed by JeffBen Systems.",
                 "sameAs": [
                   "https://jeffben.org"
                 ]

@@ -60,7 +60,7 @@ export const Navbar = React.memo(function Navbar() {
             >
               <Image 
                 src="/hero-logo.png" 
-                alt="Digi Bus Stand Logo" 
+                alt="Smart Thamizha Logo" 
                 fill 
                 sizes="(max-width: 768px) 80px, 120px"
                 className="object-contain mix-blend-multiply"
@@ -68,7 +68,7 @@ export const Navbar = React.memo(function Navbar() {
               />
             </motion.div>
             <span className="hidden sm:block text-sm md:text-base font-bold uppercase tracking-wide leading-tight">
-              <span className="text-zinc-950">Digi Bus</span><br/>
+              <span className="text-zinc-950">Smart Thamizha</span><br/>
               <span className="text-primary">Stand</span>
             </span>
           </Link>
