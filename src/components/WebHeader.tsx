@@ -66,9 +66,12 @@ export function WebHeader() {
         <a href="/" className="flex items-center gap-2 md:gap-4 shrink-0">
           <img src="/hero-logo.png" alt="JeffBen" className="w-10 h-10 md:w-[72px] md:h-[72px] object-contain drop-shadow-md mix-blend-multiply" />
           
-          <div className="flex flex-col justify-center">
-            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase leading-[1.15]">
-              SMART <span className="text-[#FF5F1F]">THAMIZHA</span>
+          <div className="flex flex-col justify-center leading-[1.15]">
+            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase">
+              SMART
+            </span>
+            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-[#FF5F1F] uppercase">
+              THAMIZHA
             </span>
           </div>
 

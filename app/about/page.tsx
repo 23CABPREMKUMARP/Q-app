@@ -105,14 +105,7 @@ export default function AboutPage() {
         <div className="bg-[#ffffff] rounded-3xl p-6 border border-slate-100 shadow-sm space-y-5">
           <h3 className="text-sm font-bold text-[#6B7280] uppercase tracking-wider">Executive Leadership</h3>
           <div className="flex items-center gap-4">
-            <div className="relative w-16 h-20 rounded-2xl overflow-hidden border-2 border-slate-100 shadow-sm shrink-0">
-              <Image 
-                src="/founder.jpg" 
-                alt="JeffBen" 
-                fill 
-                className="object-cover"
-              />
-            </div>
+
             <div>
               <h4 className="text-sm font-bold text-slate-900">JeffBen</h4>
               <p className="text-[10px] font-semibold text-[#6B7280] uppercase tracking-wider">Founder & Chief Executive Officer</p>

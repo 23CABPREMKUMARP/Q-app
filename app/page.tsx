@@ -388,25 +388,8 @@ export default function ProductPage() {
       {/* ================= MEET OUR FOUNDER SECTION ================= */}
       <section className="relative py-12 md:py-24 bg-primary text-zinc-950 overflow-hidden gpu-accelerated">
         <div className="container mx-auto px-6 max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              viewport={{ once: true }}
-              className="relative w-full max-w-[380px] mx-auto md:mx-0 group gpu-accelerated"
-            >
-              <div className="absolute -inset-4 bg-gradient-to-tr from-orange-500 to-orange-400 opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-700" />
-              <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden border-8 border-[#E5E7EB] shadow-2xl shadow-black/20">
-                <Image
-                  src="/founder.jpg"
-                  alt="Founder (JeffBen)"
-                  width={576}
-                  height={1024}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-            </motion.div>
+          <div className="grid grid-cols-1 items-center">
+
 
             <motion.div
               initial={{ opacity: 0, x: 30 }}

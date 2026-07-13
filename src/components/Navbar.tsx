@@ -67,8 +67,9 @@ export const Navbar = React.memo(function Navbar() {
                 priority
               />
             </motion.div>
-            <span className="hidden sm:block text-sm md:text-base font-bold uppercase tracking-wide leading-tight">
-              <span className="text-zinc-950">Smart Thamizha</span>
+            <span className="hidden sm:flex flex-col text-sm md:text-base font-bold uppercase tracking-wide leading-tight">
+              <span className="text-zinc-950">SMART</span>
+              <span className="text-[#FF5F1F]">THAMIZHA</span>
             </span>
           </Link>
 
