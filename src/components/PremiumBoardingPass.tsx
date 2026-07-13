@@ -82,7 +82,7 @@ export function PremiumBoardingPass({
     <div className="w-full overflow-x-auto pb-4 custom-scrollbar">
       <div className={`relative w-[800px] max-w-full md:max-w-4xl mx-auto flex flex-row shadow-[0_20px_50px_-10px_rgba(212,175,55,0.4)] rounded-lg overflow-hidden ${isExpired ? "grayscale-[0.5]" : ""} ${isPrinting ? "print-active-ticket" : ""}`}
            style={{
-             background: "linear-gradient(135deg, #FFD700 0%, #FFF3B0 25%, #D4AF37 50%, #FFE55C 75%, #DAA520 100%)",
+             background: "linear-gradient(135deg, #FF5F1F 0%, #FFF3B0 25%, #D4AF37 50%, #FFE55C 75%, #DAA520 100%)",
              color: "#000000",
              fontFamily: "Georgia, serif",
              border: isExpired ? "3px solid #DC2626" : "3px solid #16A34A"

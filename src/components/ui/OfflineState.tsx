@@ -173,8 +173,8 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
             <circle cx="156" cy="147" r="15" fill="#ffffff" opacity="0.4" />
 
             {/* Indicators */}
-            <rect x="35" y="156" width="18" height="4" rx="2" fill="#facc15" />
-            <rect x="147" y="156" width="18" height="4" rx="2" fill="#facc15" />
+            <rect x="35" y="156" width="18" height="4" rx="2" fill="#FF5F1F" />
+            <rect x="147" y="156" width="18" height="4" rx="2" fill="#FF5F1F" />
 
             {/* Bumper */}
             <rect x="25" y="170" width="150" height="12" rx="4" fill="#334155" />

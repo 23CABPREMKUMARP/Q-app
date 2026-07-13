@@ -754,7 +754,7 @@ export default function TicketCountSelectionPage() {
     boardingPoint: bookingResult.boardingPoint || boardingPoint || 'Point A',
     destination: bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'
   })}
-  className="w-full max-w-sm mx-auto border bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden"
+  className="w-full max-w-sm mx-auto border bg-gradient-to-br from-[#FF5F1F] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden"
 >
   <div className="flex justify-between items-start">
     <div className="flex flex-col">

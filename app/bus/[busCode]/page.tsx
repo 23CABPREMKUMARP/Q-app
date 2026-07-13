@@ -50,7 +50,7 @@ export default function BusQRRedirectPage() {
               {/* Step 1 */}
               <div className="flex gap-4">
                 <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                  <Grid size={14} className="text-[#F59E0B]" />
+                  <Grid size={14} className="text-[#FF5F1F]" />
                 </div>
                 <div>
                   <h3 className="text-[13px] font-bold text-[#FF5F1F]">1. Open the JeffBen App</h3>

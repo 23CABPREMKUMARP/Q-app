@@ -46,8 +46,8 @@ export const MatrixIdSearch = () => {
         className="relative overflow-hidden rounded-[32px] bg-[#ffffff] shadow-2xl border border-zinc-100"
       >
         {/* Background Accents like the poster */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 via-cyan-400/5 to-[#ffffff] pointer-events-none" />
-        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#F59E0B] via-cyan-400 to-[#F59E0B]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FF5F1F]/5 via-cyan-400/5 to-[#ffffff] pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#FF5F1F] via-cyan-400 to-[#FF5F1F]" />
         
         <div className="relative p-8 flex flex-col items-center">
           {/* Header Branding */}
@@ -125,7 +125,7 @@ export const MatrixIdSearch = () => {
         </div>
 
         {/* Poster Style Bottom Border */}
-        <div className="h-1 w-full bg-gradient-to-r from-[#F59E0B] via-cyan-400 to-[#F59E0B]" />
+        <div className="h-1 w-full bg-gradient-to-r from-[#FF5F1F] via-cyan-400 to-[#FF5F1F]" />
       </motion.div>
     </div>
   );

@@ -98,7 +98,7 @@ export default function BusCodeDetailsPage() {
                         <p className="text-[9px] font-black text-[#6B7280] uppercase tracking-widest">Fare</p>
                         <p className="font-bold text-slate-800">₹{trip.fare}</p>
                       </div>
-                      <div className="w-8 h-8 bg-blue-50 text-[#F59E0B] rounded-lg flex items-center justify-center"><Zap size={16} /></div>
+                      <div className="w-8 h-8 bg-blue-50 text-[#FF5F1F] rounded-lg flex items-center justify-center"><Zap size={16} /></div>
                     </div>
                   </div>
                 </div>

@@ -208,7 +208,7 @@ export default function GetTicketPage() {
                   placeholder="Search by ID, Bus, or Route..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-[#F59E0B]/20 focus:border-[#F59E0B] outline-none"
+                  className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-[#FF5F1F]/20 focus:border-[#FF5F1F] outline-none"
                 />
               </div>
             </div>
@@ -277,7 +277,7 @@ export default function GetTicketPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
                         onClick={() => setSelectedTicket(booking)}
-                        className={`w-full border ${isExpired ? 'bg-[#ffffff] border-[#E5E7EB]' : 'bg-gradient-to-br from-[#FFD700] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40'} rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden`}
+                        className={`w-full border ${isExpired ? 'bg-[#ffffff] border-[#E5E7EB]' : 'bg-gradient-to-br from-[#FF5F1F] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40'} rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden`}
                   >
                     {/* Left Accent Bar */}
                     {isExpired && <div className="absolute left-0 top-0 bottom-0 w-1 bg-slate-300"></div>}

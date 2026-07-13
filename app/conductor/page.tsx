@@ -859,7 +859,7 @@ export default function EnterpriseConductorPortal() {
                     {[
                       { title: "Tickets Sold Today", val: ticketsSold, desc: "Total issuances", color: "text-orange-500", icon: FileText },
                       { title: "Passengers Boarded", val: passengersBoarded, desc: "QR codes scanned", color: "text-[#22C55E]", icon: ShieldCheck },
-                      { title: "Bus Occupancy", val: `${occupancy}/50`, desc: `Occupied: ${Math.round((occupancy/50)*100)}%`, color: "text-[#F59E0B]", icon: Bus },
+                      { title: "Bus Occupancy", val: `${occupancy}/50`, desc: `Occupied: ${Math.round((occupancy/50)*100)}%`, color: "text-[#FF5F1F]", icon: Bus },
                       { title: "Revenue Collection", val: `₹${totalRevenue}`, desc: `Cash: ₹${cashCollection} | UPI: ₹${onlineCollection}`, color: "text-purple-500", icon: DollarSign }
                     ].map((stat, i) => {
                       const Icon = stat.icon;
@@ -1542,7 +1542,7 @@ export default function EnterpriseConductorPortal() {
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Updates</p>
                     </div>
                     <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-zinc-300 rounded-2xl p-4 text-center">
-                      <Signal size={18} className="text-[#F59E0B] mx-auto mb-2" />
+                      <Signal size={18} className="text-[#FF5F1F] mx-auto mb-2" />
                       <p className="text-[11px] font-black text-[#111827]">{gpsState.accuracy ? `${Math.round(gpsState.accuracy)}m` : '—'}</p>
                       <p className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold mt-0.5">Accuracy</p>
                     </div>
