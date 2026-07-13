@@ -36,7 +36,7 @@ export default function BusCodeDetailsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#F28500]" size={48} />
+        <Loader2 className="animate-spin text-[#FF5F1F]" size={48} />
       </div>
     );
   }
@@ -44,7 +44,7 @@ export default function BusCodeDetailsPage() {
   return (
     <div className="min-h-screen bg-white font-sans pb-24">
       {/* Header */}
-      <div className="bg-[#F28500] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#FF5F1F] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <button onClick={() => router.back()} className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
@@ -87,7 +87,7 @@ export default function BusCodeDetailsPage() {
                 <div className="space-y-4 border-t border-slate-100 pt-4">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-emerald-50 text-[#F28500] rounded-lg flex items-center justify-center"><Clock size={16} /></div>
+                      <div className="w-8 h-8 bg-emerald-50 text-[#FF5F1F] rounded-lg flex items-center justify-center"><Clock size={16} /></div>
                       <div>
                         <p className="text-[9px] font-black text-[#6B7280] uppercase tracking-widest">Departure</p>
                         <p className="font-bold text-slate-800">{trip.departureTime}</p>
@@ -112,7 +112,7 @@ export default function BusCodeDetailsPage() {
                 className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
                 <div className="w-10 h-10 rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] flex items-center justify-center">
-                  <Bus size={20} className="text-[#F28500]" />
+                  <Bus size={20} className="text-[#FF5F1F]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>
               </Link>
@@ -122,7 +122,7 @@ export default function BusCodeDetailsPage() {
                 className="bg-[#ffffff] border border-[#E5E7EB] text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-[#ffffff] active:scale-95 transition-all shadow-sm"
               >
                 <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
-                  <MapPin size={20} className="text-[#F28500]" />
+                  <MapPin size={20} className="text-[#FF5F1F]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Track GPS</span>
               </Link>

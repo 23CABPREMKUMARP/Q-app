@@ -51,7 +51,7 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
         <motion.div
           animate={{ y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-32 h-32 bg-[#F28500]/5 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-32 h-32 bg-[#FF5F1F]/5 rounded-full blur-3xl"
         />
         <motion.div
           animate={{ y: [0, 20, 0], opacity: [0.2, 0.4, 0.2] }}
@@ -141,7 +141,7 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
           
           <svg viewBox="0 0 200 220" width="160" height="176" xmlns="http://www.w3.org/2000/svg">
             {/* Bus Body Base */}
-            <rect x="25" y="20" width="150" height="170" rx="28" fill="#F28500" />
+            <rect x="25" y="20" width="150" height="170" rx="28" fill="#FF5F1F" />
             
             {/* Dark Top Roof */}
             <path d="M 40 20 L 160 20 C 168 20 175 27 175 35 L 175 50 L 25 50 L 25 35 C 25 27 32 20 40 20 Z" fill="#e07b1a" />
@@ -220,7 +220,7 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-[#F28500] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_8px_20px_rgba(242,133,0,0.25)] flex items-center justify-center gap-2 hover:bg-[#e07b1a] transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[200px]"
+          className="bg-[#FF5F1F] text-white px-8 py-3.5 rounded-full font-bold shadow-[0_8px_20px_rgba(242,133,0,0.25)] flex items-center justify-center gap-2 hover:bg-[#e07b1a] transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[200px]"
         >
           {isRetrying ? (
             <RefreshCw size={18} className="animate-spin" />

@@ -626,7 +626,7 @@ function EnterpriseAdminDashboardContent() {
             </h2>
             <div className="h-4 w-px bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827]"></div>
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F28500] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F1F] animate-pulse"></span>
               <span className="text-[11px] font-medium text-zinc-500">System Normal</span>
             </div>
           </div>
@@ -687,7 +687,7 @@ function EnterpriseAdminDashboardContent() {
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 {[
                   { label: "Total Bookings", val: stats.totalBookings, trend: "+14.8%", color: "bg-[#F59E0B]", icon: Ticket },
-                  { label: "Revenue (Today)", val: `₹${stats.totalRevenue.toLocaleString()}`, trend: "+18.2%", color: "bg-[#F28500]", icon: DollarSign },
+                  { label: "Revenue (Today)", val: `₹${stats.totalRevenue.toLocaleString()}`, trend: "+18.2%", color: "bg-[#FF5F1F]", icon: DollarSign },
                   { label: "Active Fleet", val: stats.activeBuses, trend: "Stable", color: "bg-orange-500", icon: Bus },
                   { label: "Active Staff", val: stats.activeConductors, trend: "Optimal", color: "bg-purple-500", icon: Users },
                   { label: "Avg Occupancy", val: `${stats.occupancyRate}%`, trend: "+5.4%", color: "bg-amber-500", icon: Percent },
@@ -703,7 +703,7 @@ function EnterpriseAdminDashboardContent() {
                       <div className="pl-2">
                         <div className="text-2xl font-semibold text-zinc-900">{stat.val}</div>
                         <div className="flex items-center gap-1.5 mt-1 text-[11px] text-zinc-500 font-medium">
-                          <span className={stat.trend.includes("+") ? "text-[#F28500]" : "text-zinc-600"}>{stat.trend}</span> 
+                          <span className={stat.trend.includes("+") ? "text-[#FF5F1F]" : "text-zinc-600"}>{stat.trend}</span> 
                           <span>vs last week</span>
                         </div>
                       </div>
@@ -813,7 +813,7 @@ function EnterpriseAdminDashboardContent() {
                         <div key={log.id} className="flex gap-3 items-start text-[12px]">
                           <span className="text-zinc-600 font-mono text-[10px] mt-0.5 w-12">{log.time.substring(0, 5)}</span>
                           <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
-                            log.type === 'success' ? 'bg-[#F28500]' : log.type === 'warn' ? 'bg-[#EF4444]' : 'bg-[#F59E0B]'
+                            log.type === 'success' ? 'bg-[#FF5F1F]' : log.type === 'warn' ? 'bg-[#EF4444]' : 'bg-[#F59E0B]'
                           }`}></span>
                           <span className="text-zinc-600 leading-snug flex-1">{log.text}</span>
                         </div>
@@ -891,14 +891,14 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 font-mono text-zinc-300">{bus.busCode || 'BUS'}</td>
                         <td className="py-3 px-5 text-zinc-200">{bus.busNumber}</td>
                         <td className="py-3 px-5">
-                          <span className={`inline-flex items-center gap-1.5 ${bus.status === 'Running' ? 'text-[#F28500]' : 'text-zinc-600'}`}>
+                          <span className={`inline-flex items-center gap-1.5 ${bus.status === 'Running' ? 'text-[#FF5F1F]' : 'text-zinc-600'}`}>
                             {bus.status === 'Running' ? <><Gauge size={12}/> {bus.speed} km/h</> : 'Stationary'}
                           </span>
                         </td>
                         <td className="py-3 px-5">
                           <div className="flex items-center gap-3">
                             <span className="flex items-center gap-1.5 w-16">
-                              <span className={`w-1.5 h-1.5 rounded-full ${devStatus === 'Online' ? 'bg-[#F28500] animate-pulse' : 'bg-zinc-600'}`} />
+                              <span className={`w-1.5 h-1.5 rounded-full ${devStatus === 'Online' ? 'bg-[#FF5F1F] animate-pulse' : 'bg-zinc-600'}`} />
                               <span className="text-[12px] text-zinc-600">{devStatus}</span>
                             </span>
                             <button
@@ -994,7 +994,7 @@ function EnterpriseAdminDashboardContent() {
                             onClick={() => handleUpdateConductorStatus(conductor.id, conductor.status)}
                             className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
                               conductor.status === "Active" 
-                                ? "bg-[#F28500]/10 text-[#F28500] hover:bg-[#F28500]/20" 
+                                ? "bg-[#FF5F1F]/10 text-[#FF5F1F] hover:bg-[#FF5F1F]/20" 
                                 : "bg-[#EF4444]/10 text-[#EF4444] hover:bg-[#EF4444]/20"
                             }`}
                           >
@@ -1173,7 +1173,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
                             b.paymentStatus === 'Paid' || b.paymentStatus === 'Confirmed' 
-                              ? 'bg-[#F28500]/10 text-[#F28500]' 
+                              ? 'bg-[#FF5F1F]/10 text-[#FF5F1F]' 
                               : 'bg-[#EF4444]/10 text-[#EF4444]'
                           }`}>
                             {b.paymentStatus || "Paid"}

@@ -85,7 +85,7 @@ export const MatrixIdSearch = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="absolute -bottom-6 left-0 right-0 text-[10px] font-bold text-[#F28500] uppercase tracking-wider text-center"
+                    className="absolute -bottom-6 left-0 right-0 text-[10px] font-bold text-[#FF5F1F] uppercase tracking-wider text-center"
                   >
                     {error}
                   </motion.p>

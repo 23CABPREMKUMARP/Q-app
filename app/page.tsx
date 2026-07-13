@@ -23,7 +23,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1, ease: "easeInOut" }}
-      className="fixed inset-0 z-[1000] bg-[#F28500] flex flex-col items-center justify-center p-6"
+      className="fixed inset-0 z-[1000] bg-[#FF5F1F] flex flex-col items-center justify-center p-6"
     >
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -195,7 +195,7 @@ export default function ProductPage() {
                   whileTap={{ scale: 0.95 }}
                   aria-label="Explore Solutions"
                   onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] px-10 py-4 text-[#111827] text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(16,185,129,0.3)] hover:bg-[#F28500] hover:text-[#FFFFFF] hover:border-[#F28500] cursor-pointer gpu-accelerated"
+                  className="rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] px-10 py-4 text-[#111827] text-lg font-medium transition-all hover:shadow-[0_20px_50px_rgba(16,185,129,0.3)] hover:bg-[#FF5F1F] hover:text-[#FFFFFF] hover:border-[#FF5F1F] cursor-pointer gpu-accelerated"
                 >
                   Explore Solutions
                 </motion.button>
@@ -483,7 +483,7 @@ export default function ProductPage() {
                 viewport={{ once: true }}
                 className="p-8 md:p-10 rounded-[40px] bg-white border border-zinc-100 flex flex-col items-start gap-6 transition-all duration-500 shadow-sm hover:shadow-2xl hover:bg-[#ffffff] gpu-accelerated group cursor-pointer"
               >
-                <div className="h-14 w-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 font-semibold text-xl group-hover:bg-[#F28500] group-hover:text-[#ffffff] transition-all duration-500">
+                <div className="h-14 w-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 font-semibold text-xl group-hover:bg-[#FF5F1F] group-hover:text-[#ffffff] transition-all duration-500">
                   {i + 1}
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight leading-none uppercase">{service.title.split('. ')[1]}</h3>

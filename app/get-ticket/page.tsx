@@ -134,7 +134,7 @@ export default function GetTicketPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F28500]/10 border border-[#F28500]/20 text-[#F28500] text-[9px] font-black uppercase tracking-wider"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/20 text-[#FF5F1F] text-[9px] font-black uppercase tracking-wider"
           >
             <ShieldCheck size={12} /> Secure Encryption Node
           </motion.div>
@@ -173,13 +173,13 @@ export default function GetTicketPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-Digit Mobile Number"
-              className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#F28500]/10 focus:border-[#F28500] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#FF5F1F]/10 focus:border-[#FF5F1F] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#F28500] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#FF5F1F] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />
@@ -322,7 +322,7 @@ export default function GetTicketPage() {
           <div className="border-t border-slate-100 pt-6 text-center">
             <p className="text-[9px] font-bold text-[#6B7280] uppercase tracking-widest mb-3">Bus stand Sync Node</p>
             <div className="inline-flex items-center gap-2 bg-slate-100/50 px-4 py-2 rounded-xl border border-slate-100">
-              <div className={`w-1.5 h-1.5 rounded-full ${diagnostics ? "bg-[#F28500] animate-pulse" : "bg-slate-300"}`} />
+              <div className={`w-1.5 h-1.5 rounded-full ${diagnostics ? "bg-[#FF5F1F] animate-pulse" : "bg-slate-300"}`} />
               <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">{diagnostics || "Ready for sync signal"}</span>
             </div>
           </div>

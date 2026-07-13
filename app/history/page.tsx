@@ -126,7 +126,7 @@ export default function HistoryPage() {
       <main className="min-h-screen bg-[#ffffff] text-slate-800 font-sans pb-28 pt-20 overflow-x-hidden safe-bottom">
       
       {/* Saffron Gradient PhonePe Header */}
-      <div className="bg-[#F28500] text-[#111827] fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
+      <div className="bg-[#FF5F1F] text-[#111827] fixed top-0 left-0 right-0 z-40 shadow-md rounded-b-3xl">
         <div className="py-6 px-6 flex items-center gap-3">
           <Link href="/" className="p-2 hover:bg-[#ffffff]/10 rounded-xl transition-all">
             <ChevronRight className="rotate-180 text-[#111827]" size={20} />
@@ -144,7 +144,7 @@ export default function HistoryPage() {
         <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="space-y-2 relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] border border-[#E5E7EB] text-[#6B7280] text-[9px] font-black uppercase tracking-wider">
-              <ShieldCheck size={12} className="text-[#F28500]" /> Live DB Sync Nodes Active
+              <ShieldCheck size={12} className="text-[#FF5F1F]" /> Live DB Sync Nodes Active
             </div>
             <h2 className="text-2xl font-black uppercase tracking-tight text-white">Sync Wallet Ledgers</h2>
             <p className="text-white text-xs font-semibold leading-relaxed max-w-sm">
@@ -157,7 +157,7 @@ export default function HistoryPage() {
             <div className="grid grid-cols-2 gap-4 w-full md:w-auto relative z-10">
               <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-2xl p-4 min-w-[120px]">
                 <span className="text-[8px] font-bold text-[#6B7280] uppercase tracking-widest block mb-1">Total Spends</span>
-                <p className="text-lg font-black text-[#F28500]">₹{totalSpent}</p>
+                <p className="text-lg font-black text-[#FF5F1F]">₹{totalSpent}</p>
               </div>
               <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-2xl p-4 min-w-[120px]">
                 <span className="text-[8px] font-bold text-[#6B7280] uppercase tracking-widest block mb-1">Active Passes</span>
@@ -185,13 +185,13 @@ export default function HistoryPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-Digit Mobile Number"
-              className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#F28500]/10 focus:border-[#F28500] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
+              className="w-full bg-[#ffffff] border border-[#E5E7EB] rounded-2xl py-4.5 pl-13 pr-28 focus:outline-none focus:ring-4 focus:ring-[#FF5F1F]/10 focus:border-[#FF5F1F] transition-all text-sm font-bold tracking-wide placeholder:text-slate-300 text-slate-900 shadow-sm"
               required
             />
             <button
               type="submit"
               disabled={loading}
-              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#F28500] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+              className="absolute right-2 top-2 bottom-2 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#FF5F1F] text-[#111827] px-5 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
             >
               {loading ? (
                 <Loader2 size={12} className="animate-spin" />
@@ -225,7 +225,7 @@ export default function HistoryPage() {
                     onClick={() => setFilterType(tab.id as any)}
                     className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all border ${
                       filterType === tab.id 
-                        ? "bg-[#F28500] text-[#111827] border-[#F28500] shadow-sm" 
+                        ? "bg-[#FF5F1F] text-[#111827] border-[#FF5F1F] shadow-sm" 
                         : "bg-[#ffffff] text-slate-500 border-[#E5E7EB] hover:bg-slate-100"
                     }`}
                   >
@@ -256,14 +256,14 @@ export default function HistoryPage() {
                         setSelectedBooking(item.rawBooking);
                       }
                     }}
-                    className={`bg-[#ffffff] rounded-2xl p-4 border border-slate-100 hover:border-[#F28500] shadow-sm flex items-center justify-between gap-4 transition-all duration-300 ${item.type === "booking" ? "cursor-pointer" : "cursor-default"}`}
+                    className={`bg-[#ffffff] rounded-2xl p-4 border border-slate-100 hover:border-[#FF5F1F] shadow-sm flex items-center justify-between gap-4 transition-all duration-300 ${item.type === "booking" ? "cursor-pointer" : "cursor-default"}`}
                   >
                     <div className="flex items-center gap-3">
                       {/* Left circular icon status */}
                       <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${
                         item.type === "booking" 
                           ? "bg-slate-100 text-[#6B7280]" 
-                          : "bg-emerald-50 text-[#F28500]"
+                          : "bg-emerald-50 text-[#FF5F1F]"
                       }`}>
                         {item.type === "booking" ? (
                           <ArrowDownLeft size={18} className="text-amber-600" />
@@ -282,13 +282,13 @@ export default function HistoryPage() {
 
                     <div className="text-right space-y-1">
                       <p className={`text-[13px] font-black leading-none ${
-                        item.type === "booking" ? "text-slate-900" : "text-[#F28500]"
+                        item.type === "booking" ? "text-slate-900" : "text-[#FF5F1F]"
                       }`}>
                         {item.type === "booking" ? "-" : "+"}₹{item.amount}
                       </p>
                       <span className={`inline-block text-[8px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md leading-none ${
                         item.status === "successful" 
-                          ? "bg-emerald-50 text-[#F28500] border border-emerald-100" 
+                          ? "bg-emerald-50 text-[#FF5F1F] border border-emerald-100" 
                           : "bg-amber-50 text-amber-600 border border-amber-100"
                       }`}>
                         {item.status}
@@ -326,7 +326,7 @@ export default function HistoryPage() {
                 <div className="w-full flex gap-3 mt-4 print:hidden">
                   <button 
                     onClick={handlePrint}
-                    className="flex-[2] py-4 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#F28500] text-[#111827] rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="flex-[2] py-4 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#FF5F1F] text-[#111827] rounded-2xl font-bold text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <Printer size={14} /> Print Pass
                   </button>
@@ -342,7 +342,7 @@ export default function HistoryPage() {
                 {/* Close Button */}
                 <button 
                   onClick={() => setSelectedBooking(null)}
-                  className="absolute top-4 right-4 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] p-2.5 rounded-full hover:bg-[#F28500] transition-all shadow-md"
+                  className="absolute top-4 right-4 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] p-2.5 rounded-full hover:bg-[#FF5F1F] transition-all shadow-md"
                 >
                   <ChevronRight className="rotate-90" size={16} />
                 </button>

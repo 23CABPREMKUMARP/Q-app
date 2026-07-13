@@ -37,7 +37,7 @@ export default function AboutPage() {
       <div className="px-5 space-y-6 mt-6 max-w-md mx-auto">
         {/* Core Profile Card */}
         <div className="bg-gradient-to-br from-zinc-950 to-zinc-900 rounded-[32px] p-6 text-[#111827] shadow-xl relative overflow-hidden">
-          <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#F28500]/15 rounded-full blur-3xl" />
+          <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#FF5F1F]/15 rounded-full blur-3xl" />
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-[#ffffff] border border-[#E5E7EB] text-[#111827] rounded-2xl flex items-center justify-center border border-[#E5E7EB]">
@@ -167,7 +167,7 @@ export default function AboutPage() {
               "Smart City integration ready"
             ].map((adv, idx) => (
               <div key={idx} className="flex items-center gap-3">
-                <CheckCircle2 size={16} className="text-[#F28500] shrink-0" />
+                <CheckCircle2 size={16} className="text-[#FF5F1F] shrink-0" />
                 <span className="text-xs text-[#6B7280] font-semibold leading-none">{adv}</span>
               </div>
             ))}

@@ -181,7 +181,7 @@ function LiveMapContent() {
           </div>
 
           {/* Profile avatar circle */}
-          <div className="w-10 h-10 rounded-full bg-[#F28500] flex items-center justify-center shadow-md flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-[#FF5F1F] flex items-center justify-center shadow-md flex-shrink-0">
             <Bus size={18} className="text-[#111827]" />
           </div>
         </div>
@@ -293,7 +293,7 @@ function LiveMapContent() {
                   <div className="flex items-center gap-2 mb-0.5">
                     <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">{selectedBus.busNumber}</h2>
                     {livePositions[selectedBus._id]?.deviceStatus === "Online" && (
-                      <span className="flex items-center gap-1 text-[9px] font-black text-[#F28500] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                      <span className="flex items-center gap-1 text-[9px] font-black text-[#FF5F1F] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                         <Radio size={7} className="animate-pulse" /> LIVE
                       </span>
                     )}
@@ -374,7 +374,7 @@ function LiveMapContent() {
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">From</p>
                       <p className="text-sm font-black text-[#111827] truncate">{from}</p>
                     </div>
-                    <Navigation size={16} className="text-[#F28500] flex-shrink-0" />
+                    <Navigation size={16} className="text-[#FF5F1F] flex-shrink-0" />
                     <div className="flex-1 min-w-0 text-right">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">To</p>
                       <p className="text-sm font-black text-[#111827] truncate">{to}</p>
@@ -423,13 +423,13 @@ function LiveMapContent() {
           >
             {/* Left: bus count pill */}
             <div className="bg-[#ffffff] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
-              <Bus size={14} className="text-[#F28500]" />
+              <Bus size={14} className="text-[#FF5F1F]" />
               <span className="text-xs font-bold text-gray-700">Digi Bus Stand</span>
               {liveCount > 0 && (
                 <>
                   <span className="w-px h-3 bg-gray-200" />
-                  <span className="flex items-center gap-1 text-xs font-bold text-[#F28500]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#F28500] animate-pulse inline-block" />
+                  <span className="flex items-center gap-1 text-xs font-bold text-[#FF5F1F]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F1F] animate-pulse inline-block" />
                     {liveCount} live
                   </span>
                 </>

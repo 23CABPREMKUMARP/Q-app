@@ -60,13 +60,13 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
         onClick={handleContainerClick}
         className={`relative h-20 rounded-[28px] bg-[#ffffff] border-2 transition-all duration-500 flex items-center px-6 cursor-text overflow-hidden ${
           isValid 
-            ? "border-[#F28500] shadow-[0_0_30px_rgba(16,185,129,0.15)]" 
+            ? "border-[#FF5F1F] shadow-[0_0_30px_rgba(16,185,129,0.15)]" 
             : isFocused 
               ? "border-primary shadow-[0_0_25px_rgba(241,135,1,0.1)]" 
               : "border-zinc-100"
         }`}
       >
-        <Phone size={20} className={`mr-4 transition-colors duration-500 ${isValid ? "text-[#F28500]" : isFocused ? "text-primary" : "text-zinc-300"}`} />
+        <Phone size={20} className={`mr-4 transition-colors duration-500 ${isValid ? "text-[#FF5F1F]" : isFocused ? "text-primary" : "text-zinc-300"}`} />
         
         <div className="relative flex-1 flex items-center h-full">
           {/* Invisible Real Input */}

@@ -36,7 +36,7 @@ export default function LuggageTrackingPage() {
 
   return (
     <div className="min-h-screen bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] font-sans text-[#111827] pb-24">
-      <div className="bg-[#F28500] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#FF5F1F] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
           <div>
@@ -61,7 +61,7 @@ export default function LuggageTrackingPage() {
           <button 
             type="submit"
             disabled={isSearching || !trackingId}
-            className="bg-[#F28500] text-[#111827] p-3 rounded-2xl shadow-lg shadow-[#F28500]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
+            className="bg-[#FF5F1F] text-[#111827] p-3 rounded-2xl shadow-lg shadow-[#FF5F1F]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
           >
             {isSearching ? <div className="w-5 h-5 border-2 border-[#ffffff]/30 border-t-[#ffffff] rounded-full animate-spin"></div> : <Search size={20} />}
           </button>
@@ -77,13 +77,13 @@ export default function LuggageTrackingPage() {
               {/* Status Card */}
               <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] rounded-3xl p-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4">
-                  <div className="w-16 h-16 bg-[#F28500]/10 rounded-full flex items-center justify-center">
-                    <Truck size={32} className="text-[#F28500]" />
+                  <div className="w-16 h-16 bg-[#FF5F1F]/10 rounded-full flex items-center justify-center">
+                    <Truck size={32} className="text-[#FF5F1F]" />
                   </div>
                 </div>
                 
                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Current Status</div>
-                <div className="text-3xl font-black tracking-tighter text-[#F28500] mb-6">{trackingData.status}</div>
+                <div className="text-3xl font-black tracking-tighter text-[#FF5F1F] mb-6">{trackingData.status}</div>
                 
                 <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-4">
                   <div>
@@ -108,8 +108,8 @@ export default function LuggageTrackingPage() {
                   {trackingData.steps.map((step: any, idx: number) => (
                     <div key={idx} className="flex gap-4 relative z-10">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        step.active ? 'bg-[#F28500] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
-                        step.completed ? 'bg-[#F28500]' : 'bg-[#ffffff] border border-[#E5E7EB] text-[#111827]'
+                        step.active ? 'bg-[#FF5F1F] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
+                        step.completed ? 'bg-[#FF5F1F]' : 'bg-[#ffffff] border border-[#E5E7EB] text-[#111827]'
                       }`}>
                         {step.completed && !step.active ? <CheckCircle size={14} className="text-[#111827]" /> : 
                          step.active ? <Truck size={14} className="text-[#111827]" /> : 
@@ -117,7 +117,7 @@ export default function LuggageTrackingPage() {
                       </div>
                       
                       <div className="pt-1.5 flex-1 pb-4 border-b border-slate-800/50">
-                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#F28500]' : step.completed ? 'text-[#111827]' : 'text-slate-500'}`}>
+                        <div className={`font-black uppercase tracking-widest text-sm ${step.active ? 'text-[#FF5F1F]' : step.completed ? 'text-[#111827]' : 'text-slate-500'}`}>
                           {step.status}
                         </div>
                         <div className="text-[10px] font-bold text-slate-500 mt-1 flex items-center gap-1">
