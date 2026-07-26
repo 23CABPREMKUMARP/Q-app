@@ -4,40 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff; 
-  --foreground: #333333; 
-  --dark-saffron: #FF5F1F;
+  --background: #FFF5E6; 
+  --foreground: #1A0B00; 
+  --dark-saffron: #FF6D00;
   --radius: 1rem;
-  --card: #ffffff;
-  --card-foreground: #111827;
-  --popover: #ffffff;
-  --popover-foreground: #111827;
-  --primary: #FF5F1F; 
-  --primary-foreground: #0f172a;
+  --card: #FFF5E6;
+  --card-foreground: #1A0B00;
+  --popover: #FFF5E6;
+  --popover-foreground: #1A0B00;
+  --primary: #FF6D00; 
+  --primary-foreground: #1A0B00;
 
   --secondary: #f3f4f6;
-  --secondary-foreground: #111827;
+  --secondary-foreground: #1A0B00;
   --muted: #f3f4f6;
   --muted-foreground: #6b7280;
   --accent: #fff7ed; 
-  --accent-foreground: #FF5F1F;
+  --accent-foreground: #FF6D00;
   --destructive: #ef4444;
   --border: #e5e7eb;
   --input: #e5e7eb;
   --ring: #D4A017;
-  --chart-1: #FF5F1F;
+  --chart-1: #FF6D00;
   --chart-2: #0F6B5C;
   --chart-3: #0F6B5C;
   --chart-4: #f59e0b;
   --chart-5: #6366f1;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #111827;
-  --sidebar-primary: #FF5F1F;
-  --sidebar-primary-foreground: #0f172a;
+  --sidebar: #FFF5E6;
+  --sidebar-foreground: #1A0B00;
+  --sidebar-primary: #FF6D00;
+  --sidebar-primary-foreground: #1A0B00;
   --sidebar-accent: #f3f4f6;
-  --sidebar-accent-foreground: #111827;
+  --sidebar-accent-foreground: #1A0B00;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: #FF5F1F;
+  --sidebar-ring: #FF6D00;
 }
 
 @theme inline {
@@ -47,7 +47,7 @@
   --color-orange-200: #e79da9;
   --color-orange-300: #da6a7e;
   --color-orange-400: #c63f58;
-  --color-orange-500: #FF5F1F; /* Primary Maroon */
+  --color-orange-500: #FF6D00; /* Primary Maroon */
   --color-orange-600: #7a1826;
   --color-orange-700: #65121e;
   --color-orange-800: #54101a;
@@ -64,7 +64,7 @@
   --color-blue-800: #07372f;
   --color-blue-900: #052923;
 
-  --color-slate-50: #ffffff; /* Warm sand background */
+  --color-slate-50: #FFF5E6; /* Warm sand background */
   --color-slate-100: #f0e9df;
   --color-slate-200: #e3d7c7;
   --color-slate-300: #d4c2ab;
@@ -73,7 +73,7 @@
   --color-slate-600: #635646;
   --color-slate-700: #4f4438;
   --color-slate-800: #3d352b;
-  --color-slate-900: #333333; /* Dark Charcoal text */
+  --color-slate-900: #1A0B00; /* Dark Charcoal text */
   --color-slate-950: #222222;
 
   --color-yellow-400: #e8b84b;

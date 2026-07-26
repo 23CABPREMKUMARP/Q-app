@@ -407,9 +407,9 @@ export default function TicketCountSelectionPage() {
 
   return (
     <SecureView>
-      <div className="min-h-screen bg-white font-sans text-zinc-900 pb-[320px]">
+      <div className="min-h-screen bg-[#FFF5E6] font-sans text-[#1A0B00] pb-[320px]">
         {/* Header */}
-      <div className="bg-[#ffffff] px-6 py-6 border-b border-zinc-200 sticky top-0 z-50 flex items-center justify-between shadow-sm">
+      <div className="bg-[#FFF5E6] px-6 py-6 border-b border-zinc-200 sticky top-0 z-50 flex items-center justify-between shadow-sm">
         <button onClick={() => {
           if (step === 5 || step === 4) {
              router.push('/get-ticket');
@@ -419,10 +419,10 @@ export default function TicketCountSelectionPage() {
              router.back();
           }
         }} className="p-2 bg-zinc-100 rounded-full hover:bg-zinc-200 transition-colors">
-          <ArrowLeft size={20} className="text-zinc-900" />
+          <ArrowLeft size={20} className="text-[#1A0B00]" />
         </button>
         <div className="text-center">
-          <h1 className="text-lg font-black uppercase tracking-widest text-zinc-900">Select Tickets</h1>
+          <h1 className="text-lg font-black uppercase tracking-widest text-[#1A0B00]">Select Tickets</h1>
           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Town Bus Express</p>
         </div>
         <div className="w-10"></div>
@@ -430,21 +430,21 @@ export default function TicketCountSelectionPage() {
 
       <div className="px-6 mt-12">
         {/* Routing Dynamic Highlight */}
-        <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-[32px] p-6 flex items-center justify-between relative overflow-hidden group mb-8 shadow-lg shadow-black/10">
-          <div className="absolute inset-y-0 left-0 w-1 bg-[#FF5F1F]" />
+        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-[32px] p-6 flex items-center justify-between relative overflow-hidden group mb-8 shadow-lg shadow-black/10">
+          <div className="absolute inset-y-0 left-0 w-1 bg-[#FF6D00]" />
           <div className="flex flex-col gap-1">
             <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Total Journeys</span>
-            <span className="text-sm font-black text-[#111827] uppercase truncate max-w-[120px]">{passengers.length}</span>
+            <span className="text-sm font-black text-[#1A0B00] uppercase truncate max-w-[120px]">{passengers.length}</span>
           </div>
           <div className="flex-1 flex flex-col items-center px-4">
-            <div className="w-full h-[1px] bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] relative">
-              <div className="absolute inset-0 bg-[#FF5F1F] animate-pulse" />
-              <Bus size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#FF5F1F]" />
+            <div className="w-full h-[1px] bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] relative">
+              <div className="absolute inset-0 bg-[#FF6D00] animate-pulse" />
+              <Bus size={14} className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[#FF6D00]" />
             </div>
           </div>
           <div className="flex flex-col gap-1 text-right">
             <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.3em]">Combined Fare</span>
-            <span className="text-sm font-black text-[#111827] uppercase truncate max-w-[120px]">₹{totalAmount}</span>
+            <span className="text-sm font-black text-[#1A0B00] uppercase truncate max-w-[120px]">₹{totalAmount}</span>
           </div>
         </div>
 
@@ -457,14 +457,14 @@ export default function TicketCountSelectionPage() {
               exit={{ opacity: 0, x: 20 }}
               className="space-y-8"
             >
-              <div className="bg-[#ffffff] border border-zinc-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
+              <div className="bg-[#FFF5E6] border border-zinc-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
                 <div className="flex justify-between items-start mb-8">
                   <div className="pr-4">
-                    <h2 className="text-xl font-black uppercase tracking-widest text-zinc-900 mb-2">Build Your Journeys</h2>
+                    <h2 className="text-xl font-black uppercase tracking-widest text-[#1A0B00] mb-2">Build Your Journeys</h2>
                     <p className="text-slate-500 text-sm">Add multiple segments to book a combined ticket.</p>
                   </div>
                   <div className="flex flex-col items-center flex-shrink-0">
-                    <button onClick={() => setExpandedQR(true)} className="p-2 bg-[#ffffff] rounded-xl shadow-sm border border-zinc-200 hover:scale-105 transition-transform">
+                    <button onClick={() => setExpandedQR(true)} className="p-2 bg-[#FFF5E6] rounded-xl shadow-sm border border-zinc-200 hover:scale-105 transition-transform">
                       <QRCodeSVG value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`} size={64} level="H" />
                     </button>
                     <p className="text-[8px] font-black text-[#6B7280] uppercase tracking-widest mt-1 text-center">Boarding<br/>QR</p>
@@ -473,8 +473,8 @@ export default function TicketCountSelectionPage() {
 
                 <div className="mt-8 pt-4">
                   {passengers.map((passenger, index) => (
-                    <div key={index} className="mb-6 bg-white border border-zinc-200 rounded-2xl p-5 relative">
-                      <div className="absolute -top-3 left-4 bg-[#ffffff] px-2 py-0.5 text-[10px] font-black text-[#FF5F1F] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm flex items-center gap-2">
+                    <div key={index} className="mb-6 bg-[#FFF5E6] border border-zinc-200 rounded-2xl p-5 relative">
+                      <div className="absolute -top-3 left-4 bg-[#FFF5E6] px-2 py-0.5 text-[10px] font-black text-[#FF6D00] uppercase tracking-widest border border-zinc-200 rounded-full shadow-sm flex items-center gap-2">
                         Journey {index + 1}
                         {passengers.length > 1 && (
                           <button onClick={() => {
@@ -500,7 +500,7 @@ export default function TicketCountSelectionPage() {
                               newP[index].fare = calculateFare(newP[index].boarding, newP[index].destination);
                               setPassengers(newP);
                             }} 
-                            className="w-full h-12 bg-[#ffffff] border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#FF5F1F] transition-all cursor-pointer"
+                            className="w-full h-12 bg-[#FFF5E6] border border-zinc-200 rounded-xl px-4 font-bold text-sm text-[#1A0B00] outline-none focus:border-[#FF6D00] transition-all cursor-pointer"
                           >
                             <option value="">Choose Start</option>
                             {stops.map((s: any) => <option key={s._id} value={s.stopName}>{s.stopName}</option>)}
@@ -518,7 +518,7 @@ export default function TicketCountSelectionPage() {
                               newP[index].fare = calculateFare(newP[index].boarding, newP[index].destination);
                               setPassengers(newP);
                             }} 
-                            className="w-full h-12 bg-[#ffffff] border border-zinc-200 rounded-xl px-4 font-bold text-sm text-zinc-900 outline-none focus:border-[#FF5F1F] transition-all cursor-pointer"
+                            className="w-full h-12 bg-[#FFF5E6] border border-zinc-200 rounded-xl px-4 font-bold text-sm text-[#1A0B00] outline-none focus:border-[#FF6D00] transition-all cursor-pointer"
                           >
                             <option value="">Choose End</option>
                             {stops
@@ -536,7 +536,7 @@ export default function TicketCountSelectionPage() {
                             <label className="flex items-center gap-1.5 cursor-pointer hover:bg-zinc-100 px-2 py-0.5 rounded transition-colors">
                               <input 
                                 type="checkbox" 
-                                className="accent-[#FF5F1F] w-3 h-3 cursor-pointer"
+                                className="accent-[#FF6D00] w-3 h-3 cursor-pointer"
                                 onChange={(e) => {
                                   const newP = [...passengers];
                                   if (e.target.checked) {
@@ -565,7 +565,7 @@ export default function TicketCountSelectionPage() {
                       <div className="flex justify-between items-end">
                         <div className="flex-1">
                           <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest pl-1 mb-2 flex items-center gap-1">
-                            <Package size={12} className="text-[#FF5F1F]" /> Luggage Add-on
+                            <Package size={12} className="text-[#FF6D00]" /> Luggage Add-on
                           </label>
                           <div className="grid grid-cols-4 gap-2">
                             {['None', 'Small', 'Medium', 'Large'].map(type => (
@@ -578,8 +578,8 @@ export default function TicketCountSelectionPage() {
                                 }}
                                 className={`py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
                                   passenger.luggage === type 
-                                    ? 'bg-[#FF5F1F] text-[#111827] border-[#FF5F1F] shadow-md shadow-[#FF5F1F]/20' 
-                                    : 'bg-[#ffffff] text-slate-500 border-zinc-200 hover:border-zinc-300'
+                                    ? 'bg-[#FF6D00] text-[#1A0B00] border-[#FF6D00] shadow-md shadow-[#FF6D00]/20' 
+                                    : 'bg-[#FFF5E6] text-slate-500 border-zinc-200 hover:border-zinc-300'
                                 }`}
                               >
                                 {type} {type !== 'None' && <span className="block mt-0.5 opacity-75">+₹{LUGGAGE_PRICES[type]}</span>}
@@ -589,7 +589,7 @@ export default function TicketCountSelectionPage() {
                         </div>
                         <div className="ml-4 text-right">
                            <span className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block mb-1">Fare</span>
-                           <span className="text-xl font-black text-zinc-900">₹{passenger.fare || 20}</span>
+                           <span className="text-xl font-black text-[#1A0B00]">₹{passenger.fare || 20}</span>
                         </div>
                       </div>
                     </div>
@@ -598,7 +598,7 @@ export default function TicketCountSelectionPage() {
                   <button
                     onClick={handleIncrement}
                     disabled={ticketCount >= 10}
-                    className="w-full py-4 border-2 border-dashed border-zinc-300 text-zinc-500 rounded-2xl font-bold uppercase tracking-widest text-xs hover:border-[#FF5F1F] hover:text-[#FF5F1F] transition-all flex items-center justify-center gap-2"
+                    className="w-full py-4 border-2 border-dashed border-zinc-300 text-zinc-500 rounded-2xl font-bold uppercase tracking-widest text-xs hover:border-[#FF6D00] hover:text-[#FF6D00] transition-all flex items-center justify-center gap-2"
                   >
                     <Plus size={16} /> Add Another Journey
                   </button>
@@ -607,7 +607,7 @@ export default function TicketCountSelectionPage() {
                 <button 
                   onClick={() => setStep(3)}
                   disabled={passengers.some(p => !p.boarding || !p.destination)}
-                  className="w-full h-20 bg-[#FF5F1F] text-[#111827] rounded-[32px] font-black text-xl tracking-tighter hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#FF5F1F]/20"
+                  className="w-full h-20 bg-[#FF6D00] text-[#1A0B00] rounded-[32px] font-black text-xl tracking-tighter hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#FF6D00]/20"
                 >
                   Proceed to Payment <ChevronRight size={24} />
                 </button>
@@ -623,12 +623,12 @@ export default function TicketCountSelectionPage() {
               exit={{ opacity: 0, x: -20 }}
               className="space-y-8"
             >
-              <div className="bg-[#ffffff] rounded-[40px] p-8 text-zinc-900 space-y-6 relative overflow-hidden group border border-zinc-200 shadow-sm">
-                <div className="absolute top-0 right-0 p-6 opacity-5 text-[#FF5F1F]">
+              <div className="bg-[#FFF5E6] rounded-[40px] p-8 text-[#1A0B00] space-y-6 relative overflow-hidden group border border-zinc-200 shadow-sm">
+                <div className="absolute top-0 right-0 p-6 opacity-5 text-[#FF6D00]">
                   <CreditCard size={120} />
                 </div>
                 <div className="space-y-1 relative z-10">
-                  <p className="text-[10px] font-black text-[#FF5F1F] uppercase tracking-[0.4em]">Payment Summary</p>
+                  <p className="text-[10px] font-black text-[#FF6D00] uppercase tracking-[0.4em]">Payment Summary</p>
                   <h4 className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap truncate font-heading">Town Bus</h4>
                 </div>
                 
@@ -652,17 +652,17 @@ export default function TicketCountSelectionPage() {
                   </div>
                   <div className="space-y-1 mt-4 col-span-2 text-right border-t border-zinc-100 pt-4">
                     <p className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Total Fare</p>
-                    <div className="text-3xl font-black text-[#FF5F1F] flex justify-end">
+                    <div className="text-3xl font-black text-[#FF6D00] flex justify-end">
                       ₹{totalAmount}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-[#ffffff] rounded-[32px] p-8 border border-zinc-200 shadow-sm mt-6">
+              <div className="bg-[#FFF5E6] rounded-[32px] p-8 border border-zinc-200 shadow-sm mt-6">
                 {paymentState === 'processing' ? (
-                  <div className="w-full h-20 bg-[#FF5F1F] rounded-[32px] flex items-center justify-center">
-                    <motion.div className="flex items-center gap-3 text-[#111827]">
+                  <div className="w-full h-20 bg-[#FF6D00] rounded-[32px] flex items-center justify-center">
+                    <motion.div className="flex items-center gap-3 text-[#1A0B00]">
                       <RefreshCw size={24} className="animate-spin" />
                       <span className="uppercase tracking-widest text-sm font-black">Processing via PhonePe...</span>
                     </motion.div>
@@ -677,7 +677,7 @@ export default function TicketCountSelectionPage() {
                     </button>
                     <button 
                       onClick={() => handlePayment()}
-                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#FF5F1F] text-[#111827] hover:bg-[#EF4444] active:bg-[#EF4444] transition-colors shadow-lg shadow-[#FF5F1F]/20"
+                      className="flex-[2] py-4 rounded-[20px] font-black uppercase tracking-widest text-sm bg-[#FF6D00] text-[#1A0B00] hover:bg-[#EF4444] active:bg-[#EF4444] transition-colors shadow-lg shadow-[#FF6D00]/20"
                     >
                       Pay ₹{totalAmount}
                     </button>
@@ -694,7 +694,7 @@ export default function TicketCountSelectionPage() {
               animate={{ opacity: 1 }}
               className="space-y-8 relative"
             >
-              <Confetti width={width} height={height} recycle={false} numberOfPieces={500} gravity={0.2} colors={['#FF5F1F', '#0F6B5C', '#8B5CF6', '#F43F5E']} style={{ pointerEvents: 'none' }} />
+              <Confetti width={width} height={height} recycle={false} numberOfPieces={500} gravity={0.2} colors={['#FF6D00', '#0F6B5C', '#8B5CF6', '#F43F5E']} style={{ pointerEvents: 'none' }} />
               <div className="text-center space-y-4 relative z-10 mb-12">
                 <motion.div 
                   initial={{ scale: 0, rotate: -45 }}
@@ -717,7 +717,7 @@ export default function TicketCountSelectionPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="text-[10px] font-bold text-[#FF5F1F] uppercase tracking-widest"
+                    className="text-[10px] font-bold text-[#FF6D00] uppercase tracking-widest"
                   >
                     Ticket Generated Successfully
                   </motion.p>
@@ -754,15 +754,15 @@ export default function TicketCountSelectionPage() {
     boardingPoint: bookingResult.boardingPoint || boardingPoint || 'Point A',
     destination: bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'
   })}
-  className="w-full max-w-sm mx-auto border bg-gradient-to-br from-[#FF5F1F] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden"
+  className="w-full max-w-sm mx-auto border bg-gradient-to-br from-[#FF6D00] via-[#FFF3B0] to-[#D4AF37] border-[#B8860B] shadow-lg shadow-[#D4AF37]/40 rounded-xl p-4 cursor-pointer hover:scale-[1.01] transition-transform active:scale-95 flex flex-col gap-3 relative overflow-hidden"
 >
   <div className="flex justify-between items-start">
     <div className="flex flex-col">
-      <span className="text-[9px] font-bold text-[#111827] uppercase tracking-widest mb-1">Pass No.</span>
-      <span className="font-mono font-black text-[#111827]/90 text-sm">{bookingResult.ticketId || "PENDING"}</span>
+      <span className="text-[9px] font-bold text-[#1A0B00] uppercase tracking-widest mb-1">Pass No.</span>
+      <span className="font-mono font-black text-[#1A0B00]/90 text-sm">{bookingResult.ticketId || "PENDING"}</span>
     </div>
     <div className="bg-black/10 px-2 py-1 rounded-md">
-      <span className="text-[10px] font-black text-[#111827] flex items-center gap-1">
+      <span className="text-[10px] font-black text-[#1A0B00] flex items-center gap-1">
         <Bus size={10} /> Town Bus
       </span>
     </div>
@@ -770,27 +770,27 @@ export default function TicketCountSelectionPage() {
   
   <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 mt-2">
     <div className="flex flex-col">
-      <span className="text-[8px] font-bold text-[#111827]/70 uppercase">From</span>
-      <span className="font-bold text-[#111827] text-sm truncate">{bookingResult.boardingPoint || boardingPoint || 'Point A'}</span>
+      <span className="text-[8px] font-bold text-[#1A0B00]/70 uppercase">From</span>
+      <span className="font-bold text-[#1A0B00] text-sm truncate">{bookingResult.boardingPoint || boardingPoint || 'Point A'}</span>
     </div>
     <div className="flex flex-col items-center px-2">
-      <ArrowRight size={14} className="text-[#111827]/50" />
+      <ArrowRight size={14} className="text-[#1A0B00]/50" />
     </div>
     <div className="flex flex-col items-end">
-      <span className="text-[8px] font-bold text-[#111827]/70 uppercase">To</span>
-      <span className="font-bold text-[#111827] text-sm truncate text-right">{bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'}</span>
+      <span className="text-[8px] font-bold text-[#1A0B00]/70 uppercase">To</span>
+      <span className="font-bold text-[#1A0B00] text-sm truncate text-right">{bookingResult.destination || (passengers.length > 1 ? "Multi-Stop" : passengers[0]?.destination) || 'Point B'}</span>
     </div>
   </div>
   
   <div className="flex justify-between items-end mt-2 pt-3 border-t border-[#B8860B]/30">
     <div className="flex flex-col">
-      <span className="text-[8px] font-bold text-[#111827]/70 uppercase mb-0.5">Time</span>
-      <span className="font-bold text-[#111827] text-xs">
+      <span className="text-[8px] font-bold text-[#1A0B00]/70 uppercase mb-0.5">Time</span>
+      <span className="font-bold text-[#1A0B00] text-xs">
         {new Date(bookingTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
       </span>
     </div>
-    <span className="text-[10px] font-black text-[#111827] uppercase tracking-widest flex items-center gap-1">
-      Tap to View <ChevronRight size={12} className="text-[#111827]/50" />
+    <span className="text-[10px] font-black text-[#1A0B00] uppercase tracking-widest flex items-center gap-1">
+      Tap to View <ChevronRight size={12} className="text-[#1A0B00]/50" />
     </span>
   </div>
 </div>
@@ -808,7 +808,7 @@ export default function TicketCountSelectionPage() {
               >
                  <button 
                    onClick={() => router.push(`/live-map?busId=${tripId}`)}
-                   className="col-span-2 md:col-span-1 h-16 bg-[#0F6B5C] text-[#111827] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#059669] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#0F6B5C]/20 border border-[#0F6B5C]"
+                   className="col-span-2 md:col-span-1 h-16 bg-[#0F6B5C] text-[#1A0B00] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#059669] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#0F6B5C]/20 border border-[#0F6B5C]"
                  >
                    <MapPin size={16} />
                    Track Bus
@@ -816,7 +816,7 @@ export default function TicketCountSelectionPage() {
 
                  <button 
                    onClick={() => router.push('/town-bus')}
-                   className="col-span-2 md:col-span-1 h-16 bg-[#FF5F1F] text-[#111827] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#FF5F1F]/20 border border-[#FF5F1F]"
+                   className="col-span-2 md:col-span-1 h-16 bg-[#FF6D00] text-[#1A0B00] rounded-[24px] font-black uppercase tracking-widest text-[10px] hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-[#FF6D00]/20 border border-[#FF6D00]"
                  >
                    <Bus size={16} />
                    Return to Bus List
@@ -824,14 +824,14 @@ export default function TicketCountSelectionPage() {
                  
                  <button 
                    onClick={() => router.push('/history')}
-                   className="col-span-1 h-16 bg-[#ffffff] text-zinc-800 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-white transition-all flex items-center justify-center gap-2 active:scale-95 border border-zinc-200"
+                   className="col-span-1 h-16 bg-[#FFF5E6] text-zinc-800 rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-[#FFF5E6] transition-all flex items-center justify-center gap-2 active:scale-95 border border-zinc-200"
                  >
                    My Bookings
                  </button>
 
                  <button 
                    onClick={() => router.push('/')}
-                   className="col-span-1 h-16 bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#111827] rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 active:scale-95"
+                   className="col-span-1 h-16 bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#1A0B00] rounded-[24px] font-black uppercase tracking-widest text-[9px] hover:bg-slate-700 transition-all flex items-center justify-center gap-2 active:scale-95"
                  >
                    Home
                  </button>
@@ -855,7 +855,7 @@ export default function TicketCountSelectionPage() {
                 <AlertCircle size={48} className="text-rose-500" />
               </motion.div>
               
-              <h2 className="text-4xl font-black text-zinc-900 tracking-tight uppercase mb-4">Payment Failed</h2>
+              <h2 className="text-4xl font-black text-[#1A0B00] tracking-tight uppercase mb-4">Payment Failed</h2>
               <p className="text-lg text-zinc-500 font-medium mb-12 max-w-sm">
                 We couldn't process your payment. Please try again or use a different payment method.
               </p>
@@ -863,7 +863,7 @@ export default function TicketCountSelectionPage() {
               <div className="w-full max-w-sm space-y-4">
                 <button 
                   onClick={() => handlePayment()}
-                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[#111827] bg-[#FF5F1F] hover:bg-[#EF4444] active:bg-[#EF4444] transition-all active:scale-[0.98] shadow-xl shadow-[#FF5F1F]/20"
+                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[#1A0B00] bg-[#FF6D00] hover:bg-[#EF4444] active:bg-[#EF4444] transition-all active:scale-[0.98] shadow-xl shadow-[#FF6D00]/20"
                 >
                   Retry Payment
                 </button>
@@ -889,13 +889,13 @@ export default function TicketCountSelectionPage() {
             >
               <div className="w-24 h-24 mb-8 relative">
                 <div className="absolute inset-0 border-4 border-zinc-200 rounded-full"></div>
-                <div className="absolute inset-0 border-4 border-[#FF5F1F] rounded-full border-t-transparent animate-spin"></div>
+                <div className="absolute inset-0 border-4 border-[#FF6D00] rounded-full border-t-transparent animate-spin"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <CreditCard className="text-zinc-600" size={32} />
                 </div>
               </div>
               
-              <h2 className="text-3xl font-black text-zinc-900 tracking-tight uppercase mb-4 animate-pulse">
+              <h2 className="text-3xl font-black text-[#1A0B00] tracking-tight uppercase mb-4 animate-pulse">
                 Verifying Payment
               </h2>
               <p className="text-lg text-zinc-500 font-medium max-w-sm">
@@ -917,17 +917,17 @@ export default function TicketCountSelectionPage() {
           >
             <button 
               onClick={handleProceed}
-              className="w-full bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
+              className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
             >
               <div className="flex flex-col items-start">
-                <span className="text-[#111827]">Proceed to Pay</span>
+                <span className="text-[#1A0B00]">Proceed to Pay</span>
                 <span className="text-[10px] text-zinc-600 mt-0.5">
                   {ticketCount} {ticketCount === 1 ? 'Seat' : 'Seats'} {passengers.some(p => p.luggage !== 'None') && `(+ Luggage)`}
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xl">₹{totalAmount}</span>
-                <ArrowRight size={20} className="text-[#FF5F1F]" />
+                <ArrowRight size={20} className="text-[#FF6D00]" />
               </div>
             </button>
           </motion.div>
@@ -943,14 +943,14 @@ export default function TicketCountSelectionPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setExpandedQR(false)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#ffffff]/80 backdrop-blur-md backdrop-blur-sm p-6"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#FFF5E6]/80 backdrop-blur-md backdrop-blur-sm p-6"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#ffffff] rounded-3xl p-8 max-w-sm w-full flex flex-col items-center shadow-2xl relative"
+              className="bg-[#FFF5E6] rounded-3xl p-8 max-w-sm w-full flex flex-col items-center shadow-2xl relative"
             >
               <button 
                 onClick={() => setExpandedQR(false)}
@@ -959,14 +959,14 @@ export default function TicketCountSelectionPage() {
                 <X size={20} />
               </button>
               
-              <h3 className="text-xl font-black text-zinc-900 uppercase tracking-widest mb-6">Boarding QR</h3>
+              <h3 className="text-xl font-black text-[#1A0B00] uppercase tracking-widest mb-6">Boarding QR</h3>
               
-              <div className="p-4 bg-white border border-zinc-200 rounded-2xl mb-6">
+              <div className="p-4 bg-[#FFF5E6] border border-zinc-200 rounded-2xl mb-6">
                 <QRCodeSVG value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`} size={200} level="H" />
               </div>
               
               <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">Bus Code</p>
-              <p className="text-3xl font-black text-[#FF5F1F] uppercase tracking-widest">
+              <p className="text-3xl font-black text-[#FF6D00] uppercase tracking-widest">
                 {trip?.busCode || trip?.busNumber || tripId}
               </p>
             </motion.div>
@@ -981,14 +981,14 @@ export default function TicketCountSelectionPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-[#1A0B00]/80 backdrop-blur-sm flex flex-col items-center justify-center p-4"
           >
             <div className="absolute inset-0" onClick={() => setSelectedTicket(null)}></div>
             
             <div className="w-full max-w-4xl flex justify-end mb-4 relative z-10">
               <button 
                 onClick={() => setSelectedTicket(null)}
-                className="bg-[#ffffff]/20 hover:bg-[#ffffff]/40 text-[#111827] rounded-full p-2 backdrop-blur-md transition-colors"
+                className="bg-[#FFF5E6]/20 hover:bg-[#FFF5E6]/40 text-[#1A0B00] rounded-full p-2 backdrop-blur-md transition-colors"
               >
                 <X size={24} />
               </button>
@@ -1008,7 +1008,7 @@ export default function TicketCountSelectionPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 relative z-10 text-[#111827] text-xs font-bold uppercase tracking-widest opacity-70"
+              className="mt-6 relative z-10 text-[#1A0B00] text-xs font-bold uppercase tracking-widest opacity-70"
             >
               Tap outside to close
             </motion.div>

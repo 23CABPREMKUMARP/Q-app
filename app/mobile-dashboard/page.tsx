@@ -124,13 +124,13 @@ export default function MobileDashboard() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="min-h-screen bg-[#f3f4f6] text-slate-900 font-sans pb-28 relative"
+        className="min-h-screen bg-[#f3f4f6] text-[#1A0B00] font-sans pb-28 relative"
       >
         {/* PhonePe Header */}
-        <div className="bg-[#FF5F1F] px-4 pt-12 pb-4 text-[#111827] sticky top-0 z-[100] shadow-md rounded-b-2xl">
+        <div className="bg-[#FF6D00] px-4 pt-12 pb-4 text-[#1A0B00] sticky top-0 z-[100] shadow-md rounded-b-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="bg-[#ffffff]/20 p-1 rounded-full">
+              <div className="bg-[#FFF5E6]/20 p-1 rounded-full">
                 <UserButton
                   appearance={{
                     elements: {
@@ -143,8 +143,8 @@ export default function MobileDashboard() {
                 onClick={() => setShowAddressModal(true)}
                 className="flex flex-col text-left bg-transparent border-none outline-none cursor-pointer focus:outline-none"
               >
-                <p className="text-[10px] font-bold text-[#111827]/70 uppercase tracking-wider">My Address</p>
-                <div className="flex items-center gap-1 text-sm font-black text-[#111827]">
+                <p className="text-[10px] font-bold text-[#1A0B00]/70 uppercase tracking-wider">My Address</p>
+                <div className="flex items-center gap-1 text-sm font-black text-[#1A0B00]">
                   <span className="truncate max-w-[140px]">{address}</span>
                   <ChevronRight size={14} className="opacity-80 shrink-0" />
                 </div>
@@ -152,22 +152,22 @@ export default function MobileDashboard() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Link href="/scan" className="relative text-[#111827]" title="Scan QR">
+              <Link href="/scan" className="relative text-[#1A0B00]" title="Scan QR">
                 <ScanLine size={24} />
               </Link>
               <button 
                 onClick={() => {
                   setShowNotificationsModal(true);
                 }}
-                className="relative text-[#111827] cursor-pointer" 
+                className="relative text-[#1A0B00] cursor-pointer" 
                 title="Notifications"
               >
                 <Bell size={24} />
                 {notifications.length > 0 && (
-                  <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-[#EF4444] border-2 border-[#FF5F1F] rounded-full" />
+                  <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-[#EF4444] border-2 border-[#FF6D00] rounded-full" />
                 )}
               </button>
-              <Link href="/about" className="relative text-[#111827]" title="Help">
+              <Link href="/about" className="relative text-[#1A0B00]" title="Help">
                 <Info size={24} />
               </Link>
             </div>
@@ -180,7 +180,7 @@ export default function MobileDashboard() {
             </div>
             <input 
               type="text" 
-              className="w-full bg-[#ffffff] text-slate-900 rounded-xl pl-11 pr-4 py-3 text-sm shadow-sm outline-none placeholder:text-slate-500"
+              className="w-full bg-[#FFF5E6] text-[#1A0B00] rounded-xl pl-11 pr-4 py-3 text-sm shadow-sm outline-none placeholder:text-slate-500"
               placeholder="Search Town Bus Routes"
               readOnly
               onClick={() => router.push('/town-bus')}
@@ -196,23 +196,23 @@ export default function MobileDashboard() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               onClick={() => router.push(`/live-map?busId=${liveTripTrack.busId?._id || liveTripTrack.busId}`)}
-              className="bg-gradient-to-br from-slate-900 to-zinc-950 text-[#111827] rounded-3xl p-5 shadow-xl border border-orange-500/30 relative overflow-hidden cursor-pointer group active:scale-[0.98] transition-all"
+              className="bg-gradient-to-br from-slate-900 to-zinc-950 text-[#1A0B00] rounded-3xl p-5 shadow-xl border border-orange-500/30 relative overflow-hidden cursor-pointer group active:scale-[0.98] transition-all"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,153,51,0.15),transparent_60%)]" />
               <div className="relative z-10 flex items-center justify-between">
                 <div className="space-y-1 text-left">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-[#FF5F1F] rounded-full animate-ping" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FF5F1F]">Live Trip Active</span>
+                    <span className="w-2 h-2 bg-[#FF6D00] rounded-full animate-ping" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FF6D00]">Live Trip Active</span>
                   </div>
-                  <h3 className="text-base font-bold tracking-tight text-[#111827] group-hover:text-[#FF5F1F] transition-colors">
+                  <h3 className="text-base font-bold tracking-tight text-[#1A0B00] group-hover:text-[#FF6D00] transition-colors">
                     Track Bus JB-{liveTripTrack.busId?.busCode || "1024"}
                   </h3>
                   <p className="text-xs text-[#6B7280]">
-                    Status: <span className="text-[#111827] font-semibold">{liveTripTrack.busId?.status || "Running"}</span>
+                    Status: <span className="text-[#1A0B00] font-semibold">{liveTripTrack.busId?.status || "Running"}</span>
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-[#FF5F1F] text-[#111827] rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
+                <div className="w-12 h-12 bg-[#FF6D00] text-[#1A0B00] rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
                   <MapPin size={22} className="animate-bounce" />
                 </div>
               </div>
@@ -224,19 +224,19 @@ export default function MobileDashboard() {
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#ffffff] rounded-3xl p-5 shadow-sm border border-slate-100/50 space-y-4 text-left overflow-hidden relative"
+              className="bg-[#FFF5E6] rounded-3xl p-5 shadow-sm border border-slate-100/50 space-y-4 text-left overflow-hidden relative"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-[#FF5F1F]/10 rounded-xl flex items-center justify-center">
-                    <Bell size={16} className="text-[#FF5F1F]" />
+                  <div className="w-8 h-8 bg-[#FF6D00]/10 rounded-xl flex items-center justify-center">
+                    <Bell size={16} className="text-[#FF6D00]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-black text-slate-900">Trip Broadcasts</h3>
+                    <h3 className="text-sm font-black text-[#1A0B00]">Trip Broadcasts</h3>
                     <p className="text-[9px] text-[#6B7280] font-bold uppercase tracking-wider">Live Updates</p>
                   </div>
                 </div>
-                <span className="px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-[#FF5F1F] rounded-full text-[9px] font-black uppercase tracking-wider animate-pulse shrink-0">
+                <span className="px-2.5 py-0.5 bg-amber-50 text-amber-700 border border-[#FF6D00] rounded-full text-[9px] font-black uppercase tracking-wider animate-pulse shrink-0">
                   Active alerts
                 </span>
               </div>
@@ -245,11 +245,11 @@ export default function MobileDashboard() {
                 {notifications.map((notif: any) => (
                   <div
                     key={notif._id}
-                    className="p-3.5 bg-[#ffffff] hover:bg-slate-100/70 transition-all rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden"
+                    className="p-3.5 bg-[#FFF5E6] hover:bg-slate-100/70 transition-all rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden"
                   >
-                    <div className="w-1.5 h-full bg-[#FF5F1F] absolute left-0 top-0 bottom-0" />
+                    <div className="w-1.5 h-full bg-[#FF6D00] absolute left-0 top-0 bottom-0" />
                     <div className="flex-1 pl-1 space-y-1">
-                      <p className="text-xs font-bold text-slate-950 flex items-center justify-between">
+                      <p className="text-xs font-bold text-[#1A0B00] flex items-center justify-between">
                         <span>{notif.title}</span>
                         <span className="text-[8.5px] text-[#6B7280] font-bold shrink-0 ml-2">
                           {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -264,55 +264,55 @@ export default function MobileDashboard() {
           )}
 
           {/* Town Bus Booking Teaser */}
-          <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl overflow-hidden shadow-md relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#FF5F1F]/10 to-transparent opacity-50"></div>
-            <div className="p-5 text-[#111827] relative z-10 flex items-center justify-between">
+          <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl overflow-hidden shadow-md relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#FF6D00]/10 to-transparent opacity-50"></div>
+            <div className="p-5 text-[#1A0B00] relative z-10 flex items-center justify-between">
               <div className="w-2/3 pr-2">
                 <div className="flex items-center gap-1.5 mb-2">
-                  <Bus size={14} className="text-[#FF5F1F]" />
-                  <p className="text-[10px] font-black text-[#FF5F1F] tracking-widest uppercase">Town Bus</p>
+                  <Bus size={14} className="text-[#FF6D00]" />
+                  <p className="text-[10px] font-black text-[#FF6D00] tracking-widest uppercase">Town Bus</p>
                 </div>
                 <h3 className="text-xl font-black tracking-tight mb-1">Town Bus Booking</h3>
                 <p className="text-[10px] text-[#6B7280] font-medium mb-3 leading-tight">Only buses equipped with GPS tracking can be tracked in real time. If a bus does not have GPS installed, live location and tracking features will not be available.</p>
                 <button 
                   onClick={() => router.push('/town-bus')}
-                  className="inline-block bg-[#FF5F1F] hover:bg-orange-600 text-[#FFFFFF] border border-[#FF5F1F]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
+                  className="inline-block bg-[#FF6D00] hover:bg-orange-600 text-[#FFF5E6] border border-[#FF6D00]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
                 >
                   Get Tickets
                 </button>
               </div>
               <div className="absolute right-0 bottom-0 top-0 w-1/3 flex items-center justify-end pr-4 opacity-90 overflow-hidden">
-                <div className="w-24 h-24 bg-[#FF5F1F]/20 rounded-full blur-2xl absolute -right-4"></div>
-                <div className="bg-gradient-to-br from-[#FF5F1F] to-orange-600 w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10">
-                  <Ticket size={32} className="text-[#111827]" />
+                <div className="w-24 h-24 bg-[#FF6D00]/20 rounded-full blur-2xl absolute -right-4"></div>
+                <div className="bg-gradient-to-br from-[#FF6D00] to-orange-600 w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10">
+                  <Ticket size={32} className="text-[#1A0B00]" />
                 </div>
               </div>
             </div>
           </div>
 
           {/* Quick Actions (Money Transfers / Primary Services) */}
-          <div className="bg-[#ffffff] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFF5E6] rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Transit & Payments</h3>
             <div className="grid grid-cols-4 gap-x-1 gap-y-4 text-center">
               <button 
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                <div className="w-11 h-11 bg-[#FF5F1F] rounded-xl flex items-center justify-center shadow-md text-[#FFFFFF] mx-auto">
+                <div className="w-11 h-11 bg-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#FFF5E6] mx-auto">
                   <Hash size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Bus<br/>Code</span>
               </button>
               
               <Link href="/scan" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF5F1F] rounded-xl flex items-center justify-center shadow-md text-[#FFFFFF] mx-auto">
+                <div className="w-11 h-11 bg-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#FFF5E6] mx-auto">
                   <ScanLine size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Scan<br/>QR</span>
               </Link>
 
               <Link href="/town-bus" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF5F1F] rounded-xl flex items-center justify-center shadow-md text-[#FFFFFF] mx-auto">
+                <div className="w-11 h-11 bg-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#FFF5E6] mx-auto">
                   <Bus size={18} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Town<br/>Bus</span>
@@ -322,7 +322,7 @@ export default function MobileDashboard() {
                 onClick={() => setShowMembershipModal(true)}
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-11 h-11 bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] rounded-xl flex items-center justify-center shadow-md text-[#111827] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 bg-gradient-to-br from-[#FF6D00] to-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#1A0B00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
                   <Crown size={18} className="drop-shadow-sm" />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">View<br/>Memberships</span>
@@ -331,27 +331,27 @@ export default function MobileDashboard() {
           </div>
 
           {/* PhonePe Wallet & Passes Card */}
-          <div className="bg-[#ffffff] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFF5E6] rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Spends & Passes</h3>
             <div className="flex gap-4">
-              <div className="flex-1 bg-[#ffffff] rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
+              <div className="flex-1 bg-[#FFF5E6] rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
                 <div className="flex items-center gap-2 text-[#6B7280] mb-2">
-                  <WalletCards size={16} className="text-[#FF5F1F]" />
+                  <WalletCards size={16} className="text-[#FF6D00]" />
                   <span className="text-[11px] font-semibold truncate">Smart Thamizha App</span>
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-slate-900 leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
+                  <p className="text-lg font-bold text-[#1A0B00] leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
                   <span className="text-[9px] font-bold text-[#6B7280] uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
                 </div>
               </div>
               
-              <Link href="/get-ticket" className="flex-1 bg-[#ffffff] rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
+              <Link href="/get-ticket" className="flex-1 bg-[#FFF5E6] rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
                 <div className="flex items-center gap-2 text-[#6B7280] mb-1">
-                  <Ticket size={16} className="text-[#FF5F1F]" />
+                  <Ticket size={16} className="text-[#FF6D00]" />
                   <span className="text-xs font-semibold">My Passes</span>
                 </div>
-                <p className="text-lg font-bold text-slate-900">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
-                <div className="mt-2 text-xs font-bold text-[#FF5F1F] flex items-center gap-1">
+                <p className="text-lg font-bold text-[#1A0B00]">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
+                <div className="mt-2 text-xs font-bold text-[#FF6D00] flex items-center gap-1">
                   VIEW PASS <ChevronRight size={12} />
                 </div>
                 <History className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
@@ -360,33 +360,33 @@ export default function MobileDashboard() {
           </div>
 
           {/* Bus Code Quick Search */}
-          <div className="bg-[#ffffff] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFF5E6] rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-3 px-1">Quick Fleet Search</h3>
             <BusCodeSearch compact={true} />
           </div>
 
           {/* Live Trip / Telemetry (Similar to PhonePe "Recent Transactions") */}
           {buses.length > 0 && (
-            <div className="bg-[#ffffff] rounded-2xl p-4 shadow-sm">
+            <div className="bg-[#FFF5E6] rounded-2xl p-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[13px] font-bold text-slate-800 px-1">Live Telemetry Status</h3>
-                <Link href="/live-map" className="text-xs font-bold text-[#FF5F1F]">View Map</Link>
+                <Link href="/live-map" className="text-xs font-bold text-[#FF6D00]">View Map</Link>
               </div>
               
               <div 
                 onClick={() => router.push(`/live-map?busId=${buses[0]?._id}`)}
-                className="flex items-center gap-3 p-3 bg-[#ffffff] rounded-xl active:bg-slate-100 transition-colors cursor-pointer"
+                className="flex items-center gap-3 p-3 bg-[#FFF5E6] rounded-xl active:bg-slate-100 transition-colors cursor-pointer"
               >
                 <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                  <Bus size={20} className="text-[#FF5F1F]" />
+                  <Bus size={20} className="text-[#FF6D00]" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-sm font-bold text-slate-900">JB-{buses[0]?.busCode || "1024"}</h4>
+                  <h4 className="text-sm font-bold text-[#1A0B00]">JB-{buses[0]?.busCode || "1024"}</h4>
                   <p className="text-xs text-slate-500 mt-0.5">{buses[0]?.routeId?.routeName || "Route 102"}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-bold text-[#FF5F1F] flex items-center gap-1 justify-end">
-                    <span className="w-2 h-2 bg-[#FF5F1F] rounded-full animate-pulse" /> Active
+                  <p className="text-xs font-bold text-[#FF6D00] flex items-center gap-1 justify-end">
+                    <span className="w-2 h-2 bg-[#FF6D00] rounded-full animate-pulse" /> Active
                   </p>
                   <p className="text-[10px] text-[#6B7280] mt-1">TN-38-EF-2025</p>
                 </div>
@@ -395,23 +395,23 @@ export default function MobileDashboard() {
           )}
 
           {/* Utilities & Conductor Portal (Recharge & Pay Bills style) */}
-          <div className="bg-[#ffffff] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFF5E6] rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Partner & Services</h3>
             <div className="grid grid-cols-3 gap-y-4 text-center">
               <Link href="/conductor" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#ffffff] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
-                  <ShieldAlert size={20} className="text-[#FF5F1F]" />
+                <div className="w-12 h-12 bg-[#FFF5E6] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                  <ShieldAlert size={20} className="text-[#FF6D00]" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Conductor<br/>Terminal</span>
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#ffffff] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
-                  <CreditCard size={20} className="text-[#FF5F1F]" />
+                <div className="w-12 h-12 bg-[#FFF5E6] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                  <CreditCard size={20} className="text-[#FF6D00]" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Payment<br/>Methods</span>
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#ffffff] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFF5E6] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
                   <Navigation size={20} className="text-purple-500" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Transit<br/>Intelligence</span>
@@ -432,22 +432,22 @@ export default function MobileDashboard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
+              className="fixed inset-0 z-[250] bg-[#1A0B00]/60 backdrop-blur-md flex items-end justify-center"
             >
               <motion.div
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="w-full max-w-md bg-[#ffffff] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10"
+                className="w-full max-w-md bg-[#FFF5E6] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF5F1F]/15 rounded-xl flex items-center justify-center">
-                      <Bell size={20} className="text-[#FF5F1F]" />
+                    <div className="w-10 h-10 bg-[#FF6D00]/15 rounded-xl flex items-center justify-center">
+                      <Bell size={20} className="text-[#FF6D00]" />
                     </div>
                     <div className="text-left">
-                      <h3 className="text-base font-bold text-slate-900">Notifications</h3>
+                      <h3 className="text-base font-bold text-[#1A0B00]">Notifications</h3>
                       <p className="text-[10px] text-[#6B7280] font-bold uppercase tracking-wider">Your Live Trip Feed</p>
                     </div>
                   </div>
@@ -469,11 +469,11 @@ export default function MobileDashboard() {
                     notifications.map((notif: any) => (
                       <div
                         key={notif._id}
-                        className="p-4 bg-[#ffffff] rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden text-left"
+                        className="p-4 bg-[#FFF5E6] rounded-2xl border border-slate-100 flex gap-3 relative overflow-hidden text-left"
                       >
-                        <div className="w-2.5 h-full bg-[#FF5F1F] absolute left-0 top-0 bottom-0" />
+                        <div className="w-2.5 h-full bg-[#FF6D00] absolute left-0 top-0 bottom-0" />
                         <div className="flex-1 pl-1.5 space-y-1">
-                          <p className="text-xs font-bold text-slate-950">{notif.title}</p>
+                          <p className="text-xs font-bold text-[#1A0B00]">{notif.title}</p>
                           <p className="text-xs text-[#6B7280] leading-tight">{notif.message}</p>
                           <p className="text-[9px] text-[#6B7280] font-medium">
                             {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -495,22 +495,22 @@ export default function MobileDashboard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
+              className="fixed inset-0 z-[250] bg-[#1A0B00]/60 backdrop-blur-md flex items-end justify-center"
             >
               <motion.div
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="w-full max-w-md bg-[#ffffff] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left"
+                className="w-full max-w-md bg-[#FFF5E6] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF5F1F]/15 rounded-xl flex items-center justify-center">
-                      <Hash size={20} className="text-[#FF5F1F]" />
+                    <div className="w-10 h-10 bg-[#FF6D00]/15 rounded-xl flex items-center justify-center">
+                      <Hash size={20} className="text-[#FF6D00]" />
                     </div>
                     <div className="text-left">
-                      <h3 className="text-base font-bold text-slate-900">Track with Bus Code</h3>
+                      <h3 className="text-base font-bold text-[#1A0B00]">Track with Bus Code</h3>
                       <p className="text-[10px] text-[#6B7280] font-bold uppercase tracking-wider">Separate Fleet Access Mode</p>
                     </div>
                   </div>
@@ -540,28 +540,28 @@ export default function MobileDashboard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
+              className="fixed inset-0 z-[250] bg-[#1A0B00]/60 backdrop-blur-md flex items-end justify-center"
             >
               <motion.div
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="w-full max-w-md bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left border-t border-amber-900/30"
+                className="w-full max-w-md bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left border-t border-amber-900/30"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF5F1F]/20 rounded-xl flex items-center justify-center">
-                      <Sparkles size={20} className="text-[#FF5F1F]" />
+                    <div className="w-10 h-10 bg-[#FF6D00]/20 rounded-xl flex items-center justify-center">
+                      <Sparkles size={20} className="text-[#FF6D00]" />
                     </div>
                     <div className="text-left">
-                      <h3 className="text-base font-bold text-[#111827]">Jeffben Pass</h3>
-                      <p className="text-[10px] text-[#FF5F1F]/80 font-bold uppercase tracking-wider">Premium Memberships</p>
+                      <h3 className="text-base font-bold text-[#1A0B00]">Jeffben Pass</h3>
+                      <p className="text-[10px] text-[#FF6D00]/80 font-bold uppercase tracking-wider">Premium Memberships</p>
                     </div>
                   </div>
                   <button
                     onClick={() => setShowPassModal(false)}
-                    className="p-2 bg-[#ffffff] border border-[#E5E7EB] text-[#111827] hover:bg-slate-700 text-[#6B7280] rounded-full font-bold text-xs cursor-pointer border-none outline-none focus:outline-none"
+                    className="p-2 bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] hover:bg-slate-700 text-[#6B7280] rounded-full font-bold text-xs cursor-pointer border-none outline-none focus:outline-none"
                   >
                     Close
                   </button>
@@ -576,64 +576,64 @@ export default function MobileDashboard() {
                   <div className="space-y-3">
                     {/* Platinum */}
                     <div className="bg-gradient-to-br from-slate-200 to-slate-400 p-[1px] rounded-2xl">
-                      <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center shadow-inner shrink-0">
                           <Zap size={24} className="text-[#6B7280]" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#111827] tracking-wide">PLATINUM</h4>
+                          <h4 className="text-sm font-black text-[#1A0B00] tracking-wide">PLATINUM</h4>
                           <p className="text-[10px] text-[#6B7280] font-medium">Unlimited free rides • Priority boarding</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Gold */}
-                    <div className="bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] p-[1px] rounded-2xl">
-                      <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-4 h-full flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] flex items-center justify-center shadow-inner shrink-0">
+                    <div className="bg-gradient-to-br from-[#FF6D00] to-[#FF6D00] p-[1px] rounded-2xl">
+                      <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl p-4 h-full flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF6D00] to-[#FF6D00] flex items-center justify-center shadow-inner shrink-0">
                           <Sparkles size={24} className="text-amber-900" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#111827] tracking-wide">GOLD</h4>
+                          <h4 className="text-sm font-black text-[#1A0B00] tracking-wide">GOLD</h4>
                           <p className="text-[10px] text-[#6B7280] font-medium">50 rides/mo • Free cancellations</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Silver */}
                     <div className="bg-gradient-to-br from-zinc-300 to-zinc-500 p-[1px] rounded-2xl">
-                      <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-zinc-300 flex items-center justify-center shadow-inner shrink-0">
                           <ShieldCheck size={24} className="text-zinc-700" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#111827] tracking-wide">SILVER</h4>
+                          <h4 className="text-sm font-black text-[#1A0B00] tracking-wide">SILVER</h4>
                           <p className="text-[10px] text-[#6B7280] font-medium">20 rides/mo • Standard support</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Bronze */}
                     <div className="bg-gradient-to-br from-orange-400 to-orange-700 p-[1px] rounded-2xl">
-                      <div className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-2xl p-4 h-full flex items-center gap-4">
+                      <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl p-4 h-full flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-inner shrink-0">
                           <User size={24} className="text-orange-950" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-black text-[#111827] tracking-wide">BRONZE</h4>
+                          <h4 className="text-sm font-black text-[#1A0B00] tracking-wide">BRONZE</h4>
                           <p className="text-[10px] text-[#6B7280] font-medium">Pay as you go • Reward points</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-[10px] font-black bg-[#ffffff] border border-[#E5E7EB] text-[#111827] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
+                          <span className="text-[10px] font-black bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#6B7280] px-2 py-1 rounded-md uppercase">Soon</span>
                         </div>
                       </div>
                     </div>
@@ -652,22 +652,22 @@ export default function MobileDashboard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[250] bg-slate-900/60 backdrop-blur-md flex items-end justify-center"
+              className="fixed inset-0 z-[250] bg-[#1A0B00]/60 backdrop-blur-md flex items-end justify-center"
             >
               <motion.div
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="w-full max-w-md bg-[#ffffff] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left"
+                className="w-full max-w-md bg-[#FFF5E6] rounded-t-[32px] p-6 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto pb-10 relative text-left"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FF5F1F]/15 rounded-xl flex items-center justify-center">
-                      <MapPin size={20} className="text-[#FF5F1F]" />
+                    <div className="w-10 h-10 bg-[#FF6D00]/15 rounded-xl flex items-center justify-center">
+                      <MapPin size={20} className="text-[#FF6D00]" />
                     </div>
                     <div className="text-left">
-                      <h3 className="text-base font-bold text-slate-900">Change Location</h3>
+                      <h3 className="text-base font-bold text-[#1A0B00]">Change Location</h3>
                       <p className="text-[10px] text-[#6B7280] font-bold uppercase tracking-wider">Set Custom Transit Origin</p>
                     </div>
                   </div>
@@ -687,7 +687,7 @@ export default function MobileDashboard() {
                       value={addressInput}
                       onChange={(e) => setAddressInput(e.target.value)}
                       placeholder="e.g. Gandhipuram, Coimbatore"
-                      className="w-full bg-[#ffffff] border-2 border-slate-100 focus:border-slate-900 rounded-xl p-3.5 text-xs font-bold text-slate-950 placeholder:text-slate-300 outline-none transition-all"
+                      className="w-full bg-[#FFF5E6] border-2 border-slate-100 focus:border-slate-900 rounded-xl p-3.5 text-xs font-bold text-[#1A0B00] placeholder:text-slate-300 outline-none transition-all"
                     />
                   </div>
 
@@ -701,7 +701,7 @@ export default function MobileDashboard() {
                           onClick={() => {
                             setAddressInput(preset);
                           }}
-                          className="px-3 py-1.5 bg-[#ffffff] hover:bg-slate-100 border border-slate-100 rounded-lg text-[10px] font-bold text-[#6B7280] transition-all active:scale-95"
+                          className="px-3 py-1.5 bg-[#FFF5E6] hover:bg-slate-100 border border-slate-100 rounded-lg text-[10px] font-bold text-[#6B7280] transition-all active:scale-95"
                         >
                           {preset}
                         </button>
@@ -717,7 +717,7 @@ export default function MobileDashboard() {
                         setShowAddressModal(false);
                       }
                     }}
-                    className="w-full h-12 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] hover:bg-[#FF5F1F] text-[#111827] rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
+                    className="w-full h-12 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] hover:bg-[#FF6D00] text-[#1A0B00] rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md"
                   >
                     Confirm & Update Address
                   </button>
@@ -735,24 +735,24 @@ export default function MobileDashboard() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/40 backdrop-blur-sm p-4 sm:items-center"
+              className="fixed inset-0 z-50 flex items-end justify-center bg-[#1A0B00]/40 backdrop-blur-sm p-4 sm:items-center"
             >
               <motion.div
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="w-full max-w-md bg-[#ffffff] rounded-[32px] p-6 shadow-2xl relative overflow-hidden"
+                className="w-full max-w-md bg-[#FFF5E6] rounded-[32px] p-6 shadow-2xl relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5F1F]/10 rounded-bl-full -z-0"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6D00]/10 rounded-bl-full -z-0"></div>
                 
                 <div className="flex justify-between items-start mb-6 relative z-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#FF5F1F] to-[#FF5F1F] rounded-2xl flex items-center justify-center shadow-md">
-                      <Crown size={24} className="text-[#111827]" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#FF6D00] to-[#FF6D00] rounded-2xl flex items-center justify-center shadow-md">
+                      <Crown size={24} className="text-[#1A0B00]" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-black text-slate-900">Bus Memberships</h3>
+                      <h3 className="text-lg font-black text-[#1A0B00]">Bus Memberships</h3>
                       <p className="text-[10px] text-[#6B7280] font-bold uppercase tracking-widest">Premium Tiers Coming Soon</p>
                     </div>
                   </div>
@@ -780,17 +780,17 @@ export default function MobileDashboard() {
                   </div>
 
                   {/* Gold Tier */}
-                  <div className="p-4 rounded-2xl border border-[#FF5F1F] bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl border border-[#FF6D00] bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#FF5F1F] flex items-center justify-center shadow-sm">
-                        <Crown size={16} className="text-[#111827]" />
+                      <div className="w-10 h-10 rounded-full bg-[#FF6D00] flex items-center justify-center shadow-sm">
+                        <Crown size={16} className="text-[#1A0B00]" />
                       </div>
                       <div>
-                        <h4 className="font-black text-[#FF5F1F]">Gold Pass</h4>
-                        <p className="text-[9px] font-bold text-[#FF5F1F]/70 uppercase tracking-widest">Priority Seating</p>
+                        <h4 className="font-black text-[#FF6D00]">Gold Pass</h4>
+                        <p className="text-[9px] font-bold text-[#FF6D00]/70 uppercase tracking-widest">Priority Seating</p>
                       </div>
                     </div>
-                    <span className="text-[9px] font-black bg-[#FF5F1F] text-amber-700 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+                    <span className="text-[9px] font-black bg-[#FF6D00] text-amber-700 px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
                   </div>
 
                   {/* Silver Tier */}

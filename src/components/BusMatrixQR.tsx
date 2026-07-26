@@ -19,11 +19,11 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative aspect-[3/4] rounded-3xl overflow-hidden border-[12px] border-[#FF5F1F] bg-[#ffffff] shadow-2xl flex flex-col items-center"
+        className="relative aspect-[3/4] rounded-3xl overflow-hidden border-[12px] border-[#FF6D00] bg-[#FFF5E6] shadow-2xl flex flex-col items-center"
       >
         {/* Background Gradient Ornaments */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-cyan-50 to-cyan-100 opacity-50" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5F1F]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF5E6] via-cyan-50 to-cyan-100 opacity-50" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6D00]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         {/* Top Header Section */}
@@ -41,7 +41,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
 
         {/* QR Code Section */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full px-8">
-          <div className="p-4 bg-[#ffffff] rounded-[40px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
+          <div className="p-4 bg-[#FFF5E6] rounded-[40px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border border-zinc-100 flex items-center justify-center">
             <QRCodeSVG 
               value={bookingUrl}
               size={200}
@@ -52,8 +52,8 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
           </div>
           <div className="mt-4 flex flex-col items-center gap-2">
             <p className="text-[7px] font-black text-blue-900/40 uppercase tracking-[0.4em]">Matrix ID</p>
-            <div className="px-10 py-4 bg-[#FF5F1F] rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.4)] border-4 border-[#E5E7EB] transform hover:scale-105 transition-transform">
-               <span className="text-[#111827] font-black text-2xl tracking-[0.2em]">{busCode}</span>
+            <div className="px-10 py-4 bg-[#FF6D00] rounded-full shadow-[0_20px_50px_rgba(37,99,235,0.4)] border-4 border-[#E5E7EB] transform hover:scale-105 transition-transform">
+               <span className="text-[#1A0B00] font-black text-2xl tracking-[0.2em]">{busCode}</span>
             </div>
           </div>
         </div>
@@ -63,13 +63,13 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
           <h1 className="text-3xl font-black text-blue-950 tracking-tighter leading-none mb-1">
             SCAN AND GET TICKET
           </h1>
-          <p className="text-[10px] font-bold text-[#FF5F1F] uppercase tracking-widest">
+          <p className="text-[10px] font-bold text-[#FF6D00] uppercase tracking-widest">
             Download the Smart Thamizha App
           </p>
         </div>
 
         {/* Decorative corner cut (top right) */}
-        <div className="absolute top-0 right-0 w-16 h-16 bg-[#FF5F1F] transform translate-x-8 -translate-y-8 rotate-45 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-16 h-16 bg-[#FF6D00] transform translate-x-8 -translate-y-8 rotate-45 pointer-events-none" />
       </motion.div>
     </div>
   );

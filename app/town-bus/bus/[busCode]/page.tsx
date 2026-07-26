@@ -35,37 +35,37 @@ export default function BusCodeDetailsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#FF5F1F]" size={48} />
+      <div className="min-h-screen bg-[#FFF5E6] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#FF6D00]" size={48} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans pb-24">
+    <div className="min-h-screen bg-[#FFF5E6] font-sans pb-24">
       {/* Header */}
-      <div className="bg-[#FF5F1F] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
+      <div className="bg-[#FF6D00] px-6 pt-12 pb-24 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
-          <button onClick={() => router.back()} className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md">
-            <ArrowRight size={24} className="text-[#111827] rotate-180" />
+          <button onClick={() => router.back()} className="bg-[#FFF5E6]/20 p-2 rounded-xl backdrop-blur-md">
+            <ArrowRight size={24} className="text-[#1A0B00] rotate-180" />
           </button>
-          <div className="bg-[#ffffff]/20 p-2 rounded-xl backdrop-blur-md px-4 flex items-center gap-2">
-            <Bus size={18} className="text-[#111827]" />
-            <span className="text-[#111827] font-black tracking-widest">{busCode}</span>
+          <div className="bg-[#FFF5E6]/20 p-2 rounded-xl backdrop-blur-md px-4 flex items-center gap-2">
+            <Bus size={18} className="text-[#1A0B00]" />
+            <span className="text-[#1A0B00] font-black tracking-widest">{busCode}</span>
           </div>
         </div>
       </div>
 
       <div className="px-6 -mt-16 relative z-20 max-w-md mx-auto">
         {error ? (
-          <div className="bg-[#ffffff] p-8 rounded-3xl shadow-xl text-center space-y-4">
+          <div className="bg-[#FFF5E6] p-8 rounded-3xl shadow-xl text-center space-y-4">
             <div className="w-16 h-16 bg-red-50 text-[#EF4444] rounded-full flex items-center justify-center mx-auto">
               <Info size={32} />
             </div>
             <h2 className="text-xl font-black text-slate-800 uppercase">Bus Not Active</h2>
             <p className="text-sm font-bold text-[#6B7280]">{error}</p>
-            <button onClick={() => router.push('/')} className="mt-4 px-6 py-3 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] rounded-xl font-black uppercase text-xs tracking-widest w-full">Back to Home</button>
+            <button onClick={() => router.push('/')} className="mt-4 px-6 py-3 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] rounded-xl font-black uppercase text-xs tracking-widest w-full">Back to Home</button>
           </div>
         ) : (
           <motion.div 
@@ -74,20 +74,20 @@ export default function BusCodeDetailsPage() {
             className="space-y-4"
           >
             {/* Bus Info Card */}
-            <div className="bg-[#ffffff] rounded-3xl p-6 shadow-xl border border-slate-100 relative overflow-hidden">
+            <div className="bg-[#FFF5E6] rounded-3xl p-6 shadow-xl border border-slate-100 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                 <Bus size={120} />
               </div>
               <div className="relative z-10">
                 <h2 className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest mb-1">Route Info</h2>
-                <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter leading-none mb-6">
+                <h3 className="text-2xl font-black text-[#1A0B00] uppercase tracking-tighter leading-none mb-6">
                   {trip.routeId?.routeName || "City Route"}
                 </h3>
 
                 <div className="space-y-4 border-t border-slate-100 pt-4">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-emerald-50 text-[#FF5F1F] rounded-lg flex items-center justify-center"><Clock size={16} /></div>
+                      <div className="w-8 h-8 bg-emerald-50 text-[#FF6D00] rounded-lg flex items-center justify-center"><Clock size={16} /></div>
                       <div>
                         <p className="text-[9px] font-black text-[#6B7280] uppercase tracking-widest">Departure</p>
                         <p className="font-bold text-slate-800">{trip.departureTime}</p>
@@ -98,7 +98,7 @@ export default function BusCodeDetailsPage() {
                         <p className="text-[9px] font-black text-[#6B7280] uppercase tracking-widest">Fare</p>
                         <p className="font-bold text-slate-800">₹{trip.fare}</p>
                       </div>
-                      <div className="w-8 h-8 bg-blue-50 text-[#FF5F1F] rounded-lg flex items-center justify-center"><Zap size={16} /></div>
+                      <div className="w-8 h-8 bg-blue-50 text-[#FF6D00] rounded-lg flex items-center justify-center"><Zap size={16} /></div>
                     </div>
                   </div>
                 </div>
@@ -109,20 +109,20 @@ export default function BusCodeDetailsPage() {
             <div className="grid grid-cols-2 gap-4">
               <Link 
                 href={`/town-bus/${trip._id}/seat-selection`}
-                className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
+                className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 transition-all shadow-lg"
               >
-                <div className="w-10 h-10 rounded-full bg-[#ffffff] border border-[#E5E7EB] text-[#111827] flex items-center justify-center">
-                  <Bus size={20} className="text-[#FF5F1F]" />
+                <div className="w-10 h-10 rounded-full bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] flex items-center justify-center">
+                  <Bus size={20} className="text-[#FF6D00]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Book Ticket</span>
               </Link>
               
               <Link 
                 href={`/live-map?busId=${trip.busId}`}
-                className="bg-[#ffffff] border border-[#E5E7EB] text-slate-900 p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-[#ffffff] active:scale-95 transition-all shadow-sm"
+                className="bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] p-5 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-[#FFF5E6] active:scale-95 transition-all shadow-sm"
               >
                 <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
-                  <MapPin size={20} className="text-[#FF5F1F]" />
+                  <MapPin size={20} className="text-[#FF6D00]" />
                 </div>
                 <span className="font-black text-[10px] uppercase tracking-widest">Track GPS</span>
               </Link>

@@ -82,7 +82,7 @@ export function PremiumBoardingPass({
     <div className="w-full overflow-x-auto pb-4 custom-scrollbar">
       <div className={`relative w-[800px] max-w-full md:max-w-4xl mx-auto flex flex-row shadow-[0_20px_50px_-10px_rgba(212,175,55,0.4)] rounded-lg overflow-hidden ${isExpired ? "grayscale-[0.5]" : ""} ${isPrinting ? "print-active-ticket" : ""}`}
            style={{
-             background: "linear-gradient(135deg, #FF5F1F 0%, #FFF3B0 25%, #D4AF37 50%, #FFE55C 75%, #DAA520 100%)",
+             background: "linear-gradient(135deg, #FF6D00 0%, #FFF3B0 25%, #D4AF37 50%, #FFE55C 75%, #DAA520 100%)",
              color: "#000000",
              fontFamily: "Georgia, serif",
              border: isExpired ? "3px solid #DC2626" : "3px solid #16A34A"
@@ -192,7 +192,7 @@ export function PremiumBoardingPass({
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                       PhonePe TXN:
                     </span>
-                    <span className="font-mono font-bold text-[#000000] text-[11px] md:text-xs tracking-wider bg-[#ffffff]/30 px-2 py-0.5 rounded shadow-sm">{booking.phonepeTransactionId}</span>
+                    <span className="font-mono font-bold text-[#000000] text-[11px] md:text-xs tracking-wider bg-[#FFF5E6]/30 px-2 py-0.5 rounded shadow-sm">{booking.phonepeTransactionId}</span>
                   </div>
                 )}
               </div>
@@ -217,21 +217,21 @@ export function PremiumBoardingPass({
             <div className="relative z-10 flex flex-col items-center w-full">
               {isExpired && (
                 <div className="absolute inset-0 z-20 flex items-center justify-center backdrop-blur-[1px]">
-                  <span className="bg-[#111827] text-[#FF5F1F] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-[#FF5F1F]">EXPIRED</span>
+                  <span className="bg-[#1A0B00] text-[#FF6D00] text-sm font-black uppercase px-3 py-1 rounded shadow-lg -rotate-12 border-2 border-[#FF6D00]">EXPIRED</span>
                 </div>
               )}
               
               {/* Status / Timer with Border */}
-              <div className={`mb-2 text-center flex flex-col items-center gap-1 border-2 p-1.5 rounded-lg shadow-sm bg-[#ffffff]/40 ${!isExpired ? 'border-[#22C55E]' : 'border-[#FF5F1F]'}`}>
+              <div className={`mb-2 text-center flex flex-col items-center gap-1 border-2 p-1.5 rounded-lg shadow-sm bg-[#FFF5E6]/40 ${!isExpired ? 'border-[#22C55E]' : 'border-[#FF6D00]'}`}>
                 {!isExpired && (
-                   <span className="bg-green-600 text-[#111827] text-sm font-bold px-3 py-1 rounded-full uppercase shadow-sm">
+                   <span className="bg-green-600 text-[#1A0B00] text-sm font-bold px-3 py-1 rounded-full uppercase shadow-sm">
                      Active 
                    </span>
                 )}
                 {!isExpired ? (
                   <span className="text-[11px] md:text-xs font-black text-green-700 uppercase tracking-widest whitespace-nowrap">{timeRemainingStr}</span>
                 ) : (
-                  <span className="text-[11px] md:text-xs font-black text-[#FF5F1F] uppercase tracking-widest bg-[#ffffff] px-2 py-0.5 rounded whitespace-nowrap">Validity Ended</span>
+                  <span className="text-[11px] md:text-xs font-black text-[#FF6D00] uppercase tracking-widest bg-[#FFF5E6] px-2 py-0.5 rounded whitespace-nowrap">Validity Ended</span>
                 )}
               </div>
 

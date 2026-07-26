@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.jeffben.app',
   appName: 'jeffben',
   webDir: 'public',
-  backgroundColor: '#FF5F1F',
+  backgroundColor: '#FF6D00',
   server: {
     url: 'https://jeffben.org',
     cleartext: false,
@@ -28,7 +28,7 @@ const config: CapacitorConfig = {
   plugins: {
     SplashScreen: {
       launchShowDuration: 0,
-      backgroundColor: '#FF5F1F',
+      backgroundColor: '#FF6D00',
       showSpinner: false
     },
     PrivacyScreen: {

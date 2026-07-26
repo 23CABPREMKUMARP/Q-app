@@ -58,7 +58,7 @@ export default function ScanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] flex flex-col items-center justify-center p-6 relative overflow-hidden secure-content">
+    <div className="min-h-screen bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] flex flex-col items-center justify-center p-6 relative overflow-hidden secure-content">
       <WatermarkOverlay />
       <AnimatePresence>
         {showScanner && (
@@ -70,13 +70,13 @@ export default function ScanPage() {
       </AnimatePresence>
 
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FF5F1F]/10 rounded-full blur-[120px] -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FF6D00]/10 rounded-full blur-[120px] -z-10" />
       
       <div className="w-full max-w-md space-y-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/20 text-[#FF5F1F] text-xs font-black tracking-widest uppercase mb-4"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF6D00]/10 border border-[#FF6D00]/20 text-[#FF6D00] text-xs font-black tracking-widest uppercase mb-4"
         >
           <ShieldCheck size={14} />
           Secure Matrix Node
@@ -88,7 +88,7 @@ export default function ScanPage() {
           transition={{ delay: 0.1 }}
           className="text-4xl font-black tracking-tighter"
         >
-          Scan to <span className="text-[#FF5F1F]">Board</span>
+          Scan to <span className="text-[#FF6D00]">Board</span>
         </motion.h1>
 
         <motion.div 
@@ -98,20 +98,20 @@ export default function ScanPage() {
           className="relative aspect-square w-full max-w-[300px] mx-auto group"
         >
           {/* Scanner Target UI */}
-          <div className="absolute inset-0 border-2 border-[#FF5F1F]/30 rounded-[40px] pointer-events-none" />
-          <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-[#FF5F1F] rounded-tl-3xl" />
-          <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-[#FF5F1F] rounded-tr-3xl" />
-          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-[#FF5F1F] rounded-bl-3xl" />
-          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-[#FF5F1F] rounded-br-3xl" />
+          <div className="absolute inset-0 border-2 border-[#FF6D00]/30 rounded-[40px] pointer-events-none" />
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-[#FF6D00] rounded-tl-3xl" />
+          <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-[#FF6D00] rounded-tr-3xl" />
+          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-[#FF6D00] rounded-bl-3xl" />
+          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-[#FF6D00] rounded-br-3xl" />
           
-          <div className="absolute inset-4 bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] rounded-[32px] flex items-center justify-center overflow-hidden border border-[#ffffff]/5 shadow-2xl">
-            <QrCode size={120} className="text-[#FF5F1F]/20" />
+          <div className="absolute inset-4 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-[32px] flex items-center justify-center overflow-hidden border border-[#FFF5E6]/5 shadow-2xl">
+            <QrCode size={120} className="text-[#FF6D00]/20" />
             <motion.div 
               animate={{ top: ["0%", "100%", "0%"] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              className="absolute left-0 right-0 h-1 bg-[#FF5F1F] shadow-[0_0_15px_rgba(242,133,0,0.8)] z-10"
+              className="absolute left-0 right-0 h-1 bg-[#FF6D00] shadow-[0_0_15px_rgba(242,133,0,0.8)] z-10"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FF5F1F]/5 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FF6D00]/5 to-transparent" />
           </div>
         </motion.div>
 
@@ -130,14 +130,14 @@ export default function ScanPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setShowScanner(true)}
-              className="w-full h-14 bg-[#ffffff] text-[#111827] rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-[#ffffff]/5 cursor-pointer"
+              className="w-full h-14 bg-[#FFF5E6] text-[#1A0B00] rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-[#FFF5E6]/5 cursor-pointer"
             >
               <Bus size={18} />
               Re-open Scanner
             </motion.button>
           )}
 
-          <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#ffffff] transition-colors font-bold text-xs uppercase tracking-widest">
+          <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FFF5E6] transition-colors font-bold text-xs uppercase tracking-widest">
             <ArrowLeft size={14} />
             Back to Hub
           </Link>

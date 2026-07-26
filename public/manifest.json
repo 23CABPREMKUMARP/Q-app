@@ -4,8 +4,8 @@
   "description": "Pioneering industrial-grade automation for metropolitan transit.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#FF5F1F",
+  "background_color": "#FFF5E6",
+  "theme_color": "#FF6D00",
   "orientation": "portrait",
   "icons": [
     {

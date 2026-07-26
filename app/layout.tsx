@@ -23,7 +23,7 @@ const manrope = Manrope({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FF5F1F",
+  themeColor: "#FF6D00",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -62,9 +62,9 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         variables: {
-          colorPrimary: "#FF5F1F",
-          colorBackground: "#ffffff",
-          colorText: "#FF5F1F",
+          colorPrimary: "#FF6D00",
+          colorBackground: "#FFF5E6",
+          colorText: "#FF6D00",
           borderRadius: "1rem",
           fontFamily: "Inter, Manrope, system-ui, sans-serif",
         },
@@ -72,12 +72,12 @@ export default function RootLayout({
           card: "shadow-none border border-slate-100",
           headerTitle: "font-black tracking-tight uppercase",
           headerSubtitle: "text-[#6B7280] text-xs",
-          formButtonPrimary: "bg-[#FF5F1F] hover:bg-[#8bd9d3] text-slate-900 font-black uppercase tracking-widest rounded-xl h-12",
-          footerActionLink: "text-[#FF5F1F] font-bold",
+          formButtonPrimary: "bg-[#FF6D00] hover:bg-[#8bd9d3] text-[#1A0B00] font-black uppercase tracking-widest rounded-xl h-12",
+          footerActionLink: "text-[#FF6D00] font-bold",
         },
       }}
     >
-      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-[#ffffff]">
+      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-[#FFF5E6]">
         <head>
           <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
           <script
@@ -99,7 +99,7 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${inter.variable} ${manrope.variable} antialiased bg-[#ffffff] text-[#111827] min-h-full flex flex-col`}
+          className={`${inter.variable} ${manrope.variable} antialiased bg-[#FFF5E6] text-[#1A0B00] min-h-full flex flex-col`}
         >
           <CapacitorDeepLink />
           <WebHeader />

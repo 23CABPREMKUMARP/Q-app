@@ -57,7 +57,7 @@ export function WebHeader() {
   return (
     <header 
       className={`fixed top-0 z-[900] w-full transition-all duration-300 ${
-        scrolled ? "bg-[#ffffff]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
+        scrolled ? "bg-[#FFF5E6]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
@@ -67,10 +67,10 @@ export function WebHeader() {
           <img src="/hero-logo.png" alt="JeffBen" className="w-10 h-10 md:w-[72px] md:h-[72px] object-contain drop-shadow-md mix-blend-multiply" />
           
           <div className="flex flex-col justify-center leading-[1.15]">
-            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-zinc-900 uppercase">
+            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-[#1A0B00] uppercase">
               SMART
             </span>
-            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-[#FF5F1F] uppercase">
+            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-[#FF6D00] uppercase">
               THAMIZHA
             </span>
           </div>
@@ -83,7 +83,7 @@ export function WebHeader() {
             </span>
             <div className="flex flex-col leading-none">
               <span className="text-[12px] md:text-[18px] font-black tracking-tight leading-none">
-                <span className="text-zinc-900">JEFF</span><span className="text-[#FF5F1F]">BEN</span>
+                <span className="text-[#1A0B00]">JEFF</span><span className="text-[#FF6D00]">BEN</span>
               </span>
               <span className="text-[6px] md:text-[8px] font-bold text-zinc-600 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
                 Systems
@@ -101,12 +101,12 @@ export function WebHeader() {
                 key={link.href} 
                 href={link.href}
                 className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
-                  isActive ? "text-[#FF5F1F]" : "text-zinc-600 hover:text-zinc-900"
+                  isActive ? "text-[#FF6D00]" : "text-zinc-600 hover:text-[#1A0B00]"
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF5F1F] rounded-full"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF6D00] rounded-full"></span>
                 )}
               </a>
             );
@@ -115,7 +115,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#FF5F1F] hover:text-[#FFFFFF] hover:border-[#FF5F1F] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFF5E6] hover:border-[#FF6D00] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -130,7 +130,7 @@ export function WebHeader() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#FFF5E6] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
@@ -139,14 +139,14 @@ export function WebHeader() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xs font-black uppercase tracking-widest p-4 rounded-xl transition-colors ${
-                  isActive ? "bg-[#FF5F1F]/10 text-[#FF5F1F]" : "text-zinc-500 hover:bg-white"
+                  isActive ? "bg-[#FF6D00]/10 text-[#FF6D00]" : "text-zinc-500 hover:bg-[#FFF5E6]"
                 }`}
               >
                 {link.label}
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] text-[#111827] hover:bg-[#FF5F1F] hover:text-[#FFFFFF] hover:border-[#FF5F1F] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFF5E6] hover:border-[#FF6D00] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

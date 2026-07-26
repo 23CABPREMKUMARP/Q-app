@@ -44,7 +44,7 @@ export function MobileBottomNav() {
   }
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[999] bg-[#ffffff]/95 premium-blur border-t-2 border-[#FF5F1F]/30 shadow-[0_-8px_30px_rgba(255,153,51,0.1)] safe-bottom">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[999] bg-[#FFF5E6]/95 premium-blur border-t-2 border-[#FF6D00]/30 shadow-[0_-8px_30px_rgba(255,153,51,0.1)] safe-bottom">
       <div className="flex items-center justify-around h-[68px] px-2 relative">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -55,10 +55,10 @@ export function MobileBottomNav() {
               <div key={item.href} className="relative -top-6 flex flex-col items-center">
                 <Link 
                   href={item.href}
-                  className="w-[60px] h-[60px] bg-gradient-to-tr from-[#FF5F1F] to-[#FF5F1F] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(255,153,51,0.4)] border-[4px] border-[#ffffff] active:scale-95 hover:brightness-110 transition-all group relative overflow-hidden"
+                  className="w-[60px] h-[60px] bg-gradient-to-tr from-[#FF6D00] to-[#FF6D00] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(255,153,51,0.4)] border-[4px] border-[#FFF5E6] active:scale-95 hover:brightness-110 transition-all group relative overflow-hidden"
                   aria-label="Scan Ticket"
                 >
-                  <Icon className="text-[#111827]" size={26} strokeWidth={2.5} />
+                  <Icon className="text-[#1A0B00]" size={26} strokeWidth={2.5} />
                 </Link>
                 <span className="text-[10px] font-bold text-slate-800 mt-1 uppercase tracking-wider scale-90">
                   {item.label}
@@ -78,21 +78,21 @@ export function MobileBottomNav() {
                   size={24} 
                   className={cn(
                     "transition-all duration-300", 
-                    isActive ? "text-[#FF5F1F] scale-110" : "text-slate-500 hover:text-[#FF5F1F]/70"
+                    isActive ? "text-[#FF6D00] scale-110" : "text-slate-500 hover:text-[#FF6D00]/70"
                   )} 
                   strokeWidth={isActive ? 2.5 : 2} 
                 />
               </div>
               <span className={cn(
                 "text-[10px] uppercase tracking-wider font-bold transition-all duration-300 scale-90",
-                isActive ? "text-[#FF5F1F]" : "text-slate-500"
+                isActive ? "text-[#FF6D00]" : "text-slate-500"
               )}>
                 {item.label}
               </span>
               {isActive && (
                 <motion.div 
                   layoutId="activeTabIndicator"
-                  className="absolute bottom-1 w-1.5 h-1.5 bg-[#FF5F1F] rounded-full shadow-[0_0_8px_#FF5F1F]"
+                  className="absolute bottom-1 w-1.5 h-1.5 bg-[#FF6D00] rounded-full shadow-[0_0_8px_#FF6D00]"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}

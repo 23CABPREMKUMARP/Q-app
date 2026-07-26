@@ -19,7 +19,7 @@ const LeafletBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), {
 const MapSkeleton = () => (
   <div className="flex items-center justify-center h-full w-full bg-[#e8eaed]">
     <div className="flex flex-col items-center gap-4">
-      <div className="w-16 h-16 border-4 border-gray-300 border-t-[#FF5F1F] rounded-full animate-spin" />
+      <div className="w-16 h-16 border-4 border-gray-300 border-t-[#FF6D00] rounded-full animate-spin" />
       <p className="text-gray-500 text-sm font-medium">Loading map…</p>
     </div>
   </div>
@@ -156,7 +156,7 @@ function LiveMapContent() {
         <div className="flex items-center gap-2 md:gap-3 pointer-events-auto max-w-xl mx-auto md:mx-0">
 
           {/* Search box */}
-          <div className={`flex-1 bg-[#ffffff] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#FF5F1F] shadow-xl" : ""}`}
+          <div className={`flex-1 bg-[#FFF5E6] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#FF6D00] shadow-xl" : ""}`}
             style={{ height: 48 }}>
             {searchFocused ? (
               <button onClick={() => { setSearchFocused(false); setSearchQuery(""); }} className="text-gray-500">
@@ -181,19 +181,19 @@ function LiveMapContent() {
           </div>
 
           {/* Profile avatar circle */}
-          <div className="w-10 h-10 rounded-full bg-[#FF5F1F] flex items-center justify-center shadow-md flex-shrink-0">
-            <Bus size={18} className="text-[#111827]" />
+          <div className="w-10 h-10 rounded-full bg-[#FF6D00] flex items-center justify-center shadow-md flex-shrink-0">
+            <Bus size={18} className="text-[#1A0B00]" />
           </div>
         </div>
 
         {/* Realtime status chip — below search */}
         <div className="flex justify-center md:justify-start max-w-xl mx-auto md:mx-0 mt-2 pointer-events-none">
           {isConnected ? (
-            <span className="flex items-center gap-1.5 bg-[#ffffff]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-emerald-700 shadow">
+            <span className="flex items-center gap-1.5 bg-[#FFF5E6]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-emerald-700 shadow">
               <Radio size={9} className="animate-pulse" /> Realtime Connected
             </span>
           ) : (
-            <span className="flex items-center gap-1.5 bg-[#ffffff]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-gray-500 shadow">
+            <span className="flex items-center gap-1.5 bg-[#FFF5E6]/90 backdrop-blur-sm rounded-full px-3 py-1 text-[10px] font-bold text-gray-500 shadow">
               <WifiOff size={9} /> Polling Mode
             </span>
           )}
@@ -207,7 +207,7 @@ function LiveMapContent() {
         <div className="relative">
           <button
             onClick={() => setShowLayers((v) => !v)}
-            className="w-12 h-12 bg-[#ffffff] rounded-2xl shadow-lg flex items-center justify-center text-gray-600 hover:shadow-xl transition-all active:scale-95"
+            className="w-12 h-12 bg-[#FFF5E6] rounded-2xl shadow-lg flex items-center justify-center text-gray-600 hover:shadow-xl transition-all active:scale-95"
           >
             <Layers size={20} />
           </button>
@@ -219,7 +219,7 @@ function LiveMapContent() {
                 initial={{ opacity: 0, scale: 0.9, x: 10 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.9, x: 10 }}
-                className="absolute right-14 top-0 bg-[#ffffff] rounded-2xl shadow-2xl p-4 w-44"
+                className="absolute right-14 top-0 bg-[#FFF5E6] rounded-2xl shadow-2xl p-4 w-44"
               >
                 <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Map Layers</p>
                 {[
@@ -231,8 +231,8 @@ function LiveMapContent() {
                     className="w-full flex items-center justify-between py-2 text-sm font-semibold text-gray-700"
                   >
                     {item.label}
-                    <div className={`w-10 h-5 rounded-full transition-colors relative ${item.value ? "bg-[#FF5F1F]" : "bg-gray-200"}`}>
-                      <div className={`absolute top-0.5 w-4 h-4 bg-[#ffffff] rounded-full shadow transition-all ${item.value ? "left-5" : "left-0.5"}`} />
+                    <div className={`w-10 h-5 rounded-full transition-colors relative ${item.value ? "bg-[#FF6D00]" : "bg-gray-200"}`}>
+                      <div className={`absolute top-0.5 w-4 h-4 bg-[#FFF5E6] rounded-full shadow transition-all ${item.value ? "left-5" : "left-0.5"}`} />
                     </div>
                   </button>
                 ))}
@@ -245,10 +245,10 @@ function LiveMapContent() {
         <button
           onClick={requestLocation}
           disabled={locating}
-          className={`w-12 h-12 bg-[#ffffff] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-[#FF5F1F]"}`}
+          className={`w-12 h-12 bg-[#FFF5E6] rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95 ${locating ? "opacity-60" : "hover:shadow-xl"} ${locationError ? "text-[#EF4444]" : "text-[#FF6D00]"}`}
         >
           {locating ? (
-            <div className="w-5 h-5 border-2 border-blue-300 border-t-[#FF5F1F] rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-blue-300 border-t-[#FF6D00] rounded-full animate-spin" />
           ) : (
             <Locate size={20} />
           )}
@@ -273,7 +273,7 @@ function LiveMapContent() {
                 setDrawerState("full");
               }
             }}
-            className="absolute inset-x-0 bottom-0 z-[600] bg-[#ffffff] rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.15)]"
+            className="absolute inset-x-0 bottom-0 z-[600] bg-[#FFF5E6] rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.15)]"
             style={{ maxHeight: "85vh", overflow: "hidden" }}
           >
             {/* Drag handle */}
@@ -286,14 +286,14 @@ function LiveMapContent() {
               <div className="flex items-start gap-4">
                 {/* Bus icon */}
                 <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 border border-blue-100">
-                  <Bus size={26} className="text-[#FF5F1F]" />
+                  <Bus size={26} className="text-[#FF6D00]" />
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
                     <h2 className="text-lg font-black text-gray-900 uppercase tracking-tight">{selectedBus.busNumber}</h2>
                     {livePositions[selectedBus._id]?.deviceStatus === "Online" && (
-                      <span className="flex items-center gap-1 text-[9px] font-black text-[#FF5F1F] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                      <span className="flex items-center gap-1 text-[9px] font-black text-[#FF6D00] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                         <Radio size={7} className="animate-pulse" /> LIVE
                       </span>
                     )}
@@ -321,8 +321,8 @@ function LiveMapContent() {
                 ].map((stat) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={stat.label} className="bg-white rounded-2xl p-3 text-center">
-                      <Icon size={16} className="text-[#FF5F1F] mx-auto mb-1" />
+                    <div key={stat.label} className="bg-[#FFF5E6] rounded-2xl p-3 text-center">
+                      <Icon size={16} className="text-[#FF6D00] mx-auto mb-1" />
                       <p className="text-xs font-black text-gray-800">{stat.value}</p>
                       <p className="text-[9px] text-gray-400 font-semibold mt-0.5">{stat.label}</p>
                     </div>
@@ -333,7 +333,7 @@ function LiveMapContent() {
               {/* Expand indicator */}
               <button
                 onClick={() => setDrawerState(drawerState === "peek" ? "full" : "peek")}
-                className="w-full mt-3 py-2 flex items-center justify-center gap-1 text-xs font-bold text-[#FF5F1F]"
+                className="w-full mt-3 py-2 flex items-center justify-center gap-1 text-xs font-bold text-[#FF6D00]"
               >
                 {drawerState === "peek" ? "More info" : "Less info"}
                 {drawerState === "peek" ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -372,24 +372,24 @@ function LiveMapContent() {
                   <div className="bg-gray-900 rounded-2xl p-4 flex items-center gap-4">
                     <div className="flex-1 min-w-0">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">From</p>
-                      <p className="text-sm font-black text-[#111827] truncate">{from}</p>
+                      <p className="text-sm font-black text-[#1A0B00] truncate">{from}</p>
                     </div>
-                    <Navigation size={16} className="text-[#FF5F1F] flex-shrink-0" />
+                    <Navigation size={16} className="text-[#FF6D00] flex-shrink-0" />
                     <div className="flex-1 min-w-0 text-right">
                       <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">To</p>
-                      <p className="text-sm font-black text-[#111827] truncate">{to}</p>
+                      <p className="text-sm font-black text-[#1A0B00] truncate">{to}</p>
                     </div>
                   </div>
 
                   {/* Stats */}
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white rounded-2xl p-4">
+                    <div className="bg-[#FFF5E6] rounded-2xl p-4">
                       <div className="flex items-center gap-1.5 text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1"><Gauge size={10} /> Speed</div>
                       <p className="text-2xl font-black text-gray-900">{speed}<span className="text-sm font-semibold text-gray-400 ml-1">km/h</span></p>
                     </div>
                     {nextStop && (
                       <div className="bg-blue-50 rounded-2xl p-4">
-                        <div className="flex items-center gap-1.5 text-[9px] font-black text-[#FF5F1F] uppercase tracking-widest mb-1"><MapPin size={10} /> Next Stop</div>
+                        <div className="flex items-center gap-1.5 text-[9px] font-black text-[#FF6D00] uppercase tracking-widest mb-1"><MapPin size={10} /> Next Stop</div>
                         <p className="text-sm font-black text-gray-900 leading-tight">{nextStop.stopName}</p>
                       </div>
                     )}
@@ -397,11 +397,11 @@ function LiveMapContent() {
 
                   {/* GPS offline warning */}
                   {!isOnline && (
-                    <div className="flex items-center gap-3 p-3 bg-amber-50 border border-[#FF5F1F] rounded-2xl">
-                      <WifiOff size={16} className="text-[#FF5F1F] flex-shrink-0" />
+                    <div className="flex items-center gap-3 p-3 bg-amber-50 border border-[#FF6D00] rounded-2xl">
+                      <WifiOff size={16} className="text-[#FF6D00] flex-shrink-0" />
                       <div>
                         <p className="text-xs font-black text-amber-800">GPS Offline</p>
-                        <p className="text-[10px] text-[#FF5F1F] mt-0.5">Last updated {lastSeenText}</p>
+                        <p className="text-[10px] text-[#FF6D00] mt-0.5">Last updated {lastSeenText}</p>
                       </div>
                     </div>
                   )}
@@ -422,14 +422,14 @@ function LiveMapContent() {
             className="absolute bottom-6 inset-x-4 z-[500] flex items-center justify-between"
           >
             {/* Left: bus count pill */}
-            <div className="bg-[#ffffff] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
-              <Bus size={14} className="text-[#FF5F1F]" />
+            <div className="bg-[#FFF5E6] rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2.5">
+              <Bus size={14} className="text-[#FF6D00]" />
               <span className="text-xs font-bold text-gray-700">Smart Thamizha</span>
               {liveCount > 0 && (
                 <>
                   <span className="w-px h-3 bg-gray-200" />
-                  <span className="flex items-center gap-1 text-xs font-bold text-[#FF5F1F]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF5F1F] animate-pulse inline-block" />
+                  <span className="flex items-center gap-1 text-xs font-bold text-[#FF6D00]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF6D00] animate-pulse inline-block" />
                     {liveCount} live
                   </span>
                 </>
@@ -438,7 +438,7 @@ function LiveMapContent() {
 
             {/* Right: location error note */}
             {locationError && (
-              <div className="bg-[#ffffff] rounded-full shadow-lg px-3 py-2 flex items-center gap-1.5 text-xs font-semibold text-[#FF5F1F]">
+              <div className="bg-[#FFF5E6] rounded-full shadow-lg px-3 py-2 flex items-center gap-1.5 text-xs font-semibold text-[#FF6D00]">
                 <MapPin size={12} />
                 Location unavailable
               </div>

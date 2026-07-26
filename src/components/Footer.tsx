@@ -15,25 +15,25 @@ export const Footer = React.memo(function Footer() {
   }
 
   return (
-    <footer className="bg-[#FF5F1F] text-[#111827] pt-24 pb-12 border-t border-[#E5E7EB]">
+    <footer className="bg-[#FF6D00] text-[#1A0B00] pt-24 pb-12 border-t border-[#E5E7EB]">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {/* Brand Column */}
           <div className="space-y-8 col-span-1 md:col-span-2">
             <Link href="/" className="flex flex-col gap-2">
-              <span className="text-[9px] font-bold text-[#111827]/80 uppercase tracking-widest leading-none">
+              <span className="text-[9px] font-bold text-[#1A0B00]/80 uppercase tracking-widest leading-none">
                 Powered By
               </span>
               <div className="flex flex-col">
                 <span className="text-2xl font-bold tracking-tight leading-none">
-                  <span className="text-[#111827]">JEFF</span><span className="text-[#111827]">BEN</span>
+                  <span className="text-[#1A0B00]">JEFF</span><span className="text-[#1A0B00]">BEN</span>
                 </span>
-                <span className="text-[10px] font-bold text-[#111827]/80 uppercase tracking-wider leading-none">
+                <span className="text-[10px] font-bold text-[#1A0B00]/80 uppercase tracking-wider leading-none">
                   Systems
                 </span>
               </div>
             </Link>
-            <p className="text-[#111827]/90 text-lg leading-relaxed max-w-md font-bold">
+            <p className="text-[#1A0B00]/90 text-lg leading-relaxed max-w-md font-bold">
               Pioneering industrial-grade automation and real-time telemetry for metropolitan public transit ecosystems. Advancing regional connectivity through intelligent infrastructure.
             </p>
             <div className="flex items-center gap-4">
@@ -50,7 +50,7 @@ export const Footer = React.memo(function Footer() {
                   aria-label={`Visit our ${social.href.includes('mail') ? 'Email' : social.href.includes('youtube') ? 'Youtube' : 'Facebook'}`}
                   whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-2xl bg-[#ffffff] border border-[#E5E7EB] shadow-sm text-[#111827] border border-[#E5E7EB] flex items-center justify-center text-[#111827] hover:bg-[#ffffff]/10 transition-all"
+                  className="w-12 h-12 rounded-2xl bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] flex items-center justify-center text-[#1A0B00] hover:bg-[#FFF5E6]/10 transition-all"
                 >
                   {social.icon}
                 </motion.a>
@@ -60,7 +60,7 @@ export const Footer = React.memo(function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#111827]/80">Platform</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#1A0B00]/80">Platform</h4>
             <nav className="flex flex-col gap-4">
               {[
                 { label: "Live Tracking", href: "/live-map" },
@@ -70,7 +70,7 @@ export const Footer = React.memo(function Footer() {
                   key={link.href} 
                   href={link.href}
                   aria-label={link.label}
-                  className="text-[#111827]/90 hover:text-[#111827] transition-all flex items-center justify-between group"
+                  className="text-[#1A0B00]/90 hover:text-[#1A0B00] transition-all flex items-center justify-between group"
                 >
                   <span className="text-base font-bold">{link.label}</span>
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0" />
@@ -81,27 +81,27 @@ export const Footer = React.memo(function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#111827]/80">Intelligence Hub</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#1A0B00]/80">Intelligence Hub</h4>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="mt-1 text-[#111827]"><MapPin size={20} /></div>
+                <div className="mt-1 text-[#1A0B00]"><MapPin size={20} /></div>
                 <div className="flex flex-col">
-                  <span className="text-[#111827] font-bold">Regional Headquarters</span>
-                  <span className="text-[#111827]/90 text-sm font-bold">Tamil Nadu, India</span>
+                  <span className="text-[#1A0B00] font-bold">Regional Headquarters</span>
+                  <span className="text-[#1A0B00]/90 text-sm font-bold">Tamil Nadu, India</span>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="mt-1 text-[#111827]"><Mail size={20} /></div>
+                <div className="mt-1 text-[#1A0B00]"><Mail size={20} /></div>
                 <div className="flex flex-col">
-                  <span className="text-[#111827] font-bold">Inquiries</span>
-                  <span className="text-[#111827]/90 text-sm font-bold underline underline-offset-4">jeffbenofficial1@gmail.com</span>
+                  <span className="text-[#1A0B00] font-bold">Inquiries</span>
+                  <span className="text-[#1A0B00]/90 text-sm font-bold underline underline-offset-4">jeffbenofficial1@gmail.com</span>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="mt-1 text-[#111827]"><Phone size={20} /></div>
+                <div className="mt-1 text-[#1A0B00]"><Phone size={20} /></div>
                 <div className="flex flex-col">
-                  <span className="text-[#111827] font-bold">Support Line</span>
-                  <span className="text-[#111827]/90 text-sm font-bold">Industrial Telemetry Div.</span>
+                  <span className="text-[#1A0B00] font-bold">Support Line</span>
+                  <span className="text-[#1A0B00]/90 text-sm font-bold">Industrial Telemetry Div.</span>
                 </div>
               </div>
             </div>
@@ -109,12 +109,12 @@ export const Footer = React.memo(function Footer() {
         </div>
 
         <div className="mt-24 pt-8 border-t border-[#E5E7EB] flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-[#111827]/70 text-sm font-bold uppercase tracking-widest">
+          <p className="text-[#1A0B00]/70 text-sm font-bold uppercase tracking-widest">
             © {currentYear} JeffBen Systems. All Rights Reserved.
           </p>
           <div className="flex items-center gap-8">
-            <Link href="/privacy" className="text-[#111827] hover:text-[#111827] text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Privacy Policy</Link>
-            <Link href="/terms" className="text-[#111827] hover:text-[#111827] text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Terms of Service</Link>
+            <Link href="/privacy" className="text-[#1A0B00] hover:text-[#1A0B00] text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Privacy Policy</Link>
+            <Link href="/terms" className="text-[#1A0B00] hover:text-[#1A0B00] text-xs font-bold uppercase tracking-[0.2em] transition-all drop-shadow-sm">Terms of Service</Link>
           </div>
         </div>
       </div>

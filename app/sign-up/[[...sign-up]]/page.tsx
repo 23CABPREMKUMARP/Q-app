@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SignUpPage() {
   return (
-    <main className="min-h-screen bg-[#ffffff] flex flex-col items-center justify-center p-5 relative overflow-hidden">
+    <main className="min-h-screen bg-[#FFF5E6] flex flex-col items-center justify-center p-5 relative overflow-hidden">
       
       {/* Background decorative glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -25,7 +25,7 @@ export default function SignUpPage() {
             </div>
           </div>
           <div className="space-y-1">
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Create Account</h1>
+            <h1 className="text-2xl font-black text-[#1A0B00] tracking-tight uppercase">Create Account</h1>
             <p className="text-[#6B7280] text-xs font-semibold uppercase tracking-widest">
               Join the Metropolitan Transit Network
             </p>
