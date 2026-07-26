@@ -16,13 +16,9 @@ export default function Splash() {
         }}
         className="relative flex flex-col items-center"
       >
-        <div className="flex items-center gap-6 mb-12">
-          <div className="relative w-48 h-48">
-            <Image src="/hero-logo.png" alt="Smart Thamizha" fill sizes="96px" className="object-contain" priority />
-          </div>
-          <div className="w-px h-32 bg-black/20" />
-          <div className="relative w-48 h-48">
-            <Image src="/logo2.png" alt="JeffBen" fill sizes="96px" className="object-contain mix-blend-multiply" priority />
+        <div className="flex justify-center w-full mb-12">
+          <div className="relative w-[80%] max-w-[400px] aspect-[21/9]">
+            <Image src="/smart-tamizha-logo.jpeg" alt="Smart Tamizha" fill sizes="100vw" className="object-contain" priority />
           </div>
         </div>
         

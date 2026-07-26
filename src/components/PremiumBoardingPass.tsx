@@ -107,11 +107,7 @@ export function PremiumBoardingPass({
               {/* Header with Logos */}
               <div className="text-center mb-2">
                 <div className="flex justify-center items-center gap-4 mb-1">
-                  {/* Smart Thamizha logo */}
-                  <Image src="/hero-logo.png" alt="Logo" width={60} height={18} className="object-contain" />
-                  <div className="h-5 w-px bg-black/30"></div>
-                  {/* jeff ben logo (assumed to be a different logo, using placeholder or same if not available. Using hero-logo for now) */}
-                  <Image src="/logo2.png" alt="Jeff Ben" width={50} height={15} className="object-contain" />
+                  <Image src="/smart-tamizha-logo.jpeg" alt="Smart Tamizha" width={120} height={36} className="object-contain" />
                 </div>
                 
                 <div className="flex items-center justify-center gap-3 md:gap-4 mt-4">

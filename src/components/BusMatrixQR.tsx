@@ -27,16 +27,16 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-cyan-400/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         {/* Top Header Section */}
+        {/* Top Header Section */}
         <div className="relative z-10 pt-8 pb-4 flex flex-col items-center">
-          <div className="w-20 h-20 relative mb-2">
+          <div className="w-32 h-12 relative mb-2">
              <Image 
-               src="/hero-logo.png" 
-               alt="Smart Thamizha Logo" 
+               src="/smart-tamizha-logo.jpeg" 
+               alt="Smart Tamizha Logo" 
                fill 
                className="object-contain"
              />
           </div>
-          <h2 className="text-[10px] font-black tracking-[0.2em] text-blue-900 uppercase">Smart Thamizha</h2>
         </div>
 
         {/* QR Code Section */}

@@ -63,33 +63,8 @@ export function WebHeader() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
         
         {/* Left Side: Logos */}
-        <a href="/" className="flex items-center gap-2 md:gap-4 shrink-0">
-          <img src="/hero-logo.png" alt="JeffBen" className="w-10 h-10 md:w-[72px] md:h-[72px] object-contain drop-shadow-md mix-blend-multiply" />
-          
-          <div className="flex flex-col justify-center leading-[1.15]">
-            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-[#1A0B00] uppercase">
-              SMART
-            </span>
-            <span className="font-black text-[12px] md:text-[18px] tracking-tight text-[#FF6D00] uppercase">
-              THAMIZHA
-            </span>
-          </div>
-
-          <div className="w-[1px] h-8 md:h-12 bg-zinc-300 mx-1 md:mx-2"></div>
-
-          <div className="flex flex-col justify-center gap-[1px] md:gap-[2px]">
-            <span className="text-[6px] md:text-[8px] font-bold text-zinc-500 uppercase tracking-widest leading-none">
-              Powered By
-            </span>
-            <div className="flex flex-col leading-none">
-              <span className="text-[12px] md:text-[18px] font-black tracking-tight leading-none">
-                <span className="text-[#1A0B00]">JEFF</span><span className="text-[#FF6D00]">BEN</span>
-              </span>
-              <span className="text-[6px] md:text-[8px] font-bold text-zinc-600 uppercase tracking-widest leading-none mt-[1px] md:mt-[2px]">
-                Systems
-              </span>
-            </div>
-          </div>
+        <a href="/" className="flex items-center shrink-0">
+          <img src="/smart-tamizha-logo.jpeg" alt="Smart Tamizha" className="h-10 md:h-14 object-contain" />
         </a>
         
         {/* Middle: Desktop Nav */}

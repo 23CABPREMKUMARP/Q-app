@@ -51,39 +51,17 @@ export const Navbar = React.memo(function Navbar() {
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
         {/* Logos */}
-        <div className="flex items-center gap-4">
-          <Link href="/" aria-label="Home" className="relative flex items-center gap-4 group border-r border-zinc-200 pr-6">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative w-14 h-14 md:w-20 md:h-20"
-            >
+        <div className="flex items-center">
+          <Link href="/" aria-label="Home" className="relative flex items-center">
+            <div className="relative h-10 w-32 md:h-14 md:w-48">
               <Image 
-                src="/hero-logo.png" 
-                alt="Smart Thamizha Logo" 
+                src="/smart-tamizha-logo.jpeg" 
+                alt="Smart Tamizha Logo" 
                 fill 
-                sizes="(max-width: 768px) 80px, 120px"
-                className="object-contain mix-blend-multiply"
+                sizes="(max-width: 768px) 128px, 192px"
+                className="object-contain"
                 priority
               />
-            </motion.div>
-            <span className="hidden sm:flex flex-col text-sm md:text-base font-bold uppercase tracking-wide leading-tight">
-              <span className="text-[#1A0B00]">SMART</span>
-              <span className="text-[#FF6D00]">THAMIZHA</span>
-            </span>
-          </Link>
-
-          <Link href="/" aria-label="JeffBen Systems" className="relative flex flex-col items-center gap-0 group">
-            <span className="text-[7px] font-semibold text-zinc-600 uppercase tracking-widest leading-none mb-1">
-              Powered By
-            </span>
-            <div className="flex flex-col -gap-1">
-              <span className="text-lg md:text-xl font-bold tracking-tight leading-none">
-                <span className="text-[#1A0B00]">JEFF</span><span className="text-primary">BEN</span>
-              </span>
-              <span className="text-[8px] font-semibold text-zinc-600 uppercase tracking-wider leading-none">
-                Systems
-              </span>
             </div>
           </Link>
         </div>
