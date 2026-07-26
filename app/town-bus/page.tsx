@@ -6,6 +6,7 @@ import { Search, MapPin, Calendar, Clock, Filter, Bus, Navigation, Users, Zap, A
 import { useRouter } from 'next/navigation';
 import { MOCK_BUSES } from "@/src/lib/constants";
 import { QRCodeSVG } from 'qrcode.react';
+import Image from 'next/image';
 import SecureView from "@/src/components/SecureView";
 
 export default function TownBusSearchPage() {
@@ -333,14 +334,38 @@ export default function TownBusSearchPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="w-full mb-4 flex flex-col items-center justify-center bg-[#FFF5E6] p-6 rounded-2xl border border-[#E5E7EB] shadow-inner"
+                    className="w-full mb-4 flex flex-col items-center justify-center overflow-hidden"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="bg-[#FFF5E6] p-3 rounded-xl shadow-sm border border-slate-100 mb-4">
-                      <QRCodeSVG value={`https://jeffben.org/bus/${trip.busId.busCode}`} size={160} level="H" />
+                    <div className="relative w-full max-w-[320px] aspect-[714/1024] rounded-2xl overflow-hidden shadow-2xl bg-[#FF6D00] my-2">
+                      <Image 
+                        src="/qr-template.jpeg" 
+                        alt="Scan QR to Book" 
+                        fill 
+                        className="object-cover"
+                        priority
+                      />
+                      
+                      {/* QR Code Container - Positioned over the white square */}
+                      <div className="absolute" style={{ top: "26.3%", right: "8.5%", width: "40.5%", aspectRatio: "1/1" }}>
+                        <div className="w-full h-full bg-white flex items-center justify-center p-[4%]">
+                          <QRCodeSVG 
+                            value={`https://jeffben.org/bus/${trip.busId.busCode}`}
+                            size={160}
+                            style={{ width: "100%", height: "100%" }}
+                            level="H"
+                            includeMargin={false}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Bus Code Text - Positioned over the white rectangle in the ticket */}
+                      <div className="absolute flex items-center justify-center" style={{ top: "80.5%", right: "6%", width: "43%", height: "5.5%" }}>
+                        <span className="text-[#1A0B00] font-black tracking-widest text-[clamp(12px,4vw,22px)] text-center w-full">
+                          {trip.busId.busCode}
+                        </span>
+                      </div>
                     </div>
-                    <p className="text-xl font-black text-[#1A0B00] uppercase tracking-widest">{trip.busId.busCode}</p>
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest text-center mt-2">Scan this code while boarding to book instantly</p>
                   </motion.div>
                 )}
               </AnimatePresence>
