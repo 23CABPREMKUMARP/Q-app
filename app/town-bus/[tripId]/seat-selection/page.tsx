@@ -946,29 +946,46 @@ export default function TicketCountSelectionPage() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-[#FFF5E6]/80 backdrop-blur-md backdrop-blur-sm p-6"
           >
             <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#FFF5E6] rounded-3xl p-8 max-w-sm w-full flex flex-col items-center shadow-2xl relative"
+              className="relative w-full max-w-sm aspect-[714/1024] rounded-2xl overflow-hidden shadow-2xl bg-[#FF6D00]"
             >
               <button 
                 onClick={() => setExpandedQR(false)}
-                className="absolute top-4 right-4 p-2 bg-zinc-100 rounded-full text-zinc-500 hover:bg-zinc-200"
+                className="absolute top-4 left-4 p-2 bg-black/40 backdrop-blur-md rounded-full text-white hover:bg-black/60 z-50 border border-white/20"
               >
                 <X size={20} />
               </button>
+
+              <Image 
+                src="/qr-template.jpeg" 
+                alt="Scan QR to Book" 
+                fill 
+                className="object-cover"
+                priority
+              />
               
-              <h3 className="text-xl font-black text-[#1A0B00] uppercase tracking-widest mb-6">Boarding QR</h3>
-              
-              <div className="p-4 bg-[#FFF5E6] border border-zinc-200 rounded-2xl mb-6">
-                <QRCodeSVG value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`} size={200} level="H" />
+              {/* QR Code Container - Positioned over the white square */}
+              <div className="absolute" style={{ top: "26.3%", right: "8.5%", width: "40.5%", aspectRatio: "1/1" }}>
+                <div className="w-full h-full bg-white flex items-center justify-center p-[4%]">
+                  <QRCodeSVG 
+                    value={`https://jeffben.org/bus/${trip?.busCode || trip?.busNumber || tripId}`}
+                    size={256}
+                    style={{ width: "100%", height: "100%" }}
+                    level="H"
+                    includeMargin={false}
+                  />
+                </div>
               </div>
-              
-              <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-1">Bus Code</p>
-              <p className="text-3xl font-black text-[#FF6D00] uppercase tracking-widest">
-                {trip?.busCode || trip?.busNumber || tripId}
-              </p>
+
+              {/* Bus Code Text - Positioned over the white rectangle in the ticket */}
+              <div className="absolute flex items-center justify-center" style={{ top: "80.5%", right: "6%", width: "43%", height: "5.5%" }}>
+                <span className="text-[#1A0B00] font-black tracking-widest text-[clamp(12px,4vw,22px)] text-center w-full">
+                  {trip?.busCode || trip?.busNumber || tripId}
+                </span>
+              </div>
             </motion.div>
           </motion.div>
         )}
