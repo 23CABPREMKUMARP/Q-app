@@ -30,7 +30,7 @@ export default function Splash() {
           muted 
           loop 
           playsInline 
-          className="block md:hidden w-full h-full object-cover object-[60%_center]" 
+          className="block md:hidden w-full h-full object-cover object-[80%_center]" 
         />
 
       </motion.div>
