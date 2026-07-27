@@ -34,7 +34,7 @@ export default function Splash() {
         />
 
         {/* Mobile Top Text */}
-        <div className="absolute top-12 inset-x-0 flex justify-center z-10 md:hidden pointer-events-none">
+        <div className="absolute top-6 inset-x-0 flex justify-center z-10 md:hidden pointer-events-none">
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function Splash() {
             className="px-6 py-2"
           >
             <span className="text-[#FFFFFF] font-black uppercase tracking-[0.2em] text-base drop-shadow-md">
-              1st in Tamil Nadu
+              1st time in Tamil Nadu
             </span>
           </motion.div>
         </div>
