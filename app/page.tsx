@@ -65,7 +65,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     // Fallback in case video onEnded doesn't fire
-    const timer = setTimeout(() => setIsLoading(false), 8000);
+    const timer = setTimeout(() => setIsLoading(false), 10000);
     return () => clearTimeout(timer);
   }, []);
 
