@@ -14,13 +14,23 @@ export default function Splash() {
         transition={{ duration: 0.8 }}
         className="relative w-full h-full flex items-center justify-center"
       >
+        {/* Desktop Video */}
+        <video 
+          src="/videos/web-loading.mp4" 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="hidden md:block w-full h-full object-cover" 
+        />
+        {/* Mobile Video */}
         <video 
           src="/videos/mobile-loading.mp4" 
           autoPlay 
           muted 
           loop 
           playsInline 
-          className="w-full h-full object-contain bg-[#FFFFFF]" 
+          className="block md:hidden w-full h-full object-contain bg-[#FFFFFF]" 
         />
       </motion.div>
     </div>
