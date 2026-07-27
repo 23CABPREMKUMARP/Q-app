@@ -42,7 +42,7 @@ export const BusMatrixQR = ({ busCode, busId }: BusMatrixQRProps) => {
         </div>
 
         {/* Bus Code Text - Positioned over the white rectangle in the ticket */}
-        <div className="absolute flex items-center justify-center" style={{ top: "80%", right: "6%", width: "43%", height: "5.5%" }}>
+        <div className="absolute flex items-center justify-center" style={{ top: "81%", right: "6%", width: "43%", height: "5.5%" }}>
           <span className="text-[#1A0B00] font-black tracking-widest text-[clamp(12px,4vw,22px)] text-center w-full">
             {busCode}
           </span>
