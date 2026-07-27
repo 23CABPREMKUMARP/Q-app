@@ -124,7 +124,7 @@ export default function MobileDashboard() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="min-h-screen bg-[#f3f4f6] text-[#1A0B00] font-sans pb-28 relative"
+        className="min-h-screen bg-[#000000] text-[#1A0B00] font-sans pb-28 relative"
       >
         {/* PhonePe Header */}
         <div className="bg-[#FF6D00] px-4 pt-12 pb-4 text-[#1A0B00] sticky top-0 z-[100] shadow-md rounded-b-2xl">
@@ -298,22 +298,22 @@ export default function MobileDashboard() {
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                <div className="w-11 h-11 bg-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#FFFFFF] mx-auto">
-                  <Hash size={18} />
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                  <Hash size={24} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Bus<br/>Code</span>
               </button>
               
               <Link href="/scan" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#FFFFFF] mx-auto">
-                  <ScanLine size={18} />
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                  <ScanLine size={24} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Scan<br/>QR</span>
               </Link>
 
               <Link href="/town-bus" className="flex flex-col items-center gap-2">
-                <div className="w-11 h-11 bg-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#FFFFFF] mx-auto">
-                  <Bus size={18} />
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                  <Bus size={24} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Town<br/>Bus</span>
               </Link>
@@ -322,8 +322,8 @@ export default function MobileDashboard() {
                 onClick={() => setShowMembershipModal(true)}
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-11 h-11 bg-gradient-to-br from-[#FF6D00] to-[#FF6D00] rounded-xl flex items-center justify-center shadow-md text-[#1A0B00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
-                  <Crown size={18} className="drop-shadow-sm" />
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                  <Crown size={24} className="drop-shadow-sm" />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">View<br/>Memberships</span>
               </button>
