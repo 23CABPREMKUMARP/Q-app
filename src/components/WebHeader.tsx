@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronRight } from "lucide-react";
 
@@ -63,16 +64,16 @@ export function WebHeader() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
         
         {/* Left Side: Logos */}
-        <a href="/" className="flex items-center shrink-0">
+        <Link href="/" className="flex items-center shrink-0">
           <img src="/smart-tamizha-logo.png" alt="Smart Tamizha" className="h-10 md:h-14 object-contain" />
-        </a>
+        </Link>
         
         {/* Middle: Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
-              <a 
+              <Link 
                 key={link.href} 
                 href={link.href}
                 className={`text-[14px] font-black uppercase tracking-[0.1em] transition-all relative py-2 ${
@@ -83,16 +84,16 @@ export function WebHeader() {
                 {isActive && (
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF6D00] rounded-full"></span>
                 )}
-              </a>
+              </Link>
             );
           })}
         </nav>
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFFFFF] hover:border-[#FF6D00] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <Link href="/town-bus" className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFFFFF] hover:border-[#FF6D00] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Nav Toggle */}
@@ -109,7 +110,7 @@ export function WebHeader() {
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
-              <a 
+              <Link 
                 key={link.href} 
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -118,12 +119,12 @@ export function WebHeader() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
-          <a href="/town-bus" className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFFFFF] hover:border-[#FF6D00] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <Link href="/town-bus" className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFFFFF] hover:border-[#FF6D00] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
-          </a>
+          </Link>
         </div>
       )}
     </header>
