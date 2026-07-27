@@ -139,16 +139,16 @@ export default function MobileDashboard() {
                   }}
                 />
               </div>
-              <button 
-                onClick={() => setShowAddressModal(true)}
-                className="flex flex-col text-left bg-transparent border-none outline-none cursor-pointer focus:outline-none"
-              >
-                <p className="text-[10px] font-bold text-[#1A0B00]/70 uppercase tracking-wider">My Address</p>
-                <div className="flex items-center gap-1 text-sm font-black text-[#1A0B00]">
-                  <span className="truncate max-w-[140px]">{address}</span>
-                  <ChevronRight size={14} className="opacity-80 shrink-0" />
-                </div>
-              </button>
+              <div className="flex items-center ml-1">
+                <Image 
+                  src="/Smart Tamizha Final Logo White.png" 
+                  alt="Smart Tamizha" 
+                  width={150} 
+                  height={40} 
+                  className="object-contain h-8 w-auto"
+                  priority
+                />
+              </div>
             </div>
 
             <div className="flex items-center gap-4">
