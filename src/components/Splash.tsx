@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Splash() {
   return (
-    <div className="fixed inset-0 z-[5000] bg-[#FFFFFF] flex flex-col items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 z-[5000] bg-[#FF6D00] flex flex-col items-center justify-center overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -30,7 +30,7 @@ export default function Splash() {
           muted 
           loop 
           playsInline 
-          className="block md:hidden w-full h-full object-contain bg-[#FFFFFF]" 
+          className="block md:hidden w-full h-full object-contain" 
         />
 
         {/* Mobile Top Text */}
@@ -39,9 +39,9 @@ export default function Splash() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm"
+            className="px-6 py-2"
           >
-            <span className="text-[#FF6D00] font-black uppercase tracking-[0.2em] text-xs">
+            <span className="text-[#FFFFFF] font-black uppercase tracking-[0.2em] text-base drop-shadow-md">
               1st in Tamil Nadu
             </span>
           </motion.div>
@@ -53,10 +53,10 @@ export default function Splash() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="text-[#1A0B00] font-bold text-sm leading-relaxed bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-sm"
+            className="text-[#FFFFFF] font-bold text-base leading-relaxed drop-shadow-md"
           >
             No need to guess where the bus is...<br/>
-            <span className="text-[#FF6D00] text-base mt-1 block">Watch it live on your phone!</span>
+            <span className="text-[#FFFFFF] font-black text-2xl mt-2 block">Watch it live on your phone!</span>
           </motion.p>
         </div>
       </motion.div>
