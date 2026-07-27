@@ -360,8 +360,8 @@ export default function MobileDashboard() {
           </div>
 
           {/* Bus Code Quick Search */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
-            <h3 className="text-[13px] font-bold text-slate-800 mb-3 px-1">Quick Fleet Search</h3>
+          <div className="bg-[#000000] rounded-2xl p-4 shadow-md">
+            <h3 className="text-[13px] font-bold text-white mb-3 px-1">Quick Fleet Search</h3>
             <BusCodeSearch compact={true} />
           </div>
 

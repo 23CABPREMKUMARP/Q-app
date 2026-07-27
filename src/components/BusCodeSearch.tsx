@@ -83,35 +83,35 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#FFFFFF] shadow-2xl border border-zinc-100/50"
+        className="relative overflow-hidden rounded-[32px] bg-black shadow-2xl border border-gray-800"
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl md:text-2xl font-black text-[#1A0B00] tracking-tight leading-none">Bus Quick-Code</h2>
-              <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-2">Instant Fleet Access</p>
+              <h2 className="text-xl md:text-2xl font-black text-white tracking-tight leading-none">Bus Quick-Code</h2>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Instant Fleet Access</p>
             </div>
-            <div className="w-12 h-12 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl flex items-center justify-center shadow-lg">
-              <Zap size={24} className="text-[#1A0B00] fill-current" />
+            <div className="w-12 h-12 bg-black border border-gray-700 shadow-sm text-[#FF6D00] rounded-2xl flex items-center justify-center shadow-lg">
+              <Zap size={24} className="text-[#FF6D00] fill-current" />
             </div>
           </div>
 
           <form onSubmit={handleSearch} className="relative group">
             <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-              <Search size={20} className="text-zinc-600 group-focus-within:text-[#1A0B00] transition-colors" />
+              <Search size={20} className="text-gray-500 group-focus-within:text-white transition-colors" />
             </div>
             <input
               type="text"
               value={busCode}
               onChange={(e) => setBusCode(e.target.value.toUpperCase())}
               placeholder="ENTER BUS CODE (e.g. 1024)"
-              className="w-full bg-[#FFFFFF] border-2 border-zinc-100 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-[#1A0B00] placeholder:text-zinc-500 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/10 transition-all uppercase"
+              className="w-full bg-black border-2 border-gray-800 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-white placeholder:text-gray-600 outline-none focus:border-[#FF6D00] focus:ring-4 focus:ring-[#FF6D00]/10 transition-all uppercase"
             />
             <div className="absolute inset-y-2 right-2 flex items-center">
               <button
                 type="submit"
                 disabled={isLoading || !busCode}
-                className="h-full px-4 w-14 justify-center bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
+                className="h-full px-4 w-14 justify-center bg-black border border-gray-700 shadow-sm text-white rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-gray-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={18} />}
               </button>
@@ -134,14 +134,14 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
           {recentBuses.length > 0 && (
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2 mr-2">
-                <History size={14} className="text-zinc-300" />
-                <span className="text-[10px] font-black text-zinc-300 uppercase tracking-widest">Recent</span>
+                <History size={14} className="text-gray-500" />
+                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Recent</span>
               </div>
               {recentBuses.map((code) => (
                 <button
                   key={code}
                   onClick={() => handleSearch(undefined, code)}
-                  className="px-4 py-2 bg-[#FFFFFF] hover:bg-zinc-100 border border-zinc-100 rounded-full text-[10px] font-bold text-zinc-600 uppercase tracking-widest transition-all hover:scale-105"
+                  className="px-4 py-2 bg-black hover:bg-gray-800 border border-gray-700 rounded-full text-[10px] font-bold text-gray-300 uppercase tracking-widest transition-all hover:scale-105"
                 >
                   {code}
                 </button>
