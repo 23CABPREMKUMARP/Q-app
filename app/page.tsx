@@ -23,70 +23,16 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1, ease: "easeInOut" }}
-      className="fixed inset-0 z-[1000] bg-[#FF6D00] flex flex-col items-center justify-center p-6"
+      className="fixed inset-0 z-[1000] bg-[#FFFFFF] flex flex-col items-center justify-center overflow-hidden"
     >
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col items-center gap-12"
-      >
-        <div className="flex items-center gap-8">
-          <motion.div
-            initial={{ x: -30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1, type: "spring" }}
-            className="relative w-32 h-32 md:w-48 md:h-48"
-          >
-            <Image src="/logo2.png" alt="Smart Thamizha" fill sizes="200px" className="object-contain" priority />
-          </motion.div>
-          <motion.div 
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="w-px h-24 bg-[#1A0B00]/20" 
-          />
-          <motion.div
-            initial={{ x: 30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 1, duration: 1, type: "spring" }}
-            className="relative w-32 h-32 md:w-48 md:h-48"
-          >
-            <Image src="/hero-logo.png" alt="Jeff Ben" fill sizes="200px" className="object-contain mix-blend-multiply" priority />
-          </motion.div>
-        </div>
-
-        <div className="space-y-6 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic font-heading"
-          >
-            <span className="text-[#FFFFFF]">Smart Thamizha</span>
-          </motion.h2>
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ delay: 1.8, duration: 3.5, ease: "linear" }}
-            className="h-1.5 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-full mx-auto"
-          />
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }}
-            transition={{ delay: 2.2 }}
-            className="text-[#FFFFFF] font-bold uppercase tracking-widest text-[10px]"
-          >
-            Powered By JeffBen Systems
-          </motion.p>
-        </div>
-
-        <motion.div 
-          animate={{ top: ["0%", "100%", "0%"] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-x-0 h-[2px] bg-[#1A0B00]/5 pointer-events-none"
-        />
-      </motion.div>
+      <video 
+        src="/videos/web-loading.mp4" 
+        autoPlay 
+        muted 
+        playsInline 
+        onEnded={onComplete}
+        className="w-full h-full object-cover" 
+      />
     </motion.div>
   );
 });
@@ -108,7 +54,8 @@ export default function ProductPage() {
   }, [isLoading]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2500);
+    // Fallback in case video onEnded doesn't fire
+    const timer = setTimeout(() => setIsLoading(false), 8000);
     return () => clearTimeout(timer);
   }, []);
 

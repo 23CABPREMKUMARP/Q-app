@@ -9,7 +9,7 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 2500); // 2.5 seconds loading animation
+    }, 4000); // 4 seconds loading animation
     return () => clearTimeout(timer);
   }, []);
 
