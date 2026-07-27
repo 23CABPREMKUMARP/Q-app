@@ -83,7 +83,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#FFFFFF] shadow-2xl border border-zinc-100/50"
+        className="relative overflow-hidden rounded-[32px] bg-[#FFFFFF] shadow-2xl border-2 border-black"
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">

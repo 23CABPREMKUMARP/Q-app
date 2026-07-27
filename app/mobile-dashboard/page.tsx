@@ -264,7 +264,7 @@ export default function MobileDashboard() {
           )}
 
           {/* Town Bus Booking Teaser */}
-          <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm rounded-2xl overflow-hidden shadow-md relative group">
+          <div className="bg-[#FFFFFF] border-2 border-black shadow-sm rounded-2xl overflow-hidden shadow-md relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-[#FF6D00]/10 to-transparent opacity-50"></div>
             <div className="p-5 text-[#1A0B00] relative z-10 flex items-center justify-between">
               <div className="w-2/3 pr-2">
@@ -291,7 +291,7 @@ export default function MobileDashboard() {
           </div>
 
           {/* Quick Actions (Money Transfers / Primary Services) */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFFFFF] border-2 border-black rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Transit & Payments</h3>
             <div className="grid grid-cols-4 gap-x-1 gap-y-4 text-center">
               <button 
@@ -331,10 +331,10 @@ export default function MobileDashboard() {
           </div>
 
           {/* PhonePe Wallet & Passes Card */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFFFFF] border-2 border-black rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Spends & Passes</h3>
             <div className="flex gap-4">
-              <div className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
+              <div className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border-2 border-black flex flex-col justify-center">
                 <div className="flex items-center gap-2 text-[#6B7280] mb-2">
                   <WalletCards size={16} className="text-[#FF6D00]" />
                   <span className="text-[11px] font-semibold truncate">Smart Thamizha App</span>
@@ -345,7 +345,7 @@ export default function MobileDashboard() {
                 </div>
               </div>
               
-              <Link href="/get-ticket" className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
+              <Link href="/get-ticket" className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border-2 border-black flex flex-col justify-center relative overflow-hidden">
                 <div className="flex items-center gap-2 text-[#6B7280] mb-1">
                   <Ticket size={16} className="text-[#FF6D00]" />
                   <span className="text-xs font-semibold">My Passes</span>
@@ -360,7 +360,7 @@ export default function MobileDashboard() {
           </div>
 
           {/* Bus Code Quick Search */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFFFFF] border-2 border-black rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-3 px-1">Quick Fleet Search</h3>
             <BusCodeSearch compact={true} />
           </div>
@@ -395,7 +395,7 @@ export default function MobileDashboard() {
           )}
 
           {/* Utilities & Conductor Portal (Recharge & Pay Bills style) */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#FFFFFF] border-2 border-black rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Partner & Services</h3>
             <div className="grid grid-cols-3 gap-y-4 text-center">
               <Link href="/conductor" className="flex flex-col items-center gap-2">
