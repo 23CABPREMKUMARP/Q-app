@@ -395,26 +395,26 @@ export default function MobileDashboard() {
           )}
 
           {/* Utilities & Conductor Portal (Recharge & Pay Bills style) */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
-            <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Partner & Services</h3>
+          <div className="bg-[#000000] rounded-2xl p-4 shadow-md">
+            <h3 className="text-[13px] font-bold text-white mb-4 px-1">Partner & Services</h3>
             <div className="grid grid-cols-3 gap-y-4 text-center">
               <Link href="/conductor" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-gray-800 text-[#6B7280]">
                   <ShieldAlert size={20} className="text-[#FF6D00]" />
                 </div>
-                <span className="text-[11px] font-medium text-[#6B7280]">Conductor<br/>Terminal</span>
+                <span className="text-[11px] font-medium text-gray-300">Conductor<br/>Terminal</span>
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-gray-800 text-[#6B7280]">
                   <CreditCard size={20} className="text-[#FF6D00]" />
                 </div>
-                <span className="text-[11px] font-medium text-[#6B7280]">Payment<br/>Methods</span>
+                <span className="text-[11px] font-medium text-gray-300">Payment<br/>Methods</span>
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-gray-800 text-[#6B7280]">
                   <Navigation size={20} className="text-purple-500" />
                 </div>
-                <span className="text-[11px] font-medium text-[#6B7280]">Transit<br/>Intelligence</span>
+                <span className="text-[11px] font-medium text-gray-300">Transit<br/>Intelligence</span>
               </Link>
             </div>
           </div>
