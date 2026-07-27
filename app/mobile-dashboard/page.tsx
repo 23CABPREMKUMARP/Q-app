@@ -291,41 +291,41 @@ export default function MobileDashboard() {
           </div>
 
           {/* Quick Actions (Money Transfers / Primary Services) */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
-            <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Transit & Payments</h3>
+          <div className="bg-[#000000] rounded-2xl p-4 shadow-md">
+            <h3 className="text-[13px] font-bold text-white mb-4 px-1">Transit & Payments</h3>
             <div className="grid grid-cols-4 gap-x-1 gap-y-4 text-center">
               <button 
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                <div className="w-14 h-14 bg-[#000000] rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
                   <Hash size={24} />
                 </div>
-                <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Bus<br/>Code</span>
+                <span className="text-[9px] font-semibold text-gray-300 leading-tight">Bus<br/>Code</span>
               </button>
               
               <Link href="/scan" className="flex flex-col items-center gap-2">
-                <div className="w-14 h-14 bg-[#000000] rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
                   <ScanLine size={24} />
                 </div>
-                <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Scan<br/>QR</span>
+                <span className="text-[9px] font-semibold text-gray-300 leading-tight">Scan<br/>QR</span>
               </Link>
 
               <Link href="/town-bus" className="flex flex-col items-center gap-2">
-                <div className="w-14 h-14 bg-[#000000] rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
                   <Bus size={24} />
                 </div>
-                <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Town<br/>Bus</span>
+                <span className="text-[9px] font-semibold text-gray-300 leading-tight">Town<br/>Bus</span>
               </Link>
 
               <button 
                 onClick={() => setShowMembershipModal(true)}
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-14 h-14 bg-[#000000] rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
                   <Crown size={24} className="drop-shadow-sm" />
                 </div>
-                <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">View<br/>Memberships</span>
+                <span className="text-[9px] font-semibold text-gray-300 leading-tight">View<br/>Memberships</span>
               </button>
             </div>
           </div>
