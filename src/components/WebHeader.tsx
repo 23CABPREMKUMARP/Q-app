@@ -57,14 +57,14 @@ export function WebHeader() {
   return (
     <header 
       className={`fixed top-0 z-[900] w-full transition-all duration-300 ${
-        scrolled ? "bg-[#FFF5E6]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
+        scrolled ? "bg-[#FFFFFF]/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 max-w-7xl h-16 md:h-24 flex items-center justify-between relative">
         
         {/* Left Side: Logos */}
         <a href="/" className="flex items-center shrink-0">
-          <img src="/smart-tamizha-logo.jpeg" alt="Smart Tamizha" className="h-10 md:h-14 object-contain" />
+          <img src="/smart-tamizha-logo.png" alt="Smart Tamizha" className="h-10 md:h-14 object-contain" />
         </a>
         
         {/* Middle: Desktop Nav */}
@@ -90,7 +90,7 @@ export function WebHeader() {
 
         {/* Right Side: Book Now Pill */}
         <div className="hidden md:flex items-center">
-          <a href="/town-bus" className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFF5E6] hover:border-[#FF6D00] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
+          <a href="/town-bus" className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFFFFF] hover:border-[#FF6D00] text-[14px] font-bold uppercase tracking-widest px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-lg active:scale-95">
             Book Now <ChevronRight size={14} />
           </a>
         </div>
@@ -105,7 +105,7 @@ export function WebHeader() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#FFF5E6] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#FFFFFF] border-b border-zinc-200 shadow-xl py-4 flex flex-col gap-2 px-4 animate-in slide-in-from-top-2">
           {links.map(link => {
             const isActive = pathname === link.href || (pathname?.startsWith(link.href) && link.href !== "/");
             return (
@@ -114,14 +114,14 @@ export function WebHeader() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xs font-black uppercase tracking-widest p-4 rounded-xl transition-colors ${
-                  isActive ? "bg-[#FF6D00]/10 text-[#FF6D00]" : "text-zinc-500 hover:bg-[#FFF5E6]"
+                  isActive ? "bg-[#FF6D00]/10 text-[#FF6D00]" : "text-zinc-500 hover:bg-[#FFFFFF]"
                 }`}
               >
                 {link.label}
               </a>
             );
           })}
-          <a href="/town-bus" className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFF5E6] hover:border-[#FF6D00] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
+          <a href="/town-bus" className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] hover:bg-[#FF6D00] hover:text-[#FFFFFF] hover:border-[#FF6D00] text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition-all mt-2">
             Book Now <ChevronRight size={16} />
           </a>
         </div>

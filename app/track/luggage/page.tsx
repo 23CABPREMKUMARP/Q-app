@@ -35,7 +35,7 @@ export default function LuggageTrackingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] font-sans text-[#1A0B00] pb-24">
+    <div className="min-h-screen bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] font-sans text-[#1A0B00] pb-24">
       <div className="bg-[#FF6D00] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div className="relative z-10 flex items-center justify-between">
@@ -43,14 +43,14 @@ export default function LuggageTrackingPage() {
             <h1 className="text-3xl font-black uppercase tracking-tighter">Track</h1>
             <p className="text-[#1A0B00]/80 font-medium text-sm tracking-wide">Live Parcel Tracking</p>
           </div>
-          <div className="bg-[#FFF5E6]/20 p-3 rounded-2xl backdrop-blur-md">
+          <div className="bg-[#FFFFFF]/20 p-3 rounded-2xl backdrop-blur-md">
             <Search size={32} className="text-[#1A0B00]" />
           </div>
         </div>
       </div>
 
       <div className="px-6 -mt-8 relative z-20">
-        <form onSubmit={handleSearch} className="bg-[#FFF5E6] rounded-3xl p-4 shadow-xl shadow-black/20 flex gap-3">
+        <form onSubmit={handleSearch} className="bg-[#FFFFFF] rounded-3xl p-4 shadow-xl shadow-black/20 flex gap-3">
           <input 
             type="text" 
             placeholder="Enter Tracking ID (e.g. TRK-...)" 
@@ -63,7 +63,7 @@ export default function LuggageTrackingPage() {
             disabled={isSearching || !trackingId}
             className="bg-[#FF6D00] text-[#1A0B00] p-3 rounded-2xl shadow-lg shadow-[#FF6D00]/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
           >
-            {isSearching ? <div className="w-5 h-5 border-2 border-[#FFF5E6]/30 border-t-[#FFF5E6] rounded-full animate-spin"></div> : <Search size={20} />}
+            {isSearching ? <div className="w-5 h-5 border-2 border-[#FFFFFF]/30 border-t-[#FFFFFF] rounded-full animate-spin"></div> : <Search size={20} />}
           </button>
         </form>
 
@@ -75,7 +75,7 @@ export default function LuggageTrackingPage() {
               className="mt-8 space-y-6"
             >
               {/* Status Card */}
-              <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] rounded-3xl p-6 relative overflow-hidden">
+              <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] rounded-3xl p-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4">
                   <div className="w-16 h-16 bg-[#FF6D00]/10 rounded-full flex items-center justify-center">
                     <Truck size={32} className="text-[#FF6D00]" />
@@ -99,17 +99,17 @@ export default function LuggageTrackingPage() {
               </div>
 
               {/* Timeline */}
-              <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] rounded-3xl p-6">
+              <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] rounded-3xl p-6">
                 <h3 className="text-xs font-black uppercase tracking-widest text-[#6B7280] mb-6">Tracking Timeline</h3>
                 
                 <div className="space-y-6 relative">
-                  <div className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00]"></div>
+                  <div className="absolute left-[15px] top-4 bottom-4 w-0.5 bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00]"></div>
                   
                   {trackingData.steps.map((step: any, idx: number) => (
                     <div key={idx} className="flex gap-4 relative z-10">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                         step.active ? 'bg-[#FF6D00] shadow-[0_0_15px_rgba(255,153,51,0.5)]' :
-                        step.completed ? 'bg-[#FF6D00]' : 'bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00]'
+                        step.completed ? 'bg-[#FF6D00]' : 'bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00]'
                       }`}>
                         {step.completed && !step.active ? <CheckCircle size={14} className="text-[#1A0B00]" /> : 
                          step.active ? <Truck size={14} className="text-[#1A0B00]" /> : 

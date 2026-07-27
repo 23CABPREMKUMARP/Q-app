@@ -23,7 +23,7 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
   };
 
   return (
-    <div className="relative w-full h-full min-h-[100dvh] bg-[#FFF5E6] flex flex-col items-center justify-center overflow-hidden">
+    <div className="relative w-full h-full min-h-[100dvh] bg-[#FFFFFF] flex flex-col items-center justify-center overflow-hidden">
       {/* 1. Kolam Watermark Background */}
       <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -149,7 +149,7 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
             {/* Smart Windshield Glass */}
             <rect x="35" y="45" width="130" height="75" rx="12" fill="#1A0B00" />
             {/* Glass reflection */}
-            <path d="M 35 60 L 165 45 L 165 55 L 35 70 Z" fill="#FFF5E6" opacity="0.1" />
+            <path d="M 35 60 L 165 45 L 165 55 L 35 70 Z" fill="#FFFFFF" opacity="0.1" />
 
             {/* LED Destination Board */}
             <rect x="65" y="30" width="70" height="10" rx="3" fill="#000000" />
@@ -166,11 +166,11 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
             <rect x="70" y="150" width="60" height="1" fill="#CBD5E1" opacity="0.3" />
 
             {/* Glowing LED Headlights */}
-            <rect x="35" y="140" width="18" height="14" rx="5" fill="#FFF5E6" />
-            <rect x="147" y="140" width="18" height="14" rx="5" fill="#FFF5E6" />
+            <rect x="35" y="140" width="18" height="14" rx="5" fill="#FFFFFF" />
+            <rect x="147" y="140" width="18" height="14" rx="5" fill="#FFFFFF" />
             {/* Subtle glow effect around headlights */}
-            <circle cx="44" cy="147" r="15" fill="#FFF5E6" opacity="0.4" />
-            <circle cx="156" cy="147" r="15" fill="#FFF5E6" opacity="0.4" />
+            <circle cx="44" cy="147" r="15" fill="#FFFFFF" opacity="0.4" />
+            <circle cx="156" cy="147" r="15" fill="#FFFFFF" opacity="0.4" />
 
             {/* Indicators */}
             <rect x="35" y="156" width="18" height="4" rx="2" fill="#FF6D00" />
@@ -220,7 +220,7 @@ export const OfflineState: React.FC<OfflineStateProps> = ({ onRetry }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-[#FF6D00] text-[#FFF5E6] px-8 py-3.5 rounded-full font-bold shadow-[0_8px_20px_rgba(242,133,0,0.25)] flex items-center justify-center gap-2 hover:bg-[#e07b1a] transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[200px]"
+          className="bg-[#FF6D00] text-[#FFFFFF] px-8 py-3.5 rounded-full font-bold shadow-[0_8px_20px_rgba(242,133,0,0.25)] flex items-center justify-center gap-2 hover:bg-[#e07b1a] transition-colors disabled:opacity-70 disabled:cursor-not-allowed min-w-[200px]"
         >
           {isRetrying ? (
             <RefreshCw size={18} className="animate-spin" />

@@ -44,7 +44,7 @@ export function MobileBottomNav() {
   }
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[999] bg-[#FFF5E6]/95 premium-blur border-t-2 border-[#FF6D00]/30 shadow-[0_-8px_30px_rgba(255,153,51,0.1)] safe-bottom">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[999] bg-[#FFFFFF]/95 premium-blur border-t-2 border-[#FF6D00]/30 shadow-[0_-8px_30px_rgba(255,153,51,0.1)] safe-bottom">
       <div className="flex items-center justify-around h-[68px] px-2 relative">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -55,7 +55,7 @@ export function MobileBottomNav() {
               <div key={item.href} className="relative -top-6 flex flex-col items-center">
                 <Link 
                   href={item.href}
-                  className="w-[60px] h-[60px] bg-gradient-to-tr from-[#FF6D00] to-[#FF6D00] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(255,153,51,0.4)] border-[4px] border-[#FFF5E6] active:scale-95 hover:brightness-110 transition-all group relative overflow-hidden"
+                  className="w-[60px] h-[60px] bg-gradient-to-tr from-[#FF6D00] to-[#FF6D00] rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(255,153,51,0.4)] border-[4px] border-[#FFFFFF] active:scale-95 hover:brightness-110 transition-all group relative overflow-hidden"
                   aria-label="Scan Ticket"
                 >
                   <Icon className="text-[#1A0B00]" size={26} strokeWidth={2.5} />

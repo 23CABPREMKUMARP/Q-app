@@ -18,7 +18,7 @@ export default function Splash() {
       >
         <div className="flex justify-center w-full mb-12">
           <div className="relative w-[80%] max-w-[400px] aspect-[21/9]">
-            <Image src="/smart-tamizha-logo.jpeg" alt="Smart Tamizha" fill sizes="100vw" className="object-contain" priority />
+            <Image src="/smart-tamizha-logo.png" alt="Smart Tamizha" fill sizes="100vw" className="object-contain" priority />
           </div>
         </div>
         
@@ -31,7 +31,7 @@ export default function Splash() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-0 bottom-0 w-1/2 bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] rounded-full"
+            className="absolute top-0 bottom-0 w-1/2 bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00] rounded-full"
           />
         </div>
         

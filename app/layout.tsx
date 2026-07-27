@@ -63,7 +63,7 @@ export default function RootLayout({
       appearance={{
         variables: {
           colorPrimary: "#FF6D00",
-          colorBackground: "#FFF5E6",
+          colorBackground: "#FFFFFF",
           colorText: "#FF6D00",
           borderRadius: "1rem",
           fontFamily: "Inter, Manrope, system-ui, sans-serif",
@@ -77,7 +77,7 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-[#FFF5E6]">
+      <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="selection:bg-orange-500 selection:text-[#FFFFFF]">
         <head>
           <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
           <script
@@ -99,7 +99,7 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${inter.variable} ${manrope.variable} antialiased bg-[#FFF5E6] text-[#1A0B00] min-h-full flex flex-col`}
+          className={`${inter.variable} ${manrope.variable} antialiased bg-[#FFFFFF] text-[#1A0B00] min-h-full flex flex-col`}
         >
           <CapacitorDeepLink />
           <WebHeader />

@@ -83,7 +83,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#FFF5E6] shadow-2xl border border-zinc-100/50"
+        className="relative overflow-hidden rounded-[32px] bg-[#FFFFFF] shadow-2xl border border-zinc-100/50"
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">
@@ -91,7 +91,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               <h2 className="text-xl md:text-2xl font-black text-[#1A0B00] tracking-tight leading-none">Bus Quick-Code</h2>
               <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-2">Instant Fleet Access</p>
             </div>
-            <div className="w-12 h-12 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl flex items-center justify-center shadow-lg">
               <Zap size={24} className="text-[#1A0B00] fill-current" />
             </div>
           </div>
@@ -105,13 +105,13 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               value={busCode}
               onChange={(e) => setBusCode(e.target.value.toUpperCase())}
               placeholder="ENTER BUS CODE (e.g. 1024)"
-              className="w-full bg-[#FFF5E6] border-2 border-zinc-100 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-[#1A0B00] placeholder:text-zinc-500 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/10 transition-all uppercase"
+              className="w-full bg-[#FFFFFF] border-2 border-zinc-100 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-[#1A0B00] placeholder:text-zinc-500 outline-none focus:border-zinc-950 focus:ring-4 focus:ring-zinc-950/10 transition-all uppercase"
             />
             <div className="absolute inset-y-2 right-2 flex items-center">
               <button
                 type="submit"
                 disabled={isLoading || !busCode}
-                className="h-full px-4 w-14 justify-center bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
+                className="h-full px-4 w-14 justify-center bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-zinc-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={18} />}
               </button>
@@ -141,7 +141,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
                 <button
                   key={code}
                   onClick={() => handleSearch(undefined, code)}
-                  className="px-4 py-2 bg-[#FFF5E6] hover:bg-zinc-100 border border-zinc-100 rounded-full text-[10px] font-bold text-zinc-600 uppercase tracking-widest transition-all hover:scale-105"
+                  className="px-4 py-2 bg-[#FFFFFF] hover:bg-zinc-100 border border-zinc-100 rounded-full text-[10px] font-bold text-zinc-600 uppercase tracking-widest transition-all hover:scale-105"
                 >
                   {code}
                 </button>
@@ -172,7 +172,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               onClick={onScanClick || (() => router.push('/live-map?action=scan'))}
               className="flex items-center gap-3 text-zinc-600 hover:text-[#1A0B00] transition-colors group"
             >
-              <div className="w-10 h-10 bg-[#FFF5E6] rounded-xl flex items-center justify-center group-hover:bg-zinc-100 transition-all">
+              <div className="w-10 h-10 bg-[#FFFFFF] rounded-xl flex items-center justify-center group-hover:bg-zinc-100 transition-all">
                 <QrCode size={20} />
               </div>
               <span className="text-[10px] font-black uppercase tracking-widest">Scan QR Matrix</span>

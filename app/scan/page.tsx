@@ -58,7 +58,7 @@ export default function ScanPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] flex flex-col items-center justify-center p-6 relative overflow-hidden secure-content">
+    <div className="min-h-screen bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] flex flex-col items-center justify-center p-6 relative overflow-hidden secure-content">
       <WatermarkOverlay />
       <AnimatePresence>
         {showScanner && (
@@ -104,7 +104,7 @@ export default function ScanPage() {
           <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-[#FF6D00] rounded-bl-3xl" />
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-[#FF6D00] rounded-br-3xl" />
           
-          <div className="absolute inset-4 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-[32px] flex items-center justify-center overflow-hidden border border-[#FFF5E6]/5 shadow-2xl">
+          <div className="absolute inset-4 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-[32px] flex items-center justify-center overflow-hidden border border-[#FFFFFF]/5 shadow-2xl">
             <QrCode size={120} className="text-[#FF6D00]/20" />
             <motion.div 
               animate={{ top: ["0%", "100%", "0%"] }}
@@ -130,14 +130,14 @@ export default function ScanPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setShowScanner(true)}
-              className="w-full h-14 bg-[#FFF5E6] text-[#1A0B00] rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-[#FFF5E6]/5 cursor-pointer"
+              className="w-full h-14 bg-[#FFFFFF] text-[#1A0B00] rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-[#FFFFFF]/5 cursor-pointer"
             >
               <Bus size={18} />
               Re-open Scanner
             </motion.button>
           )}
 
-          <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FFF5E6] transition-colors font-bold text-xs uppercase tracking-widest">
+          <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#FFFFFF] transition-colors font-bold text-xs uppercase tracking-widest">
             <ArrowLeft size={14} />
             Back to Hub
           </Link>

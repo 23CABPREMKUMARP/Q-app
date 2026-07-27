@@ -49,24 +49,24 @@ export default function LuggageBookingPage() {
       </h2>
       
       <div className="space-y-4">
-        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
           <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-2">Pickup Point</label>
           <input 
             type="text" 
             placeholder="E.g. Gandhipuram Terminus"
             value={formData.pickupPoint}
             onChange={(e) => setFormData({...formData, pickupPoint: e.target.value})}
-            className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00] transition-colors"
+            className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00] transition-colors"
           />
         </div>
-        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
           <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-2">Drop Point</label>
           <input 
             type="text" 
             placeholder="E.g. Ukkadam Stand"
             value={formData.dropPoint}
             onChange={(e) => setFormData({...formData, dropPoint: e.target.value})}
-            className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00] transition-colors"
+            className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00] transition-colors"
           />
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function LuggageBookingPage() {
       </h2>
       
       <div className="space-y-4">
-        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
           <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-4">Category</label>
           <div className="grid grid-cols-2 gap-3">
             {['Small', 'Medium', 'Large', 'Fragile', 'Express'].map(cat => (
@@ -96,7 +96,7 @@ export default function LuggageBookingPage() {
                 key={cat}
                 onClick={() => setFormData({...formData, category: cat})}
                 className={`py-3 rounded-xl text-xs font-black uppercase tracking-widest border transition-colors ${
-                  formData.category === cat ? 'bg-[#FF6D00] text-[#1A0B00] border-[#FF6D00]' : 'bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#6B7280] border-[#E5E7EB]'
+                  formData.category === cat ? 'bg-[#FF6D00] text-[#1A0B00] border-[#FF6D00]' : 'bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#6B7280] border-[#E5E7EB]'
                 }`}
               >
                 {cat}
@@ -106,29 +106,29 @@ export default function LuggageBookingPage() {
         </div>
 
         <div className="flex gap-4">
-          <div className="flex-1 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
+          <div className="flex-1 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
             <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-2 flex items-center gap-1"><Scale size={12}/> Weight (kg)</label>
             <input 
               type="number" 
               placeholder="0.0"
               value={formData.weight}
               onChange={(e) => setFormData({...formData, weight: e.target.value})}
-              className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00] transition-colors"
+              className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00] transition-colors"
             />
           </div>
-          <div className="flex-[2] bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
+          <div className="flex-[2] bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-4 rounded-2xl border border-[#E5E7EB]">
             <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block mb-2 flex items-center gap-1"><Box size={12}/> L x W x H (cm)</label>
             <div className="flex gap-2">
-              <input type="number" placeholder="L" className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" value={formData.length} onChange={e=>setFormData({...formData, length: e.target.value})} />
-              <input type="number" placeholder="W" className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" value={formData.width} onChange={e=>setFormData({...formData, width: e.target.value})} />
-              <input type="number" placeholder="H" className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" value={formData.height} onChange={e=>setFormData({...formData, height: e.target.value})} />
+              <input type="number" placeholder="L" className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" value={formData.length} onChange={e=>setFormData({...formData, length: e.target.value})} />
+              <input type="number" placeholder="W" className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" value={formData.width} onChange={e=>setFormData({...formData, width: e.target.value})} />
+              <input type="number" placeholder="H" className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" value={formData.height} onChange={e=>setFormData({...formData, height: e.target.value})} />
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex gap-4 mt-8">
-        <button onClick={handleBack} className="w-1/3 bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#1A0B00] py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
+        <button onClick={handleBack} className="w-1/3 bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00] text-[#1A0B00] py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
         <button 
           onClick={handleNext}
           disabled={!formData.weight || !formData.length}
@@ -147,24 +147,24 @@ export default function LuggageBookingPage() {
       </h2>
       
       <div className="space-y-6">
-        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-5 rounded-3xl border border-[#E5E7EB]">
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-5 rounded-3xl border border-[#E5E7EB]">
           <h3 className="text-xs font-black text-[#6B7280] uppercase tracking-widest mb-4">Sender</h3>
           <div className="space-y-3">
-            <input type="text" placeholder="Name" value={formData.senderName} onChange={e=>setFormData({...formData, senderName: e.target.value})} className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
-            <input type="tel" placeholder="Phone" value={formData.senderPhone} onChange={e=>setFormData({...formData, senderPhone: e.target.value})} className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
+            <input type="text" placeholder="Name" value={formData.senderName} onChange={e=>setFormData({...formData, senderName: e.target.value})} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
+            <input type="tel" placeholder="Phone" value={formData.senderPhone} onChange={e=>setFormData({...formData, senderPhone: e.target.value})} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
           </div>
         </div>
 
-        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-5 rounded-3xl border border-[#E5E7EB]">
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-5 rounded-3xl border border-[#E5E7EB]">
           <h3 className="text-xs font-black text-[#6B7280] uppercase tracking-widest mb-4">Receiver</h3>
           <div className="space-y-3">
-            <input type="text" placeholder="Name" value={formData.receiverName} onChange={e=>setFormData({...formData, receiverName: e.target.value})} className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
-            <input type="tel" placeholder="Phone" value={formData.receiverPhone} onChange={e=>setFormData({...formData, receiverPhone: e.target.value})} className="w-full bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
+            <input type="text" placeholder="Name" value={formData.receiverName} onChange={e=>setFormData({...formData, receiverName: e.target.value})} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
+            <input type="tel" placeholder="Phone" value={formData.receiverPhone} onChange={e=>setFormData({...formData, receiverPhone: e.target.value})} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] p-3 rounded-xl outline-none border border-[#E5E7EB] focus:border-[#FF6D00]" />
           </div>
         </div>
       </div>
 
-      <div className="mt-8 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#FF6D00]/30 p-5 rounded-3xl flex justify-between items-center">
+      <div className="mt-8 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#FF6D00]/30 p-5 rounded-3xl flex justify-between items-center">
         <div>
           <div className="text-[10px] font-black uppercase tracking-widest text-[#6B7280]">Total Fare</div>
           <div className="text-2xl font-black text-[#FF6D00]">₹{calculateFare()}</div>
@@ -172,13 +172,13 @@ export default function LuggageBookingPage() {
       </div>
 
       <div className="flex gap-4 mt-6">
-        <button onClick={handleBack} className="w-1/3 bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] text-[#1A0B00] py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
+        <button onClick={handleBack} className="w-1/3 bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00] text-[#1A0B00] py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-colors active:scale-95">Back</button>
         <button 
           onClick={handleSubmit}
           disabled={!formData.senderName || !formData.receiverName || isProcessing}
           className="flex-1 bg-[#FF6D00] text-[#1A0B00] py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-colors active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
         >
-          {isProcessing ? <div className="w-5 h-5 border-2 border-[#FFF5E6]/30 border-t-[#FFF5E6] rounded-full animate-spin"></div> : 'Pay & Book'}
+          {isProcessing ? <div className="w-5 h-5 border-2 border-[#FFFFFF]/30 border-t-[#FFFFFF] rounded-full animate-spin"></div> : 'Pay & Book'}
         </button>
       </div>
     </motion.div>
@@ -192,7 +192,7 @@ export default function LuggageBookingPage() {
       <h2 className="text-2xl font-black uppercase tracking-tighter text-[#1A0B00] mb-2">Booking Confirmed</h2>
       <p className="text-[#6B7280] text-sm mb-8">Your luggage has been booked successfully.</p>
       
-      <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] p-6 rounded-3xl mb-8 text-left">
+      <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] p-6 rounded-3xl mb-8 text-left">
         <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Tracking ID</div>
         <div className="text-xl font-black tracking-widest text-[#1A0B00] mb-6">TRK-A9X7B2</div>
         
@@ -210,7 +210,7 @@ export default function LuggageBookingPage() {
 
   return (
     <SecureView>
-      <div className="min-h-screen bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] font-sans text-[#1A0B00] pb-12">
+      <div className="min-h-screen bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] font-sans text-[#1A0B00] pb-12">
       {/* Header */}
       <div className="bg-[#FF6D00] px-6 pt-12 pb-16 rounded-b-[40px] shadow-2xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
@@ -219,7 +219,7 @@ export default function LuggageBookingPage() {
             <h1 className="text-3xl font-black uppercase tracking-tighter">Luggage</h1>
             <p className="text-[#1A0B00]/80 font-medium text-sm tracking-wide">Fast & Secure Parcels</p>
           </div>
-          <div className="bg-[#FFF5E6]/20 p-3 rounded-2xl backdrop-blur-md">
+          <div className="bg-[#FFFFFF]/20 p-3 rounded-2xl backdrop-blur-md">
             <Truck size={32} className="text-[#1A0B00]" />
           </div>
         </div>
@@ -227,12 +227,12 @@ export default function LuggageBookingPage() {
 
       {/* Main Content */}
       <div className="px-6 -mt-10 relative z-20">
-        <div className="bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] rounded-[32px] p-6 shadow-2xl shadow-black/50">
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-[#E5E7EB] rounded-[32px] p-6 shadow-2xl shadow-black/50">
           
           {step < 4 && (
             <div className="flex gap-2 mb-8">
               {[1, 2, 3].map(s => (
-                <div key={s} className={`h-1.5 flex-1 rounded-full ${step >= s ? 'bg-[#FF6D00]' : 'bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00]'}`}></div>
+                <div key={s} className={`h-1.5 flex-1 rounded-full ${step >= s ? 'bg-[#FF6D00]' : 'bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00]'}`}></div>
               ))}
             </div>
           )}

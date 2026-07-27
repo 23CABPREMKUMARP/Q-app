@@ -134,7 +134,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[5000] bg-[#FFF5E6] border border-[#E5E7EB] text-[#FF6D00] flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[5000] bg-[#FFFFFF] border border-[#E5E7EB] text-[#FF6D00] flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Full Screen Camera View */}
       <div id="reader" className="absolute inset-0 w-full h-full object-cover [&>video]:object-cover [&>video]:w-full [&>video]:h-full" />
@@ -155,7 +155,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       </div>
 
       {error && (
-        <div className="absolute z-20 flex flex-col items-center justify-center bg-[#FFF5E6]/90 backdrop-blur-md backdrop-blur-md rounded-2xl p-6 text-center gap-4 m-8">
+        <div className="absolute z-20 flex flex-col items-center justify-center bg-[#FFFFFF]/90 backdrop-blur-md backdrop-blur-md rounded-2xl p-6 text-center gap-4 m-8">
           <Camera size={32} className="text-[#FF6D00]" />
           <p className="text-sm font-bold text-[#FF6D00] max-w-[200px]">{error}</p>
           <button onClick={onClose} className="px-6 py-2 bg-[#FF6D00] text-[#FF6D00] rounded-full font-black text-xs uppercase tracking-widest">Close</button>
@@ -175,7 +175,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       {/* Top Left: Logo & Manual Entry */}
       <div className="absolute top-12 left-6 z-20 flex flex-col gap-4 items-start">
         <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-[#E5E7EB]">
-          <img src="/smart-tamizha-logo.jpeg" alt="Smart Thamizha" className="w-auto h-8 object-contain" />
+          <img src="/smart-tamizha-logo.png" alt="Smart Thamizha" className="w-auto h-8 object-contain" />
           <div className="flex flex-col">
             <span className="text-[8px] font-bold text-[#FF6D00] tracking-widest uppercase mt-1">Scanner</span>
           </div>
@@ -199,12 +199,12 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
             exit={{ opacity: 0, y: -20 }}
             className="absolute top-28 left-6 right-6 z-30"
           >
-            <div className="bg-[#FFF5E6]/80 backdrop-blur-md backdrop-blur-md p-4 rounded-2xl border border-[#E5E7EB]">
+            <div className="bg-[#FFFFFF]/80 backdrop-blur-md backdrop-blur-md p-4 rounded-2xl border border-[#E5E7EB]">
               <input 
                 type="text"
                 autoFocus
                 placeholder="ENTER BUS CODE (e.g. 1024)"
-                className="w-full bg-[#FFF5E6] border border-[#E5E7EB] text-[#FF6D00] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#FF6D00] font-black text-sm uppercase tracking-widest placeholder:text-[#FF6D00]/40 focus:outline-none focus:border-[#FF6D00] transition-colors"
+                className="w-full bg-[#FFFFFF] border border-[#E5E7EB] text-[#FF6D00] border border-[#E5E7EB] rounded-xl px-4 py-3 text-[#FF6D00] font-black text-sm uppercase tracking-widest placeholder:text-[#FF6D00]/40 focus:outline-none focus:border-[#FF6D00] transition-colors"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     const val = (e.target as HTMLInputElement).value;
@@ -220,7 +220,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       {/* Bottom Controls */}
       <div className="absolute bottom-16 z-20 w-full px-16 flex justify-between items-center max-w-sm mx-auto">
         <div className="flex flex-col items-center gap-3">
-          <label className="w-16 h-16 bg-[#FFF5E6] border border-[#E5E7EB] text-[#FF6D00] hover:bg-[#FFF5E6]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all cursor-pointer border border-[#E5E7EB]">
+          <label className="w-16 h-16 bg-[#FFFFFF] border border-[#E5E7EB] text-[#FF6D00] hover:bg-[#FFFFFF]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all cursor-pointer border border-[#E5E7EB]">
             <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
             <ImageIcon size={24} className="text-[#FF6D00]" />
           </label>
@@ -230,7 +230,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={toggleTorch}
-            className={`w-16 h-16 \${torchOn ? 'bg-[#FFF5E6] text-[#FF6D00]' : 'bg-[#FFF5E6] border border-[#E5E7EB] text-[#FF6D00] text-[#FF6D00]'} hover:bg-[#FFF5E6]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all border border-[#E5E7EB]`}
+            className={`w-16 h-16 \${torchOn ? 'bg-[#FFFFFF] text-[#FF6D00]' : 'bg-[#FFFFFF] border border-[#E5E7EB] text-[#FF6D00] text-[#FF6D00]'} hover:bg-[#FFFFFF]/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all border border-[#E5E7EB]`}
           >
             <Flashlight size={24} />
           </button>

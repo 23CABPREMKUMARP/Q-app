@@ -101,7 +101,7 @@ export const Card = ({
                 isMobile ? "transform-none" : ""
             )}
         >
-            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[#FFF5E6] border border-[#E5E7EB] text-[#1A0B00] md:rounded-2xl md:p-4 ">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00] md:rounded-2xl md:p-4 ">
                 {children}
             </div>
         </motion.div>

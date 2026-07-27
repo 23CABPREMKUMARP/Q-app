@@ -43,10 +43,10 @@ export const MatrixIdSearch = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative overflow-hidden rounded-[32px] bg-[#FFF5E6] shadow-2xl border border-zinc-100"
+        className="relative overflow-hidden rounded-[32px] bg-[#FFFFFF] shadow-2xl border border-zinc-100"
       >
         {/* Background Accents like the poster */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF6D00]/5 via-cyan-400/5 to-[#FFF5E6] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FF6D00]/5 via-cyan-400/5 to-[#FFFFFF] pointer-events-none" />
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#FF6D00] via-cyan-400 to-[#FF6D00]" />
         
         <div className="relative p-8 flex flex-col items-center">
@@ -77,7 +77,7 @@ export const MatrixIdSearch = () => {
                 value={matrixId}
                 onChange={(e) => setMatrixId(e.target.value.toUpperCase())}
                 placeholder="e.g. 1024"
-                className="w-full bg-[#FFF5E6] border-2 border-zinc-100 rounded-2xl py-5 pl-14 pr-6 text-lg font-black tracking-widest text-dark-saffron placeholder:text-zinc-300 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all uppercase"
+                className="w-full bg-[#FFFFFF] border-2 border-zinc-100 rounded-2xl py-5 pl-14 pr-6 text-lg font-black tracking-widest text-dark-saffron placeholder:text-zinc-300 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all uppercase"
               />
               <AnimatePresence>
                 {error && (
@@ -99,7 +99,7 @@ export const MatrixIdSearch = () => {
               className="w-full bg-dark-saffron hover:bg-primary text-[#1A0B00] rounded-2xl py-5 font-bold flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-xl shadow-dark-saffron/10 disabled:opacity-50 disabled:cursor-not-allowed group"
             >
               {isLoading ? (
-                <div className="w-6 h-6 border-2 border-[#FFF5E6]/30 border-t-[#FFF5E6] rounded-full animate-spin" />
+                <div className="w-6 h-6 border-2 border-[#FFFFFF]/30 border-t-[#FFFFFF] rounded-full animate-spin" />
               ) : (
                 <>
                   <span className="uppercase tracking-widest text-sm">Quick Book Matrix</span>
@@ -114,7 +114,7 @@ export const MatrixIdSearch = () => {
              <div className="flex items-center gap-4">
                 <button 
                   onClick={() => router.push('/live-map?action=scan')}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#FFF5E6] rounded-full border border-zinc-100 hover:bg-[#FFF5E6] hover:shadow-md transition-all group"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#FFFFFF] rounded-full border border-zinc-100 hover:bg-[#FFFFFF] hover:shadow-md transition-all group"
                 >
                   <QrCode size={14} className="text-zinc-600 group-hover:text-primary" />
                   <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Scan QR instead</span>

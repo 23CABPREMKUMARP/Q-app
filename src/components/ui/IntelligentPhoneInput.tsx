@@ -58,7 +58,7 @@ export const IntelligentPhoneInput: React.FC<IntelligentPhoneInputProps> = ({
       <motion.div
         animate={shake ? { x: [-4, 4, -4, 4, 0] } : {}}
         onClick={handleContainerClick}
-        className={`relative h-20 rounded-[28px] bg-[#FFF5E6] border-2 transition-all duration-500 flex items-center px-6 cursor-text overflow-hidden ${
+        className={`relative h-20 rounded-[28px] bg-[#FFFFFF] border-2 transition-all duration-500 flex items-center px-6 cursor-text overflow-hidden ${
           isValid 
             ? "border-[#FF6D00] shadow-[0_0_30px_rgba(16,185,129,0.15)]" 
             : isFocused 

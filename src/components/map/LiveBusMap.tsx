@@ -33,12 +33,12 @@ function createBusIcon(bus: BusData, livePos: BusPosition | null, isSelected: bo
   const html = `
     <div class="relative flex flex-col items-center" style="transform: rotate(${heading}deg)">
       <div class="relative">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-[#FFF5E6] shadow-xl ring-2 ${ringClass} ring-offset-2 overflow-hidden" style="box-shadow: 0 4px 20px ${ringColor}40">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-[#FFFFFF] shadow-xl ring-2 ${ringClass} ring-offset-2 overflow-hidden" style="box-shadow: 0 4px 20px ${ringColor}40">
           <img src="/bus-marker-3d.png" alt="Bus" style="width:40px;height:40px;object-fit:contain;" />
         </div>
-        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#22C55E] ring-2 ring-[#FFF5E6] ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-[#FFF5E6] z-10"></span>`}
+        ${isRunning ? `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#22C55E] ring-2 ring-[#FFFFFF] ${pulseClass} z-10"></span>` : `<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-slate-300 ring-2 ring-[#FFFFFF] z-10"></span>`}
       </div>
-      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-[#FFF5E6] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-[#E5E7EB]">
+      <div style="transform: rotate(-${heading}deg)" class="mt-1 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] text-[9px] font-black px-2 py-0.5 rounded-full whitespace-nowrap shadow-lg border border-[#E5E7EB]">
         ${bus.busCode || bus.busNumber}${speed > 0 ? ` · ${speed}km/h` : ""}
       </div>
     </div>`;
