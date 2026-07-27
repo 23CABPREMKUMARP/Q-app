@@ -264,16 +264,16 @@ export default function MobileDashboard() {
           )}
 
           {/* Town Bus Booking Teaser */}
-          <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl overflow-hidden shadow-md relative group">
+          <div className="bg-[#000000] border border-gray-800 shadow-sm rounded-2xl overflow-hidden shadow-md relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-[#FF6D00]/10 to-transparent opacity-50"></div>
-            <div className="p-5 text-[#1A0B00] relative z-10 flex items-center justify-between">
+            <div className="p-5 text-white relative z-10 flex items-center justify-between">
               <div className="w-2/3 pr-2">
                 <div className="flex items-center gap-1.5 mb-2">
                   <Bus size={14} className="text-[#FF6D00]" />
                   <p className="text-[10px] font-black text-[#FF6D00] tracking-widest uppercase">Town Bus</p>
                 </div>
-                <h3 className="text-xl font-black tracking-tight mb-1">Town Bus Booking</h3>
-                <p className="text-[10px] text-[#6B7280] font-medium mb-3 leading-tight">Only buses equipped with GPS tracking can be tracked in real time. If a bus does not have GPS installed, live location and tracking features will not be available.</p>
+                <h3 className="text-xl font-black tracking-tight mb-1 text-white">Town Bus Booking</h3>
+                <p className="text-[10px] text-gray-400 font-medium mb-3 leading-tight">Only buses equipped with GPS tracking can be tracked in real time. If a bus does not have GPS installed, live location and tracking features will not be available.</p>
                 <button 
                   onClick={() => router.push('/town-bus')}
                   className="inline-block bg-[#FF6D00] hover:bg-orange-600 text-[#FFFFFF] border border-[#FF6D00]/30 text-[10px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-md active:scale-95 transition-all"
@@ -331,30 +331,30 @@ export default function MobileDashboard() {
           </div>
 
           {/* PhonePe Wallet & Passes Card */}
-          <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
-            <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Spends & Passes</h3>
+          <div className="bg-[#000000] rounded-2xl p-4 shadow-md">
+            <h3 className="text-[13px] font-bold text-white mb-4 px-1">Spends & Passes</h3>
             <div className="flex gap-4">
-              <div className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
-                <div className="flex items-center gap-2 text-[#6B7280] mb-2">
+              <div className="flex-1 bg-black rounded-xl p-3 border border-gray-800 flex flex-col justify-center">
+                <div className="flex items-center gap-2 text-gray-400 mb-2">
                   <WalletCards size={16} className="text-[#FF6D00]" />
                   <span className="text-[11px] font-semibold truncate">Smart Thamizha App</span>
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-[#1A0B00] leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
-                  <span className="text-[9px] font-bold text-[#6B7280] uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
+                  <p className="text-lg font-bold text-white leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
+                  <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
                 </div>
               </div>
               
-              <Link href="/get-ticket" className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
-                <div className="flex items-center gap-2 text-[#6B7280] mb-1">
+              <Link href="/get-ticket" className="flex-1 bg-black rounded-xl p-3 border border-gray-800 flex flex-col justify-center relative overflow-hidden">
+                <div className="flex items-center gap-2 text-gray-400 mb-1">
                   <Ticket size={16} className="text-[#FF6D00]" />
                   <span className="text-xs font-semibold">My Passes</span>
                 </div>
-                <p className="text-lg font-bold text-[#1A0B00]">{activeBookingsCount} <span className="text-xs font-medium text-slate-500">Active</span></p>
+                <p className="text-lg font-bold text-white">{activeBookingsCount} <span className="text-xs font-medium text-gray-500">Active</span></p>
                 <div className="mt-2 text-xs font-bold text-[#FF6D00] flex items-center gap-1">
                   VIEW PASS <ChevronRight size={12} />
                 </div>
-                <History className="absolute right-[-10px] bottom-[-10px] text-slate-200/50" size={64} />
+                <History className="absolute right-[-10px] bottom-[-10px] text-gray-800/50" size={64} />
               </Link>
             </div>
           </div>
