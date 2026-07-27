@@ -41,7 +41,7 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
         muted 
         loop
         playsInline 
-        className="block md:hidden w-full h-full object-cover" 
+        className="block md:hidden w-full h-full object-contain bg-[#FFFFFF]" 
       />
     </motion.div>
   );
