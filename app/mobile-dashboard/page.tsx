@@ -283,8 +283,8 @@ export default function MobileDashboard() {
               </div>
               <div className="absolute right-0 bottom-0 top-0 w-1/3 flex items-center justify-end pr-4 opacity-90 overflow-hidden">
                 <div className="w-24 h-24 bg-[#FF6D00]/20 rounded-full blur-2xl absolute -right-4"></div>
-                <div className="bg-gradient-to-br from-[#FF6D00] to-orange-600 w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10">
-                  <Ticket size={32} className="text-[#1A0B00]" />
+                <div className="bg-[#FFFFFF] w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10 border border-gray-800">
+                  <Ticket size={32} className="text-[#FF6D00]" />
                 </div>
               </div>
             </div>

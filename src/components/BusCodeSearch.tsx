@@ -98,20 +98,20 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
 
           <form onSubmit={handleSearch} className="relative group">
             <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-              <Search size={20} className="text-gray-500 group-focus-within:text-white transition-colors" />
+              <Search size={20} className="text-gray-400 group-focus-within:text-[#FF6D00] transition-colors" />
             </div>
             <input
               type="text"
               value={busCode}
               onChange={(e) => setBusCode(e.target.value.toUpperCase())}
               placeholder="ENTER BUS CODE (e.g. 1024)"
-              className="w-full bg-black border-2 border-gray-800 rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-white placeholder:text-gray-600 outline-none focus:border-[#FF6D00] focus:ring-4 focus:ring-[#FF6D00]/10 transition-all uppercase"
+              className="w-full bg-[#FFFFFF] border-2 border-[#FFFFFF] rounded-2xl py-5 pl-12 pr-[76px] text-base md:text-xl font-black tracking-wide text-[#1A0B00] placeholder:text-gray-400 outline-none focus:border-[#FF6D00] focus:ring-4 focus:ring-[#FF6D00]/20 transition-all uppercase shadow-inner"
             />
             <div className="absolute inset-y-2 right-2 flex items-center">
               <button
                 type="submit"
                 disabled={isLoading || !busCode}
-                className="h-full px-4 w-14 justify-center bg-black border border-gray-700 shadow-sm text-white rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-gray-800 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/10"
+                className="h-full px-4 w-14 justify-center bg-[#FF6D00] border-none shadow-sm text-white rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center hover:bg-orange-600 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-[#FF6D00]/20"
               >
                 {isLoading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={18} />}
               </button>
