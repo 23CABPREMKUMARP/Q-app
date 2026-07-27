@@ -347,7 +347,7 @@ export default function TownBusSearchPage() {
                       />
                       
                       {/* QR Code Container - Positioned over the white square */}
-                      <div className="absolute overflow-hidden" style={{ top: "25%", right: "8.5%", width: "43%", aspectRatio: "1/1" }}>
+                      <div className="absolute overflow-hidden" style={{ top: "25%", right: "10%", width: "43%", aspectRatio: "1/1" }}>
                         <div className="w-full h-full bg-white p-[4%]">
                           <QRCodeSVG 
                             value={`https://jeffben.org/bus/${trip?.busId?.busCode}`}
@@ -359,7 +359,7 @@ export default function TownBusSearchPage() {
                       </div>
 
                       {/* Bus Code Text - Positioned over the white rectangle in the ticket */}
-                      <div className="absolute flex items-center justify-center" style={{ top: "79%", right: "4.5%", width: "43%", height: "5.5%" }}>
+                      <div className="absolute flex items-center justify-center" style={{ top: "79%", right: "6%", width: "43%", height: "5.5%" }}>
                         <span className="text-[#1A0B00] font-black tracking-widest text-[clamp(12px,4vw,22px)] text-center w-full">
                           {trip?.busId?.busCode}
                         </span>
