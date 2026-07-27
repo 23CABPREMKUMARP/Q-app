@@ -91,7 +91,7 @@ export const BusCodeSearch = ({ onScanClick, compact = false }: BusCodeSearchPro
               <h2 className="text-xl md:text-2xl font-black text-[#1A0B00] tracking-tight leading-none">Bus Quick-Code</h2>
               <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest mt-2">Instant Fleet Access</p>
             </div>
-            <div className="w-12 h-12 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-[#FFFFFF] border-2 border-black shadow-sm text-[#1A0B00] rounded-2xl flex items-center justify-center shadow-lg">
               <Zap size={24} className="text-[#FF6D00] fill-current" />
             </div>
           </div>

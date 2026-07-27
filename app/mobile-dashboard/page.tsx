@@ -283,7 +283,7 @@ export default function MobileDashboard() {
               </div>
               <div className="absolute right-0 bottom-0 top-0 w-1/3 flex items-center justify-end pr-4 opacity-90 overflow-hidden">
                 <div className="w-24 h-24 bg-[#FF6D00]/20 rounded-full blur-2xl absolute -right-4"></div>
-                <div className="bg-[#FFFFFF] w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10 border border-gray-800">
+                <div className="bg-[#FFFFFF] w-16 h-16 rounded-full flex items-center justify-center shadow-xl z-10 border-2 border-black">
                   <Ticket size={32} className="text-[#FF6D00]" />
                 </div>
               </div>
@@ -298,21 +298,21 @@ export default function MobileDashboard() {
                 onClick={() => setShowBusCodeModal(true)} 
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none"
               >
-                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                <div className="w-14 h-14 bg-[#FFFFFF] border-2 border-black rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
                   <Hash size={24} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Bus<br/>Code</span>
               </button>
               
               <Link href="/scan" className="flex flex-col items-center gap-2">
-                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                <div className="w-14 h-14 bg-[#FFFFFF] border-2 border-black rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
                   <ScanLine size={24} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Scan<br/>QR</span>
               </Link>
 
               <Link href="/town-bus" className="flex flex-col items-center gap-2">
-                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
+                <div className="w-14 h-14 bg-[#FFFFFF] border-2 border-black rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto">
                   <Bus size={24} />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">Town<br/>Bus</span>
@@ -322,7 +322,7 @@ export default function MobileDashboard() {
                 onClick={() => setShowMembershipModal(true)}
                 className="flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none outline-none focus:outline-none group"
               >
-                <div className="w-14 h-14 bg-[#FFFFFF] border border-gray-200 rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
+                <div className="w-14 h-14 bg-[#FFFFFF] border-2 border-black rounded-full flex items-center justify-center shadow-sm text-[#FF6D00] mx-auto relative overflow-hidden group-hover:scale-105 transition-transform">
                   <Crown size={24} className="drop-shadow-sm" />
                 </div>
                 <span className="text-[9px] font-semibold text-[#6B7280] leading-tight">View<br/>Memberships</span>
@@ -399,19 +399,19 @@ export default function MobileDashboard() {
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Partner & Services</h3>
             <div className="grid grid-cols-3 gap-y-4 text-center">
               <Link href="/conductor" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border-2 border-black text-[#6B7280]">
                   <ShieldAlert size={20} className="text-[#FF6D00]" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Conductor<br/>Terminal</span>
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border-2 border-black text-[#6B7280]">
                   <CreditCard size={20} className="text-[#FF6D00]" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Payment<br/>Methods</span>
               </Link>
               <Link href="/about" className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border border-slate-100 text-[#6B7280]">
+                <div className="w-12 h-12 bg-[#FFFFFF] rounded-full flex items-center justify-center border-2 border-black text-[#6B7280]">
                   <Navigation size={20} className="text-purple-500" />
                 </div>
                 <span className="text-[11px] font-medium text-[#6B7280]">Transit<br/>Intelligence</span>
