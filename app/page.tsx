@@ -25,13 +25,23 @@ const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
       transition={{ duration: 1, ease: "easeInOut" }}
       className="fixed inset-0 z-[1000] bg-[#FFFFFF] flex flex-col items-center justify-center overflow-hidden"
     >
+      {/* Desktop Video */}
       <video 
         src="/videos/web-loading.mp4" 
         autoPlay 
-        muted 
+        muted
+        loop
         playsInline 
-        onEnded={onComplete}
-        className="w-full h-full object-cover" 
+        className="hidden md:block w-full h-full object-cover" 
+      />
+      {/* Mobile Video */}
+      <video 
+        src="/videos/mobile-loading.mp4" 
+        autoPlay 
+        muted 
+        loop
+        playsInline 
+        className="block md:hidden w-full h-full object-cover" 
       />
     </motion.div>
   );
