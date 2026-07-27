@@ -17,64 +17,22 @@ const Globe = dynamic(() => import("@/src/registry/magicui/globe").then(m => m.G
 
 const ContainerScroll = dynamic(() => import("../src/components/ui/container-scroll-animation").then(m => m.ContainerScroll), { ssr: false });
 
-const HomeLoader = React.memo(({ onComplete }: { onComplete: () => void }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1, ease: "easeInOut" }}
-      className="fixed inset-0 z-[1000] bg-[#FFFFFF] flex flex-col items-center justify-center overflow-hidden"
-    >
-      {/* Desktop Video */}
-      <video 
-        src="/videos/web-loading.mp4" 
-        autoPlay 
-        muted
-        loop
-        playsInline 
-        className="hidden md:block w-full h-full object-cover" 
-      />
-      {/* Mobile Video */}
-      <video 
-        src="/videos/mobile-loading.mp4" 
-        autoPlay 
-        muted 
-        loop
-        playsInline 
-        className="block md:hidden w-full h-full object-contain bg-[#FFFFFF]" 
-      />
-    </motion.div>
-  );
-});
-
-HomeLoader.displayName = "HomeLoader";
-
 export default function ProductPage() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
   React.useEffect(() => {
     // Bulletproof video playback for mobile browsers
-    if (!isLoading && videoRef.current) {
+    if (videoRef.current) {
       videoRef.current.play().catch((e) => {
         console.warn("Video autoplay prevented:", e);
       });
     }
-  }, [isLoading]);
-
-  useEffect(() => {
-    // Fallback in case video onEnded doesn't fire
-    const timer = setTimeout(() => setIsLoading(false), 10000);
-    return () => clearTimeout(timer);
   }, []);
 
 
   return (
     <AnimatePresence mode="wait">
-      {isLoading ? (
-        <HomeLoader key="loader" onComplete={() => setIsLoading(false)} />
-      ) : (
         <motion.main 
           key="main"
           initial={{ opacity: 0 }}
@@ -481,7 +439,6 @@ export default function ProductPage() {
         </p>
       </section>
       </motion.main>
-      )}
     </AnimatePresence>
   );
 }
