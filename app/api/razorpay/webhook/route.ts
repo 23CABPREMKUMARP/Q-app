@@ -14,12 +14,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Missing signature" }, { status: 400 });
     }
 
-    const expectedSignature = crypto
-      .createHmac('sha256', webhookSecret)
-      .update(rawBody)
-      .digest('hex');
-
-    if (expectedSignature !== signature) {
+    const Razorpay = require('razorpay');
+    const isValid = Razorpay.validateWebhookSignature(rawBody, signature as string, webhookSecret);
+    
+    if (!isValid) {
       return NextResponse.json({ success: false, error: "Invalid signature" }, { status: 400 });
     }
 

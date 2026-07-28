@@ -445,8 +445,9 @@ export default function TicketCountSelectionPage() {
               setPaymentState('success');
               setStep(5);
             } else {
+              console.error('Verification failed:', verifyData);
               setPaymentState('failed');
-              setPaymentError('Payment verification failed');
+              setPaymentError(verifyData.error || 'Payment verification failed');
             }
           },
           prefill: {
