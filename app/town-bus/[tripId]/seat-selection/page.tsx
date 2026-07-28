@@ -352,6 +352,20 @@ export default function TicketCountSelectionPage() {
     setStep(3);
   };
 
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      if (typeof window !== 'undefined' && (window as any).Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const handlePayment = async () => {
     setPaymentState('processing');
     setPaymentError(null);
@@ -367,7 +381,12 @@ export default function TicketCountSelectionPage() {
     }
     
     try {
-      const response = await fetch('/api/phonepe/pay', {
+      const res = await loadRazorpayScript();
+      if (!res) {
+        throw new Error('Razorpay SDK failed to load');
+      }
+
+      const response = await fetch('/api/razorpay/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -391,9 +410,53 @@ export default function TicketCountSelectionPage() {
 
       const data = await response.json();
 
-      if (data.success && data.redirectUrl) {
-        // Redirect user to PhonePe checkout
-        window.location.href = data.redirectUrl;
+      if (data.success && data.orderId) {
+        const options = {
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TIpFsYwfq2jYC8',
+          amount: data.amount,
+          currency: "INR",
+          name: "Smart Tamizha",
+          description: "Town Bus Ticket",
+          order_id: data.orderId,
+          handler: async function (response: any) {
+            setPaymentState('processing');
+            // Verify payment
+            const verifyRes = await fetch('/api/razorpay/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                ticketId: data.ticketId
+              })
+            });
+            const verifyData = await verifyRes.json();
+            if (verifyData.success) {
+              setPaymentState('success');
+              setStep(5);
+            } else {
+              setPaymentState('failed');
+              setPaymentError('Payment verification failed');
+            }
+          },
+          prefill: {
+            name: user?.firstName || "User",
+            contact: passengers[0]?.phone || "9999999999"
+          },
+          theme: {
+            color: "#FF6D00"
+          },
+          modal: {
+            ondismiss: function() {
+              setPaymentState('idle');
+            }
+          }
+        };
+
+        const paymentObject = new (window as any).Razorpay(options);
+        paymentObject.open();
+        
       } else {
         setPaymentState('failed');
         setPaymentError(data.error || 'Failed to initialize payment');
