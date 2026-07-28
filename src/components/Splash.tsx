@@ -25,7 +25,7 @@ export default function Splash() {
         />
         {/* Mobile Video */}
         <video 
-          src="/videos/mobile-loading.mp4" 
+          src="/upscaled-video.mp4" 
           autoPlay 
           muted 
           loop 
