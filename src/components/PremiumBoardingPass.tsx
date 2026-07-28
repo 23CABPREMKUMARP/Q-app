@@ -103,7 +103,12 @@ export function PremiumBoardingPass({
               <div className="absolute inset-1 border border-[#000000]/10 rounded pointer-events-none z-0"></div>
             </div>
 
-            <div className="relative z-10 px-2 md:px-4">
+            <div className={`relative select-none no-print ${isExpired ? 'opacity-70 grayscale-[0.8]' : ''}`}>
+      <style>{`
+        @media print {
+          .no-print { display: none !important; }
+        }
+      `}</style>
               {/* Header with Logos */}
               <div className="text-center mb-2">
                 <div className="flex justify-center items-center gap-4 mb-1">

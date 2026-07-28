@@ -32,7 +32,7 @@ const config: CapacitorConfig = {
       showSpinner: false
     },
     PrivacyScreen: {
-      enable: false,
+      enable: true,
       preventScreenshots: true
     }
   }
