@@ -186,7 +186,7 @@ export function PremiumBoardingPass({
                   <div className="flex items-center pt-2">
                     <span className="w-24 md:w-32 text-[#000000]/80 text-[10px] md:text-xs flex items-center gap-1 font-bold">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                      PhonePe TXN:
+                      TXN:
                     </span>
                     <span className="font-mono font-bold text-[#000000] text-[11px] md:text-xs tracking-wider bg-[#FFFFFF]/30 px-2 py-0.5 rounded shadow-sm">{booking.phonepeTransactionId}</span>
                   </div>

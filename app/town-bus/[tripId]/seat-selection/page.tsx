@@ -760,7 +760,7 @@ export default function TicketCountSelectionPage() {
                   <div className="w-full h-20 bg-[#FF6D00] rounded-[32px] flex items-center justify-center">
                     <motion.div className="flex items-center gap-3 text-[#1A0B00]">
                       <RefreshCw size={24} className="animate-spin" />
-                      <span className="uppercase tracking-widest text-sm font-black">Processing via PhonePe...</span>
+                      <span className="uppercase tracking-widest text-sm font-black">Payment was Processing</span>
                     </motion.div>
                   </div>
                 ) : (
