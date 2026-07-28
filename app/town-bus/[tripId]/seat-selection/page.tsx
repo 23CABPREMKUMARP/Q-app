@@ -249,7 +249,7 @@ export default function TicketCountSelectionPage() {
         }
       };
       pollStatus();
-    } else if (paymentStatus === 'success' && ticketIdParam) {
+    } else if ((paymentStatus === 'success' || searchParams?.get('success') === 'true') && ticketIdParam) {
       setIsProcessingRedirect(true);
       // Read fresh values from sessionStorage to avoid stale closure
       const freshState = (() => {
@@ -263,7 +263,7 @@ export default function TicketCountSelectionPage() {
         try {
           const res = await fetch(`/api/phonepe/status?ticketId=${ticketIdParam}`);
           const data = await res.json();
-          if (data.status === 'SUCCESS' || data.booking) {
+          if (data.status === 'SUCCESS' || data.status === 'Confirmed' || data.booking) {
             const b = data.booking || {};
             setBookingResult({
               ...b,
@@ -427,6 +427,8 @@ export default function TicketCountSelectionPage() {
           name: "Smart Tamizha",
           description: "Town Bus Ticket",
           order_id: data.orderId,
+          callback_url: `${window.location.origin}/api/razorpay/callback?tripId=${tripId}&ticketId=${data.ticketId}`,
+          redirect: true,
           handler: async function (response: any) {
             setPaymentState('processing');
             // Verify payment

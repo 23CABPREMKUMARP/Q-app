@@ -26,7 +26,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ success: false, status: 'PENDING', error: "Booking not found yet" });
     }
 
-    if (booking.payment_status === 'Paid') {
+    if (booking.payment_status === 'Paid' || booking.payment_status === 'Completed') {
       return NextResponse.json({ success: true, status: 'SUCCESS', booking });
     } else if (booking.payment_status === 'Failed' || booking.payment_status === 'Cancelled') {
       return NextResponse.json({ success: true, status: 'FAILED', booking });
