@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     const merchantTransactionId = `T${Date.now()}${Math.floor(Math.random() * 1000)}`;
 
     const options = {
-      amount: totalAmount * 100, // amount in smallest currency unit
+      amount: Math.floor(totalAmount * 100), // amount in smallest currency unit
       currency: "INR",
       receipt: merchantTransactionId,
     };
