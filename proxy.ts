@@ -23,6 +23,7 @@ const isPublicRoute = createRouteMatcher([
   "/robots.txt",
   // Allow external callbacks like PhonePe if they exist
   "/api/phonepe(.*)",
+  "/api/razorpay(.*)",
   "/api/town-bus(.*)",
   "/api/bookings(.*)",
   "/api/buses(.*)",

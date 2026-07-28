@@ -408,7 +408,16 @@ export default function TicketCountSelectionPage() {
         })
       });
 
-      const data = await response.json();
+      const contentType = response.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Non-JSON response from server:", text);
+        throw new Error(`Server returned an unexpected format (Status: ${response.status}). Are you sure the latest backend changes are deployed?`);
+      }
 
       if (data.success && data.orderId) {
         const options = {
