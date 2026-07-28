@@ -40,7 +40,16 @@ export function AppBootSplash({ children }: { children: React.ReactNode }) {
     }
   }, [isLoaded, userId]);
 
-  if (!isLoaded) {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isLoaded || showSplash) {
     return <Splash />;
   }
 
