@@ -316,9 +316,9 @@ export default function TicketCountSelectionPage() {
         }
       };
       getBookingDetails();
-    } else if (paymentStatus === 'failed') {
+    } else if (paymentStatus === 'failed' || searchParams?.get('error') === 'verification_failed') {
       setPaymentState('failed');
-      setPaymentError('Payment Failed or Cancelled.');
+      setPaymentError(searchParams?.get('error') === 'verification_failed' ? 'Payment verification failed in callback.' : 'Payment Failed or Cancelled.');
       setStep(5); 
     }
   }, [searchParams]);
@@ -463,6 +463,7 @@ export default function TicketCountSelectionPage() {
               console.error('Verification failed:', verifyData);
               setPaymentState('failed');
               setPaymentError(verifyData.error || 'Payment verification failed');
+              setStep(5);
             }
           },
           prefill: {
@@ -480,6 +481,12 @@ export default function TicketCountSelectionPage() {
         };
 
         const paymentObject = new (window as any).Razorpay(options);
+        paymentObject.on('payment.failed', function (response: any) {
+          console.error("Payment failed event:", response.error);
+          setPaymentState('failed');
+          setPaymentError(response.error.description || 'Payment failed on gateway.');
+          setStep(5);
+        });
         paymentObject.open();
         
       } else {
@@ -490,6 +497,7 @@ export default function TicketCountSelectionPage() {
       console.error('Payment Error:', error);
       setPaymentState('failed');
       setPaymentError(error.message || "A network error occurred while connecting to the payment gateway.");
+      setStep(5);
     }
   };
 
