@@ -6,12 +6,10 @@ import { motion } from "framer-motion";
 
 export default function Splash() {
   return (
-    <div className="fixed inset-0 z-[5000] bg-[#FF6D00] flex flex-col items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 z-[5000] bg-[#000000] flex flex-col items-center justify-center overflow-hidden">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.4 }}
         className="relative w-full h-full flex items-center justify-center"
       >
         {/* Desktop Video */}
