@@ -428,7 +428,6 @@ export default function TicketCountSelectionPage() {
           description: "Town Bus Ticket",
           order_id: data.orderId,
           callback_url: `${window.location.origin}/api/razorpay/callback?tripId=${tripId}&ticketId=${data.ticketId}`,
-          redirect: true,
           handler: async function (response: any) {
             setPaymentState('processing');
             // Verify payment
