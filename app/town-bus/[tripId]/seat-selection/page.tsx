@@ -444,7 +444,21 @@ export default function TicketCountSelectionPage() {
             const verifyData = await verifyRes.json();
             if (verifyData.success) {
               setPaymentState('success');
-              setStep(5);
+              setBookingResult({
+                ticketId: data.ticketId,
+                status: 'Confirmed',
+                totalAmount: totalAmount,
+                boardingPoint: passengers.length > 1 ? 'Combined Journey' : passengers[0]?.boarding || 'Boarding Point',
+                destination: passengers.length > 1 ? 'Multi-Stop' : passengers[0]?.destination || 'Destination',
+                luggageType: passengers[0]?.luggage || 'None',
+                passengers: passengers,
+                busNumber: trip?.busNumber || trip?.busCode || '',
+                seats: Array.from({ length: ticketCount }, (_, i) => `S-${i + 1}`),
+                qrToken: '',
+                bookingDate: new Date().toISOString(),
+                phonepeTransactionId: data.orderId
+              });
+              setStep(4);
             } else {
               console.error('Verification failed:', verifyData);
               setPaymentState('failed');
