@@ -421,7 +421,7 @@ export default function TicketCountSelectionPage() {
 
       if (data.success && data.orderId) {
         const options = {
-          key: 'rzp_test_TIpFsYwfq2jYC8',
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TIpFsYwfq2jYC8',
           amount: data.amount,
           currency: "INR",
           name: "Smart Tamizha",
