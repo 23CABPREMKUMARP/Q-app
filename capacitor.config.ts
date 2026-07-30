@@ -9,16 +9,7 @@ const config: CapacitorConfig = {
     url: 'https://jeffben.org',
     cleartext: false,
     allowNavigation: [
-      'app-woad-beta.vercel.app',
-      '*.vercel.app',
-      '*.clerk.accounts.dev',
-      'keen-mustang-26.clerk.accounts.dev',
-      '*.clerk.com',
-      '*.supabase.co',
-      '*.razorpay.com',
-      '*.phonepe.com',
-      'jeffben.org',
-      '*.jeffben.org'
+      '*'
     ]
   },
   android: {
