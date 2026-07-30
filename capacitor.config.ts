@@ -9,7 +9,14 @@ const config: CapacitorConfig = {
     url: 'https://jeffben.org',
     cleartext: false,
     allowNavigation: [
-      '*'
+      '*',
+      '*.phonepe.com',
+      'phonepe.com',
+      '*.razorpay.com',
+      'razorpay.com',
+      '*.payu.in',
+      '*.stripe.com',
+      '*.cashfree.com'
     ]
   },
   android: {
