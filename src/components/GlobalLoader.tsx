@@ -7,9 +7,14 @@ export function GlobalLoader({ children }: { children: React.ReactNode }) {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
+    if (sessionStorage.getItem('skip_splash') === 'true') {
+      setShowSplash(false);
+      sessionStorage.removeItem('skip_splash');
+      return;
+    }
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 10000); // 10 seconds loading animation
+    }, 4500); // 4.5 seconds loading animation
     return () => clearTimeout(timer);
   }, []);
 

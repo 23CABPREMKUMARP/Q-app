@@ -315,17 +315,28 @@ export default function TicketCountSelectionPage() {
       setPaymentState('failed');
       setPaymentError(searchParams?.get('error') === 'verification_failed' ? 'Payment verification failed in callback.' : 'Payment Failed or Cancelled.');
       setStep(5); 
+    } else {
+      const wasInCheckout = typeof window !== 'undefined' && sessionStorage.getItem('razorpay_checkout_in_progress') === 'true';
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem('razorpay_checkout_in_progress');
+      }
+      if (wasInCheckout) {
+        setPaymentState('failed');
+        setPaymentError('Payment was cancelled.');
+        setStep(5);
+      }
     }
   }, [searchParams]);
 
   if (isProcessingRedirect) {
     return (
       <SecureView>
-        <Splash />
-      
-
-
-    </SecureView>
+        <div className="min-h-screen bg-[#FFFFFF] flex flex-col items-center justify-center font-sans">
+          <RefreshCw size={48} className="animate-spin text-[#FF6D00] mb-6" />
+          <h2 className="text-xl font-black text-[#1A0B00] uppercase tracking-widest">Verifying Payment...</h2>
+          <p className="text-zinc-500 text-sm mt-2 font-medium">Please wait while we confirm your ticket</p>
+        </div>
+      </SecureView>
     );
   }
 
@@ -381,6 +392,8 @@ export default function TicketCountSelectionPage() {
         busNumber: trip?.busNumber || trip?.busCode || '',
         busCode: trip?.busCode || ''
       }));
+      sessionStorage.setItem('skip_splash', 'true');
+      sessionStorage.setItem('razorpay_checkout_in_progress', 'true');
     }
     
     try {
