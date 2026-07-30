@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       razorpay_signature = body.razorpay_signature || '';
     }
 
-    const secret = 'xOBzZ6o7LERkpGx4a6TVLuhS';
+    const secret = process.env.RAZORPAY_KEY_SECRET || 'xOBzZ6o7LERkpGx4a6TVLuhS';
     
     const shasum = crypto.createHmac('sha256', secret);
     shasum.update(`${razorpay_order_id}|${razorpay_payment_id}`);
@@ -36,9 +36,9 @@ export async function POST(req: Request) {
     if (digest !== razorpay_signature) {
       console.error("Signature mismatch in callback", { digest, razorpay_signature });
       if (tripId) {
-        return NextResponse.redirect(new URL(`/town-bus/${tripId}/seat-selection?error=verification_failed`, origin));
+        return NextResponse.redirect(new URL(`/town-bus/${tripId}/seat-selection?error=verification_failed`, origin), 303);
       }
-      return NextResponse.redirect(new URL(`/`, origin));
+      return NextResponse.redirect(new URL(`/`, origin), 303);
     }
 
     // Update DB
@@ -77,9 +77,9 @@ export async function POST(req: Request) {
 
     // Redirect to success
     if (tripId) {
-      return NextResponse.redirect(new URL(`/town-bus/${tripId}/seat-selection?success=true&ticketId=${ticketId}`, origin));
+      return NextResponse.redirect(new URL(`/town-bus/${tripId}/seat-selection?success=true&ticketId=${ticketId}`, origin), 303);
     }
-    return NextResponse.redirect(new URL(`/get-ticket`, origin));
+    return NextResponse.redirect(new URL(`/get-ticket`, origin), 303);
 
   } catch (error) {
     console.error("Error processing Razorpay callback:", error);
