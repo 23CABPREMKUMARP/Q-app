@@ -45,7 +45,7 @@ export function AppBootSplash({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 4000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 

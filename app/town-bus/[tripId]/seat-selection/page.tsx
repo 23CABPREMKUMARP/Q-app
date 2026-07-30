@@ -348,7 +348,15 @@ export default function TicketCountSelectionPage() {
     }
   };
 
-  const handleProceed = async () => {
+  const handleProceed = () => {
+    if (!passengers.every(p => p.phone && p.phone.length >= 10)) {
+      alert("Please enter a valid 10-digit phone number for all passengers.");
+      return;
+    }
+    if (!passengers.every(p => p.destination)) {
+      alert("Please select a destination for all passengers.");
+      return;
+    }
     setStep(3);
   };
 
@@ -1004,7 +1012,7 @@ export default function TicketCountSelectionPage() {
 
       {/* Bottom Action Bar (Only for Step 2) */}
       <AnimatePresence>
-        {step === 2 && passengers.every(p => p.phone?.length >= 10 && p.destination) && (
+        {step === 2 && (
           <motion.div 
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
