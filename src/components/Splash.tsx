@@ -19,7 +19,8 @@ export default function Splash() {
           muted 
           loop 
           playsInline 
-          className="hidden md:block w-full h-full object-cover" 
+          className="hidden md:block w-full h-full object-cover pointer-events-none" 
+          style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
         />
         {/* Mobile Video */}
         <video 
@@ -28,8 +29,18 @@ export default function Splash() {
           muted 
           loop 
           playsInline 
-          className="block md:hidden w-full h-full object-cover object-[60%_center]" 
+          className="block md:hidden w-full h-full object-cover object-[60%_center] pointer-events-none" 
+          style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
         />
+        <style jsx global>{`
+          video::-webkit-media-controls {
+            display: none !important;
+          }
+          video::-webkit-media-controls-start-playback-button {
+            display: none !important;
+            -webkit-appearance: none;
+          }
+        `}</style>
 
       </motion.div>
     </div>
