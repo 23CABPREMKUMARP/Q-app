@@ -25,7 +25,7 @@ export default function Splash() {
         {/* Mobile Video - Use transparent poster to prevent play button flash */}
         <div className="block md:hidden w-full h-full relative flex items-center justify-center bg-black">
           <video 
-            src="/upscaled-video.mp4" 
+            src="/upscaled-video (3).mp4" 
             autoPlay 
             muted 
             loop 
