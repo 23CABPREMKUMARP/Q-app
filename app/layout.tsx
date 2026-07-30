@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
   icons: {
-    icon: '/hero-logo.png',
-    apple: '/hero-logo.png',
+    icon: '/icon.png',
+    apple: '/icon.png',
   }
 };
 
