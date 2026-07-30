@@ -635,7 +635,7 @@ export default function TicketCountSelectionPage() {
                       {/* Phone */}
                       <div className="mb-4">
                         <div className="flex justify-between items-center mb-1 pl-1">
-                          <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block">Phone Number</label>
+                          <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block">Phone Number <span className="text-[#EF4444]">*</span></label>
                           {index > 0 && (
                             <label className="flex items-center gap-1.5 cursor-pointer hover:bg-zinc-100 px-2 py-0.5 rounded transition-colors">
                               <input 
@@ -710,8 +710,12 @@ export default function TicketCountSelectionPage() {
 
                 <button 
                   onClick={() => setStep(3)}
-                  disabled={passengers.some(p => !p.boarding || !p.destination)}
-                  className="w-full h-20 bg-[#FF6D00] text-[#1A0B00] rounded-[32px] font-black text-xl tracking-tighter hover:bg-[#EF4444] active:bg-[#EF4444] transition-all flex items-center justify-center gap-3 disabled:opacity-50 mt-8 active:scale-95 shadow-lg shadow-[#FF6D00]/20"
+                  disabled={!passengers.every(p => p.boarding && p.destination && p.phone && p.phone.length >= 10)}
+                  className={`w-full h-20 rounded-[32px] font-black text-xl tracking-tighter transition-all flex items-center justify-center gap-3 mt-8 shadow-lg shadow-[#FF6D00]/20 ${
+                    passengers.every(p => p.boarding && p.destination && p.phone && p.phone.length >= 10)
+                      ? 'bg-[#FF6D00] text-[#1A0B00] hover:bg-[#EF4444] active:bg-[#EF4444] active:scale-95'
+                      : 'bg-zinc-200 text-zinc-400 opacity-80 cursor-not-allowed'
+                  }`}
                 >
                   Proceed to Payment <ChevronRight size={24} />
                 </button>
