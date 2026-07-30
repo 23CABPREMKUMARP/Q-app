@@ -38,7 +38,7 @@ export default function TicketCountSelectionPage() {
   const [bookingResult, setBookingResult] = useState<any>(null);
   const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
   const [passengers, setPassengers] = useState<Array<{ phone: string, luggage: string, destination: string, boarding: string, fare: number }>>([
-    { phone: '', luggage: 'None', destination: '', boarding: '', fare: 20 }
+    { phone: '', luggage: 'None', destination: '', boarding: '', fare: 1 }
   ]);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
@@ -49,16 +49,11 @@ export default function TicketCountSelectionPage() {
     }
   }, [step]);
 
-  const LUGGAGE_PRICES: Record<string, number> = { None: 0, Small: 1, Medium: 2, Large: 3 };
+  const LUGGAGE_PRICES: Record<string, number> = { None: 0, Small: 0, Medium: 0, Large: 0 };
     const calculateFare = (boarding: string, destination: string) => {
-    if (!boarding || !destination) return 20;
-    const bIndex = stops.findIndex((s: any) => s.stopName === boarding);
-    const dIndex = stops.findIndex((s: any) => s.stopName === destination);
-    if (bIndex === -1 || dIndex === -1) return 20;
-    const stopsCount = Math.abs(dIndex - bIndex);
-    return Math.max(10, stopsCount * 5);
+    return 1;
   };
-  const totalAmount = passengers.reduce((sum, p) => sum + (p.fare || 20) + (LUGGAGE_PRICES[p.luggage] || 0), 0);
+  const totalAmount = passengers.reduce((sum, p) => sum + (p.fare || 1) + (LUGGAGE_PRICES[p.luggage] || 0), 0);
   const { width, height } = typeof window !== 'undefined' ? { width: window.innerWidth, height: window.innerHeight } : { width: 0, height: 0 };
   const [phonePeMethod, setPhonePeMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
 
@@ -151,7 +146,7 @@ export default function TicketCountSelectionPage() {
               luggage: 'None', 
               boarding: matchedBoarding?.stopName || '', 
               destination: matchedDrop?.stopName || '',
-              fare: 20
+              fare: 1
             }]);
           }
         } catch (e) {}
@@ -337,7 +332,7 @@ export default function TicketCountSelectionPage() {
   const handleIncrement = () => {
     if (ticketCount < 10) {
       setTicketCount(prev => prev + 1);
-      setPassengers(prev => [...prev, { phone: '', luggage: 'None', boarding: prev[prev.length - 1]?.destination || '', destination: '', fare: 20 }]);
+      setPassengers(prev => [...prev, { phone: '', luggage: 'None', boarding: prev[prev.length - 1]?.destination || '', destination: '', fare: 1 }]);
     }
   };
 
@@ -411,7 +406,7 @@ export default function TicketCountSelectionPage() {
             luggage: p.luggage,
             boarding: p.boarding || '',
             destination: p.destination || '',
-            fare: p.fare || 20
+            fare: p.fare || 1
           })),
         })
       });
@@ -694,7 +689,7 @@ export default function TicketCountSelectionPage() {
                         </div>
                         <div className="ml-4 text-right">
                            <span className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block mb-1">Fare</span>
-                           <span className="text-xl font-black text-[#1A0B00]">₹{passenger.fare || 20}</span>
+                           <span className="text-xl font-black text-[#1A0B00]">₹{passenger.fare || 1}</span>
                         </div>
                       </div>
                     </div>
