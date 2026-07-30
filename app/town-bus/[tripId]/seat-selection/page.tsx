@@ -1021,11 +1021,16 @@ export default function TicketCountSelectionPage() {
           >
             <button 
               onClick={handleProceed}
-              className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-[#1A0B00] h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] active:scale-95 transition-transform"
+              disabled={!passengers.every(p => p.phone && p.phone.length >= 10 && p.destination)}
+              className={`w-full h-16 rounded-[24px] font-black uppercase tracking-widest text-sm flex items-center justify-between px-6 transition-all duration-300 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] ${
+                passengers.every(p => p.phone && p.phone.length >= 10 && p.destination)
+                  ? 'bg-[#FFFFFF] border border-[#E5E7EB] text-[#1A0B00] active:scale-95'
+                  : 'bg-zinc-200 border border-zinc-300 text-zinc-400 opacity-80 cursor-not-allowed'
+              }`}
             >
               <div className="flex flex-col items-start">
-                <span className="text-[#1A0B00]">Proceed to Pay</span>
-                <span className="text-[10px] text-zinc-600 mt-0.5">
+                <span className={passengers.every(p => p.phone && p.phone.length >= 10 && p.destination) ? "text-[#1A0B00]" : "text-zinc-500"}>Proceed to Pay</span>
+                <span className={`text-[10px] mt-0.5 ${passengers.every(p => p.phone && p.phone.length >= 10 && p.destination) ? "text-zinc-600" : "text-zinc-400"}`}>
                   {ticketCount} {ticketCount === 1 ? 'Seat' : 'Seats'} {passengers.some(p => p.luggage !== 'None') && `(+ Luggage)`}
                 </span>
               </div>
