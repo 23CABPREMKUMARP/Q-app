@@ -22,10 +22,14 @@ export default function Splash() {
           className="hidden md:block w-full h-full object-cover pointer-events-none" 
           style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
         />
-        {/* Mobile GIF (Replaces Video to prevent Play button flashing) */}
-        <img 
-          src="/upscaled-video.gif" 
-          alt="Loading..."
+        {/* Mobile Video (Reverted to MP4 for smooth playback, with opacity trick to hide play button if blocked) */}
+        <video 
+          src="/upscaled-video.mp4" 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          controls={false}
           className="block md:hidden w-full h-full object-cover object-[60%_center] pointer-events-none" 
           style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
         />
