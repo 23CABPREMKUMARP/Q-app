@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.jeffben.app',
   appName: 'jeffben',
   webDir: 'public',
-  backgroundColor: '#FF6D00',
+  backgroundColor: '#000000',
   server: {
     url: 'https://jeffben.org',
     cleartext: false,

@@ -22,12 +22,18 @@ export default function Splash() {
           className="hidden md:block w-full h-full object-cover pointer-events-none" 
           style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
         />
-        {/* Mobile View - GIF completely bypasses the OS video player, physically preventing any Play Button overlays! */}
+        {/* Mobile Video - Use transparent poster to prevent play button flash */}
         <div className="block md:hidden w-full h-full relative flex items-center justify-center bg-black">
-          <img 
-            src="/upscaled-video.gif" 
-            alt="Loading..."
-            className="w-full h-full object-cover object-[60%_center] pointer-events-none" 
+          <video 
+            src="/upscaled-video.mp4" 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            controls={false}
+            preload="auto"
+            poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            className="w-full h-full object-cover object-[60%_center] pointer-events-none [&::-webkit-media-controls]:hidden" 
             style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
           />
         </div>
