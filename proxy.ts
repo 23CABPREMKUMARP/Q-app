@@ -13,7 +13,7 @@ const isPublicRoute = createRouteMatcher([
   "/favicon.ico",
   "/manifest.json",
   "/manifest.webmanifest",
-  "/logo2.png",
+  "/smart-tamizha-logo.png",
   "/hero-logo.png",
   "/smart-bus.png",
   "/bus-marker-3d.png",

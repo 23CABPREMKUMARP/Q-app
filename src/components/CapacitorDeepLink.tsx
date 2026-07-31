@@ -30,6 +30,11 @@ export function CapacitorDeepLink() {
               router.push(`/get-ticket?ticketId=${ticketId}`);
             } else if (path.startsWith("/profile")) {
               router.push("/profile");
+            } else if (path.startsWith("/sso-callback")) {
+              import("@capacitor/browser").then(({ Browser }) => {
+                Browser.close().catch(() => {});
+              });
+              router.push(`${path}${search}`);
             } else if (path !== "/") {
               router.push(`${path}${search}`);
             }

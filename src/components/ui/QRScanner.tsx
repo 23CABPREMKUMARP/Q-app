@@ -175,7 +175,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onClose }) => {
       {/* Top Left: Logo & Manual Entry */}
       <div className="absolute top-12 left-6 z-20 flex flex-col gap-4 items-start">
         <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-[#E5E7EB]">
-          <img src="/smart-tamizha-logo.png" alt="Smart Thamizha" className="w-auto h-8 object-contain" />
+          <img src="/smart-tamizha-logo.png" alt="Smart Tamizha" className="w-auto h-8 object-contain" />
           <div className="flex flex-col">
             <span className="text-[8px] font-bold text-[#FF6D00] tracking-widest uppercase mt-1">Scanner</span>
           </div>

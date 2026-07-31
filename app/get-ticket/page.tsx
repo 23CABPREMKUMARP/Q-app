@@ -10,8 +10,10 @@ import { BusCodeSearch } from "@/src/components/BusCodeSearch";
 import { WatermarkOverlay } from "@/src/components/ui/WatermarkOverlay";
 import { PremiumBoardingPass } from "@/src/components/PremiumBoardingPass";
 import SecureView from "@/src/components/SecureView";
+import { useUser } from "@clerk/nextjs";
 
 export default function GetTicketPage() {
+  const { user } = useUser();
   const [phone, setPhone] = useState("");
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -25,15 +27,20 @@ export default function GetTicketPage() {
   const [selectedTicket, setSelectedTicket] = useState<any>(null);
 
 
-  // Pre-load phone number from localStorage if present
+  // Pre-load phone number from Clerk or localStorage if present
   useEffect(() => {
-    const savedPhone = localStorage.getItem("registeredPhone");
+    let savedPhone = localStorage.getItem("registeredPhone");
+    
+    if (!savedPhone && user?.primaryPhoneNumber?.phoneNumber) {
+      savedPhone = user.primaryPhoneNumber.phoneNumber.replace(/\D/g, "").slice(-10);
+      localStorage.setItem("registeredPhone", savedPhone);
+    }
+    
     if (savedPhone) {
       setPhone(savedPhone);
-      // Auto trigger fetch
       fetchBookings(savedPhone);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);

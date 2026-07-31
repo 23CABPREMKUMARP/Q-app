@@ -160,7 +160,7 @@ export default function ProductPage() {
           className="container mx-auto px-6 max-w-4xl text-center pb-20 -mt-10 md:-mt-64 relative z-10"
         >
           <p className="text-base md:text-xl text-[#1A0B00] font-medium leading-relaxed">
-            JEFFBEN Systems is spearheading the digital transformation of urban mobility across Tamil Nadu. Through our proprietary Smart Thamizha framework, we deploy advanced automated fare collection and mission-critical fleet intelligence systems. Our mission is to provide transport authorities with robust, data-driven operational control while delivering a premier, frictionless experience for every commuter.
+            JEFFBEN Systems is spearheading the digital transformation of urban mobility across Tamil Nadu. Through our proprietary Smart Tamizha framework, we deploy advanced automated fare collection and mission-critical fleet intelligence systems. Our mission is to provide transport authorities with robust, data-driven operational control while delivering a premier, frictionless experience for every commuter.
           </p>
         </motion.div>
       </section>

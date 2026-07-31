@@ -18,11 +18,11 @@ export default function MobileDashboard() {
   const router = useRouter();
   const { user } = useUser();
   const [buses, setBuses] = useState<any[]>([]);
-  const [walletBalance, setWalletBalance] = useState("250.00");
+  const [walletBalance, setWalletBalance] = useState("2000.00");
   const [activeBookingsCount, setActiveBookingsCount] = useState(0);
   const [totalSpent, setTotalSpent] = useState(0);
   const [showNotification, setShowNotification] = useState(false);
-  const [notificationText, setNotificationText] = useState({ title: "Welcome to Smart Thamizha!", message: "Your journey begins here." });
+  const [notificationText, setNotificationText] = useState({ title: "Welcome to Smart Tamizha!", message: "Your journey begins here." });
   const [notifications, setNotifications] = useState<any[]>([]);
   const [showNotificationsModal, setShowNotificationsModal] = useState(false);
   const [liveTripTrack, setLiveTripTrack] = useState<any>(null);
@@ -52,7 +52,12 @@ export default function MobileDashboard() {
     };
     fetchBusesData();
 
-    const phone = localStorage.getItem("registeredPhone");
+    let phone = localStorage.getItem("registeredPhone");
+    if (!phone && user?.primaryPhoneNumber?.phoneNumber) {
+      phone = user.primaryPhoneNumber.phoneNumber.replace(/\D/g, "").slice(-10);
+      localStorage.setItem("registeredPhone", phone);
+    }
+
     if (phone) {
       const fetchBookings = async () => {
         try {
@@ -67,6 +72,7 @@ export default function MobileDashboard() {
             setActiveBookingsCount(confirmedPaid.length);
             const spent = confirmedPaid.reduce((sum: number, b: any) => sum + (Number(b.ticketPrice) || Number(b.amount) || Number(b.totalAmount) || 0), 0);
             setTotalSpent(spent);
+            setWalletBalance((2000 - spent).toFixed(2));
             
             // Check if any of passenger's booked buses are active
             const activeBus = confirmedPaid.find((b: any) => 
@@ -116,7 +122,7 @@ export default function MobileDashboard() {
     }
 
     return () => {};
-  }, []);
+  }, [user]);
 
   return (
     <AnimatePresence mode="wait">
@@ -334,14 +340,17 @@ export default function MobileDashboard() {
           <div className="bg-[#FFFFFF] rounded-2xl p-4 shadow-sm">
             <h3 className="text-[13px] font-bold text-slate-800 mb-4 px-1">Spends & Passes</h3>
             <div className="flex gap-4">
-              <div className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border border-slate-100 flex flex-col justify-center">
-                <div className="flex items-center gap-2 text-[#6B7280] mb-2">
+              <div className="flex-1 bg-[#FFFFFF] rounded-xl p-3 border border-slate-100 flex flex-col justify-center relative overflow-hidden">
+                <div className="flex items-center gap-2 text-[#6B7280] mb-1">
                   <WalletCards size={16} className="text-[#FF6D00]" />
-                  <span className="text-[11px] font-semibold truncate">Smart Thamizha App</span>
+                  <span className="text-xs font-semibold">Wallet Ledger</span>
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-[#1A0B00] leading-tight">₹{totalSpent.toLocaleString('en-IN')}</p>
-                  <span className="text-[9px] font-bold text-[#6B7280] uppercase tracking-widest block mt-0.5">Amount used to purchase ticket</span>
+                  <p className="text-lg font-bold text-[#1A0B00] leading-tight">₹{walletBalance}</p>
+                  <span className="text-[9px] font-bold text-[#6B7280] uppercase tracking-widest block mt-0.5">Available Balance</span>
+                </div>
+                <div className="absolute -right-4 -bottom-4 opacity-5">
+                  <Wallet size={64} className="text-[#1A0B00]" />
                 </div>
               </div>
               
@@ -569,7 +578,7 @@ export default function MobileDashboard() {
 
                 <div className="space-y-4">
                   <div className="text-center py-2">
-                    <p className="text-sm text-[#6B7280] font-medium">Coming soon. Unlock exclusive benefits, priority booking, and unlimited transit across the Smart Thamizha network.</p>
+                    <p className="text-sm text-[#6B7280] font-medium">Coming soon. Unlock exclusive benefits, priority booking, and unlimited transit across the Smart Tamizha network.</p>
                   </div>
                   
                   {/* Tiers */}

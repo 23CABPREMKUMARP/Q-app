@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 import { 
   ArrowLeft, Phone, Search, Loader2, Ticket, MapPin, 
   Clock, Calendar, QrCode, ShieldCheck, Download, Zap, 
@@ -39,14 +40,22 @@ export default function HistoryPage() {
     }, 150);
   };
 
-  // Pre-load phone number from localStorage if present
+  const { user } = useUser();
+
+  // Pre-load phone number from Clerk or localStorage if present
   useEffect(() => {
-    const savedPhone = localStorage.getItem("registeredPhone");
+    let savedPhone = localStorage.getItem("registeredPhone");
+    
+    if (!savedPhone && user?.primaryPhoneNumber?.phoneNumber) {
+      savedPhone = user.primaryPhoneNumber.phoneNumber.replace(/\D/g, "").slice(-10);
+      localStorage.setItem("registeredPhone", savedPhone);
+    }
+    
     if (savedPhone) {
       setPhone(savedPhone);
       fetchBookings(savedPhone);
     }
-  }, []);
+  }, [user]);
 
   const fetchBookings = async (phoneNum: string) => {
     setLoading(true);
@@ -99,7 +108,7 @@ export default function HistoryPage() {
     items.push({
       id: "limit-allocation-init",
       type: "limit",
-      title: "Smart Thamizha Ticket Purchases",
+      title: "Smart Tamizha Ticket Purchases",
       subtitle: "Amount used to purchase ticket",
       date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
       amount: 2000,

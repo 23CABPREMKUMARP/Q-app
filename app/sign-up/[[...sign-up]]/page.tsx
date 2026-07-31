@@ -1,5 +1,6 @@
 import { SignUp } from "@clerk/nextjs";
 import Image from "next/image";
+import { GoogleAuthButton } from "@/src/components/GoogleAuthButton";
 
 export default function SignUpPage() {
   return (
@@ -17,7 +18,7 @@ export default function SignUpPage() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-4">
             <div className="relative w-12 h-12">
-              <Image src="/logo2.png" alt="Smart Thamizha" fill sizes="48px" className="object-contain" priority />
+              <Image src="/smart-tamizha-logo.png" alt="Smart Tamizha" fill sizes="48px" className="object-contain" priority />
             </div>
             <div className="w-px h-8 bg-slate-200" />
             <div className="relative w-12 h-12">
@@ -32,8 +33,31 @@ export default function SignUpPage() {
           </div>
         </div>
 
-        {/* Clerk SignUp Component */}
-        <SignUp />
+        <div className="space-y-4">
+          <GoogleAuthButton mode="signUp" />
+          
+          <div className="flex items-center gap-3">
+            <div className="h-px bg-slate-200 flex-1"></div>
+            <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">OR</span>
+            <div className="h-px bg-slate-200 flex-1"></div>
+          </div>
+          
+          {/* Clerk SignUp Component */}
+          <SignUp
+            appearance={{
+              layout: {
+                showOptionalFields: false,
+              },
+              elements: {
+                socialButtonsBlockButton: "hidden",
+                dividerRow: "hidden",
+                card: "shadow-none border-none p-0",
+                header: "hidden",
+                footer: "hidden"
+              }
+            }}
+          />
+        </div>
 
         {/* Footer note */}
         <p className="text-center text-[10px] text-[#6B7280] font-medium uppercase tracking-widest">
