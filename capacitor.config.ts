@@ -17,7 +17,11 @@ const config: CapacitorConfig = {
       'razorpay.com',
       '*.payu.in',
       '*.stripe.com',
-      '*.cashfree.com'
+      '*.cashfree.com',
+      '*.clerk.accounts.dev',
+      'clerk.accounts.dev',
+      '*.clerk.dev',
+      'clerk.dev'
     ]
   },
   android: {
