@@ -161,38 +161,6 @@ export default function EnterpriseConductorPortal() {
     }
   }, [isAuthenticated]);
 
-  // Simulated GPS Telemetry Broadcast updates
-  useEffect(() => {
-    let interval: any = null;
-    if (broadcasting && !isOffline) {
-      interval = setInterval(() => {
-        setPathIndex((prev) => {
-          const nextIndex = (prev + 1) % routePathCoordinates.length;
-          const nextCoord = routePathCoordinates[nextIndex];
-          setLat(nextCoord.lat);
-          setLng(nextCoord.lng);
-          
-          fetch("/api/conductor/update-trip", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              busId: busDbId || "65f02cdcf8dbd5225c588825",
-              status: tripStatus,
-              speed: speed > 0 ? speed : 48,
-              lat: nextCoord.lat,
-              lng: nextCoord.lng
-            })
-          }).catch(console.error);
-
-          return nextIndex;
-        });
-      }, 5000);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [broadcasting, busDbId, tripStatus, speed, isOffline]);
-
   // Check Clerk User Assignment
   useEffect(() => {
     if (isLoaded) {
@@ -1489,8 +1457,15 @@ export default function EnterpriseConductorPortal() {
                         onClick={() => {
                           const next = !gpsEnabled;
                           setGpsEnabled(next);
-                          if (!next) setBroadcasting(false);
-                          else { setBroadcasting(true); setTripStatus('Trip Started'); }
+                          if (!next) {
+                            setBroadcasting(false);
+                            setTripStatus('Completed');
+                            triggerTripBroadcast('Completed');
+                          } else { 
+                            setBroadcasting(true); 
+                            setTripStatus('Trip Started');
+                            triggerTripBroadcast('Trip Started');
+                          }
                           playBeep(true);
                         }}
                         disabled={!busDbId}
