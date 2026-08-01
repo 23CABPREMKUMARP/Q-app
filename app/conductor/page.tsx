@@ -1491,13 +1491,13 @@ export default function EnterpriseConductorPortal() {
                     <div className="grid grid-cols-2 gap-3 font-mono">
                       <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-xl p-3 border border-zinc-300">
                         <span className="text-[8px] font-bold text-zinc-500 block uppercase tracking-wider mb-1">Latitude</span>
-                        <span className="text-sm font-bold text-zinc-200">
+                        <span className="text-sm font-bold text-zinc-900">
                           {gpsState.lat !== null ? gpsState.lat.toFixed(6) : (lat !== 0 ? lat.toFixed(6) : '—')}
                         </span>
                       </div>
                       <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded-xl p-3 border border-zinc-300">
                         <span className="text-[8px] font-bold text-zinc-500 block uppercase tracking-wider mb-1">Longitude</span>
-                        <span className="text-sm font-bold text-zinc-200">
+                        <span className="text-sm font-bold text-zinc-900">
                           {gpsState.lng !== null ? gpsState.lng.toFixed(6) : (lng !== 0 ? lng.toFixed(6) : '—')}
                         </span>
                       </div>
