@@ -16,6 +16,7 @@
     "@capacitor/cli": "^8.3.4",
     "@capacitor/core": "^8.3.4",
     "@capacitor/geolocation": "^8.2.0",
+    "@capawesome/capacitor-background-task": "^8.0.2",
     "@clerk/nextjs": "^7.3.5",
     "@react-pdf/renderer": "^4.3.2",
     "@supabase/supabase-js": "^2.108.2",

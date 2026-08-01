@@ -39,6 +39,9 @@ function LiveMapContent() {
   const searchParams = useSearchParams();
   const targetBusId = searchParams.get("busId");
 
+  const [notification, setNotification] = useState<{ message: string, title?: string } | null>(null);
+  const notified5kmRef = useRef(false);
+
   // ── State ──────────────────────────────────────────────────────────────────
   const [buses, setBuses] = useState<BusData[]>([]); // Real buses fetched from DB
   const [selectedBus, setSelectedBus] = useState<BusData | null>(null);
@@ -58,6 +61,29 @@ function LiveMapContent() {
   });
 
   const liveCount = Object.values(livePositions).filter((p) => p.deviceStatus === "Online").length;
+
+  // ── Proximity Notification ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (!targetBusId || !userLocation) return;
+    const live = livePositions[targetBusId];
+    if (live && live.lat && live.lng) {
+      // Calculate distance between userLocation and live
+      const R = 6371; // km
+      const dLat = (live.lat - userLocation.lat) * Math.PI / 180;
+      const dLng = (live.lng - userLocation.lng) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(userLocation.lat * Math.PI / 180) * Math.cos(live.lat * Math.PI / 180) *
+                Math.sin(dLng/2) * Math.sin(dLng/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      const distance = R * c;
+
+      if (distance <= 5.0 && !notified5kmRef.current) {
+        setNotification({ title: "Bus Approaching!", message: "Your bus is within 5 km of your location." });
+        notified5kmRef.current = true;
+        setTimeout(() => setNotification(null), 8000); // Hide after 8s
+      }
+    }
+  }, [livePositions, targetBusId, userLocation]);
 
   // ── Fetch Buses ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -150,6 +176,31 @@ function LiveMapContent() {
           showStops={false}
         />
       </div>
+
+      {/* ── NOTIFICATION TOAST ───────────────────────────────────────────── */}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="absolute top-20 inset-x-4 z-[600] pointer-events-none"
+          >
+            <div className="max-w-md mx-auto bg-[#FFFFFF] rounded-2xl shadow-2xl border border-[#FF6D00]/20 p-4 flex items-start gap-3 pointer-events-auto">
+              <div className="w-10 h-10 bg-[#FF6D00]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <Bus size={20} className="text-[#FF6D00]" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm font-black text-gray-900">{notification.title}</h3>
+                <p className="text-xs font-semibold text-gray-500 mt-0.5">{notification.message}</p>
+              </div>
+              <button onClick={() => setNotification(null)} className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 text-gray-400 hover:text-gray-600">
+                <X size={14} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── TOP BAR (Google Maps style) ──────────────────────────────────── */}
       <div className="absolute top-0 inset-x-0 z-[500] p-3 md:p-4 pointer-events-none">

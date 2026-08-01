@@ -4,7 +4,20 @@ import { supabase } from "@/src/lib/supabase";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { busId, conductorId, lat, lng, speed = 0, heading = 0 } = body;
+    // Support for offline bulk sync
+    const isBulk = Array.isArray(body.locations);
+    const locations = isBulk ? body.locations : [body];
+
+    if (locations.length === 0) {
+      return NextResponse.json({ success: true, message: "No locations to process" });
+    }
+
+    const { busId, conductorId } = locations[0];
+    
+    // We'll only use the LATEST location to broadcast and update the buses table
+    // Historical locations are useful for 'bus_tracking' historical table (if it exists)
+    const latestLocationRaw = locations[locations.length - 1];
+    const { lat, lng, speed = 0, heading = 0 } = latestLocationRaw;
 
     if (!busId || !lat || !lng) {
       return NextResponse.json({ success: false, error: "busId, lat, lng are required" }, { status: 400 });
@@ -59,6 +72,7 @@ export async function POST(req: Request) {
       ...locationPayload,
       timestamp: now,
       deviceStatus: "Online",
+      bulkSyncedCount: isBulk ? locations.length : 1
     };
 
     await supabase.channel(`gps:${busId}`).send({
@@ -79,6 +93,7 @@ export async function POST(req: Request) {
       message: "GPS location updated",
       location: locationPayload,
       timestamp: now,
+      syncedCount: locations.length
     });
   } catch (error: any) {
     console.error("GPS Update Error:", error);

@@ -14,6 +14,7 @@ import {
 
 import { BusData, MapLayers } from "@/src/types";
 import SecureView from "@/src/components/SecureView";
+import { useBusRealtime } from "@/src/hooks/useBusRealtime";
 
 // Load LeafletBusMap dynamically to prevent SSR hydration issues with Leaflet
 const LiveBusMap = dynamic(() => import("@/src/components/map/LiveBusMap"), { ssr: false });
@@ -58,6 +59,9 @@ function EnterpriseAdminDashboardContent() {
   const [luggageBookings, setLuggageBookings] = useState<any[]>([]);
   const [routes, setRoutes] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Global fleet realtime tracking
+  const { positions: livePositions } = useBusRealtime({ pollFallbackMs: 5000 });
   
   // Real-time telemetry feed logs
   const [telemetryLogs, setTelemetryLogs] = useState<Array<{ id: string; time: string; text: string; type: 'info' | 'success' | 'warn' }>>([]);
@@ -727,8 +731,8 @@ function EnterpriseAdminDashboardContent() {
                     </div>
                     <div className="flex-1 w-full relative">
                       <LiveBusMap
-                        buses={[]}
-                        livePositions={{}}
+                        buses={filteredBuses}
+                        livePositions={livePositions}
                         onBusClick={() => {}}
                         showRoutes={false}
                         showStops={false}
