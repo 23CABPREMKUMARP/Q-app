@@ -1,6 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
 import Image from "next/image";
-import { GoogleAuthButton } from "@/src/components/GoogleAuthButton";
 
 export default function SignInPage() {
   return (
@@ -34,14 +33,6 @@ export default function SignInPage() {
         </div>
 
         <div className="space-y-4">
-          <GoogleAuthButton mode="signIn" />
-          
-          <div className="flex items-center gap-3">
-            <div className="h-px bg-slate-200 flex-1"></div>
-            <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">OR</span>
-            <div className="h-px bg-slate-200 flex-1"></div>
-          </div>
-          
           {/* Clerk SignIn Component */}
           <SignIn
             appearance={{
@@ -49,8 +40,6 @@ export default function SignInPage() {
                 showOptionalFields: false,
               },
               elements: {
-                socialButtonsBlockButton: "hidden",
-                dividerRow: "hidden",
                 card: "shadow-none border-none p-0",
                 header: "hidden",
                 footer: "hidden"
