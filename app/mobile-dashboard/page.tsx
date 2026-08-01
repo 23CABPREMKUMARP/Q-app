@@ -68,7 +68,7 @@ export default function MobileDashboard() {
           });
           const bookings = await res.json();
           if (Array.isArray(bookings)) {
-            const confirmedPaid = bookings.filter((b: any) => b.paymentStatus === "Paid");
+            const confirmedPaid = bookings.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid" || b.paymentStatus === "Completed");
             setActiveBookingsCount(confirmedPaid.length);
             const spent = confirmedPaid.reduce((sum: number, b: any) => sum + (Number(b.ticketPrice) || Number(b.amount) || Number(b.totalAmount) || 0), 0);
             setTotalSpent(spent);

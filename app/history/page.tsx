@@ -69,7 +69,7 @@ export default function HistoryPage() {
 
       if (res.ok) {
         const data = await res.json();
-        const paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid");
+        const paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid" || b.paymentStatus === "Completed");
         setBookings(paidBookings);
         localStorage.setItem("registeredPhone", phoneNum);
       }

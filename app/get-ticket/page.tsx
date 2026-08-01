@@ -59,7 +59,7 @@ export default function GetTicketPage() {
 
       if (res.ok) {
         const data = await res.json();
-        let paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid");
+        let paidBookings = data.filter((b: any) => !b.paymentStatus || b.paymentStatus === "Paid" || b.paymentStatus === "Completed");
         
         // Sort bookings: Valid first, closest to expiring first. Expired last.
         paidBookings.sort((a: any, b: any) => {

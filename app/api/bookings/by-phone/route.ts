@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     const { data: townBusBookings, error: townBusError } = await supabase
       .from('town_bus_bookings')
       .select('*, town_bus_trips(*)')
-      .eq('payment_status', 'Paid')
+      .in('payment_status', ['Paid', 'Completed'])
       .or(`passengers.cs.[{"phone": "${cleanPhone}"}],passengers.cs.[{"phone": "+91${cleanPhone}"}]`)
       .order('booking_date', { ascending: false });
 
