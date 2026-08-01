@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       .from('bookings')
       .select('*, buses(*, routes(*))')
       .eq('status', 'Confirmed')
-      .eq('phone', cleanPhone)
+      .or(`phone.eq.${cleanPhone},phone.eq.+91${cleanPhone}`)
       .order('created_at', { ascending: false });
 
     if (regularError) {
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
       .from('town_bus_bookings')
       .select('*, town_bus_trips(*)')
       .eq('payment_status', 'Paid')
-      .contains('passengers', `[{"phone": "${cleanPhone}"}]`)
+      .or(`passengers.cs.[{"phone": "${cleanPhone}"}],passengers.cs.[{"phone": "+91${cleanPhone}"}]`)
       .order('booking_date', { ascending: false });
 
     if (townBusError) {

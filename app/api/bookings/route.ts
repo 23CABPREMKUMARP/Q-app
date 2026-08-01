@@ -30,6 +30,7 @@ export async function POST(req: Request) {
       total_amount: totalAmount || 0,
       boarding_point: boardingPoint || "TRANSIT_HUB",
       destination: destination || "END_NODE",
+      phone: passengers?.[0]?.phone || "N/A",
       passengers: passengers,
       payment_status: "Paid",
       qr_token: qrToken,
