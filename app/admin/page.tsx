@@ -596,7 +596,7 @@ function EnterpriseAdminDashboardContent() {
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium transition-all ${
                     isActive 
                       ? "bg-zinc-800/60 text-[#1A0B00]" 
-                      : "text-zinc-600 hover:text-zinc-200 hover:bg-[#1A0B00]"
+                      : "text-zinc-600 hover:text-zinc-800 hover:bg-[#1A0B00]"
                   }`}
                 >
                   <Icon size={14} className={isActive ? "text-orange-500" : "text-zinc-500"} />
@@ -610,7 +610,7 @@ function EnterpriseAdminDashboardContent() {
           <div className="p-2 border-t border-zinc-800/50">
             <button 
               onClick={() => router.push("/")}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium text-zinc-600 hover:text-zinc-200 hover:bg-[#1A0B00] transition-all"
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium text-zinc-600 hover:text-zinc-800 hover:bg-[#1A0B00] transition-all"
             >
               <LogOut size={14} className="text-zinc-500" />
               Exit to Portal
@@ -625,7 +625,7 @@ function EnterpriseAdminDashboardContent() {
         {/* Top Header Bar */}
         <header className="h-14 border-b border-zinc-800/50 px-6 flex items-center justify-between select-none bg-[#0a0a0a] flex-shrink-0 z-10">
           <div className="flex items-center gap-4">
-            <h2 className="text-[13px] font-medium text-zinc-300 capitalize">
+            <h2 className="text-[13px] font-medium text-zinc-700 capitalize">
               {activeTab.replace("-", " ")}
             </h2>
             <div className="h-4 w-px bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00]"></div>
@@ -645,12 +645,12 @@ function EnterpriseAdminDashboardContent() {
                   placeholder="Search..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-[#1A0B00]/50 border border-zinc-300 rounded-md pl-9 pr-8 py-1.5 text-[13px] text-zinc-200 placeholder-zinc-500 w-56 outline-none focus:border-zinc-600 transition-all"
+                  className="bg-[#1A0B00]/50 border border-zinc-300 rounded-md pl-9 pr-8 py-1.5 text-[13px] text-zinc-800 placeholder-zinc-500 w-56 outline-none focus:border-zinc-600 transition-all"
                 />
                 {searchQuery && (
                   <X 
                     size={14} 
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 cursor-pointer hover:text-zinc-300" 
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 cursor-pointer hover:text-zinc-700" 
                     onClick={() => setSearchQuery("")} 
                   />
                 )}
@@ -659,7 +659,7 @@ function EnterpriseAdminDashboardContent() {
 
             <button 
               onClick={() => setRefreshKey(prev => prev + 1)}
-              className="p-1.5 rounded-md text-zinc-600 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+              className="p-1.5 rounded-md text-zinc-600 hover:text-zinc-800 hover:bg-zinc-800 transition-colors"
               title="Sync Data"
             >
               <RefreshCw size={14} className={isLoading ? "animate-spin text-orange-500" : ""} />
@@ -723,7 +723,7 @@ function EnterpriseAdminDashboardContent() {
                 <div className="lg:col-span-2 space-y-6">
                   <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl overflow-hidden h-[450px] flex flex-col">
                     <div className="px-4 py-3 border-b border-zinc-800/80 flex items-center justify-between bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] z-10">
-                      <h3 className="text-[13px] font-medium text-zinc-200">Live Operations Grid</h3>
+                      <h3 className="text-[13px] font-medium text-zinc-800">Live Operations Grid</h3>
                       <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-orange-500/10 border border-orange-500/20">
                         <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                         <span className="text-[10px] font-semibold text-orange-400 uppercase tracking-wider">Live</span>
@@ -745,7 +745,7 @@ function EnterpriseAdminDashboardContent() {
                     {/* Chart 1 */}
                     <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-5 space-y-4">
                       <div>
-                        <h3 className="text-[13px] font-medium text-zinc-200">Booking Volume</h3>
+                        <h3 className="text-[13px] font-medium text-zinc-800">Booking Volume</h3>
                         <p className="text-[11px] text-zinc-500 mt-0.5">Today's transactions by hour</p>
                       </div>
                       <div className="h-32 w-full flex items-end">
@@ -765,7 +765,7 @@ function EnterpriseAdminDashboardContent() {
                     {/* Chart 2 */}
                     <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-5 space-y-4">
                       <div>
-                        <h3 className="text-[13px] font-medium text-zinc-200">Average Occupancy</h3>
+                        <h3 className="text-[13px] font-medium text-zinc-800">Average Occupancy</h3>
                         <p className="text-[11px] text-zinc-500 mt-0.5">Load factor across active routes</p>
                       </div>
                       <div className="h-32 w-full flex items-end">
@@ -789,7 +789,7 @@ function EnterpriseAdminDashboardContent() {
                   {/* Alerts */}
                   <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-[13px] font-medium text-zinc-200">System Alerts</h3>
+                      <h3 className="text-[13px] font-medium text-zinc-800">System Alerts</h3>
                       <span className="px-2 py-0.5 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] rounded text-[10px] font-medium text-zinc-600">
                         {activeAlerts.length}
                       </span>
@@ -801,7 +801,7 @@ function EnterpriseAdminDashboardContent() {
                             <AlertTriangle size={14} />
                           </div>
                           <div>
-                            <div className="text-[12px] font-medium text-zinc-300 leading-snug">{alert.text}</div>
+                            <div className="text-[12px] font-medium text-zinc-700 leading-snug">{alert.text}</div>
                             <div className="text-[10px] text-zinc-500 mt-1">{alert.time}</div>
                           </div>
                         </div>
@@ -811,7 +811,7 @@ function EnterpriseAdminDashboardContent() {
 
                   {/* Ticker */}
                   <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-4 h-[350px] flex flex-col">
-                    <h3 className="text-[13px] font-medium text-zinc-200 mb-4">Activity Stream</h3>
+                    <h3 className="text-[13px] font-medium text-zinc-800 mb-4">Activity Stream</h3>
                     <div className="flex-1 overflow-y-auto space-y-3 scrollbar-none">
                       {telemetryLogs.map(log => (
                         <div key={log.id} className="flex gap-3 items-start text-[12px]">
@@ -858,7 +858,7 @@ function EnterpriseAdminDashboardContent() {
                 ].map((c, i) => (
                   <div key={i} className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-4 flex items-center justify-between">
                     <span className="text-[12px] font-medium text-zinc-600">{c.label}</span>
-                    <span className="text-xl font-semibold text-zinc-200">{c.count}</span>
+                    <span className="text-xl font-semibold text-zinc-800">{c.count}</span>
                   </div>
                 ))}
               </div>
@@ -892,8 +892,8 @@ function EnterpriseAdminDashboardContent() {
 
                       return (
                       <tr key={bus._id} className="hover:bg-zinc-800/20 transition-colors">
-                        <td className="py-3 px-5 font-mono text-zinc-300">{bus.busCode || 'BUS'}</td>
-                        <td className="py-3 px-5 text-zinc-200">{bus.busNumber}</td>
+                        <td className="py-3 px-5 font-mono text-zinc-700">{bus.busCode || 'BUS'}</td>
+                        <td className="py-3 px-5 text-zinc-800">{bus.busNumber}</td>
                         <td className="py-3 px-5">
                           <span className={`inline-flex items-center gap-1.5 ${bus.status === 'Running' ? 'text-[#FF6D00]' : 'text-zinc-600'}`}>
                             {bus.status === 'Running' ? <><Gauge size={12}/> {bus.speed} km/h</> : 'Stationary'}
@@ -926,7 +926,7 @@ function EnterpriseAdminDashboardContent() {
                         <td className="py-3 px-5 text-right space-x-2">
                           <button
                             onClick={() => handleRegenerateQR(bus._id)}
-                            className="p-1.5 rounded bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-zinc-600 hover:text-zinc-200 hover:bg-zinc-700 transition-colors"
+                            className="p-1.5 rounded bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-zinc-600 hover:text-zinc-800 hover:bg-zinc-700 transition-colors"
                             title="Regenerate QR"
                           >
                             <RefreshCw size={14} />
@@ -988,10 +988,10 @@ function EnterpriseAdminDashboardContent() {
                       <tr key={conductor.id} className="hover:bg-zinc-800/20 transition-colors">
                         <td className="py-3 px-5 font-mono text-zinc-600">{conductor.employee_id}</td>
                         <td className="py-3 px-5">
-                          <div className="font-medium text-zinc-200">{conductor.name}</div>
+                          <div className="font-medium text-zinc-800">{conductor.name}</div>
                           <div className="text-[11px] text-zinc-500">{conductor.email}</div>
                         </td>
-                        <td className="py-3 px-5 text-zinc-300">{conductor.assigned_bus || "—"}</td>
+                        <td className="py-3 px-5 text-zinc-700">{conductor.assigned_bus || "—"}</td>
                         <td className="py-3 px-5 text-zinc-600">{conductor.assigned_route || "—"}</td>
                         <td className="py-3 px-5">
                           <button
@@ -1057,14 +1057,14 @@ function EnterpriseAdminDashboardContent() {
                   <tbody className="divide-y divide-zinc-800/50 text-[13px]">
                     {routes.map((route, i) => (
                       <tr key={route.id || i} className="hover:bg-zinc-800/20 transition-colors">
-                        <td className="py-3 px-5 text-zinc-200">{route.origin} → {route.destination}</td>
-                        <td className="py-3 px-5 text-zinc-300 font-medium">₹{route.price}</td>
+                        <td className="py-3 px-5 text-zinc-800">{route.origin} → {route.destination}</td>
+                        <td className="py-3 px-5 text-zinc-700 font-medium">₹{route.price}</td>
                         <td className="py-3 px-5 text-zinc-600">{route.departure_time || "08:00 AM"}</td>
                         <td className="py-3 px-5 text-right">
                           <select 
                             onChange={(e) => handleUpdateCrowdStatus(route.id, e.target.value)}
                             value={route.status || "Scheduled"}
-                            className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                            className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-700 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
                           >
                             <option value="Scheduled">Scheduled</option>
                             <option value="Running">Active</option>
@@ -1105,24 +1105,24 @@ function EnterpriseAdminDashboardContent() {
                   <tbody className="divide-y divide-zinc-800/50 text-[13px]">
                     {filteredLuggage.map(parcel => (
                       <tr key={parcel.id} className="hover:bg-zinc-800/20 transition-colors">
-                        <td className="py-3 px-5 font-mono text-zinc-300">{parcel.tracking_id}</td>
+                        <td className="py-3 px-5 font-mono text-zinc-700">{parcel.tracking_id}</td>
                         <td className="py-3 px-5">
-                          <div className="text-zinc-200">{parcel.sender_details?.name || "Sender"}</div>
+                          <div className="text-zinc-800">{parcel.sender_details?.name || "Sender"}</div>
                           <div className="text-[11px] text-zinc-500">{parcel.sender_details?.phone || ""}</div>
                         </td>
                         <td className="py-3 px-5">
-                          <div className="text-zinc-200">{parcel.receiver_details?.name || "Receiver"}</div>
+                          <div className="text-zinc-800">{parcel.receiver_details?.name || "Receiver"}</div>
                           <div className="text-[11px] text-zinc-500">{parcel.receiver_details?.phone || ""}</div>
                         </td>
                         <td className="py-3 px-5 text-zinc-600">
                           {parcel.package_category || "General"} ({parcel.weight || "10"}kg)
                         </td>
-                        <td className="py-3 px-5 font-medium text-zinc-200">₹{parcel.total_amount || parcel.amount}</td>
+                        <td className="py-3 px-5 font-medium text-zinc-800">₹{parcel.total_amount || parcel.amount}</td>
                         <td className="py-3 px-5 text-right">
                           <select 
                             onChange={(e) => handleUpdateLuggageStatus(parcel.id, e.target.value)}
                             value={parcel.status}
-                            className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-300 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
+                            className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-700 text-[11px] rounded px-2 py-1 outline-none cursor-pointer hover:border-zinc-600 transition-colors"
                           >
                             <option value="Booked">Booked</option>
                             <option value="Picked up">Picked up</option>
@@ -1168,12 +1168,12 @@ function EnterpriseAdminDashboardContent() {
                   <tbody className="divide-y divide-zinc-800/50 text-[13px]">
                     {filteredBookings.map((b, idx) => (
                       <tr key={b.id || idx} className="hover:bg-zinc-800/20 transition-colors">
-                        <td className="py-3 px-5 font-mono text-zinc-300">{b.ticketId}</td>
+                        <td className="py-3 px-5 font-mono text-zinc-700">{b.ticketId}</td>
                         <td className="py-3 px-5 text-zinc-600 text-[11px]">ID: {b.userId?.substring(0, 8)}...</td>
-                        <td className="py-3 px-5 text-zinc-300">
+                        <td className="py-3 px-5 text-zinc-700">
                           {typeof b.tripId === "object" ? b.tripId?.bus_number : b.tripId?.substring(0, 8)} <span className="text-zinc-500 mx-1">/</span> {Array.isArray(b.seats) ? b.seats.join(", ") : b.seats || "1"}
                         </td>
-                        <td className="py-3 px-5 font-medium text-zinc-200">₹{b.totalAmount}</td>
+                        <td className="py-3 px-5 font-medium text-zinc-800">₹{b.totalAmount}</td>
                         <td className="py-3 px-5">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
                             b.paymentStatus === 'Paid' || b.paymentStatus === 'Confirmed' 
@@ -1215,7 +1215,7 @@ function EnterpriseAdminDashboardContent() {
       {isConductorModalOpen && (
         <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
           <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
-            <button onClick={() => setIsConductorModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
+            <button onClick={() => setIsConductorModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-700">
               <X size={16} />
             </button>
             <h3 className="text-[15px] font-medium text-[#1A0B00] mb-1">Assign Conductor</h3>
@@ -1224,24 +1224,43 @@ function EnterpriseAdminDashboardContent() {
             <form onSubmit={handleAddConductor} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Name</label>
-                <input type="text" required value={newConductor.name} onChange={(e) => setNewConductor(prev => ({ ...prev, name: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="text" required value={newConductor.name} onChange={(e) => setNewConductor(prev => ({ ...prev, name: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
               </div>
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Email</label>
-                <input type="email" required value={newConductor.email} onChange={(e) => setNewConductor(prev => ({ ...prev, email: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="email" required value={newConductor.email} onChange={(e) => setNewConductor(prev => ({ ...prev, email: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
               </div>
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Employee ID</label>
-                <input type="text" required value={newConductor.employee_id} onChange={(e) => setNewConductor(prev => ({ ...prev, employee_id: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="text" required value={newConductor.employee_id} onChange={(e) => setNewConductor(prev => ({ ...prev, employee_id: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Bus</label>
-                  <input type="text" value={newConductor.assigned_bus} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_bus: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <select 
+                    value={newConductor.assigned_bus} 
+                    onChange={(e) => {
+                      const busId = e.target.value;
+                      const bus = buses.find(b => b._id === busId || b.busNumber === busId);
+                      setNewConductor(prev => ({ 
+                        ...prev, 
+                        assigned_bus: busId,
+                        assigned_route: bus?.routeId?.routeName || (bus?.routeId?.from ? `${bus.routeId.from} - ${bus.routeId.to}` : prev.assigned_route)
+                      }));
+                    }} 
+                    className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600"
+                  >
+                    <option value="">Select a Bus</option>
+                    {buses.map(bus => (
+                      <option key={bus._id} value={bus._id || bus.busNumber}>
+                        {bus.busNumber} {bus.busCode ? `(${bus.busCode})` : ''}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Route</label>
-                  <input type="text" value={newConductor.assigned_route} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" value={newConductor.assigned_route} onChange={(e) => setNewConductor(prev => ({ ...prev, assigned_route: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
                 </div>
               </div>
               <button type="submit" className="w-full mt-2 bg-[#FFFFFF] hover:bg-zinc-200 text-[#1A0B00] font-medium text-[13px] py-2.5 rounded-md transition-colors">
@@ -1256,7 +1275,7 @@ function EnterpriseAdminDashboardContent() {
       {isBusModalOpen && (
         <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
           <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
-            <button onClick={() => setIsBusModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
+            <button onClick={() => setIsBusModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-700">
               <X size={16} />
             </button>
             <h3 className="text-[15px] font-medium text-[#1A0B00] mb-1">Add Fleet Vehicle</h3>
@@ -1265,12 +1284,12 @@ function EnterpriseAdminDashboardContent() {
             <form onSubmit={handleAddBus} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Registration Number</label>
-                <input type="text" required value={newBus.bus_number} onChange={(e) => setNewBus(prev => ({ ...prev, bus_number: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                <input type="text" required value={newBus.bus_number} onChange={(e) => setNewBus(prev => ({ ...prev, bus_number: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Type</label>
-                  <select value={newBus.type} onChange={(e) => setNewBus(prev => ({ ...prev, type: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600">
+                  <select value={newBus.type} onChange={(e) => setNewBus(prev => ({ ...prev, type: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600">
                     <option>Regular</option>
                     <option>Express</option>
                     <option>AC Sleeper</option>
@@ -1278,7 +1297,7 @@ function EnterpriseAdminDashboardContent() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Seats</label>
-                  <input type="number" required value={newBus.available_seats} onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="number" required value={newBus.available_seats} onChange={(e) => setNewBus(prev => ({ ...prev, available_seats: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
                 </div>
               </div>
               <button type="submit" className="w-full mt-2 bg-[#FFFFFF] hover:bg-zinc-200 text-[#1A0B00] font-medium text-[13px] py-2.5 rounded-md transition-colors">
@@ -1293,7 +1312,7 @@ function EnterpriseAdminDashboardContent() {
       {isRouteModalOpen && (
         <div className="fixed inset-0 bg-[#0a0a0a]/80 flex items-center justify-center p-6 z-50 backdrop-blur-sm select-none">
           <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-800/80 rounded-xl p-6 w-full max-w-md shadow-2xl relative">
-            <button onClick={() => setIsRouteModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-300">
+            <button onClick={() => setIsRouteModalOpen(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-700">
               <X size={16} />
             </button>
             <h3 className="text-[15px] font-medium text-[#1A0B00] mb-1">Create Route</h3>
@@ -1303,21 +1322,21 @@ function EnterpriseAdminDashboardContent() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Origin</label>
-                  <input type="text" required value={newRoute.origin} onChange={(e) => setNewRoute(prev => ({ ...prev, origin: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" required value={newRoute.origin} onChange={(e) => setNewRoute(prev => ({ ...prev, origin: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Destination</label>
-                  <input type="text" required value={newRoute.destination} onChange={(e) => setNewRoute(prev => ({ ...prev, destination: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="text" required value={newRoute.destination} onChange={(e) => setNewRoute(prev => ({ ...prev, destination: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Base Fare (₹)</label>
-                  <input type="number" required value={newRoute.fare} onChange={(e) => setNewRoute(prev => ({ ...prev, fare: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="number" required value={newRoute.fare} onChange={(e) => setNewRoute(prev => ({ ...prev, fare: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-medium text-zinc-600 mb-1.5">Total Seats</label>
-                  <input type="number" required value={newRoute.total_seats} onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-200 outline-none focus:border-zinc-600" />
+                  <input type="number" required value={newRoute.total_seats} onChange={(e) => setNewRoute(prev => ({ ...prev, total_seats: e.target.value }))} className="w-full bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-md px-3 py-2 text-[13px] text-zinc-800 outline-none focus:border-zinc-600" />
                 </div>
               </div>
               <button type="submit" className="w-full mt-2 bg-[#FFFFFF] hover:bg-zinc-200 text-[#1A0B00] font-medium text-[13px] py-2.5 rounded-md transition-colors">

@@ -123,7 +123,7 @@ export default function EnterpriseConductorPortal() {
 
   // Log Records
   const [logs, setLogs] = useState<any[]>([
-    { time: "08:30 AM", event: "Shift engaged by Employee EMP-9824", type: "system" },
+    { time: "08:30 AM", event: "Shift engaged by Employee EMP-N/A", type: "system" },
     { time: "09:12 AM", event: "Validated Ticket TB-849204 (Boarded: Gandhipuram)", type: "scan" },
     { time: "09:45 AM", event: "Completed Trip 1: Ukkadam Express", type: "trip" }
   ]);
@@ -140,14 +140,13 @@ export default function EnterpriseConductorPortal() {
 
   // Fetch Bus details and initialize trip status
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && busDbId) {
       fetch("/api/buses")
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) {
-            const matchedBus = data.find((b: any) => b.busCode === "1024");
+            const matchedBus = data.find((b: any) => b.id === busDbId || b._id === busDbId || b.busNumber === busDbId);
             if (matchedBus) {
-              setBusDbId(matchedBus._id);
               setTripStatus(matchedBus.status || "Scheduled");
               setSpeed(matchedBus.speed || 0);
               if (matchedBus.location) {
@@ -159,7 +158,7 @@ export default function EnterpriseConductorPortal() {
         })
         .catch((err) => console.error("Error fetching buses:", err));
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, busDbId]);
 
   // Check Clerk User Assignment
   useEffect(() => {
@@ -523,7 +522,7 @@ export default function EnterpriseConductorPortal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] flex flex-col items-center justify-center p-6 text-zinc-200 overflow-y-auto"
+            className="fixed inset-0 z-[1000] bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] flex flex-col items-center justify-center p-6 text-zinc-800 overflow-y-auto"
           >
             <div className="text-center space-y-4 max-w-md w-full p-8 border border-zinc-300 rounded-3xl bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] shadow-2xl relative">
               <div className="absolute top-0 left-0 w-80 h-80 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none" />
@@ -603,7 +602,7 @@ export default function EnterpriseConductorPortal() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${isActive ? "bg-orange-600 text-[#1A0B00] shadow-md shadow-orange-600/10" : "text-zinc-600 hover:text-zinc-200 hover:bg-zinc-800/40"}`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${isActive ? "bg-orange-600 text-[#1A0B00] shadow-md shadow-orange-600/10" : "text-zinc-600 hover:text-zinc-800 hover:bg-zinc-800/40"}`}
                   >
                     <Icon size={16} />
                     <span>{tab.label}</span>
@@ -615,12 +614,12 @@ export default function EnterpriseConductorPortal() {
             <div className="pt-4 border-t border-zinc-300 space-y-3">
               <div className="bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] p-3.5 rounded-xl border border-zinc-300 text-[10px] space-y-1">
                 <span className="text-zinc-500 font-bold uppercase block tracking-wider">Conductor ID</span>
-                <span className="text-zinc-200 font-black uppercase block">{employeeId || "EMP-9824"}</span>
+                <span className="text-zinc-800 font-black uppercase block">{employeeId || "EMP-N/A"}</span>
                 <span className="text-zinc-600 block pt-1">Conductor</span>
               </div>
               <button 
                 onClick={handleLogout}
-                className="w-full py-3 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] hover:bg-zinc-755 border border-zinc-300 text-zinc-300 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all active:scale-95"
+                className="w-full py-3 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] hover:bg-zinc-755 border border-zinc-300 text-zinc-700 text-[10px] font-black uppercase tracking-wider rounded-xl transition-all active:scale-95"
               >
                 Logout Shift
               </button>
@@ -632,7 +631,7 @@ export default function EnterpriseConductorPortal() {
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-1.5 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] hover:bg-zinc-750 border border-zinc-300 rounded-lg text-zinc-300 mr-0.5"
+                className="p-1.5 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] hover:bg-zinc-750 border border-zinc-300 rounded-lg text-zinc-700 mr-0.5"
               >
                 <Menu size={16} />
               </button>
@@ -731,7 +730,7 @@ export default function EnterpriseConductorPortal() {
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                               isActive 
                                 ? "bg-orange-600 text-[#1A0B00] shadow-md" 
-                                : "text-zinc-600 hover:text-zinc-200"
+                                : "text-zinc-600 hover:text-zinc-800"
                             }`}
                           >
                             <Icon size={14} />
@@ -771,8 +770,8 @@ export default function EnterpriseConductorPortal() {
               </div>
               
               <div className="flex items-center gap-4 text-xs font-bold text-zinc-600">
-                <span className="hidden sm:inline">Route: <strong className="text-zinc-200 uppercase">Coimbatore EXP-1024</strong></span>
-                <span>Bus: <strong className="text-zinc-200">1024</strong></span>
+                <span className="hidden sm:inline">Route: <strong className="text-zinc-800 uppercase">{assignedRouteName || "Coimbatore EXP"}</strong></span>
+                <span>Bus: <strong className="text-zinc-800">{busDbId || "Unknown"}</strong></span>
                 <span className="text-[10px] bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 px-2 py-0.5 rounded text-orange-400 font-mono">
                   {tripStatus}
                 </span>
@@ -793,7 +792,7 @@ export default function EnterpriseConductorPortal() {
                         <span className="text-[9px] bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] text-zinc-600 px-2 py-0.5 rounded font-mono">Shift Active</span>
                       </div>
                       <h2 className="text-2xl font-black uppercase tracking-tight text-[#1A0B00]">Rajesh Kumar</h2>
-                      <p className="text-xs text-zinc-500">Employee ID: <strong className="text-zinc-300">EMP-9824</strong> • Mobile: <strong className="text-zinc-300">9876543210</strong></p>
+                      <p className="text-xs text-zinc-500">Employee ID: <strong className="text-zinc-700">EMP-N/A</strong> • Mobile: <strong className="text-zinc-700">9876543210</strong></p>
                     </div>
 
                     <div className="flex flex-wrap gap-2 pt-2 md:pt-0">
@@ -857,7 +856,7 @@ export default function EnterpriseConductorPortal() {
                           <div key={i} className="flex gap-3 items-start text-xs">
                             <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 shrink-0" />
                             <div className="flex-1">
-                              <p className="text-zinc-200 font-medium">{log.event}</p>
+                              <p className="text-zinc-800 font-medium">{log.event}</p>
                               <p className="text-[9px] text-zinc-500 font-mono mt-0.5">{log.time} • {log.type}</p>
                             </div>
                           </div>
@@ -878,7 +877,7 @@ export default function EnterpriseConductorPortal() {
                               <span className="text-[9px] font-black uppercase tracking-wider text-orange-500">{n.title}</span>
                               <span className="text-[8px] text-zinc-500 font-mono">{n.time}</span>
                             </div>
-                            <p className="text-xs text-zinc-300 leading-snug">{n.message}</p>
+                            <p className="text-xs text-zinc-700 leading-snug">{n.message}</p>
                           </div>
                         ))}
                       </div>
@@ -974,15 +973,15 @@ export default function EnterpriseConductorPortal() {
                             <div className="w-full grid grid-cols-2 gap-4 pt-6 border-t border-zinc-300 text-left text-xs">
                               <div className="space-y-1">
                                 <span className="text-[9px] font-bold uppercase text-zinc-500 tracking-wider">Ticket ID</span>
-                                <p className="font-mono font-bold text-zinc-200">{scanResult.booking.ticketId || scanResult.booking.ticket_id}</p>
+                                <p className="font-mono font-bold text-zinc-800">{scanResult.booking.ticketId || scanResult.booking.ticket_id}</p>
                               </div>
                               <div className="space-y-1">
                                 <span className="text-[9px] font-bold uppercase text-zinc-500 tracking-wider">Passengers</span>
-                                <p className="font-bold text-zinc-200">{scanResult.booking.seats?.length || 1} {scanResult.booking.passengers?.some((p: any) => p.luggage && p.luggage !== 'None') && "(+ Luggage)"}</p>
+                                <p className="font-bold text-zinc-800">{scanResult.booking.seats?.length || 1} {scanResult.booking.passengers?.some((p: any) => p.luggage && p.luggage !== 'None') && "(+ Luggage)"}</p>
                               </div>
                               <div className="space-y-1">
                                 <span className="text-[9px] font-bold uppercase text-zinc-500 tracking-wider">Boarding Points</span>
-                                <p className="text-xs font-bold text-zinc-200 leading-tight pr-2">
+                                <p className="text-xs font-bold text-zinc-800 leading-tight pr-2">
                                   {(scanResult.booking.boarding_point === "Combined Journey" || scanResult.booking.boardingPoint === "Combined Journey") && scanResult.booking.passengers 
                                     ? scanResult.booking.passengers.map((p: any) => p.boarding).join(' • ') 
                                     : (scanResult.booking.boarding_point || scanResult.booking.boardingPoint || "Unknown")}
@@ -990,7 +989,7 @@ export default function EnterpriseConductorPortal() {
                               </div>
                               <div className="space-y-1">
                                 <span className="text-[9px] font-bold uppercase text-zinc-500 tracking-wider">Drop Points</span>
-                                <p className="text-xs font-bold text-zinc-200 leading-tight pr-2">
+                                <p className="text-xs font-bold text-zinc-800 leading-tight pr-2">
                                   {scanResult.booking.destination === "Multi-Stop" && scanResult.booking.passengers 
                                     ? scanResult.booking.passengers.map((p: any) => p.destination).join(' • ') 
                                     : (scanResult.booking.destination || "Unknown")}
@@ -1006,7 +1005,7 @@ export default function EnterpriseConductorPortal() {
                                 {scanResult.booking.passengers.map((p: any, idx: number) => (
                                   <div key={idx} className="text-xs bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 rounded-lg p-3">
                                     <div className="flex justify-between items-center mb-2">
-                                      <span className="text-zinc-300 font-medium">Journey {idx + 1} {p.luggage && p.luggage !== 'None' ? `(+${p.luggage})` : ''}</span>
+                                      <span className="text-zinc-700 font-medium">Journey {idx + 1} {p.luggage && p.luggage !== 'None' ? `(+${p.luggage})` : ''}</span>
                                       <span className="text-orange-500 font-bold">₹{p.fare || 20}</span>
                                     </div>
                                     <div className="flex justify-between items-center text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
@@ -1025,7 +1024,7 @@ export default function EnterpriseConductorPortal() {
                                 <div className="space-y-2">
                                   {scanResult.booking.passengers.map((p: any, idx: number) => (
                                     <div key={idx} className="flex justify-between items-center text-xs">
-                                      <span className="text-zinc-300 font-medium">Passenger {idx + 1} {p.luggage && p.luggage !== 'None' ? `(${p.luggage})` : ''}</span>
+                                      <span className="text-zinc-700 font-medium">Passenger {idx + 1} {p.luggage && p.luggage !== 'None' ? `(${p.luggage})` : ''}</span>
                                       <span className="text-orange-500 font-bold uppercase truncate max-w-[100px]">{p.destination || "Unknown"}</span>
                                     </div>
                                   ))}
@@ -1036,7 +1035,7 @@ export default function EnterpriseConductorPortal() {
 
                           <button 
                             onClick={() => setScanResult(null)}
-                            className="w-full py-4 bg-zinc-850 hover:bg-zinc-800 text-zinc-200 border border-zinc-300 rounded-xl font-black uppercase tracking-widest text-[9px]"
+                            className="w-full py-4 bg-zinc-850 hover:bg-zinc-800 text-zinc-800 border border-zinc-300 rounded-xl font-black uppercase tracking-widest text-[9px]"
                           >
                             Dismiss Report
                           </button>
@@ -1126,7 +1125,7 @@ export default function EnterpriseConductorPortal() {
                                 setObQuantity(q => Math.max(1, q - 1));
                                 setObSuccessTicket(null);
                               }}
-                              className="w-9 h-9 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-300 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
+                              className="w-9 h-9 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-700 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
                             >
                               <Minus size={14} />
                             </button>
@@ -1137,7 +1136,7 @@ export default function EnterpriseConductorPortal() {
                                 setObQuantity(q => Math.min(10, q + 1));
                                 setObSuccessTicket(null);
                               }}
-                              className="w-9 h-9 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-300 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
+                              className="w-9 h-9 bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border border-zinc-300 text-zinc-700 rounded-lg flex items-center justify-center hover:bg-zinc-800 cursor-pointer"
                             >
                               <Plus size={14} />
                             </button>
@@ -1261,7 +1260,7 @@ export default function EnterpriseConductorPortal() {
                           placeholder="Search Passenger Name or Ticket ID..."
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
-                          className="w-full bg-zinc-955 border border-zinc-300 rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:ring-1 focus:ring-orange-500 text-xs text-zinc-200 placeholder:text-zinc-750"
+                          className="w-full bg-zinc-955 border border-zinc-300 rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:ring-1 focus:ring-orange-500 text-xs text-zinc-800 placeholder:text-zinc-750"
                         />
                       </div>
                     </div>
@@ -1301,7 +1300,7 @@ export default function EnterpriseConductorPortal() {
                                 <td className="p-4 font-bold text-[#1A0B00]">{p.name}</td>
                                 <td className="p-4 text-zinc-600 truncate max-w-[120px]">{p.boarding}</td>
                                 <td className="p-4 text-zinc-600 truncate max-w-[120px]">{p.destination}</td>
-                                <td className="p-4 font-bold text-zinc-200">{p.seat}</td>
+                                <td className="p-4 font-bold text-zinc-800">{p.seat}</td>
                                 <td className="p-4 text-center">
                                   <button
                                     onClick={() => {
@@ -1556,7 +1555,7 @@ export default function EnterpriseConductorPortal() {
                             key={s.name}
                             onClick={() => { setTripStatus(s.name); triggerTripBroadcast(s.name); playBeep(true); }}
                             className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all text-center gap-1.5 cursor-pointer ${
-                              isActive ? 'bg-orange-600 border-orange-500 text-[#1A0B00] shadow-md' : 'bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border-zinc-300 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                              isActive ? 'bg-orange-600 border-orange-500 text-[#1A0B00] shadow-md' : 'bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00] border-zinc-300 text-zinc-500 hover:border-zinc-700 hover:text-zinc-700'
                             }`}
                           >
                             <Icon size={16} />
@@ -1578,11 +1577,11 @@ export default function EnterpriseConductorPortal() {
                     <div className="space-y-4 pt-2">
                       <div className="flex justify-between items-center text-xs">
                         <span className="text-zinc-500">Cash Collection Ledger:</span>
-                        <span className="font-bold text-zinc-200">₹{cashCollection}</span>
+                        <span className="font-bold text-zinc-800">₹{cashCollection}</span>
                       </div>
                       <div className="flex justify-between items-center text-xs">
                         <span className="text-zinc-500">UPI / QR Digital Ledger:</span>
-                        <span className="font-bold text-zinc-200">₹{onlineCollection}</span>
+                        <span className="font-bold text-zinc-800">₹{onlineCollection}</span>
                       </div>
                       <div className="h-px bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm text-[#1A0B00]" />
                       <div className="flex justify-between items-center text-sm">
@@ -1622,7 +1621,7 @@ export default function EnterpriseConductorPortal() {
                           <div className="w-10 h-10 bg-[#22C55E]/10 border border-[#22C55E]/20 text-[#22C55E] rounded-2xl flex items-center justify-center"><Wifi size={20} /></div>
                         )}
                         <div>
-                          <h3 className="text-sm font-bold text-zinc-200">Offline Transit Mode</h3>
+                          <h3 className="text-sm font-bold text-zinc-800">Offline Transit Mode</h3>
                           <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">
                             {isOffline ? "Currently working in disconnected mode" : "Synced to central database node"}
                           </p>
@@ -1656,7 +1655,7 @@ export default function EnterpriseConductorPortal() {
                           <div key={idx} className="bg-zinc-955 p-3 rounded-xl border border-zinc-850 flex justify-between items-center text-xs">
                             <div>
                               <span className="text-[9px] font-black uppercase tracking-wider text-orange-500 block mb-0.5">{item.type}</span>
-                              <span className="font-mono text-zinc-300">{item.token || item.ticket?.ticketId}</span>
+                              <span className="font-mono text-zinc-700">{item.token || item.ticket?.ticketId}</span>
                             </div>
                             <span className="text-[9px] text-zinc-600 font-mono">{new Date(item.time || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                           </div>
@@ -1724,7 +1723,7 @@ export default function EnterpriseConductorPortal() {
                           placeholder="Describe the vehicle breakdown, delays, or emergency details for the admin control room..."
                           value={issueDesc}
                           onChange={(e) => setIssueDesc(e.target.value)}
-                          className="w-full bg-zinc-955 border border-zinc-300 rounded-xl p-4 focus:outline-none focus:ring-1 focus:ring-orange-500 text-xs text-zinc-200 h-24 placeholder:text-zinc-700"
+                          className="w-full bg-zinc-955 border border-zinc-300 rounded-xl p-4 focus:outline-none focus:ring-1 focus:ring-orange-500 text-xs text-zinc-800 h-24 placeholder:text-zinc-700"
                           required
                         />
                       </div>
@@ -1760,7 +1759,7 @@ export default function EnterpriseConductorPortal() {
                             <span className="text-[10px] font-black uppercase tracking-wider text-orange-500">{n.title}</span>
                             <span className="text-[9px] text-zinc-600 font-mono">{n.time}</span>
                           </div>
-                          <p className="text-xs text-zinc-300 leading-relaxed">{n.message}</p>
+                          <p className="text-xs text-zinc-700 leading-relaxed">{n.message}</p>
                         </div>
                       ))}
                     </div>
