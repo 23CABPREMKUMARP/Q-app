@@ -731,7 +731,7 @@ function EnterpriseAdminDashboardContent() {
                     </div>
                     <div className="flex-1 w-full relative">
                       <LiveBusMap
-                        buses={filteredBuses}
+                        buses={filteredBuses.filter(bus => livePositions[bus._id] !== undefined)}
                         livePositions={livePositions}
                         onBusClick={() => {}}
                         showRoutes={false}

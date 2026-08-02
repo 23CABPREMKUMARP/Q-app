@@ -166,7 +166,7 @@ function LiveMapContent() {
       {/* ── FULL-SCREEN MAP ──────────────────────────────────────────────── */}
       <div className="absolute inset-0">
         <LeafletBusMap
-          buses={buses}
+          buses={buses.filter(bus => livePositions[bus._id] !== undefined)}
           livePositions={livePositions}
           selectedBusId={selectedBus?._id}
           onBusClick={handleBusClick}
