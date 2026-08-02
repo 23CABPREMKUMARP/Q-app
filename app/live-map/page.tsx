@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback, Suspense } from "react";
+import React, { useState, useEffect, useRef, useCallback, Suspense, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Search, X, Locate, Layers, Bus, Navigation, MapPin,
+  Search, X, Locate, Layers, Bus, Navigation, MapPin, Map,
   Radio, WifiOff, ChevronUp, ChevronDown, Gauge,
 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -61,6 +61,44 @@ function LiveMapContent() {
   });
 
   const liveCount = Object.values(livePositions).filter((p) => p.deviceStatus === "Online").length;
+
+  // ── Search Logic ────────────────────────────────────────────────────────
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    
+    const q = searchQuery.toLowerCase();
+    const results: any[] = [];
+    
+    buses.forEach(bus => {
+      // 1. Check Bus
+      if (
+        bus.busNumber?.toLowerCase().includes(q) || 
+        bus.busCode?.toLowerCase().includes(q)
+      ) {
+        results.push({ type: 'bus', title: `Bus ${bus.busNumber} ${bus.busCode ? `(${bus.busCode})` : ''}`, subtitle: bus.routeId?.routeName || 'No Route', lat: bus.location?.lat, lng: bus.location?.lng, bus });
+      }
+      
+      // 2. Check Route
+      if (bus.routeId && (bus.routeId.routeName || "").toLowerCase().includes(q)) {
+        if (!results.find(r => r.type === 'route' && r.title === bus.routeId.routeName)) {
+          results.push({ type: 'route', title: bus.routeId.routeName, subtitle: `Route`, lat: bus.location?.lat, lng: bus.location?.lng, bus });
+        }
+      }
+      
+      // 3. Check Stops
+      if (bus.routeId && Array.isArray(bus.routeId.stops)) {
+        bus.routeId.stops.forEach((stop: any) => {
+          if (stop.stopName && stop.stopName.toLowerCase().includes(q)) {
+             if (!results.find(r => r.type === 'stop' && r.title === stop.stopName)) {
+               results.push({ type: 'stop', title: stop.stopName, subtitle: `Stop on ${bus.routeId.routeName}`, lat: stop.lat, lng: stop.lng, bus });
+             }
+          }
+        });
+      }
+    });
+    
+    return results.slice(0, 10);
+  }, [searchQuery, buses]);
 
   // ── Proximity Notification ──────────────────────────────────────────────────
   useEffect(() => {
@@ -206,8 +244,8 @@ function LiveMapContent() {
       <div className="absolute top-0 inset-x-0 z-[500] p-3 md:p-4 pointer-events-none">
         <div className="flex items-center gap-2 md:gap-3 pointer-events-auto max-w-xl mx-auto md:mx-0">
 
-          {/* Search box */}
-          <div className={`flex-1 bg-[#FFFFFF] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#FF6D00] shadow-xl" : ""}`}
+          {/* Search box container */}
+          <div className={`flex-1 relative bg-[#FFFFFF] rounded-full shadow-lg flex items-center gap-3 px-4 transition-all ${searchFocused ? "ring-2 ring-[#FF6D00] shadow-xl" : ""}`}
             style={{ height: 48 }}>
             {searchFocused ? (
               <button onClick={() => { setSearchFocused(false); setSearchQuery(""); }} className="text-gray-500">
@@ -228,6 +266,35 @@ function LiveMapContent() {
               <button onClick={() => setSearchQuery("")} className="text-gray-400">
                 <X size={16} />
               </button>
+            )}
+
+            {/* Search Results Dropdown */}
+            {searchFocused && searchQuery && searchResults.length > 0 && (
+              <div className="absolute top-14 left-0 right-0 bg-[#FFFFFF] rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[501] max-h-80 overflow-y-auto pointer-events-auto">
+                {searchResults.map((res, i) => (
+                  <button 
+                    key={i}
+                    onMouseDown={() => {
+                      if (res.lat && res.lng) {
+                        setCenterOn({ lat: res.lat, lng: res.lng });
+                        if (res.type === 'bus') {
+                           handleBusClick(res.bus);
+                        }
+                      }
+                      setSearchFocused(false);
+                    }}
+                    className="w-full flex items-center gap-3 p-3 hover:bg-orange-50 transition-colors text-left border-b border-gray-50 last:border-0"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">
+                      {res.type === 'bus' ? <Bus size={16} /> : res.type === 'route' ? <Map size={16} /> : <MapPin size={16} />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                       <p className="text-sm font-bold text-gray-900 truncate">{res.title}</p>
+                       <p className="text-xs text-gray-500 truncate">{res.subtitle}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
